@@ -1,0 +1,55 @@
+{
+  "name": "tailwindcss-stimulus-components",
+  "version": "0.9.0",
+  "description": "A set of Stimulus components (tabs, dropdowns, modals, etc) for TailwindCSS users",
+  "main": "dist/tailwindcss-stimulus-components.min.js",
+  "repository": {
+    "url": "https://github.com/excid3/tailwindcss-stimulus-components",
+    "type": "git"
+  },
+  "author": "Chris Oliver <excid3@gmail.com>",
+  "contributors": [],
+  "license": "MIT",
+  "private": false,
+  "keywords": [
+    "stimulus",
+    "stimulusjs",
+    "controller",
+    "tailwindcss",
+    "components"
+  ],
+  "dependencies": {
+    "stimulus": "^1.1.0"
+  },
+  "babel": {
+    "plugins": [
+      "transform-class-properties",
+      "transform-runtime"
+    ],
+    "presets": [
+      [
+        "env",
+        {
+          "modules": false
+        }
+      ]
+    ]
+  },
+  "scripts": {
+    "build": "webpack --env dev && webpack --env build",
+    "prepublish": "yarn run build"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-syntax-async-functions": "^6.13.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "uglifyjs-webpack-plugin": "^1.2.5",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-middleware": "^3.1.3"
+  }
+}
