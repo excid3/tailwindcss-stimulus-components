@@ -65,11 +65,6 @@ application.register('dropdown', Dropdown)
           <%= link_to 'Password', password_path, class: 'no-underline block px-8 py-3 text-grey-darkest bg-white  hover:bg-grey-lighter whitespace-no-wrap' %>
           <%= link_to 'Accounts', user_connected_accounts_path, class: 'no-underline block px-8 py-3 text-grey-darkest bg-white  hover:bg-grey-lighter whitespace-no-wrap' %>
           <%= link_to 'Billing',  subscription_path, class: 'no-underline block px-8 py-3 text-grey-darkest bg-white  hover:bg-grey-lighter whitespace-no-wrap' %>
-          <%= link_to 'Admin',    admin_root_path, class: 'no-underline block px-8 py-3 border-t text-grey-darkest bg-white  hover:bg-grey-lighter whitespace-no-wrap', data: { turbolinks: false } if current_user.admin? %>
-          <% if Rails.env.development? %>
-            <%= link_to 'Jumpstart', jumpstart_path, class: 'border-t no-underline block px-8 py-3 text-grey-darkest bg-white  hover:bg-grey-lighter whitespace-no-wrap', data: { turbolinks: false } %>
-            <%= link_to 'Letter Opener', letter_opener_web_path, class: 'no-underline block px-8 py-3 text-grey-darkest bg-white  hover:bg-grey-lighter whitespace-no-wrap', target: "_blank", data: { turbolinks: false } %>
-          <% end %>
           <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'no-underline block px-8 py-3 border-t text-grey-darkest bg-white  hover:bg-grey-lighter whitespace-no-wrap' %>
       </div>
     </div>
