@@ -1,6 +1,6 @@
 [![npm](https://img.shields.io/npm/v/tailwindcss-stimulus-components.svg)](https://www.npmjs.com/package/tailwindcss-stimulus-components)
 
-# Stimulus Placeholdable
+# TailwindCSS Stimulus Components
 
 This is a set of components (Tabs, Modals, Dropdowns, etc) for TailwindCSS that uses [StimulusJS](https://stimulusjs.org) controllers.
 
