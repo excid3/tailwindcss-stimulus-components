@@ -87,7 +87,7 @@ application.register('modal', Modal)
 ```
 
 ```html
-<div data-controller="modal">
+<div data-controller="modal" data-action="keydown@window->modal#closeWithKeyboard">
   <button class="btn btn-grey" data-action="click->modal#open">Open Modal</button>
 
   <div data-target="modal.container" class="hidden">
