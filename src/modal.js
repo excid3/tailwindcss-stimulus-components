@@ -3,7 +3,7 @@
 //
 // This example controller works with specially annotated HTML like:
 //
-//<div data-controller="modal">
+//<div data-controller="modal" data-action="keydown@window->modal#closeWithKeyboard">
   //<button data-action="click->modal#open">Open Modal</button>
 
   //<div data-target="modal.container" class="hidden">
@@ -59,5 +59,11 @@ export default class extends Controller {
 
   closeBackground(e) {
     if (e.target === this.backgroundTarget) { this.close(e) }
+  }
+
+  closeWithKeyboard(e) {
+    if (e.keyCode == 27) {
+      this.close(e)
+    }
   }
 }
