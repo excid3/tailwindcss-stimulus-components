@@ -24,7 +24,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: outputFile,
-    library: 'StimulusPlaceholdable',
+    library: 'TailwindcssStimulusComponents',
     libraryTarget: 'umd'
   },
 
