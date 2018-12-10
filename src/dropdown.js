@@ -27,7 +27,7 @@ export default class extends Controller {
     this.menuTarget.classList.toggle(this.toggleClass)
   }
 
-  hide() {
+  hide(event) {
     if ((this.element.contains(event.target) === false) && (!this.menuTarget.classList.contains(this.toggleClass))) {
       this.menuTarget.classList.add(this.toggleClass)
     }
