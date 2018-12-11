@@ -173,6 +173,25 @@ Some components like the modal have some styles that are necessary for
 proper use in the browser. The container and backgrounds are separate so
 that you can have a fixed size container and the modal inside of it.
 
+### Extending Components
+
+You can use inheritance to extend the functionality of any Stimulus components.
+
+```js
+class ButtonDropdown extends Dropdown {
+  static targets = ["button"]
+
+  connect() {
+    super.connect();
+    console.log("the value of button : ", this.buttonTarget.value)
+  }
+}
+```
+
+These controllers will automatically have access to `targets` defined in the parent class.
+
+If you override the `connect`, `disconnect` or any other methods from the parent, you'll want to call `super.method()` to make sure the parent functionality is executed.
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at <https://github.com/excid3/tailwindcss-stimulus-components>.  This project is intended to be a safe, welcoming space for  collaboration, and contributors are expected to adhere to the  Contributor Covenant code of conduct.
