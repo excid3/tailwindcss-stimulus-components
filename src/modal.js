@@ -62,7 +62,7 @@ export default class extends Controller {
   }
 
   closeWithKeyboard(e) {
-    if (e.keyCode == 27) {
+    if (e.keyCode == 27 && !this.containerTarget.classList.contains(this.toggleClass)) {
       this.close(e)
     }
   }
