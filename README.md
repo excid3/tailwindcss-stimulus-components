@@ -25,6 +25,12 @@ or
 $ npm install tailwindcss-stimulus-components
 ```
 
+or use directly from unpkg:
+
+```html
+<script src="https://unpkg.com/tailwindcss-stimulus-components/dist/tailwindcss-stimulus-components.js"></script>
+```
+
 ## Basic Usage
 
 First, you'll want to initialize StimulusJS and then you can import all the TailwindCSS components.
