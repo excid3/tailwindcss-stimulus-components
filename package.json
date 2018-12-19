@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-stimulus-components",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "A set of Stimulus components (tabs, dropdowns, modals, etc) for TailwindCSS users",
   "main": "dist/tailwindcss-stimulus-components.min.js",
   "repository": {
