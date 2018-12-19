@@ -27,19 +27,29 @@ $ npm install tailwindcss-stimulus-components
 
 ## Basic Usage
 
-First, you'll want to initialize StimulusJS.
+First, you'll want to initialize StimulusJS and then you can import all the TailwindCSS components.
 
 ```javascript
+// Start StimulusJS
 import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"
 
 const application = Application.start();
 const context = require.context("controllers", true, /.js$/);
 application.load(definitionsFromContext(context));
+
+// Import and register all TailwindCSS Components
+import { Dropdown, Modal, Tabs } from "tailwindcss-stimulus-components"
+application.register('dropdown', Dropdown)
+application.register('modal', Modal)
+application.register('tabs', Tabs)
 ```
 
 This will start StimulusJS and load any controllers that you have
-locally. Then you can add in the TailwindCSS Stimulus Components.
+locally and then register the TailwindCSS components.
+
+Alternatively, you can use the import lines below to import the 
+individual features you need.
 
 ### Dropdowns
 
