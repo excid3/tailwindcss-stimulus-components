@@ -190,9 +190,9 @@ application.register('popover', Popover)
 
 ```html
 <p>
-  Beginning in 2015, Google introduced what is called the 
+  Beginning in 2015, Google introduced what is called the
     <div class="popover inline-block" data-controller="popover" data-popover-translate-x="0" data-popover-translate-y="-128%" data-action="mouseover->popover#mouseOver mouseout->popover#mouseOut">
-      <span class="underline">'local snack pack',</span> 
+      <span class="underline">'local snack pack',</span>
       <div class="content hidden absolute max-w-xs bg-grey-light rounded p-2" data-target="popover.content">
         Terrible name - we know. But the biggest name in SEO came up with it.
       </div>
@@ -206,38 +206,6 @@ application.register('popover', Popover)
 `data-popover-translate-x="0"` defines the css transform-translate X value used in positioning the popover.It can be anything from a percentage to rem units to pixels.
 
 `data-popover-translate-y="-128%"` defines the css transform-translate Y value used in positioning the popover. It can be anything from a percentage to rem units to pixels.
-
-### Styling
-
-All of the styles for the Stimulus components are configurable. Our
-examples above show some example styles you can use, but these
-components themselves don't require any specific styles.
-
-Stimulus simply requires the `data-` attributes to be defined correctly
-to trigger actions and find targets.
-
-Some components like the modal have some styles that are necessary for
-proper use in the browser. The container and backgrounds are separate so
-that you can have a fixed size container and the modal inside of it.
-
-### Extending Components
-
-You can use inheritance to extend the functionality of any Stimulus components.
-
-```js
-class ButtonDropdown extends Dropdown {
-  static targets = ["button"]
-
-  connect() {
-    super.connect();
-    console.log("the value of button : ", this.buttonTarget.value)
-  }
-}
-```
-
-These controllers will automatically have access to `targets` defined in the parent class.
-
-If you override the `connect`, `disconnect` or any other methods from the parent, you'll want to call `super.method()` to make sure the parent functionality is executed.
 
 ### Autosave (Rails-only)
 
@@ -288,6 +256,38 @@ Your server side should check the `params[:commit]` text to see whether
 or not it should save as a draft or actually publish the record.
 
 We recommend using a gem like Draftsman to help make the backend easier.
+
+## Styling
+
+All of the styles for the Stimulus components are configurable. Our
+examples above show some example styles you can use, but these
+components themselves don't require any specific styles.
+
+Stimulus simply requires the `data-` attributes to be defined correctly
+to trigger actions and find targets.
+
+Some components like the modal have some styles that are necessary for
+proper use in the browser. The container and backgrounds are separate so
+that you can have a fixed size container and the modal inside of it.
+
+## Extending Components
+
+You can use inheritance to extend the functionality of any Stimulus components.
+
+```js
+class ButtonDropdown extends Dropdown {
+  static targets = ["button"]
+
+  connect() {
+    super.connect();
+    console.log("the value of button : ", this.buttonTarget.value)
+  }
+}
+```
+
+These controllers will automatically have access to `targets` defined in the parent class.
+
+If you override the `connect`, `disconnect` or any other methods from the parent, you'll want to call `super.method()` to make sure the parent functionality is executed.
 
 ## Contributing
 
