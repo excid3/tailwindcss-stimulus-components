@@ -45,10 +45,11 @@ const context = require.context("controllers", true, /.js$/);
 application.load(definitionsFromContext(context));
 
 // Import and register all TailwindCSS Components
-import { Dropdown, Modal, Tabs } from "tailwindcss-stimulus-components"
+import { Dropdown, Modal, Tabs, Popover } from "tailwindcss-stimulus-components"
 application.register('dropdown', Dropdown)
 application.register('modal', Modal)
 application.register('tabs', Tabs)
+application.register('popover', Popover)
 ```
 
 This will start StimulusJS and load any controllers that you have
@@ -175,6 +176,36 @@ currently selected tab.
 
 `data-tabs-active-tab` defines the list of classes that will be
 added/removed from the active tab when the active tab changes.
+
+### Popovers
+
+![Popovers](https://user-images.githubusercontent.com/11435593/51342548-24ffd380-1a8c-11e9-95a9-1b8a0181b2a1.png)
+
+
+
+```javascript
+import { Popover } from "tailwindcss-stimulus-components"
+application.register('popover', Popover)
+```
+
+```html
+<p>
+  Beginning in 2015, Google introduced what is called the 
+    <div class="popover inline-block" data-controller="popover" data-popover-translate-x="0" data-popover-translate-y="-128%" data-action="mouseover->popover#mouseOver mouseout->popover#mouseOut">
+      <span class="underline">'local snack pack',</span> 
+      <div class="content hidden absolute max-w-xs bg-grey-light rounded p-2" data-target="popover.content">
+        Terrible name - we know. But the biggest name in SEO came up with it.
+      </div>
+    </div>
+  which shows you local search results before normal organic results.
+</p>
+```
+
+`data-target="popover.content"` defines which element will contain the actual content in the popover.
+
+`data-popover-translate-x="0"` defines the css transform-translate X value used in positioning the popover.It can be anything from a percentage to rem units to pixels.
+
+`data-popover-translate-y="-128%"` defines the css transform-translate Y value used in positioning the popover. It can be anything from a percentage to rem units to pixels.
 
 ### Styling
 
