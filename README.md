@@ -54,7 +54,7 @@ application.register('tabs', Tabs)
 This will start StimulusJS and load any controllers that you have
 locally and then register the TailwindCSS components.
 
-Alternatively, you can use the import lines below to import the 
+Alternatively, you can use the import lines below to import the
 individual features you need.
 
 ### Dropdowns
@@ -207,6 +207,56 @@ class ButtonDropdown extends Dropdown {
 These controllers will automatically have access to `targets` defined in the parent class.
 
 If you override the `connect`, `disconnect` or any other methods from the parent, you'll want to call `super.method()` to make sure the parent functionality is executed.
+
+### Autosave (Rails-only)
+
+Autosaving forms are really helpful for saving drafts of records. This
+Stimulus controller allows you to listen to fields to easily submit the
+form once the user has stopped typing.
+
+Here's an example using Rails forms:
+
+```erb
+<%= form_with(model: post, data: { controller: "autosave", target: "autosave.form", action: "ajax:success->autosave#success ajax:error->autosave#error" }) do |form| %>
+  <div class="form-group">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: 'form-control', data: { action: "keyup->autosave#save" } %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :body %>
+    <%= form.text_area :body, class: 'form-control', data: { action: "keyup->autosave#save" } %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit "Save and Publish", class: 'btn btn-primary' %>
+
+    <span class="text-muted" data-target="autosave.status"></span>
+  </div>
+<% end %>
+```
+
+You can use `data-target="autosave.form"` to reference the form. This
+will be used with the Rails AJAX form submission.
+
+The `data-target="autosave.status"` is used for displaying the status message of the autosave. This displays "Saving..." while the request is in progress and then "Saved!" if it was successful, "Unable to save!" if it failed.
+
+Add `data-action="keyup->autosave#save` to listen to the keyup event and
+trigger an autosave. You can use other events like `change` for other
+field types like `select`.
+
+Lastly, we have to handle the success and failure cases for the AJAX
+form submission.
+
+`data-action="ajax:success->autosave#success"` is applied to the form to call the `success` method once the Rails ajax request succeeded.
+
+`data-action="ajax:error->autosave#error"` is applied to the form to call the `error` method once the Rails ajax request failed.
+
+#### Handling the form submission server-side
+Your server side should check the `params[:commit]` text to see whether
+or not it should save as a draft or actually publish the record.
+
+We recommend using a gem like Draftsman to help make the backend easier.
 
 ## Contributing
 
