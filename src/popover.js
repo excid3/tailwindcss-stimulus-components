@@ -5,9 +5,9 @@
 // This example controller works with specially annotated HTML like:
 //
 //<p>
-//  Beginning in 2015, Google introduced what is called the 
+//  Beginning in 2015, Google introduced what is called the
 //    <div class="popover inline-block" data-controller="popover" data-popover-translate-x="0" data-popover-translate-y="-128%" data-action="mouseover->popover#mouseOver mouseout->popover#mouseOut">
-//      <span class="underline">'local snack pack',</span> 
+//      <span class="underline">'local snack pack',</span>
 //      <div class="content hidden absolute max-w-xs bg-grey-light rounded p-2" data-target="popover.content">
 //        Terrible name - we know. But the biggest name in SEO came up with it.
 //      </div>
@@ -15,16 +15,17 @@
 //  which shows you local search results before normal organic results.
 //</p>
 
-import {
-  Controller
-} from 'stimulus'
+import { Controller } from 'stimulus'
 
 export default class extends Controller {
   static targets = ['content']
 
   // Sets the popover offset using Stimulus data map objects.
   initialize() {
-    this.contentTarget.setAttribute("style", `transform:translate(${this.data.get("translateX")}, ${this.data.get("translateY")});`)
+    this.contentTarget.setAttribute(
+      'style',
+      `transform:translate(${this.data.get('translateX')}, ${this.data.get('translateY')});`,
+    )
   }
 
   // Show the popover
