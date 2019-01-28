@@ -1,7 +1,7 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = [ 'tab', 'panel' ]
+  static targets = ['tab', 'panel']
 
   initialize() {
     this.activeTabClasses = (this.data.get('activeTab') || 'active').split(' ')

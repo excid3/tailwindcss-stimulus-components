@@ -1,48 +1,44 @@
 const webpack = require('webpack')
-const path = require("path")
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const env = require('yargs').argv.env; // use --env with webpack 2
-const pkg = require('./package.json');
+const path = require('path')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const env = require('yargs').argv.env // use --env with webpack 2
+const pkg = require('./package.json')
 
-let libraryName = 'tailwindcss-stimulus-components';
+let libraryName = 'tailwindcss-stimulus-components'
 
-let plugins = [], outputFile;
+let plugins = [],
+  outputFile
 
 if (env === 'build') {
-  plugins.push(new UglifyJsPlugin());
-  outputFile = libraryName + '.min.js';
+  plugins.push(new UglifyJsPlugin())
+  outputFile = libraryName + '.min.js'
 } else {
-  outputFile = libraryName + '.js';
+  outputFile = libraryName + '.js'
 }
 
 module.exports = {
   mode: 'development',
   entry: {
-    bundle: "./index.js"
+    bundle: './index.js',
   },
 
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, 'dist'),
     filename: outputFile,
     library: 'TailwindcssStimulusComponents',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
   },
-
 
   module: {
     rules: [
       {
         test: /\.js$/,
         include: path.resolve(__dirname, 'src'),
-        exclude: [
-          /node_modules/
-        ],
-        use: [
-          { loader: "babel-loader" }
-        ]
-      }
-    ]
+        exclude: [/node_modules/],
+        use: [{ loader: 'babel-loader' }],
+      },
+    ],
   },
 
-   plugins: plugins
+  plugins: plugins,
 }
