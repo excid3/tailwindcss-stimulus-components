@@ -73,7 +73,7 @@ application.register('dropdown', Dropdown)
     <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" class="inline-block select-none">
       <span class="appearance-none flex items-center inline-block text-grey-dark">
         <% if current_user %>
-        <%= image_tag avatar_url_for(current_user), class: "rounded-full h-8 w-8 align-middle" %>
+          <%= image_tag avatar_url_for(current_user), class: "rounded-full h-8 w-8 align-middle" %>
         <% end %>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-4 w-4"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
       </span>
@@ -91,7 +91,7 @@ application.register('dropdown', Dropdown)
 </div>
 ```
 
-Dropdowns are setup to toggle if you click on the dropdown button. It
+Dropdowns are set up to toggle if you click on the dropdown button. It
 will also close if you click anywhere outside of the dropdown. This is
 done using a window click event to check if the user clicked outside the
 dropdown.
