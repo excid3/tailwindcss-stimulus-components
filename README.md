@@ -106,27 +106,34 @@ application.register('modal', Modal)
 ```
 
 ```html
-<div data-controller="modal" data-action="keydown@window->modal#closeWithKeyboard">
-  <button class="btn btn-grey" data-action="click->modal#open">Open Modal</button>
+<div data-controller="modal" data-modal-allow-background-close="false">
+  <a href="#" data-action="click->modal#open" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded">
+    <span>Open Modal</span>
+  </a>
 
-  <div data-target="modal.container" class="hidden">
-    <div class="fixed z-50 pin-t pin-l w-full h-full table" style="background-color: rgba(0, 0, 0, .5);">
-      <div data-target="modal.background" data-action="click->modal#closeBackground" class="table-cell align-middle">
+  <!-- Modal Container -->
+  <div data-target="modal.container" data-action="click->modal#closeBackground" class="hidden animated fadeIn fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center" style="z-index: 9999;">
+    <!-- Modal Inner Container -->
+    <div class="w-full max-w-lg relative">
+      <!-- Modal Card -->
+      <div class="bg-white rounded shadow">
+        <div class="p-8">
+          <h2 class="text-xl mb-4">Large Modal Content</h2>
+          <p class="mb-4">This is an example modal dialog box.</p>
 
-        <div class="bg-white mx-auto rounded shadow p-8" style="width:480px">
-          <h2>Content</h2>
-          <p>This is an example modal dialog box.</p>
-          <div class="text-right">
-            <button class="btn btn-sm btn-grey">Does nothing</button>
-            <button class="btn btn-grey" data-action="click->modal#close">Close</button>
+          <div class="flex justify-end items-center flex-wrap mt-6">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" data-action="click->modal#close">Close</button>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 </div>
 ```
+
+`data-modal-allow-background-close` may be set to `false` to disable
+closing the modal when a user clicks on the background. Defaults to
+`true`
 
 ### Tabs
 

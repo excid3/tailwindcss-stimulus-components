@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Tailwind Stimulus Components</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/stimulus/dist/stimulus.umd.js"></script>
+    <script src="../dist/tailwindcss-stimulus-components.js"></script>
+
+    <script>
+      const application = Stimulus.Application.start();
+      application.register('dropdown', TailwindcssStimulusComponents.Dropdown);
+      application.register('modal', TailwindcssStimulusComponents.Modal);
+      application.register('tabs', TailwindcssStimulusComponents.Tabs);
+      application.register('popover', TailwindcssStimulusComponents.Popover);
+    </script>
+  </head>
+  <body>
+    <div class="container mx-auto py-8">
+      <h1 class="text-3xl font-semibold mb-2">Tailwind Stimulus Components Examples</h1>
+      <img src="https://img.shields.io/npm/v/tailwindcss-stimulus-components.svg" class="inline-block mr-2" />
+      <a href="https://github.com/excid3/tailwindcss-stimulus-components" class="text-blue-500">View on Github</a>
+      <p class="my-4">To view examples locally, run <code class="bg-gray-300 text-sm px-2 py-1 rounded">yarn build</code> and then open <code class="bg-gray-300 text-sm px-2 py-1 rounded">example.html</code> in your browser.</p>
+
+      <div class="my-12">
+        <h2 class="text-2xl text-gray-800 font-semibold mb-4">Dropdowns</h2>
+
+        <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+          <div class="flex items-center flex-no-shrink text-white mr-6">
+            <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
+            <span class="font-semibold text-xl tracking-tight">Dropdown Example</span>
+          </div>
+
+
+          <div data-controller="dropdown" data-action="click->dropdown#toggle click@window->dropdown#hide" class="inline-block text-sm px-4 py-2 leading-none rounded no-underline text-white hover:bg-teal-600 mt-0">
+            <div class="relative">
+              <div role="button" class="inline-block select-none">
+                <span class="appearance-none flex items-center inline-block">
+                  <span>Dropdown Example</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="text-white fill-current h-4 w-4"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+                </span>
+              </div>
+              <div data-target="dropdown.menu" class="absolute pin-r mt-2 hidden">
+                <div class="bg-white shadow rounded border overflow-hidden w-32">
+                  <a href="#" class='no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap'>Account</a>
+                  <a href="#" class='no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap'>Billing</a>
+                  <a href="#" class='no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap border-t'>Sign Out</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <div class="my-12">
+        <h2 class="text-2xl text-gray-800 font-semibold mb-4">Modals</h2>
+
+        <div data-controller="modal" data-modal-allow-background-close="true">
+          <a href="#" data-action="click->modal#open" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded">
+            <span>Open Modal</span>
+          </a>
+
+          <!-- Modal Container -->
+          <div data-target="modal.container" data-action="click->modal#closeBackground" class="hidden animated fadeIn fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center" style="z-index: 9999;">
+            <!-- Modal Inner Container -->
+            <div class="w-full max-w-lg relative">
+              <!-- Modal Card -->
+              <div class="bg-white rounded shadow">
+                <div class="p-8">
+                  <h2 class="text-xl mb-4">Large Modal Content</h2>
+                  <p class="mb-4">This is an example modal dialog box.</p>
+
+                  <div class="flex justify-end items-center flex-wrap mt-6">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" data-action="click->modal#close">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="my-12">
+        <h2 class="text-2xl text-gray-800 font-semibold mb-4">Tabs</h2>
+
+        <div data-controller="tabs" data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t text-blue-700">
+          <ul class="list-reset flex border-b">
+            <li class="-mb-px mr-1" data-target="tabs.tab" data-action="click->tabs#change">
+              <a class="bg-white inline-block py-2 px-4 text-blue hover:text-blue-700 font-semibold no-underline" href="#">Active</a>
+            </li>
+            <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
+              <a class="bg-white inline-block py-2 px-4 text-blue hover:text-blue-700 font-semibold no-underline" href="#">Tab</a>
+            </li>
+            <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
+              <a class="bg-white inline-block py-2 px-4 text-blue hover:text-blue-700 font-semibold no-underline" href="#">Tab</a>
+            </li>
+            <li class="mr-1">
+              <a class="bg-white inline-block py-2 px-4 text-gray-400 font-semibold no-underline" href="#">Tab</a>
+            </li>
+          </ul>
+
+          <div class="hidden py-4 px-4 border-l border-b border-r" data-target="tabs.panel">
+            Tab panel 1
+          </div>
+
+          <div class="hidden py-4 px-4 border-l border-b border-r" data-target="tabs.panel">
+            Tab panel 2
+          </div>
+
+          <div class="hidden py-4 px-4 border-l border-b border-r" data-target="tabs.panel">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/y3niFzo5VLI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
