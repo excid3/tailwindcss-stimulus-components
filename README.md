@@ -112,7 +112,7 @@ application.register('modal', Modal)
   </a>
 
   <!-- Modal Container -->
-  <div data-target="modal.container" data-action="click->modal#closeBackground" class="hidden animated fadeIn fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center" style="z-index: 9999;">
+  <div data-target="modal.container" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" class="hidden animated fadeIn fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center" style="z-index: 9999;">
     <!-- Modal Inner Container -->
     <div class="w-full max-w-lg relative">
       <!-- Modal Card -->
