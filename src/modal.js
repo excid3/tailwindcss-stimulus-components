@@ -48,6 +48,7 @@ export default class extends Controller {
 
   open(e) {
     e.preventDefault();
+    e.target.blur();
 
     // Lock the scroll and save current scroll position
     this.lockScroll();
