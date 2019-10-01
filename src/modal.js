@@ -62,8 +62,10 @@ export default class extends Controller {
     this.containerTarget.classList.remove(this.toggleClass)
 
     // Insert the background
-    document.body.insertAdjacentHTML('beforeend', this.backgroundHtml);
-    this.background = document.querySelector('#' + this.backgroundId)
+    if (!this.data.get("disable-backdrop")) {
+      document.body.insertAdjacentHTML('beforeend', this.backgroundHtml);
+      this.background = document.querySelector('#' + this.backgroundId)
+    }
   }
 
   close(e) {
@@ -77,7 +79,7 @@ export default class extends Controller {
     this.containerTarget.classList.add(this.toggleClass)
 
     // Remove the background
-    this.background.remove()
+    if (this.background) { this.background.remove() }
   }
 
   closeBackground(e) {
