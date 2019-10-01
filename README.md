@@ -2,7 +2,7 @@
 
 # TailwindCSS Stimulus Components
 
-[Check out the demo](https://jsfiddle.net/excid3/f5x6arz4/18/)
+[Check out the demo](https://jsfiddle.net/excid3/176obwmc/)
 
 This is a set of components (Tabs, Modals, Dropdowns, etc) for TailwindCSS that uses [StimulusJS](https://stimulusjs.org) controllers.
 
