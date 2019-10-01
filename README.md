@@ -135,6 +135,10 @@ application.register('modal', Modal)
 closing the modal when a user clicks on the background. Defaults to
 `true`
 
+`data-modal-disable-backdrop` may be set to `true` to disable adding the
+modal's dark transparent backdrop. This is useful if you want to make a
+fullscreen modal.
+
 ### Tabs
 
 ![Tabs](https://d3vv6lp55qjaqc.cloudfront.net/items/440B1H1P2Y1r3C3r1h0R/Screen%20Shot%202018-12-07%20at%201.24.31%20PM.png?X-CloudApp-Visitor-Id=bcd17e7039e393c836f30de901088b96&v=84e44dbd)
