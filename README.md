@@ -188,6 +188,9 @@ currently selected tab.
 `data-tabs-active-tab` defines the list of classes that will be
 added/removed from the active tab when the active tab changes.
 
+`data-tabs-index="1"` can be used to set the selected tab when the
+controller connects.
+
 ### Popovers
 
 ![Popovers](https://user-images.githubusercontent.com/11435593/51342548-24ffd380-1a8c-11e9-95a9-1b8a0181b2a1.png)
