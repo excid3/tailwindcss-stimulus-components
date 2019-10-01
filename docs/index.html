@@ -61,11 +61,11 @@
           </a>
 
           <!-- Modal Container -->
-          <div data-target="modal.container" data-action="click->modal#closeBackground" class="hidden animated fadeIn fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center" style="z-index: 9999;">
+          <div data-target="modal.container" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" class="hidden animated fadeIn fixed inset-0 overflow-y-auto flex items-center justify-center" style="z-index: 9999;">
             <!-- Modal Inner Container -->
-            <div class="w-full max-w-lg relative">
+            <div class="max-h-screen w-full max-w-lg relative">
               <!-- Modal Card -->
-              <div class="bg-white rounded shadow">
+              <div class="m-1 bg-white rounded shadow">
                 <div class="p-8">
                   <h2 class="text-xl mb-4">Large Modal Content</h2>
                   <p class="mb-4">This is an example modal dialog box.</p>

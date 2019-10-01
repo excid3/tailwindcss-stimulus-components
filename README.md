@@ -68,10 +68,10 @@ application.register('dropdown', Dropdown)
 ```
 
 ```html
-<div class="inline-block text-sm px-4 py-2 leading-none rounded no-underline text-grey hover:text-grey-darker hover:bg-white mt-4 lg:mt-0">
+<div class="inline-block text-sm px-4 py-2 leading-none rounded no-underline text-gray hover:text-gray-900 hover:bg-white mt-4 lg:mt-0">
   <div class="relative" data-controller="dropdown">
     <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" class="inline-block select-none">
-      <span class="appearance-none flex items-center inline-block text-grey-dark">
+      <span class="appearance-none flex items-center inline-block text-gray-700">
         <% if current_user %>
           <%= image_tag avatar_url_for(current_user), class: "rounded-full h-8 w-8 align-middle" %>
         <% end %>
@@ -80,11 +80,11 @@ application.register('dropdown', Dropdown)
     </div>
     <div data-target="dropdown.menu" class="absolute pin-r mt-2 hidden">
       <div class="bg-white shadow rounded border overflow-hidden">
-          <%= link_to 'Profile',  edit_user_registration_path, class: 'no-underline block pl-8 py-3 text-grey-darkest bg-white hover:bg-grey-lighter whitespace-no-wrap' %>
-          <%= link_to 'Password', password_path, class: 'no-underline block px-8 py-3 text-grey-darkest bg-white  hover:bg-grey-lighter whitespace-no-wrap' %>
-          <%= link_to 'Accounts', user_connected_accounts_path, class: 'no-underline block px-8 py-3 text-grey-darkest bg-white  hover:bg-grey-lighter whitespace-no-wrap' %>
-          <%= link_to 'Billing',  subscription_path, class: 'no-underline block px-8 py-3 text-grey-darkest bg-white  hover:bg-grey-lighter whitespace-no-wrap' %>
-          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'no-underline block px-8 py-3 border-t text-grey-darkest bg-white  hover:bg-grey-lighter whitespace-no-wrap' %>
+          <%= link_to 'Profile',  edit_user_registration_path, class: 'no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Password', password_path, class: 'no-underline block px-8 py-3 text-gray-900 bg-white  hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Accounts', user_connected_accounts_path, class: 'no-underline block px-8 py-3 text-gray-900 bg-white  hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Billing',  subscription_path, class: 'no-underline block px-8 py-3 text-gray-900 bg-white  hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'no-underline block px-8 py-3 border-t text-gray-900 bg-white  hover:bg-gray-300 whitespace-no-wrap' %>
       </div>
     </div>
   </div>
@@ -112,11 +112,11 @@ application.register('modal', Modal)
   </a>
 
   <!-- Modal Container -->
-  <div data-target="modal.container" data-action="click->modal#closeBackground" class="hidden animated fadeIn fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center" style="z-index: 9999;">
+  <div data-target="modal.container" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" class="hidden animated fadeIn fixed inset-0 overflow-y-auto flex items-center justify-center" style="z-index: 9999;">
     <!-- Modal Inner Container -->
-    <div class="w-full max-w-lg relative">
+    <div class="max-h-screen w-full max-w-lg relative">
       <!-- Modal Card -->
-      <div class="bg-white rounded shadow">
+      <div class="m-1 bg-white rounded shadow">
         <div class="p-8">
           <h2 class="text-xl mb-4">Large Modal Content</h2>
           <p class="mb-4">This is an example modal dialog box.</p>
@@ -152,16 +152,16 @@ application.register('tabs', Tabs)
 <div data-controller="tabs" data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t">
   <ul class="list-reset flex border-b">
     <li class="-mb-px mr-1" data-target="tabs.tab" data-action="click->tabs#change">
-      <a class="bg-white inline-block py-2 px-4 text-blue hover:text-blue-darker font-semibold no-underline" href="#">Active</a>
+      <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-700 font-semibold no-underline" href="#">Active</a>
     </li>
     <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
-      <a class="bg-white inline-block py-2 px-4 text-blue hover:text-blue-darker font-semibold no-underline" href="#">Tab</a>
+      <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-700 font-semibold no-underline" href="#">Tab</a>
     </li>
     <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
-      <a class="bg-white inline-block py-2 px-4 text-blue hover:text-blue-darker font-semibold no-underline" href="#">Tab</a>
+      <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-700 font-semibold no-underline" href="#">Tab</a>
     </li>
     <li class="mr-1">
-      <a class="bg-white inline-block py-2 px-4 text-grey-light font-semibold no-underline" href="#">Tab</a>
+      <a class="bg-white inline-block py-2 px-4 text-gray-300 font-semibold no-underline" href="#">Tab</a>
     </li>
   </ul>
 
@@ -204,7 +204,7 @@ application.register('popover', Popover)
   Beginning in 2015, Google introduced what is called the
     <div class="popover inline-block" data-controller="popover" data-popover-translate-x="0" data-popover-translate-y="-128%" data-action="mouseover->popover#mouseOver mouseout->popover#mouseOut">
       <span class="underline">'local snack pack',</span>
-      <div class="content hidden absolute max-w-xs bg-grey-light rounded p-2" data-target="popover.content">
+      <div class="content hidden absolute max-w-xs bg-gray-300 rounded p-2" data-target="popover.content">
         Terrible name - we know. But the biggest name in SEO came up with it.
       </div>
     </div>
