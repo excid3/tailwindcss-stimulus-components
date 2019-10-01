@@ -36,7 +36,7 @@
     ]
   },
   "scripts": {
-    "build": "webpack --env dev && webpack --env build",
+    "build": "webpack --env dev && webpack --env build && cp -R dist docs",
     "prepublish": "yarn run build"
   },
   "devDependencies": {
