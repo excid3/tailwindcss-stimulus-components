@@ -31,16 +31,15 @@
             <span class="font-semibold text-xl tracking-tight">Dropdown Example</span>
           </div>
 
-
-          <div data-controller="dropdown" data-action="click->dropdown#toggle click@window->dropdown#hide" class="inline-block text-sm px-4 py-2 leading-none rounded no-underline text-white hover:bg-teal-600 mt-0">
-            <div class="relative">
+          <div data-controller="dropdown" data-action="click->dropdown#toggle click@window->dropdown#hide">
+            <div class="relative inline-block text-sm px-4 py-2 leading-none rounded no-underline text-white hover:bg-teal-600 mt-0">
               <div role="button" class="inline-block select-none">
                 <span class="appearance-none flex items-center inline-block">
                   <span>Dropdown Example</span>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="text-white fill-current h-4 w-4"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
                 </span>
               </div>
-              <div data-target="dropdown.menu" class="absolute pin-r mt-2 hidden">
+              <div data-target="dropdown.menu" class="absolute right-0 mt-2 hidden">
                 <div class="bg-white shadow rounded border overflow-hidden w-32">
                   <a href="#" class='no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap'>Account</a>
                   <a href="#" class='no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap'>Billing</a>

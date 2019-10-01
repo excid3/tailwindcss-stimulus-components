@@ -78,7 +78,7 @@ application.register('dropdown', Dropdown)
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-4 w-4"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
       </span>
     </div>
-    <div data-target="dropdown.menu" class="absolute pin-r mt-2 hidden">
+    <div data-target="dropdown.menu" class="absolute right-0 mt-2 hidden">
       <div class="bg-white shadow rounded border overflow-hidden">
           <%= link_to 'Profile',  edit_user_registration_path, class: 'no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
           <%= link_to 'Password', password_path, class: 'no-underline block px-8 py-3 text-gray-900 bg-white  hover:bg-gray-300 whitespace-no-wrap' %>
