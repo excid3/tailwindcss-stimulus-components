@@ -289,6 +289,8 @@ that you can have a fixed size container and the modal inside of it.
 You can use inheritance to extend the functionality of any Stimulus components.
 
 ```js
+import { Dropdown } from "tailwindcss-stimulus-components"
+
 class ButtonDropdown extends Dropdown {
   static targets = ["button"]
 
