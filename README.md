@@ -45,7 +45,7 @@ const context = require.context("controllers", true, /.js$/);
 application.load(definitionsFromContext(context));
 
 // Import and register all TailwindCSS Components
-import { Dropdown, Modal, Tabs, Popover } from "tailwindcss-stimulus-components"
+import { Dropdown, Modal, Tabs, Popover, Toggle } from "tailwindcss-stimulus-components"
 application.register('dropdown', Dropdown)
 application.register('modal', Modal)
 application.register('tabs', Tabs)
@@ -285,7 +285,7 @@ We recommend using a gem like Draftsman to help make the backend easier.
 </div>
 ```
 
-In this example, clicking the question will toggle the hidden class. The hidden class is the default. If you wish to use a different class, you can use the `data-toggle-class="custom-class"` attribute. 
+In this example, clicking the question will toggle the hidden class. The hidden class is the default. If you wish to use a different class, you can use the `data-toggle-class="custom-class"` attribute.
 
 
 ```html
