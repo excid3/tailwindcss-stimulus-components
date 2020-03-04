@@ -46,6 +46,10 @@ export default class extends Controller {
     this.allowBackgroundClose = (this.data.get('allowBackgroundClose') || 'true') === 'true';
   }
 
+  disconnect() {
+    this.close();
+  }
+
   open(e) {
     e.preventDefault();
     e.target.blur();
@@ -64,7 +68,7 @@ export default class extends Controller {
   }
 
   close(e) {
-    e.preventDefault();
+    if (e) e.preventDefault();
 
     // Unlock the scroll and restore previous scroll position
     this.unlockScroll();
