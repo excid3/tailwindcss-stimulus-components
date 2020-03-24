@@ -16,11 +16,12 @@ export default class extends Controller {
   showTab() {
     this.tabTargets.forEach((tab, index) => {
       const panel = this.panelTargets[index]
-      panel.classList.toggle('hidden', index != this.index)
 
       if (index === this.index) {
+        panel.classList.remove('hidden')
         tab.classList.add(...this.activeTabClasses)
       } else {
+        panel.classList.add('hidden')
         tab.classList.remove(...this.activeTabClasses)
       }
     })
