@@ -319,7 +319,7 @@ You can use inheritance to extend the functionality of any Stimulus components.
 ```js
 import { Dropdown } from "tailwindcss-stimulus-components"
 
-class ButtonDropdown extends Dropdown {
+export default class ButtonDropdown extends Dropdown {
   static targets = ["button"]
 
   connect() {
