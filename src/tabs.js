@@ -5,6 +5,7 @@ export default class extends Controller {
 
   connect() {
     this.activeTabClasses = (this.data.get('activeTab') || 'active').split(' ')
+    this.inactiveTabClasses = (this.data.get('inactiveTab') || 'inactive').split(' ')
     this.index = this.tabTargets.findIndex(tab => tab.id == this.anchor)
     this.showTab()
   }
@@ -20,6 +21,7 @@ export default class extends Controller {
 
       if (index === this.index) {
         panel.classList.remove('hidden')
+        tab.classList.remove(...this.inactiveTabClasses)
         tab.classList.add(...this.activeTabClasses)
 
         // Update URL with the tab ID if it has one
@@ -32,6 +34,7 @@ export default class extends Controller {
       } else {
         panel.classList.add('hidden')
         tab.classList.remove(...this.activeTabClasses)
+        tab.classList.add(...this.inactiveTabClasses)
       }
     })
   }
