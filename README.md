@@ -189,6 +189,9 @@ currently selected tab.
 `data-tabs-active-tab` defines the list of classes that will be
 added/removed from the active tab when the active tab changes.
 
+`data-tabs-inactive-tab` defines the list of classes that will be
+added/removed from the inactive tab when the active tab changes.
+
 `data-tabs-index="1"` can be used to set the selected tab when the
 controller connects.
 
