@@ -1,3 +1,7 @@
+# 2.0.1
+
+* [Fix] Only set active tab using anchor if anchor is present
+
 # 2.0.0
 
 * [New] Move Stimulus.js to a peerDependency to reduce bundle size. @adrienpoly
