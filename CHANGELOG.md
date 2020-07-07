@@ -1,3 +1,7 @@
+# 2.0.0
+
+* [New] Move Stimulus.js to a peerDependency to reduce bundle size. @adrienpoly
+
 # 1.1.0
 
 * [New] Automatically select the visible tab based upon the anchor in the URL and the ID on the tabs
