@@ -6,13 +6,15 @@ export default class extends Controller {
   connect() {
     this.activeTabClasses = (this.data.get('activeTab') || 'active').split(' ')
     this.inactiveTabClasses = (this.data.get('inactiveTab') || 'inactive').split(' ')
-    this.index = this.tabTargets.findIndex(tab => tab.id == this.anchor)
+    if (this.anchor) this.index = this.tabTargets.findIndex((tab) => tab.id === this.anchor)
     this.showTab()
   }
 
   change(event) {
     event.preventDefault()
     this.index = this.tabTargets.indexOf(event.currentTarget)
+
+    window.dispatchEvent(new CustomEvent('tsc:tab-change'))
   }
 
   showTab() {
@@ -30,7 +32,6 @@ export default class extends Controller {
           event.preventDefault()
           location.hash = tab.id
         }
-
       } else {
         panel.classList.add('hidden')
         tab.classList.remove(...this.activeTabClasses)
