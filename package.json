@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-stimulus-components",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A set of Stimulus components (tabs, dropdowns, modals, toggles, autosave, etc) for TailwindCSS users",
   "main": "dist/tailwindcss-stimulus-components.js",
   "umd:main": "dist/tailwindcss-stimulus-components.umd.js",
@@ -29,6 +29,6 @@
     "prepublish": "yarn build"
   },
   "devDependencies": {
-    "microbundle": "^0.12.2"
+    "microbundle": "^0.12.3"
   }
 }

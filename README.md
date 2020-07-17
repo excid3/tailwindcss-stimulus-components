@@ -140,6 +140,14 @@ closing the modal when a user clicks on the background. Defaults to
 modal's dark transparent backdrop. This is useful if you want to make a
 fullscreen modal.
 
+`data-modal-prevent-default-action-opening` may be set to `true` to prevent the
+default action from running when clicking the element (e.g. a link from opening)
+that opens the modal and set to `false` to allow it. Default: `true`.
+
+`data-modal-prevent-default-action-closing` may be set to `true` to prevent the
+default action from running when clicking the element (e.g. a link from opening)
+that closes the modal and set to `false` to allow it. Default: `true`.
+
 ### Tabs
 
 ![Tabs](https://d3vv6lp55qjaqc.cloudfront.net/items/440B1H1P2Y1r3C3r1h0R/Screen%20Shot%202018-12-07%20at%201.24.31%20PM.png?X-CloudApp-Visitor-Id=bcd17e7039e393c836f30de901088b96&v=84e44dbd)
