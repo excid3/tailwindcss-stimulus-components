@@ -1,3 +1,7 @@
+# 2.0.2
+
+* [New] Add option to prevent or allow the default event when using the modal. @brunnogomes
+
 # 2.0.1
 
 * [Fix] Only set active tab using anchor if anchor is present

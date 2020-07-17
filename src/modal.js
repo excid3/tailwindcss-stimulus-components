@@ -44,6 +44,12 @@ export default class extends Controller {
 
     // Let the user close the modal by clicking on the background
     this.allowBackgroundClose = (this.data.get('allowBackgroundClose') || 'true') === 'true';
+
+    // Prevent the default action of the clicked element (following a link for example) when opening the modal
+    this.preventDefaultActionOpening = (this.data.get('preventDefaultActionOpening') || 'true') === 'true';
+
+    // Prevent the default action of the clicked element (following a link for example) when closing the modal
+    this.preventDefaultActionClosing = (this.data.get('preventDefaultActionClosing') || 'true') === 'true';
   }
 
   disconnect() {
@@ -51,7 +57,10 @@ export default class extends Controller {
   }
 
   open(e) {
-    e.preventDefault();
+    if (this.preventDefaultActionOpening) {
+      e.preventDefault();
+    }
+
     e.target.blur();
 
     // Lock the scroll and save current scroll position
@@ -68,7 +77,9 @@ export default class extends Controller {
   }
 
   close(e) {
-    if (e) e.preventDefault();
+    if (e && this.preventDefaultActionClosing) {
+      e.preventDefault();
+    }
 
     // Unlock the scroll and restore previous scroll position
     this.unlockScroll();
