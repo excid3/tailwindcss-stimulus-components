@@ -77,8 +77,8 @@ export default class extends Controller {
   }
 
   close(e) {
-    if (this.preventDefaultActionClosing) {
-      if (e) e.preventDefault();
+    if (e && this.preventDefaultActionClosing) {
+      e.preventDefault();
     }
 
     // Unlock the scroll and restore previous scroll position
