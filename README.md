@@ -2,7 +2,7 @@
 
 # TailwindCSS Stimulus Components
 
-[Check out the demo](https://jsfiddle.net/excid3/176obwmc/)
+[Check out the demo](https://excid3.github.io/tailwindcss-stimulus-components/)
 
 This is a set of components (Tabs, Modals, Dropdowns, etc) for TailwindCSS that uses [StimulusJS](https://stimulusjs.org) controllers.
 
@@ -28,7 +28,8 @@ $ npm install tailwindcss-stimulus-components
 or use directly from unpkg:
 
 ```html
-<script src="https://unpkg.com/tailwindcss-stimulus-components/dist/tailwindcss-stimulus-components.js"></script>
+<script src="https://unpkg.com/stimulus/dist/stimulus.umd.js"></script>
+<script src="https://unpkg.com/tailwindcss-stimulus-components/dist/tailwindcss-stimulus-components.umd.js"></script>
 ```
 
 ## Basic Usage

@@ -1,3 +1,11 @@
+# 2.0.4
+
+* Change to specify external stimulus dependency instead of global since we're using peerDependencies
+
+# 2.0.3
+
+* [Fix] Build UMD module with access to global Stimulus
+
 # 2.0.2
 
 * [New] Add option to prevent or allow the default event when using the modal. @brunnogomes
