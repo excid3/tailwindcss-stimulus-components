@@ -1,3 +1,7 @@
+# 2.0.5
+
+* Revert 2.0.4, microbundle's --external option didn't work as expected
+
 # 2.0.4
 
 * Change to specify external stimulus dependency instead of global since we're using peerDependencies
