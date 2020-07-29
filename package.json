@@ -14,6 +14,7 @@
   "contributors": [],
   "license": "MIT",
   "private": false,
+  "amdName": "TailwindcssStimulusComponents",
   "keywords": [
     "stimulus",
     "stimulusjs",
@@ -25,7 +26,7 @@
     "stimulus": ">=1.1.0"
   },
   "scripts": {
-    "build": "microbundle",
+    "build": "microbundle --globals stimulus=Stimulus",
     "prepublish": "yarn build"
   },
   "devDependencies": {
