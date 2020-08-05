@@ -12,7 +12,15 @@ export default class extends Controller {
 
   change(event) {
     event.preventDefault()
-    this.index = this.tabTargets.indexOf(event.currentTarget)
+
+    // If target specifies an index, use that
+    if (event.currentTarget.dataset.index) {
+      this.index = event.currentTarget.dataset.index
+
+    // Otherwise, use the index of the current target
+    } else {
+      this.index = this.tabTargets.indexOf(event.currentTarget)
+    }
 
     window.dispatchEvent(new CustomEvent('tsc:tab-change'))
   }
