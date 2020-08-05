@@ -204,6 +204,16 @@ added/removed from the inactive tab when the active tab changes.
 `data-tabs-index="1"` can be used to set the selected tab when the
 controller connects.
 
+##### Changing tabs from other places
+
+If you'd like to change the tab from a button or link outside of the tabs, you can call the same method and assign either `data-id` or `data-index` to select the tab.
+
+```html
+<a data-action="click->tabs#change" data-index="1">Change tab by data-index</a>
+
+<a data-action="click->tabs#change" data-id="second">Change tab by data-id</a>
+```
+
 ### Popovers
 
 ![Popovers](https://user-images.githubusercontent.com/11435593/51342548-24ffd380-1a8c-11e9-95a9-1b8a0181b2a1.png)

@@ -1,3 +1,7 @@
+# 2.0.7
+
+* [NEW] Use `data-id` on `tabs.change` element if specified
+
 # 2.0.6
 
 * [NEW] Use `data-index` on `tabs.change` element if specified
