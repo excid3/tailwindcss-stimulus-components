@@ -68,6 +68,21 @@ import { Alert } from "tailwindcss-stimulus-components"
 application.register('alert', Alert)
 ```
 
+To customize the appearance of alerts based on the kind of alert it is, you can do
+something like this in: `app/helpers/application_helper.rb`
+```ruby
+module ApplicationHelper
+  def tailwind_classes_for(flash_type)
+    {
+      notice: "bg-green-400 border-l-4 border-green-700 text-white",
+      error:   "bg-red-400 border-l-4 border-red-700 text-black",
+    }.stringify_keys[flash_type.to_s] || flash_type.to_s
+  end
+end
+```
+
+And then add something like this either directly in the layout file, or in a partial
+that's rendered directly by the layout:
 ```html
 <div class="fixed inset-x-0 top-0 flex items-end justify-right px-4 py-6 sm:p-6 justify-end z-50 ">
   <div data-controller="alert" class="max-w-sm w-full shadow-lg rounded px-4 py-3 rounded relative bg-green-400 border-l-4 border-green-700 text-white">
