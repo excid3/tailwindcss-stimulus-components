@@ -23,7 +23,7 @@
     "components"
   ],
   "np": {
-    "tests": false,
+    "tests": false
   },
   "peerDependencies": {
     "stimulus": ">=1.1.0"
