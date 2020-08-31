@@ -1,3 +1,6 @@
+# 2.0.8
+
+* [NEW] Add Alert component @esmale
 # 2.0.7
 
 * [NEW] Use `data-id` on `tabs.change` element if specified
