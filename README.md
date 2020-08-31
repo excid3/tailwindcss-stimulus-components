@@ -61,7 +61,7 @@ Alternatively, you can use the import lines below to import the
 individual features you need.
 
 ### Alerts
-![Alerts](https://raw.githubusercontent.com/esmale/stimulus-components/master/alert.png)
+![Alerts](https://i.imgur.com/jxQ8k1t.png)
 
 ```javascript
 import { Alert } from "tailwindcss-stimulus-components"
