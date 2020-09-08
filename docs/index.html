@@ -6,8 +6,8 @@
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://unpkg.com/stimulus/dist/stimulus.umd.js"></script>
     <script src="https://unpkg.com/tailwindcss-stimulus-components/dist/tailwindcss-stimulus-components.js"></script>
-    <!-- To use a local copy for testing, uncomment this
-    <script src="../dist/tailwindcss-stimulus-components.js"></script.
+    <!-- To use a local copy for testing, uncomment this 
+    <script src="../dist/tailwindcss-stimulus-components.js"></script>
     -->
 
     <script>
@@ -28,13 +28,13 @@
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Dropdowns</h2>
 
-        <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+        <nav id='nav_bar' class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
           <div class="flex items-center flex-no-shrink text-white mr-6">
             <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
             <span class="font-semibold text-xl tracking-tight">Dropdown Example</span>
           </div>
 
-          <div data-controller="dropdown" data-action="click->dropdown#toggle click@window->dropdown#hide">
+          <div data-controller="dropdown" data-dropdown-active-class='bg-teal-600' data-dropdown-active-target='#nav_bar'  data-action="click->dropdown#toggle click@window->dropdown#hide">
             <div class="relative inline-block text-sm px-4 py-2 leading-none rounded no-underline text-white hover:bg-teal-600 mt-0">
               <div role="button" class="inline-block select-none">
                 <span class="appearance-none flex items-center inline-block">

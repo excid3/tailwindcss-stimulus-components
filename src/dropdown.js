@@ -21,10 +21,14 @@ export default class extends Controller {
 
   connect() {
     this.toggleClass = this.data.get('class') || 'hidden'
+    this.activeClass = this.data.get('activeClass') || ''
   }
 
   toggle() {
     this.menuTarget.classList.toggle(this.toggleClass)
+    if(this.activeClass != '') {
+      this.activeTarget.classList.toggle(this.activeClass)
+    }
   }
 
   hide(event) {
@@ -33,6 +37,14 @@ export default class extends Controller {
       !this.menuTarget.classList.contains(this.toggleClass)
     ) {
       this.menuTarget.classList.add(this.toggleClass)
+      if(this.activeClass != '') {
+        this.activeTarget.classList.remove(this.activeClass)
+      }
     }
   }
+
+  get activeTarget() {
+    return this.data.has('activeTarget') ? document.querySelector(this.data.get('activeTarget')) : this.element
+  }
+
 }
