@@ -148,6 +148,31 @@ will also close if you click anywhere outside of the dropdown. This is
 done using a window click event to check if the user clicked outside the
 dropdown.
 
+The ```data-dropdown-active-class``` allows you add an active class to the dropdown menu. It will default to ```this.element```.  You can also specify a target to use for the active class with the ```data-active-target```. 
+
+```html
+<div class="inline-block text-sm px-4 py-2 leading-none rounded no-underline text-gray hover:text-gray-900 hover:bg-white mt-4 lg:mt-0">
+  <div class="relative" data-controller="dropdown" data-dropdown-active-class='bg-teal-700' data-dropdown-active-target='#activeTarget'>
+    <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" class="inline-block select-none">
+      <span class="appearance-none flex items-center inline-block text-gray-700">
+        <% if current_user %>
+          <%= image_tag avatar_url_for(current_user), class: "rounded-full h-8 w-8 align-middle" %>
+        <% end %>
+      </span>
+    </div>
+    <div id='activeTarget' data-target="dropdown.menu" class="absolute right-0 mt-2 hidden">
+      <div class="bg-white shadow rounded border overflow-hidden">
+          <%= link_to 'Profile',  edit_user_registration_path, class: 'no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Password', password_path, class: 'no-underline block px-8 py-3 text-gray-900 bg-white  hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Accounts', user_connected_accounts_path, class: 'no-underline block px-8 py-3 text-gray-900 bg-white  hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Billing',  subscription_path, class: 'no-underline block px-8 py-3 text-gray-900 bg-white  hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'no-underline block px-8 py-3 border-t text-gray-900 bg-white  hover:bg-gray-300 whitespace-no-wrap' %>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
 ### Modals
 
 ![Modal](https://d3vv6lp55qjaqc.cloudfront.net/items/3V2t3f0K0B1J3B2t0k0u/Screen%20Shot%202018-12-07%20at%201.01.22%20PM.png?X-CloudApp-Visitor-Id=bcd17e7039e393c836f30de901088b96&v=fa2ab240)
