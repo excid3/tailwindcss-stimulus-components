@@ -1,3 +1,7 @@
+# 2.0.9
+
+* [NEW] Add active class to dropdown component - @williamkennedy
+
 # 2.0.8
 
 * [NEW] Add Alert component @esmale
