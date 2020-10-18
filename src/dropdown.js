@@ -43,25 +43,33 @@ export default class extends Controller {
       this.activeTarget.classList.add(klass)
     })
 
-    setTimeout(() => {
-      this._activeClassList.forEach(klass => {
-        this.activeTarget.classList.add(klass)
-      })
-      this._inactiveClassList.forEach(klass => this.activeTarget.classList.remove(klass))
-      setTimeout(() => {
-        this._enteringClassList.forEach(klass => this.activeTarget.classList.remove(klass))
-      }, this.enterTimeout)
-    })
+    setTimeout(
+      (() => {
+        this._activeClassList.forEach(klass => {
+          this.activeTarget.classList.add(klass)
+        })
+        this._inactiveClassList.forEach(klass => this.activeTarget.classList.remove(klass))
+        setTimeout(
+          (() => {
+            this._enteringClassList.forEach(klass => this.activeTarget.classList.remove(klass))
+          }).bind(this),
+          this.enterTimeout,
+        )
+      }).bind(this),
+    )
   }
 
   _hide() {
     this._inactiveClassList.forEach(klass => this.activeTarget.classList.add(klass))
     this._activeClassList.forEach(klass => this.activeTarget.classList.remove(klass))
     this._leavingClassList.forEach(klass => this.activeTarget.classList.add(klass))
-    setTimeout(() => {
-      this.menuTarget.classList.add(this.toggleClass)
-      this._leavingClassList.forEach(klass => this.activeTarget.classList.remove(klass))
-    }, this.leaveTimeout)
+    setTimeout(
+      (() => {
+        this.menuTarget.classList.add(this.toggleClass)
+        this._leavingClassList.forEach(klass => this.activeTarget.classList.remove(klass))
+      }).bind(this),
+      this.leaveTimeout,
+    )
   }
 
   hide(event) {
