@@ -3,11 +3,19 @@
 
 // This example controller works with specially annotated HTML like:
 
-// <div class="relative" data-controller="dropdown" data-dropdown-inactive-class="invisible" data-dropdown-active-class="visible" data-dropdown-entering-class="entering-transition" data-dropdown-enter-timeout="100" data-dropdown-leaving-class="leaving-transition" data-dropdown-leave-timeout="75">
+// <div class="relative"
+//      data-controller="dropdown"
+//      data-action="click->dropdown#toggle click@window->dropdown#hide"
+//      data-dropdown-invisible-class="opacity-0 scale-95"
+//      data-dropdown-visible-class="opacity-100 scale-100"
+//      data-dropdown-entering-class="ease-out duration-100"
+//      data-dropdown-enter-timeout="100"
+//      data-dropdown-leaving-class="ease-in duration-75"
+//      data-dropdown-leave-timeout="75">
 //  <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" class="inline-block select-none">
 //    Open Dropdown
 //  </div>
-//  <div data-target="dropdown.menu" class="absolute pin-r mt-2 hidden">
+//  <div data-target="dropdown.menu" class="absolute pin-r mt-2 transform transition hidden opacity-0 scale-95">
 //    <div class="bg-white shadow rounded border overflow-hidden">
 //      Content
 //    </div>
@@ -21,7 +29,8 @@ export default class extends Controller {
 
   connect() {
     this.toggleClass = this.data.get('class') || 'hidden'
-    this.inactiveClass = this.data.get('inactiveClass') || null
+    this.visibleClass = this.data.get('visibleClass') || null
+    this.invisibleClass = this.data.get('invisibleClass') || null
     this.activeClass = this.data.get('activeClass') || null
     this.enteringClass = this.data.get('enteringClass') || null
     this.enterTimeout = parseInt(this.data.get('enterTimeout')) || 0
@@ -39,19 +48,24 @@ export default class extends Controller {
 
   _show() {
     this.menuTarget.classList.remove(this.toggleClass)
-    this._enteringClassList.forEach(klass => {
-      this.activeTarget.classList.add(klass)
-    })
+    this._enteringClassList.forEach(
+      (klass => {
+        this.menuTarget.classList.add(klass)
+      }).bind(this),
+    )
 
-    setTimeout(
+    requestAnimationFrame(
       (() => {
+        this._visibleClassList.forEach(klass => {
+          this.menuTarget.classList.add(klass)
+        })
         this._activeClassList.forEach(klass => {
           this.activeTarget.classList.add(klass)
         })
-        this._inactiveClassList.forEach(klass => this.activeTarget.classList.remove(klass))
+        this._invisibleClassList.forEach(klass => this.menuTarget.classList.remove(klass))
         setTimeout(
           (() => {
-            this._enteringClassList.forEach(klass => this.activeTarget.classList.remove(klass))
+            this._enteringClassList.forEach(klass => this.menuTarget.classList.remove(klass))
           }).bind(this),
           this.enterTimeout,
         )
@@ -60,13 +74,14 @@ export default class extends Controller {
   }
 
   _hide() {
-    this._inactiveClassList.forEach(klass => this.activeTarget.classList.add(klass))
+    this._invisibleClassList.forEach(klass => this.menuTarget.classList.add(klass))
+    this._visibleClassList.forEach(klass => this.menuTarget.classList.remove(klass))
     this._activeClassList.forEach(klass => this.activeTarget.classList.remove(klass))
-    this._leavingClassList.forEach(klass => this.activeTarget.classList.add(klass))
+    this._leavingClassList.forEach(klass => this.menuTarget.classList.add(klass))
     setTimeout(
       (() => {
         this.menuTarget.classList.add(this.toggleClass)
-        this._leavingClassList.forEach(klass => this.activeTarget.classList.remove(klass))
+        this._leavingClassList.forEach(klass => this.menuTarget.classList.remove(klass))
       }).bind(this),
       this.leaveTimeout,
     )
@@ -92,8 +107,12 @@ export default class extends Controller {
     return !this.activeClass ? [] : this.activeClass.split(' ')
   }
 
-  get _inactiveClassList() {
-    return !this.inactiveClass ? [] : this.inactiveClass.split(' ')
+  get _visibleClassList() {
+    return !this.visibleClass ? [] : this.visibleClass.split(' ')
+  }
+
+  get _invisibleClassList() {
+    return !this.invisibleClass ? [] : this.invisibleClass.split(' ')
   }
 
   get _enteringClassList() {
