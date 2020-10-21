@@ -1,3 +1,7 @@
+# 2.0.10
+
+* [NEW] Add animations for dropdown menu - @julianrubisch
+
 # 2.0.9
 
 * [NEW] Add active class to dropdown component - @williamkennedy
