@@ -106,7 +106,7 @@ that's rendered directly by the layout:
 </div>
 ```
 
-Alerts are set up to slide into view from the top-right side of the 
+Alerts are set up to slide into view from the top-right side of the
 screen. Clicking on the "X" button will cause the alert to slide back
 out of view and be removed from the DOM.
 
@@ -148,7 +148,7 @@ will also close if you click anywhere outside of the dropdown. This is
 done using a window click event to check if the user clicked outside the
 dropdown.
 
-The ```data-dropdown-active-class``` allows you add an active class to the dropdown menu. It will default to ```this.element```.  You can also specify a target to use for the active class with the ```data-active-target```. 
+The ```data-dropdown-active-class``` allows you add an active class to the dropdown menu. It will default to ```this.element```.  You can also specify a target to use for the active class with the ```data-active-target```.
 
 ```html
 <div class="inline-block text-sm px-4 py-2 leading-none rounded no-underline text-gray hover:text-gray-900 hover:bg-white mt-4 lg:mt-0">
@@ -171,6 +171,17 @@ The ```data-dropdown-active-class``` allows you add an active class to the dropd
     </div>
   </div>
 </div>
+```
+
+Animations for the dropdown menu (like the TailwindUI dropdowns) can be applied using these data attributes:
+
+```html
+data-dropdown-invisible-class="opacity-0 scale-95"
+data-dropdown-visible-class="opacity-100 scale-100"
+data-dropdown-entering-class="ease-out duration-300"
+data-dropdown-enter-timeout="300"
+data-dropdown-leaving-class="ease-in duration-300"
+data-dropdown-leave-timeout="300"
 ```
 
 ### Modals

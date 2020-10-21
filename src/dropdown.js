@@ -6,6 +6,8 @@
 // <div class="relative"
 //      data-controller="dropdown"
 //      data-action="click->dropdown#toggle click@window->dropdown#hide"
+//      data-dropdown-active-target="#dropdown-button"
+//      data-dropdown-active-class="bg-teal-600"
 //      data-dropdown-invisible-class="opacity-0 scale-95"
 //      data-dropdown-visible-class="opacity-100 scale-100"
 //      data-dropdown-entering-class="ease-out duration-100"
