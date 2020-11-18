@@ -1,12 +1,12 @@
 // <div role="main" class="h-screen flex overflow-hidden bg-gray-100"
 //      data-controller="slideover"
-//      data-sidebar-inactive-class="-translate-x-full,opacity-0"
-//      data-sidebar-active-class="translate-x-0,opacity-100"
-//      data-sidebar-entering-class=""
-//      data-sidebar-enter-timeout="300,300"
-//      data-sidebar-leaving-class=""
-//      data-sidebar-leave-timeout="300,300"
-//      data-sidebar-active-target="#sidebar-target">
+//      data-slideover-invisible-class="-translate-x-full,opacity-0"
+//      data-slideover-visible-class="translate-x-0,opacity-100"
+//      data-slideover-entering-class=""
+//      data-slideover-enter-timeout="300,300"
+//      data-slideover-leaving-class=""
+//      data-slideover-leave-timeout="300,300"
+//      data-slideover-active-target="#slideover-target">
 
 import Dropdown from './dropdown.js'
 
