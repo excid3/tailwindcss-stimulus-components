@@ -35,9 +35,7 @@ export default class extends Controller {
     this.invisibleClass = this.data.get('invisibleClass') || null
     this.activeClass = this.data.get('activeClass') || null
     this.enteringClass = this.data.get('enteringClass') || null
-    this.enterTimeout = parseInt(this.data.get('enterTimeout')) || 0
     this.leavingClass = this.data.get('leavingClass') || null
-    this.leaveTimeout = parseInt(this.data.get('leaveTimeout')) || 0
   }
 
   toggle() {
@@ -48,44 +46,52 @@ export default class extends Controller {
     }
   }
 
-  _show() {
+  _show(cb) {
     this.menuTarget.classList.remove(this.toggleClass)
-    this._enteringClassList.forEach(
+    this._enteringClassList[0].forEach(
       (klass => {
         this.menuTarget.classList.add(klass)
       }).bind(this),
     )
 
-    requestAnimationFrame(
+    setTimeout(
       (() => {
-        this._visibleClassList.forEach(klass => {
-          this.menuTarget.classList.add(klass)
-        })
-        this._activeClassList.forEach(klass => {
+        this._activeClassList[0].forEach(klass => {
           this.activeTarget.classList.add(klass)
         })
-        this._invisibleClassList.forEach(klass => this.menuTarget.classList.remove(klass))
+        this._invisibleClassList[0].forEach(klass => this.menuTarget.classList.remove(klass))
+        this._visibleClassList[0].forEach(klass => {
+          this.menuTarget.classList.add(klass)
+        })
         setTimeout(
           (() => {
-            this._enteringClassList.forEach(klass => this.menuTarget.classList.remove(klass))
+            this._enteringClassList[0].forEach(klass => this.menuTarget.classList.remove(klass))
           }).bind(this),
-          this.enterTimeout,
+          this.enterTimeout[0],
         )
+
+        if (cb) cb()
       }).bind(this),
     )
   }
 
-  _hide() {
-    this._invisibleClassList.forEach(klass => this.menuTarget.classList.add(klass))
-    this._visibleClassList.forEach(klass => this.menuTarget.classList.remove(klass))
-    this._activeClassList.forEach(klass => this.activeTarget.classList.remove(klass))
-    this._leavingClassList.forEach(klass => this.menuTarget.classList.add(klass))
+  _hide(cb) {
     setTimeout(
       (() => {
-        this.menuTarget.classList.add(this.toggleClass)
-        this._leavingClassList.forEach(klass => this.menuTarget.classList.remove(klass))
+        this._invisibleClassList[0].forEach(klass => this.menuTarget.classList.add(klass))
+        this._visibleClassList[0].forEach(klass => this.menuTarget.classList.remove(klass))
+        this._activeClassList[0].forEach(klass => this.activeTarget.classList.remove(klass))
+        this._leavingClassList[0].forEach(klass => this.menuTarget.classList.add(klass))
+        setTimeout(
+          (() => {
+            this._leavingClassList[0].forEach(klass => this.menuTarget.classList.remove(klass))
+            if (cb) cb()
+
+            this.menuTarget.classList.add(this.toggleClass)
+          }).bind(this),
+          this.leaveTimeout[0],
+        )
       }).bind(this),
-      this.leaveTimeout,
     )
   }
 
@@ -106,22 +112,50 @@ export default class extends Controller {
   }
 
   get _activeClassList() {
-    return !this.activeClass ? [] : this.activeClass.split(' ')
+    return !this.activeClass
+      ? [[], []]
+      : this.activeClass.split(',').map(classList => classList.split(' '))
   }
 
   get _visibleClassList() {
-    return !this.visibleClass ? [] : this.visibleClass.split(' ')
+    return !this.visibleClass
+      ? [[], []]
+      : this.visibleClass.split(',').map(classList => classList.split(' '))
   }
 
   get _invisibleClassList() {
-    return !this.invisibleClass ? [] : this.invisibleClass.split(' ')
+    return !this.invisibleClass
+      ? [[], []]
+      : this.invisibleClass.split(',').map(classList => classList.split(' '))
   }
 
   get _enteringClassList() {
-    return !this.enteringClass ? [] : this.enteringClass.split(' ')
+    return !this.enteringClass
+      ? [[], []]
+      : this.enteringClass.split(',').map(classList => classList.split(' '))
   }
 
   get _leavingClassList() {
-    return !this.leavingClass ? [] : this.leavingClass.split(' ')
+    return !this.leavingClass
+      ? [[], []]
+      : this.leavingClass.split(',').map(classList => classList.split(' '))
+  }
+
+  get enterTimeout() {
+    return (
+      this.data
+        .get('enterTimeout')
+        .split(',')
+        .map(timeout => parseInt(timeout)) || [0, 0]
+    )
+  }
+
+  get leaveTimeout() {
+    return (
+      this.data
+        .get('leaveTimeout')
+        .split(',')
+        .map(timeout => parseInt(timeout)) || [0, 0]
+    )
   }
 }
