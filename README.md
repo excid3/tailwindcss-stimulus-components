@@ -184,6 +184,50 @@ data-dropdown-leaving-class="ease-in duration-300"
 data-dropdown-leave-timeout="300"
 ```
 
+### Slideovers
+
+```js
+import { Slideover } from "tailwindcss-stimulus-components"
+application.register('slideover', Slideover)
+```
+
+```html
+<div class="container mx-auto p-8"
+     data-controller="slideover"
+     data-slideover-active-target="#slideover-target">
+  <!-- begin sidebar/slideover -->
+  <div id="sidebar">
+    <div data-target="slideover.overlay" class="fixed inset-0 flex z-40 transition-opacity ease-linear duration-300 opacity-0 hidden">
+      <div class="fixed inset-0">
+        <div class="absolute inset-0 bg-gray-600 opacity-75"></div>
+      </div>
+      <div id="slideover-target" data-target="slideover.menu" class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800 transition ease-in-out duration-300 transform -translate-x-full hidden">
+        <div class="absolute top-0 right-0 -mr-14 p-1">
+          <button data-action="slideover#_hide" class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600" aria-label="Close sidebar">
+            <svg class="h-6 w-6 text-white" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <!-- menu content -->
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+Slideovers are glorified dropdowns that include an additional overlay. Thus, the setup is equivalent to that of dropdowns, albeit you must specify an `overlay` target. Animations are annotated similarly to dropdowns, just separate the `classList`s of menu and overlay with a comma `,`:
+
+```html
+data-slideover-invisible-class="-translate-x-full,opacity-0"
+data-slideover-visible-class="translate-x-0,opacity-100"
+data-slideover-entering-class=""
+data-slideover-enter-timeout="300,300"
+data-slideover-leaving-class=""
+data-slideover-leave-timeout="300,0"
+```
+
+
 ### Modals
 
 ![Modal](https://d3vv6lp55qjaqc.cloudfront.net/items/3V2t3f0K0B1J3B2t0k0u/Screen%20Shot%202018-12-07%20at%201.01.22%20PM.png?X-CloudApp-Visitor-Id=bcd17e7039e393c836f30de901088b96&v=fa2ab240)
