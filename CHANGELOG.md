@@ -1,3 +1,7 @@
+# 2.0.11
+
+* [NEW] Add slideover component - @julianrubisch
+
 # 2.0.10
 
 * [NEW] Add animations for dropdown menu - @julianrubisch
