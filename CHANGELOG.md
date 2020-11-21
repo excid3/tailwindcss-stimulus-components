@@ -1,3 +1,7 @@
+# 2.0.12
+
+* [FIX] Add default value so enterTimeout & leaveTimeout don't break - @excid3
+
 # 2.0.11
 
 * [NEW] Add slideover component - @julianrubisch
