@@ -142,20 +142,12 @@ export default class extends Controller {
   }
 
   get enterTimeout() {
-    return (
-      this.data
-        .get('enterTimeout')
-        .split(',')
-        .map(timeout => parseInt(timeout)) || [0, 0]
-    )
+    let timeout = this.data.get('enterTimeout') || "0,0"
+    return timeout.split(',').map(t => parseInt(t))
   }
 
   get leaveTimeout() {
-    return (
-      this.data
-        .get('leaveTimeout')
-        .split(',')
-        .map(timeout => parseInt(timeout)) || [0, 0]
-    )
+    let timeout = this.data.get('leaveTimeout') || "0,0"
+    return timeout.split(',').map(t => parseInt(t))
   }
 }
