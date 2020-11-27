@@ -3,19 +3,14 @@
 import { Application, Controller } from "stimulus";
 import Toggle from "toggle";
 
-const emitEvent = (element, eventType) => {
-  const event = new Event(eventType);
-  element.dispatchEvent(event);
-};
-
 describe("ToggleController", () => {
-  describe(".toggledClass", () => {
+  describe("#toggle", () => {
     beforeEach(() => {
-      document.body.innerHTML = `<div data-controller='toggle' class="m-2">
-    <div data-action='click->toggle#toggle' class="bg-gray-900 text-white p-6">
+      document.body.innerHTML = `<div data-controller='toggle' data-toggle-class='toggledClass' class="m-2">
+    <div id='toggleAction' data-action='click->toggle#toggle' class="bg-gray-900 text-white p-6">
       What is the question?
     </div>
-    <div id='toggleTarget' data-target='toggle.toggleable' class="m-4 hidden">
+    <div id='toggleTarget' data-target='toggle.toggleable' class="m-4">
       <p>This is the answer</p>
     </div>
   </div>`
@@ -25,16 +20,11 @@ describe("ToggleController", () => {
     });
 
 
-    it("toggles hidden class from toggle.toggleable", () => {
-      let toggleTarget = document.getElementById('toggleTarget')
-      const evt = new Event('click', { bubbles: true, cancelable: false, composed: false });
-      toggleTarget.stimulate('click');
-      console.log(toggleTarget.className)
-      toggleTarget.dispatchEvent(evt)
-      toggleTarget.stimulate('click');
-      console.log(toggleTarget.className)
-      expect(toggleTarget.className.includes('hidden')).toEqual(false)
-
+    it("adds active class to toggle.toggleable", () => {
+      const toggleAction = document.getElementById('toggleAction')
+      const toggleTarget = document.getElementById('toggleTarget')
+      toggleAction.click()
+      expect(toggleTarget.className.includes('toggledClass')).toEqual(true)
     });
   });
 });
