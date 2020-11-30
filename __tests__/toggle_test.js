@@ -1,5 +1,3 @@
-'use strict';
-
 import { Application, Controller } from "stimulus";
 import Toggle from "toggle";
 
@@ -21,11 +19,12 @@ describe("ToggleController", () => {
 
 
     it("adds active class to toggle.toggleable", () => {
-      const toggleAction = document.getElementById('toggleAction')
-      const toggleTarget = document.getElementById('toggleTarget')
+      const toggleAction = document.querySelector('#toggleAction')
+      const toggleTarget = document.querySelector('#toggleTarget')
       toggleAction.click()
       expect(toggleTarget.className.includes('toggledClass')).toEqual(true)
     });
+
   });
 });
 
