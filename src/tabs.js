@@ -41,7 +41,6 @@ export default class extends Controller {
         // Update URL with the tab ID if it has one
         // This will be automatically selected on page load
         if (tab.id) {
-          event.preventDefault()
           location.hash = tab.id
         }
       } else {

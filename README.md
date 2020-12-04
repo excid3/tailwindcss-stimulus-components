@@ -46,12 +46,13 @@ const context = require.context("controllers", true, /.js$/);
 application.load(definitionsFromContext(context));
 
 // Import and register all TailwindCSS Components
-import { Dropdown, Modal, Tabs, Popover, Toggle } from "tailwindcss-stimulus-components"
+import { Dropdown, Modal, Tabs, Popover, Toggle, Slideover } from "tailwindcss-stimulus-components"
 application.register('dropdown', Dropdown)
 application.register('modal', Modal)
 application.register('tabs', Tabs)
 application.register('popover', Popover)
 application.register('toggle', Toggle)
+application.register('slideover', Slideover)
 ```
 
 This will start StimulusJS and load any controllers that you have
@@ -488,6 +489,13 @@ If you override the `connect`, `disconnect` or any other methods from the parent
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at <https://github.com/excid3/tailwindcss-stimulus-components>.  This project is intended to be a safe, welcoming space for  collaboration, and contributors are expected to adhere to the  Contributor Covenant code of conduct.
+
+To run tests:
+
+```bash
+yarn
+yarn test
+```
 
 ## License
 
