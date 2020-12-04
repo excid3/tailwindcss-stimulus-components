@@ -1,3 +1,8 @@
+# Unreleased
+
+* [NEW] Updated Stimulus JS requirement to 2.0
+* [NEW] Test suite has been added
+
 # 2.0.12
 
 * [FIX] Add default value so enterTimeout & leaveTimeout don't break - @excid3
