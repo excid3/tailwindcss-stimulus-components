@@ -16,8 +16,8 @@ describe("TabsController", () => {
 
 
     it("applies active class to panel when tab is clicked", () => {
-      const tabs = document.querySelectorAll("[data-target='tabs.tab']")
-      const panels = document.querySelectorAll("[data-target='tabs.panel']")
+      const tabs = document.querySelectorAll("[data-tabs-target='tab']")
+      const panels = document.querySelectorAll("[data-tabs-target='panel']")
       const activeClass = document.querySelector('[data-tabs-active-tab]').dataset.tabsActiveTab
 
       tabs[2].click()

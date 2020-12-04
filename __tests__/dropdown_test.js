@@ -21,7 +21,7 @@ describe("DropdownController", () => {
   <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" class="inline-block select-none">
     Open Dropdown
   </div>
-  <div id='active_target' data-target="dropdown.menu" class="absolute pin-r mt-2 transform transition hidden opacity-0 scale-95">
+  <div id='active_target' data-dropdown-target="menu" class="absolute pin-r mt-2 transform transition hidden opacity-0 scale-95">
     <div class="bg-white shadow rounded border overflow-hidden">
       Content
     </div>
@@ -33,7 +33,7 @@ describe("DropdownController", () => {
     });
 
     it('applies visible class to target ', () => {
-      const target = document.querySelector('[data-target="dropdown.menu"]');
+      const target = document.querySelector('[data-dropdown-target="menu"]');
       const action = document.querySelector('[data-action]');
       action.click()
       jest.runAllTimers()

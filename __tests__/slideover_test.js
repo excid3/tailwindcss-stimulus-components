@@ -20,7 +20,7 @@ describe("SlideoverController", () => {
       const invisibleClass =  document.querySelector('[data-controller="slideover"]').dataset.slideoverInvisibleClass
       const visibleClass =  document.querySelector('[data-controller="slideover"]').dataset.slideoverVisibleClass
 
-      const overLayTarget = mobileSidebar.querySelector('[data-target="slideover.overlay"]')
+      const overLayTarget = mobileSidebar.querySelector('[data-slideover-target="overlay"]')
       const actionBtn = document.querySelector('[data-action="click->slideover#toggle click@window->slideover#hide"]')
 
       expect(overLayTarget.className.includes('hidden')).toEqual(true)

@@ -8,7 +8,7 @@ describe("ToggleController", () => {
     <div id='toggleAction' data-action='click->toggle#toggle' class="bg-gray-900 text-white p-6">
       What is the question?
     </div>
-    <div id='toggleTarget' data-target='toggle.toggleable' class="m-4">
+    <div id='toggleTarget' data-toggle-target='toggleable' class="m-4">
       <p>This is the answer</p>
     </div>
   </div>`
