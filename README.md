@@ -490,6 +490,13 @@ If you override the `connect`, `disconnect` or any other methods from the parent
 
 Bug reports and pull requests are welcome on GitHub at <https://github.com/excid3/tailwindcss-stimulus-components>.  This project is intended to be a safe, welcoming space for  collaboration, and contributors are expected to adhere to the  Contributor Covenant code of conduct.
 
+To run tests:
+
+```bash
+yarn
+yarn test
+```
+
 ## License
 
 This package is available as open source under the terms of the MIT License.
