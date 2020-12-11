@@ -40,16 +40,18 @@ export default class extends Controller {
   }
 
   toggle() {
+    this.openValue = !this.openValue
+  }
+
+  openValueChanged() {
     if (this.openValue) {
-      this._hide()
-    } else {
       this._show()
+    } else {
+      this._hide()
     }
   }
 
   _show(cb) {
-    this.openValue = true
-
     this.menuTarget.classList.remove(this.toggleClass)
     this._enteringClassList[0].forEach(
       (klass => {
@@ -79,8 +81,6 @@ export default class extends Controller {
   }
 
   _hide(cb) {
-    this.openValue = false
-
     setTimeout(
       (() => {
         this._invisibleClassList[0].forEach(klass => this.menuTarget.classList.add(klass))
@@ -102,7 +102,7 @@ export default class extends Controller {
 
   hide(event) {
     if (this.element.contains(event.target) === false && this.openValue) {
-      this._hide()
+      this.openValue = false
     }
   }
 
