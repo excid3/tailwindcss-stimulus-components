@@ -26,7 +26,7 @@
     "tests": false
   },
   "peerDependencies": {
-    "stimulus": ">=1.1.0"
+    "stimulus": ">=2.0.0"
   },
   "scripts": {
     "build": "microbundle --globals stimulus=Stimulus",
