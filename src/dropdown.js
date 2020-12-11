@@ -73,7 +73,7 @@ export default class extends Controller {
           this.enterTimeout[0],
         )
 
-        if (cb) cb()
+        if (typeof cb == 'function') cb()
       }).bind(this),
     )
   }
@@ -90,7 +90,7 @@ export default class extends Controller {
         setTimeout(
           (() => {
             this._leavingClassList[0].forEach(klass => this.menuTarget.classList.remove(klass))
-            if (cb) cb()
+            if (typeof cb == 'function') cb()
 
             this.menuTarget.classList.add(this.toggleClass)
           }).bind(this),
