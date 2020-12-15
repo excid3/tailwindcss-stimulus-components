@@ -28,6 +28,7 @@ import { Controller } from 'stimulus'
 
 export default class extends Controller {
   static targets = ['menu']
+  static values = { open: Boolean }
 
   connect() {
     this.toggleClass = this.data.get('class') || 'hidden'
@@ -39,7 +40,11 @@ export default class extends Controller {
   }
 
   toggle() {
-    if (this.hidden) {
+    this.openValue = !this.openValue
+  }
+
+  openValueChanged() {
+    if (this.openValue) {
       this._show()
     } else {
       this._hide()
@@ -70,7 +75,7 @@ export default class extends Controller {
           this.enterTimeout[0],
         )
 
-        if (cb) cb()
+        if (typeof cb == 'function') cb()
       }).bind(this),
     )
   }
@@ -85,7 +90,7 @@ export default class extends Controller {
         setTimeout(
           (() => {
             this._leavingClassList[0].forEach(klass => this.menuTarget.classList.remove(klass))
-            if (cb) cb()
+            if (typeof cb == 'function') cb()
 
             this.menuTarget.classList.add(this.toggleClass)
           }).bind(this),
@@ -96,13 +101,9 @@ export default class extends Controller {
   }
 
   hide(event) {
-    if (this.element.contains(event.target) === false && !this.hidden) {
-      this._hide()
+    if (this.element.contains(event.target) === false && this.openValue) {
+      this.openValue = false
     }
-  }
-
-  get hidden() {
-    return this.menuTarget.classList.contains(this.toggleClass)
   }
 
   get activeTarget() {
@@ -142,12 +143,12 @@ export default class extends Controller {
   }
 
   get enterTimeout() {
-    let timeout = this.data.get('enterTimeout') || "0,0"
+    let timeout = this.data.get('enterTimeout') || '0,0'
     return timeout.split(',').map(t => parseInt(t))
   }
 
   get leaveTimeout() {
-    let timeout = this.data.get('leaveTimeout') || "0,0"
+    let timeout = this.data.get('leaveTimeout') || '0,0'
     return timeout.split(',').map(t => parseInt(t))
   }
 }

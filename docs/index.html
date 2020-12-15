@@ -12,6 +12,7 @@
   <body>
     <div class="container mx-auto p-8"
          data-controller="slideover"
+         data-slideover-open-value="false"
          data-slideover-invisible-class="-translate-x-full,opacity-0"
          data-slideover-visible-class="translate-x-0,opacity-100"
          data-slideover-entering-class=""
@@ -27,7 +28,7 @@
           </div>
           <div id="slideover-target" data-target="slideover.menu" class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800 transition ease-in-out duration-300 transform -translate-x-full hidden">
             <div class="absolute top-0 right-0 -mr-14 p-1">
-              <button data-action="slideover#_hide" class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600" aria-label="Close sidebar">
+              <button data-action="slideover#toggle" class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600" aria-label="Close sidebar">
                 <svg class="h-6 w-6 text-white" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -65,6 +66,7 @@
 
           <div data-controller="dropdown"
                data-action="click->dropdown#toggle click@window->dropdown#hide"
+               data-dropdown-open-value="false"
                data-dropdown-active-target="#dropdown-button"
                data-dropdown-active-class="bg-teal-600"
                data-dropdown-invisible-class="opacity-0 scale-95"
