@@ -11,6 +11,7 @@ describe("DropdownController", () => {
       data-dropdown-active-target='#active_target' data-controller="dropdown"
       data-action="click->dropdown#toggle click@window->dropdown#hide"
       data-dropdown-active-target="#dropdown-button"
+      data-dropdown-open-value="false"
       data-dropdown-active-class="bg-teal-600"
       data-dropdown-invisible-class="opacity-0 scale-95"
       data-dropdown-visible-class="opacity-100 scale-100"
@@ -32,11 +33,13 @@ describe("DropdownController", () => {
       application.register("dropdown", Dropdown);
     });
 
-    it('applies visible class to target ', () => {
+    it('applies visible class to target ', async () => {
       const target = document.querySelector('[data-dropdown-target="menu"]');
       const action = document.querySelector('[data-action]');
       action.click()
-      jest.runAllTimers()
+      expect(setTimeout).toHaveBeenCalledTimes(1);
+      await Promise.resolve();
+      jest.runOnlyPendingTimers();
       expect(target.className).toMatch('opacity-100 scale-100')
     })
   });
