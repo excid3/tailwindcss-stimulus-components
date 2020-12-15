@@ -31,7 +31,7 @@
   "scripts": {
     "build": "microbundle --globals stimulus=Stimulus",
     "prepublish": "yarn build",
-    "test": "jest"
+    "test": "NODE_ENV=test jest"
   },
   "jest": {
     "testRegex": ".*_test.js",
