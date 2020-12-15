@@ -131,7 +131,7 @@ application.register('dropdown', Dropdown)
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-4 w-4"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
       </span>
     </div>
-    <div data-target="dropdown.menu" class="absolute right-0 mt-2 hidden">
+    <div data-dropdown-target="menu" class="absolute right-0 mt-2 hidden">
       <div class="bg-white shadow rounded border overflow-hidden">
           <%= link_to 'Profile',  edit_user_registration_path, class: 'no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
           <%= link_to 'Password', password_path, class: 'no-underline block px-8 py-3 text-gray-900 bg-white  hover:bg-gray-300 whitespace-no-wrap' %>
@@ -161,7 +161,7 @@ The ```data-dropdown-active-class``` allows you add an active class to the dropd
         <% end %>
       </span>
     </div>
-    <div id='activeTarget' data-target="dropdown.menu" class="absolute right-0 mt-2 hidden">
+    <div id='activeTarget' data-dropdown-target="menu" class="absolute right-0 mt-2 hidden">
       <div class="bg-white shadow rounded border overflow-hidden">
           <%= link_to 'Profile',  edit_user_registration_path, class: 'no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
           <%= link_to 'Password', password_path, class: 'no-underline block px-8 py-3 text-gray-900 bg-white  hover:bg-gray-300 whitespace-no-wrap' %>
@@ -198,11 +198,11 @@ application.register('slideover', Slideover)
      data-slideover-active-target="#slideover-target">
   <!-- begin sidebar/slideover -->
   <div id="sidebar">
-    <div data-target="slideover.overlay" class="fixed inset-0 flex z-40 transition-opacity ease-linear duration-300 opacity-0 hidden">
+    <div data-slideover-target="overlay" class="fixed inset-0 flex z-40 transition-opacity ease-linear duration-300 opacity-0 hidden">
       <div class="fixed inset-0">
         <div class="absolute inset-0 bg-gray-600 opacity-75"></div>
       </div>
-      <div id="slideover-target" data-target="slideover.menu" class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800 transition ease-in-out duration-300 transform -translate-x-full hidden">
+      <div id="slideover-target" data-slideover-target="menu" class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800 transition ease-in-out duration-300 transform -translate-x-full hidden">
         <div class="absolute top-0 right-0 -mr-14 p-1">
           <button data-action="slideover#_hide" class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600" aria-label="Close sidebar">
             <svg class="h-6 w-6 text-white" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -245,7 +245,7 @@ application.register('modal', Modal)
   </a>
 
   <!-- Modal Container -->
-  <div data-target="modal.container" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" class="hidden animated fadeIn fixed inset-0 overflow-y-auto flex items-center justify-center" style="z-index: 9999;">
+  <div data-modal-target="container" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" class="hidden animated fadeIn fixed inset-0 overflow-y-auto flex items-center justify-center" style="z-index: 9999;">
     <!-- Modal Inner Container -->
     <div class="max-h-screen w-full max-w-lg relative">
       <!-- Modal Card -->
@@ -292,13 +292,13 @@ application.register('tabs', Tabs)
 ```html
 <div data-controller="tabs" data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t">
   <ul class="list-reset flex border-b">
-    <li class="-mb-px mr-1" data-target="tabs.tab" data-action="click->tabs#change">
+    <li class="-mb-px mr-1" data-tabs-target="tab" data-action="click->tabs#change">
       <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-700 font-semibold no-underline" href="#">Active</a>
     </li>
-    <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
+    <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
       <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-700 font-semibold no-underline" href="#">Tab</a>
     </li>
-    <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
+    <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
       <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-700 font-semibold no-underline" href="#">Tab</a>
     </li>
     <li class="mr-1">
@@ -306,24 +306,24 @@ application.register('tabs', Tabs)
     </li>
   </ul>
 
-  <div class="hidden py-4 px-4 border-l border-b border-r" data-target="tabs.panel">
+  <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
     Tab panel 1
   </div>
 
-  <div class="hidden py-4 px-4 border-l border-b border-r" data-target="tabs.panel">
+  <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
     Tab panel 2
   </div>
 
-  <div class="hidden py-4 px-4 border-l border-b border-r" data-target="tabs.panel">
+  <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/y3niFzo5VLI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
 </div>
 ```
 
-`data-target="tabs.tab"` defines which element is marked as a tab. The
+`data-tabs-target="tab"` defines which element is marked as a tab. The
 index of the tab is used to determine which panel to make visible.
 
-`data-target="tabs.panel"` defines which panel is visible based upon the
+`data-tabs-target="panel"` defines which panel is visible based upon the
 currently selected tab.
 
 `data-tabs-active-tab` defines the list of classes that will be
@@ -361,7 +361,7 @@ application.register('popover', Popover)
   Beginning in 2015, Google introduced what is called the
     <div class="popover inline-block" data-controller="popover" data-popover-translate-x="0" data-popover-translate-y="-128%" data-action="mouseover->popover#mouseOver mouseout->popover#mouseOut">
       <span class="underline">'local snack pack',</span>
-      <div class="content hidden absolute max-w-xs bg-gray-300 rounded p-2" data-target="popover.content">
+      <div class="content hidden absolute max-w-xs bg-gray-300 rounded p-2" data-popover-target="content">
         Terrible name - we know. But the biggest name in SEO came up with it.
       </div>
     </div>
@@ -369,7 +369,7 @@ application.register('popover', Popover)
 </p>
 ```
 
-`data-target="popover.content"` defines which element will contain the actual content in the popover.
+`data-popover-target="content"` defines which element will contain the actual content in the popover.
 
 `data-popover-translate-x="0"` defines the css transform-translate X value used in positioning the popover.It can be anything from a percentage to rem units to pixels.
 
@@ -398,15 +398,15 @@ Here's an example using Rails forms:
   <div class="form-group">
     <%= form.submit "Save and Publish", class: 'btn btn-primary' %>
 
-    <span class="text-muted" data-target="autosave.status"></span>
+    <span class="text-muted" data-autosave-target="status"></span>
   </div>
 <% end %>
 ```
 
-You can use `data-target="autosave.form"` to reference the form. This
+You can use `data-autosave-target="form"` to reference the form. This
 will be used with the Rails AJAX form submission.
 
-The `data-target="autosave.status"` is used for displaying the status message of the autosave. This displays "Saving..." while the request is in progress and then "Saved!" if it was successful, "Unable to save!" if it failed.
+The `data-autosave-target="status"` is used for displaying the status message of the autosave. This displays "Saving..." while the request is in progress and then "Saved!" if it was successful, "Unable to save!" if it failed.
 
 Add `data-action="keyup->autosave#save` to listen to the keyup event and
 trigger an autosave. You can use other events like `change` for other
@@ -432,7 +432,7 @@ We recommend using a gem like Draftsman to help make the backend easier.
   <div data-action='click->toggle#toggle touch->toggle#toggle' class="bg-gray-900 text-white p-6">
     What is the question?
   </div>
-  <div data-target='toggle.toggleable' class="m-4 hidden">
+  <div data-toggle-target='toggleable' class="m-4 hidden">
     <p>This is the answer</p>
   </div>
 </div>
@@ -446,7 +446,7 @@ In this example, clicking the question will toggle the hidden class. The hidden 
   <div data-action='click->toggle#toggle touch->toggle#toggle' class="bg-gray-900 text-white p-6">
     What is the question?
   </div>
-  <div data-target='toggle.toggleable' class="m-4 bg-red-900">
+  <div data-toggle-target='toggleable' class="m-4 bg-red-900">
     <p>This is the answer</p>
   </div>
 </div>
