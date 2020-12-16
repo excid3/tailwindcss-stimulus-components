@@ -1,5 +1,7 @@
 # Unreleased
 
+# 2.1.0
+
 * [NEW] Updated Stimulus JS requirement to 2.0
 * [NEW] Test suite has been added
 
