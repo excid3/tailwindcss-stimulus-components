@@ -52,15 +52,15 @@ export default class extends Controller {
   }
 
   _show(cb) {
-    this.menuTarget.classList.remove(this.toggleClass)
-    this._enteringClassList[0].forEach(
-      (klass => {
-        this.menuTarget.classList.add(klass)
-      }).bind(this),
-    )
-
     setTimeout(
       (() => {
+        this.menuTarget.classList.remove(this.toggleClass)
+        this._enteringClassList[0].forEach(
+          (klass => {
+            this.menuTarget.classList.add(klass)
+          }).bind(this),
+        )
+
         this._activeClassList[0].forEach(klass => {
           this.activeTarget.classList.add(klass)
         })
