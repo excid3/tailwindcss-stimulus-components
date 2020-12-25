@@ -85,8 +85,8 @@ end
 And then add something like this either directly in the layout file, or in a partial
 that's rendered directly by the layout:
 ```html
-<div class="fixed inset-x-0 top-0 flex items-end justify-right px-4 py-6 sm:p-6 justify-end z-50 ">
-  <div data-controller="alert" class="max-w-sm w-full shadow-lg rounded px-4 py-3 rounded relative bg-green-400 border-l-4 border-green-700 text-white">
+<div class="fixed inset-x-0 top-0 flex items-end justify-right px-4 py-6 sm:p-6 justify-end z-30 pointer-events-none">
+  <div data-controller="alert" class="max-w-sm w-full shadow-lg rounded px-4 py-3 rounded relative bg-green-400 border-l-4 border-green-700 text-white pointer-events-auto">
     <div class="p-2">
       <div class="flex items-start">
         <div class="ml-3 w-0 flex-1 pt-0.5">
