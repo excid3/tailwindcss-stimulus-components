@@ -1,5 +1,10 @@
 # Unreleased
 
+# 2.1.1
+
+* [FIX] Fix pointer events when alerts are visible - @inopinatus
+* [FIX] Fix dropdowns open on page load - @julianrubisch
+
 # 2.1.0
 
 * [NEW] Updated Stimulus JS requirement to 2.0
