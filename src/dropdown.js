@@ -106,6 +106,12 @@ export default class extends Controller {
     }
   }
 
+  show(event) {
+    if (this.element.contains(event.target) === true && !this.openValue) {
+      this.openValue = true
+    }
+  }
+
   get activeTarget() {
     return this.data.has('activeTarget')
       ? document.querySelector(this.data.get('activeTarget'))
