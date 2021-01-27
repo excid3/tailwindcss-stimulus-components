@@ -1,5 +1,9 @@
 # Unreleased
 
+# 2.1.2
+
+* [FIX] Allow button to be focused and toggle dropdown with space/enter - @drnic #59
+
 # 2.1.1
 
 * [FIX] Fix pointer events when alerts are visible - @inopinatus
