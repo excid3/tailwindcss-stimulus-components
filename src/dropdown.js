@@ -14,7 +14,7 @@
 //      data-dropdown-enter-timeout="100"
 //      data-dropdown-leaving-class="ease-in duration-75"
 //      data-dropdown-leave-timeout="75">
-//  <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" class="inline-block select-none">
+//  <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" data-dropdown-target="button" tabindex="0" class="inline-block select-none">
 //    Open Dropdown
 //  </div>
 //  <div data-target="dropdown.menu" class="absolute pin-r mt-2 transform transition hidden opacity-0 scale-95">
@@ -27,7 +27,7 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = ['menu']
+  static targets = ['menu', 'button']
   static values = { open: Boolean }
 
   connect() {
@@ -37,7 +37,20 @@ export default class extends Controller {
     this.activeClass = this.data.get('activeClass') || null
     this.enteringClass = this.data.get('enteringClass') || null
     this.leavingClass = this.data.get('leavingClass') || null
+
+    if (this.hasButtonTarget) {
+      this.buttonTarget.addEventListener("keydown", this._onMenuButtonKeydown)
+    }
+
+    this.element.setAttribute("aria-haspopup", "true")
   }
+
+  disconnect() {
+    if (this.hasButtonTarget) {
+      this.buttonTarget.removeEventListener("keydown", this._onMenuButtonKeydown)
+    }
+  }
+
 
   toggle() {
     this.openValue = !this.openValue
@@ -55,6 +68,7 @@ export default class extends Controller {
     setTimeout(
       (() => {
         this.menuTarget.classList.remove(this.toggleClass)
+        this.element.setAttribute("aria-expanded", "true")
         this._enteringClassList[0].forEach(
           (klass => {
             this.menuTarget.classList.add(klass)
@@ -83,6 +97,7 @@ export default class extends Controller {
   _hide(cb) {
     setTimeout(
       (() => {
+        this.element.setAttribute("aria-expanded", "false")
         this._invisibleClassList[0].forEach(klass => this.menuTarget.classList.add(klass))
         this._visibleClassList[0].forEach(klass => this.menuTarget.classList.remove(klass))
         this._activeClassList[0].forEach(klass => this.activeTarget.classList.remove(klass))
@@ -98,6 +113,15 @@ export default class extends Controller {
         )
       }).bind(this),
     )
+  }
+
+  _onMenuButtonKeydown = event => {
+    switch (event.keyCode) {
+      case 13: // enter
+      case 32: // space
+        event.preventDefault()
+        this.toggle()
+    }
   }
 
   hide(event) {

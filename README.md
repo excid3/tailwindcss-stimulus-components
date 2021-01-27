@@ -16,13 +16,13 @@ This assumes that [StimulusJS](https://stimulusjs.org) is already installed.
 Add the `tailwindcss-stimulus-components` module:
 
 ```bash
-$ yarn add tailwindcss-stimulus-components
+yarn add tailwindcss-stimulus-components
 ```
 
 or
 
 ```bash
-$ npm install tailwindcss-stimulus-components
+npm install tailwindcss-stimulus-components
 ```
 
 or use directly from unpkg:
@@ -62,6 +62,7 @@ Alternatively, you can use the import lines below to import the
 individual features you need.
 
 ### Alerts
+
 ![Alerts](https://i.imgur.com/jxQ8k1t.png)
 
 ```javascript
@@ -71,6 +72,7 @@ application.register('alert', Alert)
 
 To customize the appearance of alerts based on the kind of alert it is, you can do
 something like this in: `app/helpers/application_helper.rb`
+
 ```ruby
 module ApplicationHelper
   def tailwind_classes_for(flash_type)
@@ -84,6 +86,7 @@ end
 
 And then add something like this either directly in the layout file, or in a partial
 that's rendered directly by the layout:
+
 ```html
 <div class="fixed inset-x-0 top-0 flex items-end justify-right px-4 py-6 sm:p-6 justify-end z-30 pointer-events-none">
   <div data-controller="alert" class="max-w-sm w-full shadow-lg rounded px-4 py-3 rounded relative bg-green-400 border-l-4 border-green-700 text-white pointer-events-auto">
@@ -123,7 +126,7 @@ application.register('dropdown', Dropdown)
 ```html
 <div class="inline-block text-sm px-4 py-2 leading-none rounded no-underline text-gray hover:text-gray-900 hover:bg-white mt-4 lg:mt-0">
   <div class="relative" data-controller="dropdown">
-    <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" class="inline-block select-none">
+    <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" data-dropdown-target="button" tabindex="0" class="inline-block select-none">
       <span class="appearance-none flex items-center inline-block text-gray-700">
         <% if current_user %>
           <%= image_tag avatar_url_for(current_user), class: "rounded-full h-8 w-8 align-middle" %>
@@ -149,12 +152,14 @@ will also close if you click anywhere outside of the dropdown. This is
 done using a window click event to check if the user clicked outside the
 dropdown.
 
+Users can also focus on the dropdown button if `tabindex="0"` is included. They can toggle the dropdown with Space or Enter if the attribute `data-dropdown-target="button"` is included on the button.
+
 The ```data-dropdown-active-class``` allows you add an active class to the dropdown menu. It will default to ```this.element```.  You can also specify a target to use for the active class with the ```data-active-target```.
 
 ```html
 <div class="inline-block text-sm px-4 py-2 leading-none rounded no-underline text-gray hover:text-gray-900 hover:bg-white mt-4 lg:mt-0">
   <div class="relative" data-controller="dropdown" data-dropdown-active-class='bg-teal-700' data-dropdown-active-target='#activeTarget'>
-    <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" class="inline-block select-none">
+    <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" data-dropdown-target="button" tabindex="0" class="inline-block select-none">
       <span class="appearance-none flex items-center inline-block text-gray-700">
         <% if current_user %>
           <%= image_tag avatar_url_for(current_user), class: "rounded-full h-8 w-8 align-middle" %>
@@ -227,7 +232,6 @@ data-slideover-enter-timeout="300,300"
 data-slideover-leaving-class=""
 data-slideover-leave-timeout="300,0"
 ```
-
 
 ### Modals
 
@@ -349,8 +353,6 @@ If you'd like to change the tab from a button or link outside of the tabs, you c
 
 ![Popovers](https://user-images.githubusercontent.com/11435593/51342548-24ffd380-1a8c-11e9-95a9-1b8a0181b2a1.png)
 
-
-
 ```javascript
 import { Popover } from "tailwindcss-stimulus-components"
 application.register('popover', Popover)
@@ -420,6 +422,7 @@ form submission.
 `data-action="ajax:error->autosave#error"` is applied to the form to call the `error` method once the Rails ajax request failed.
 
 #### Handling the form submission server-side
+
 Your server side should check the `params[:commit]` text to see whether
 or not it should save as a draft or actually publish the record.
 
@@ -439,7 +442,6 @@ We recommend using a gem like Draftsman to help make the backend easier.
 ```
 
 In this example, clicking the question will toggle the hidden class. The hidden class is the default. If you wish to use a different class, you can use the `data-toggle-class="custom-class"` attribute.
-
 
 ```html
 <div data-controller='toggle' data-toggle-class='bg-red-900' class="m-2">
