@@ -15,6 +15,8 @@ export default class extends Controller {
   }
 
   openValueChanged() {
+    if (!this.toggleClass) { return }
+
     this.toggleableTargets.forEach(target => {
       target.classList.toggle(this.toggleClass)
     })
