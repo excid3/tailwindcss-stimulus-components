@@ -8,6 +8,17 @@ export default class extends Controller {
     this.inactiveTabClasses = (this.data.get('inactiveTab') || 'inactive').split(' ')
     if (this.anchor) this.index = this.tabTargets.findIndex((tab) => tab.id === this.anchor)
     this.showTab()
+
+    //if there is a redirect, we won't get the correct url until the turbo:load is fired
+    var self = this;
+    this.turboLoadListener = function(event) {
+      self.setTabFromLocation()
+    }
+    document.addEventListener('turbo:load', this.turboLoadListener);
+  }
+
+  disconnect() {
+    document.removeEventListener('turbo:load', this.turboLoadListener);
   }
 
   change(event) {
