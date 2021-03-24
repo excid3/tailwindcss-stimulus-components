@@ -61,6 +61,8 @@ export default class extends Controller {
   }
 
   get anchor() {
-    return (document.URL.split('#').length > 1) ? document.URL.split('#')[1] : null;
+    const bookmark = (document.URL.split('#').length > 1) ? document.URL.split('#')[1] : null;
+    const param = (new URLSearchParams(window.location.search)).get("tab")
+    return bookmark || param
   }
 }
