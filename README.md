@@ -156,6 +156,8 @@ Users can also focus on the dropdown button if `tabindex="0"` is included. They 
 
 The ```data-dropdown-active-class``` allows you add an active class to the dropdown menu. It will default to ```this.element```.  You can also specify a target to use for the active class with the ```data-active-target```.
 
+If you want a dropdown to by opened on page load you can set the ```data-dropdown-open-value="true"``` as a data attribute.
+
 ```html
 <div class="inline-block text-sm px-4 py-2 leading-none rounded no-underline text-gray hover:text-gray-900 hover:bg-white mt-4 lg:mt-0">
   <div class="relative" data-controller="dropdown" data-dropdown-active-class='bg-teal-700' data-dropdown-active-target='#activeTarget'>
