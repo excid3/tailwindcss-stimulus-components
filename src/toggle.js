@@ -14,6 +14,18 @@ export default class extends Controller {
     this.openValue = !this.openValue
   }
 
+  hide(event) {
+    event.preventDefault();
+
+    this.openValue = false;
+  }
+
+  show(event) {
+    event.preventDefault();
+
+    this.openValue = true;
+  }
+
   openValueChanged() {
     if (!this.toggleClass) { return }
 
