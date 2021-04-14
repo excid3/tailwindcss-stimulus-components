@@ -1,5 +1,9 @@
 # Unreleased
 
+# 2.1.3
+
+* [NEW] `hide` and `show` methods for toggle - @A7madXatab #71
+
 # 2.1.2
 
 * [FIX] Allow button to be focused and toggle dropdown with space/enter - @drnic #59
