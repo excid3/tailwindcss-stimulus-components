@@ -457,6 +457,35 @@ In this example, clicking the question will toggle the hidden class. The hidden 
 </div>
 ```
 
+### Color Picker and Preview
+
+```html
+<div class="col-span-6 sm:col-span-3">
+  <label for="hex_color_bg" class="block text-sm font-medium text-gray-700">
+    Color
+  </label>
+  <div class="mt-3 flex items-center" data-controller="color-preview">
+    <p data-color-preview-target="preview"
+       class="h-10 w-10 mr-2 rounded-full text-2xl text-white text-center"
+       style="background-color: #ba1e03; color: #fff; padding-top: 1px;">
+      A
+    </p>
+    <span class="ml-2">
+      <div class="flex rounded-md shadow-sm">
+        <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500">
+          #
+        </span>
+        <input data-action="input->color-preview#update" data-color-preview-target="color"
+               id="hex_color_bg" name="hex_color_bg" type="color" value="#ba1e03"
+               class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md flex-1 rounded-none rounded-r-md mt-0 w-24 h-8 px-1 py-1 border" />
+      </div>
+    </span>
+  </div>
+</div>
+```
+
+This will update the `backgroundColor` by default but you can choose to have the color preview update the `color` instead by setting the `data-color-preview-style="color"` attribute of the color preview controller.
+
 ## Styling
 
 All of the styles for the Stimulus components are configurable. Our
