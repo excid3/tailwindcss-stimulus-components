@@ -37,7 +37,8 @@ or use directly from unpkg:
 First, you'll want to initialize StimulusJS and then you can import all the TailwindCSS components.
 
 ```javascript
-// app/javascript/controllers/index.js
+// webpacker 5: app/javascript/controllers/index.js
+// webpacker 6: app/packs/controllers/index.js
 
 // Start StimulusJS
 import { Application } from "stimulus"
