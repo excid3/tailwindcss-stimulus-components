@@ -37,6 +37,9 @@ or use directly from unpkg:
 First, you'll want to initialize StimulusJS and then you can import all the TailwindCSS components.
 
 ```javascript
+// webpacker 5: app/javascript/controllers/index.js
+// webpacker 6: app/packs/controllers/index.js
+
 // Start StimulusJS
 import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"
@@ -46,7 +49,9 @@ const context = require.context("controllers", true, /.js$/);
 application.load(definitionsFromContext(context));
 
 // Import and register all TailwindCSS Components
-import { Dropdown, Modal, Tabs, Popover, Toggle, Slideover } from "tailwindcss-stimulus-components"
+import { Alert, Autosave, Dropdown, Modal, Tabs, Popover, Toggle, Slideover } from "tailwindcss-stimulus-components"
+application.register('alert', Alert)
+application.register('autosave', Autosave)
 application.register('dropdown', Dropdown)
 application.register('modal', Modal)
 application.register('tabs', Tabs)
