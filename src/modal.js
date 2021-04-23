@@ -36,11 +36,11 @@ export default class extends Controller {
     // The class we should toggle on the container
     this.toggleClass = this.data.get('class') || 'hidden';
 
-    // The HTML for the background element
-    this.backgroundHtml = this.data.get('backgroundHtml') || this._backgroundHTML();
-
     // The ID of the background to hide/remove
     this.backgroundId = this.data.get('backgroundId') || 'modal-background';
+
+    // The HTML for the background element
+    this.backgroundHtml = this.data.get('backgroundHtml') || this._backgroundHTML();
 
     // Let the user close the modal by clicking on the background
     this.allowBackgroundClose = (this.data.get('allowBackgroundClose') || 'true') === 'true';
@@ -104,7 +104,7 @@ export default class extends Controller {
   }
 
   _backgroundHTML() {
-    return '<div id="modal-background" class="fixed top-0 left-0 w-full h-full" style="background-color: rgba(0, 0, 0, 0.8); z-index: 9998;"></div>';
+    return `<div id="${this.backgroundId}" class="fixed top-0 left-0 w-full h-full" style="background-color: rgba(0, 0, 0, 0.8); z-index: 9998;"></div>`;
   }
 
   lockScroll() {
