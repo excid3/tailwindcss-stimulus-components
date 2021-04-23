@@ -23,11 +23,11 @@
          data-slideover-active-target="#slideover-target">
       <!-- begin sidebar/slideover -->
       <div id="sidebar-mobile">
-        <div data-target="slideover.overlay" class="fixed inset-0 flex z-40 transition-opacity ease-linear duration-300 opacity-0 hidden">
+        <div data-slideover-target="overlay" class="fixed inset-0 flex z-40 transition-opacity ease-linear duration-300 opacity-0 hidden">
           <div class="fixed inset-0">
             <div class="absolute inset-0 bg-gray-600 opacity-75"></div>
           </div>
-          <div id="slideover-target" data-target="slideover.menu" class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800 transition ease-in-out duration-300 transform -translate-x-full hidden">
+          <div id="slideover-target" data-slideover-target="menu" class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800 transition ease-in-out duration-300 transform -translate-x-full hidden">
             <div class="absolute top-0 right-0 -mr-14 p-1">
               <button data-action="slideover#toggle" class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600" aria-label="Close sidebar">
                 <svg class="h-6 w-6 text-white" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -83,7 +83,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="text-white fill-current h-4 w-4"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
                 </span>
               </div>
-              <div data-target="dropdown.menu" class="absolute right-0 mt-2 transform transition hidden opacity-0 scale-95">
+              <div data-dropdown-target="menu" class="absolute right-0 mt-2 transform transition hidden opacity-0 scale-95">
                 <div class="bg-white shadow rounded border overflow-hidden w-32">
                   <a href="#" class='no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap'>Account</a>
                   <a href="#" class='no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap'>Billing</a>
@@ -111,7 +111,7 @@
           </a>
 
           <!-- Modal Container -->
-          <div data-target="modal.container" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" class="hidden animated fadeIn fixed inset-0 overflow-y-auto flex items-center justify-center" style="z-index: 9999;">
+          <div data-modal-target="container" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" class="hidden animated fadeIn fixed inset-0 overflow-y-auto flex items-center justify-center" style="z-index: 9999;">
             <!-- Modal Inner Container -->
             <div class="max-h-screen w-full max-w-lg relative">
               <!-- Modal Card -->
@@ -135,13 +135,13 @@
 
         <div data-controller="tabs" data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t">
           <ul class="list-reset flex border-b">
-            <li class="-mb-px mr-1" data-target="tabs.tab" data-action="click->tabs#change">
+            <li class="-mb-px mr-1" data-tabs-target="tab" data-action="click->tabs#change">
               <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#">Active</a>
             </li>
-            <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
+            <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
               <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#">Tab</a>
             </li>
-            <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
+            <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
               <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#">Tab</a>
             </li>
             <li class="mr-1">
@@ -149,15 +149,15 @@
             </li>
           </ul>
 
-          <div class="hidden py-4 px-4 border-l border-b border-r" data-target="tabs.panel">
+          <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
             Tab panel 1
           </div>
 
-          <div class="hidden py-4 px-4 border-l border-b border-r" data-target="tabs.panel">
+          <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
             Tab panel 2
           </div>
 
-          <div class="hidden py-4 px-4 border-l border-b border-r" data-target="tabs.panel">
+          <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/0aTRN9CSCY0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
 
@@ -172,13 +172,13 @@
 
         <div data-controller="tabs" data-tabs-use-anchor="true" data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t">
           <ul class="list-reset flex border-b">
-            <li class="-mb-px mr-1" id="first" data-target="tabs.tab" data-action="click->tabs#change">
+            <li class="-mb-px mr-1" id="first" data-tabs-target="tab" data-action="click->tabs#change">
               <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#">Active</a>
             </li>
-            <li class="mr-1" id="second" data-target="tabs.tab" data-action="click->tabs#change">
+            <li class="mr-1" id="second" data-tabs-target="tab" data-action="click->tabs#change">
               <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#">Tab</a>
             </li>
-            <li class="mr-1" id="third" data-target="tabs.tab" data-action="click->tabs#change">
+            <li class="mr-1" id="third" data-tabs-target="tab" data-action="click->tabs#change">
               <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#">Tab</a>
             </li>
             <li class="mr-1" id="fourth">
@@ -186,15 +186,15 @@
             </li>
           </ul>
 
-          <div class="hidden py-4 px-4 border-l border-b border-r" data-target="tabs.panel">
+          <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
             Tab panel 1
           </div>
 
-          <div class="hidden py-4 px-4 border-l border-b border-r" data-target="tabs.panel">
+          <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
             Tab panel 2
           </div>
 
-          <div class="hidden py-4 px-4 border-l border-b border-r" data-target="tabs.panel">
+          <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/0aTRN9CSCY0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
 
