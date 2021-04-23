@@ -255,14 +255,16 @@
     </div>
 
     <script>
-      const application = Stimulus.Application.start();
-      application.register('dropdown', TailwindcssStimulusComponents.Dropdown);
-      application.register('modal', TailwindcssStimulusComponents.Modal);
-      application.register('tabs', TailwindcssStimulusComponents.Tabs);
-      application.register('popover', TailwindcssStimulusComponents.Popover);
-      application.register('alert', TailwindcssStimulusComponents.Alert);
-      application.register('slideover', TailwindcssStimulusComponents.Slideover);
-      application.register('color-preview', TailwindcssStimulusComponents.ColorPreview);
+      (() => {
+        const application = Stimulus.Application.start();
+        application.register('dropdown', TailwindcssStimulusComponents.Dropdown);
+        application.register('modal', TailwindcssStimulusComponents.Modal);
+        application.register('tabs', TailwindcssStimulusComponents.Tabs);
+        application.register('popover', TailwindcssStimulusComponents.Popover);
+        application.register('alert', TailwindcssStimulusComponents.Alert);
+        application.register('slideover', TailwindcssStimulusComponents.Slideover);
+        application.register('color-preview', TailwindcssStimulusComponents.ColorPreview);
+      })()
     </script>
   </body>
 </html>
