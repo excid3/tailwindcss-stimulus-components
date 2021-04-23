@@ -3,12 +3,13 @@
   <head>
     <meta charset="UTF-8">
     <title>Tailwind Stimulus Components</title>
-    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/@tailwindcss/forms/dist/forms.min.css" rel="stylesheet">
     <script src="https://unpkg.com/stimulus/dist/stimulus.umd.js"></script>
-    <script src="https://unpkg.com/tailwindcss-stimulus-components/dist/tailwindcss-stimulus-components.umd.js"></script>
     <!-- To use a local copy for testing, uncomment this
-    <script src="../dist/tailwindcss-stimulus-components.umd.js"></script>
+    <script src="https://unpkg.com/tailwindcss-stimulus-components/dist/tailwindcss-stimulus-components.umd.js"></script>
     -->
+    <script src="../dist/tailwindcss-stimulus-components.umd.js"></script>
   <body>
     <div class="container mx-auto p-8"
          data-controller="slideover"
@@ -58,7 +59,7 @@
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Dropdowns</h2>
 
-        <nav id='nav_bar' class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+        <nav id='nav_bar' class="flex items-center justify-between flex-wrap bg-indigo-500 p-6">
           <div class="flex items-center flex-no-shrink text-white mr-6">
             <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
             <span class="font-semibold text-xl tracking-tight">Dropdown Example</span>
@@ -68,14 +69,14 @@
                data-action="click->dropdown#toggle click@window->dropdown#hide"
                data-dropdown-open-value="false"
                data-dropdown-active-target="#dropdown-button"
-               data-dropdown-active-class="bg-teal-600"
+               data-dropdown-active-class="bg-indigo-600"
                data-dropdown-invisible-class="opacity-0 scale-95"
                data-dropdown-visible-class="opacity-100 scale-100"
                data-dropdown-entering-class="ease-out duration-300"
                data-dropdown-enter-timeout="300"
                data-dropdown-leaving-class="ease-in duration-300"
                data-dropdown-leave-timeout="300">
-            <div id="dropdown-button" class="relative inline-block text-sm px-4 py-2 leading-none rounded no-underline hover:bg-teal-600 mt-0">
+            <div id="dropdown-button" class="relative inline-block text-sm text-white px-4 py-2 leading-none rounded no-underline hover:bg-indigo-600 mt-0">
               <div role="button" tabindex="0" data-dropdown-target="button" class="inline-block select-none">
                 <span class="appearance-none flex items-center inline-block">
                   <span>Dropdown Example</span>
@@ -223,7 +224,7 @@
                 </span>
                 <input data-action="input->color-preview#update" data-color-preview-target="color"
                        id="hex_color_bg" name="hex_color_bg" type="color" value="#ba1e03"
-                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md flex-1 rounded-none rounded-r-md mt-0 w-24 h-8 px-1 py-1 border" />
+                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md flex-1 rounded-none rounded-r-md mt-0 w-24 h-8 px-1 py-1 border" />
               </div>
             </span>
           </div>
