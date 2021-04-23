@@ -136,21 +136,22 @@ application.register('dropdown', Dropdown)
     </div>
     <div data-dropdown-target="menu" class="absolute right-0 mt-2 hidden">
       <div class="bg-white shadow rounded border overflow-hidden">
-          <%= link_to 'Profile',  edit_user_registration_path, class: 'no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
-          <%= link_to 'Password', password_path, class: 'no-underline block px-8 py-3 text-gray-900 bg-white  hover:bg-gray-300 whitespace-no-wrap' %>
-          <%= link_to 'Accounts', user_connected_accounts_path, class: 'no-underline block px-8 py-3 text-gray-900 bg-white  hover:bg-gray-300 whitespace-no-wrap' %>
-          <%= link_to 'Billing',  subscription_path, class: 'no-underline block px-8 py-3 text-gray-900 bg-white  hover:bg-gray-300 whitespace-no-wrap' %>
-          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'no-underline block px-8 py-3 border-t text-gray-900 bg-white  hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Profile',  edit_user_registration_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Password', password_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Accounts', user_connected_accounts_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Billing',  subscription_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 border-t text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
       </div>
     </div>
   </div>
 </div>
 ```
 
-Dropdowns are set up to toggle if you click on the dropdown button. It
-will also close if you click anywhere outside of the dropdown. This is
+Dropdowns are set up to toggle if you click on the dropdown button or any of the
+options with in the dropdown menu (via `data-action="click->dropdown#toggle`).
+It will also close if you click anywhere outside of the dropdown. This is
 done using a window click event to check if the user clicked outside the
-dropdown.
+dropdown (`data-action="click@window->dropdown#hide"`).
 
 Users can also focus on the dropdown button if `tabindex="0"` is included. They can toggle the dropdown with Space or Enter if the attribute `data-dropdown-target="button"` is included on the button.
 
@@ -170,11 +171,11 @@ If you want a dropdown to be opened on page load you can set the ```data-dropdow
     </div>
     <div id='activeTarget' data-dropdown-target="menu" class="absolute right-0 mt-2 hidden">
       <div class="bg-white shadow rounded border overflow-hidden">
-          <%= link_to 'Profile',  edit_user_registration_path, class: 'no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
-          <%= link_to 'Password', password_path, class: 'no-underline block px-8 py-3 text-gray-900 bg-white  hover:bg-gray-300 whitespace-no-wrap' %>
-          <%= link_to 'Accounts', user_connected_accounts_path, class: 'no-underline block px-8 py-3 text-gray-900 bg-white  hover:bg-gray-300 whitespace-no-wrap' %>
-          <%= link_to 'Billing',  subscription_path, class: 'no-underline block px-8 py-3 text-gray-900 bg-white  hover:bg-gray-300 whitespace-no-wrap' %>
-          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'no-underline block px-8 py-3 border-t text-gray-900 bg-white  hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Profile',  edit_user_registration_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Password', password_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Accounts', user_connected_accounts_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Billing',  subscription_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 border-t text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
       </div>
     </div>
   </div>
@@ -455,6 +456,35 @@ In this example, clicking the question will toggle the hidden class. The hidden 
   </div>
 </div>
 ```
+
+### Color Picker and Preview
+
+```html
+<div class="col-span-6 sm:col-span-3">
+  <label for="hex_color_bg" class="block text-sm font-medium text-gray-700">
+    Color
+  </label>
+  <div class="mt-3 flex items-center" data-controller="color-preview">
+    <p data-color-preview-target="preview"
+       class="h-10 w-10 mr-2 rounded-full text-2xl text-white text-center"
+       style="background-color: #ba1e03; color: #fff; padding-top: 1px;">
+      A
+    </p>
+    <span class="ml-2">
+      <div class="flex rounded-md shadow-sm">
+        <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500">
+          #
+        </span>
+        <input data-action="input->color-preview#update" data-color-preview-target="color"
+               id="hex_color_bg" name="hex_color_bg" type="color" value="#ba1e03"
+               class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md flex-1 rounded-none rounded-r-md mt-0 w-24 h-8 px-1 py-1 border" />
+      </div>
+    </span>
+  </div>
+</div>
+```
+
+This will update the `backgroundColor` by default but you can choose to have the color preview update the `color` instead by setting the `data-color-preview-style="color"` attribute of the color preview controller.
 
 ## Styling
 

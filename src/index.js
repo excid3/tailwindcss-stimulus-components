@@ -6,5 +6,6 @@ import Tabs from './tabs'
 import Toggle from './toggle'
 import Popover from './popover'
 import Slideover from './slideover'
+import ColorPreview from './color_preview'
 
-export { Alert, Autosave, Dropdown, Modal, Tabs, Toggle, Popover, Slideover }
+export { Alert, Autosave, ColorPreview, Dropdown, Modal, Tabs, Toggle, Popover, Slideover }
