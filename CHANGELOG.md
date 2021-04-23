@@ -1,5 +1,9 @@
 # Unreleased
 
+# 2.2.0
+
+* [NEW] Added a color picker preview - @nickjj
+
 # 2.1.3
 
 * [NEW] `hide` and `show` methods for toggle - @A7madXatab #71
