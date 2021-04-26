@@ -23,7 +23,7 @@
 //         </span>
 //         <input data-action="input->color-preview#update" data-color-preview-target="color"
 //                id="hex_color_bg" name="hex_color_bg" type="color" value="#ba1e03"
-//                class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md flex-1 rounded-none rounded-r-md mt-0 w-24 h-8 px-1 py-1 border" />
+//                class="focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 flex-1 rounded-r-md mt-0 w-24 h-8 px-1 py-1 border" />
 //       </div>
 //     </span>
 //   </div>
