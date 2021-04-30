@@ -123,6 +123,10 @@ export default class extends Controller {
         this.toggle()
     }
   }
+  
+  show(){
+     this.openValue = true;
+  }
 
   hide(event) {
     if (this.element.contains(event.target) === false && this.openValue) {

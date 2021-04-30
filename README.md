@@ -187,6 +187,13 @@ If you want a dropdown to be opened on page load you can set the ```data-dropdow
 </div>
 ```
 
+the code above will toggle the dropdown component, if you needed to only perform a single action, such as `show` or `hide`. the dropdown component exposes such method.
+
+```html
+data-action="click->dropdown#show"
+data-action="click->dropdown#hide"
+```
+
 Animations for the dropdown menu (like the TailwindUI dropdowns) can be applied using these data attributes:
 
 ```html
