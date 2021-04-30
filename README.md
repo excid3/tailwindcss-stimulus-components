@@ -462,6 +462,22 @@ In this example, clicking the question will toggle the hidden class. The hidden 
 </div>
 ```
 
+On some cases, you don't want to toggle something but rather do one action such as only show or hide the toggleable. the toggle controller exposes two such methods named `hide` and `show`
+
+this will only hide the toggleable.
+```html
+  <div data-action='click->toggle#hide touch->toggle#hide' class="bg-gray-900 text-white p-6">
+    What is the question?
+  </div>
+
+```
+while this only shows it
+```html
+  <div data-action='click->toggle#show touch->toggle#show' class="bg-gray-900 text-white p-6">
+    What is the question?
+  </div>
+
+```
 ### Color Picker and Preview
 
 ```html
