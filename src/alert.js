@@ -51,14 +51,14 @@ export default class extends Controller {
   show() {
     this.element.setAttribute(
       'style',
-      "transition: 1s; transform:translate(0, 0);",
+      this.element.dataset.transitionIn ?? "transition: 1s; transform:translate(0, 0);",
     )
   }
 
   hide() {
     this.element.setAttribute(
       'style',
-      "transition: 1s; transform:translate(400px, 0);",
+      this.element.dataset.transitionOut ?? "transition: 1s; transform:translate(400px, 0);",
     )
   }
 }
