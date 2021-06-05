@@ -35,17 +35,18 @@ export default class extends Controller {
   }
 
   connect() {
+    const delayIn = parseInt(this.element.dataset.delayIn)
     setTimeout(() => {
       this.show()
-    }, 200)
+    }, isNaN(delayIn) ? 200 : delayIn)
   }
 
   close() {
+    const delayOut = parseInt(this.element.dataset.delayOut)
     this.hide()
     setTimeout(() => {
       this.element.remove()
-    }, 1100)
-
+    }, isNaN(delayOut) ? 1100 : delayOut)
   }
 
   show() {
