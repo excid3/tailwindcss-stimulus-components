@@ -35,30 +35,31 @@ export default class extends Controller {
   }
 
   connect() {
+    const delayIn = parseInt(this.element.dataset.delayIn)
     setTimeout(() => {
       this.show()
-    }, 200)
+    }, isNaN(delayIn) ? 200 : delayIn)
   }
 
   close() {
+    const delayOut = parseInt(this.element.dataset.delayOut)
     this.hide()
     setTimeout(() => {
       this.element.remove()
-    }, 1100)
-
+    }, isNaN(delayOut) ? 1100 : delayOut)
   }
 
   show() {
     this.element.setAttribute(
       'style',
-      "transition: 1s; transform:translate(0, 0);",
+      this.element.dataset.transitionIn ?? "transition: 1s; transform:translate(0, 0);",
     )
   }
 
   hide() {
     this.element.setAttribute(
       'style',
-      "transition: 1s; transform:translate(400px, 0);",
+      this.element.dataset.transitionOut ?? "transition: 1s; transform:translate(400px, 0);",
     )
   }
 }
