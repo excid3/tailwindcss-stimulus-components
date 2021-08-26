@@ -1,6 +1,6 @@
 # Unreleased
 
-# 2.2.1
+# 2.2.2
 
 * [NEW] Add `dismissAfter` option for Alerts to auto-dismiss - @excid3
 
