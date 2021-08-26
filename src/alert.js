@@ -29,6 +29,9 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
+  static values = {
+    dismissAfter: Number
+  }
 
   initialize() {
     this.hide()
@@ -38,6 +41,13 @@ export default class extends Controller {
     setTimeout(() => {
       this.show()
     }, 200)
+
+    // Auto dimiss if defined
+    if (this.hasDismissAfterValue) {
+      setTimeout(() => {
+        this.close()
+      }, this.dismissAfterValue)
+    }
   }
 
   close() {
