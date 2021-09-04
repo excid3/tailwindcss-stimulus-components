@@ -141,11 +141,11 @@ application.register('dropdown', Dropdown)
     </div>
     <div data-dropdown-target="menu" class="absolute right-0 mt-2 hidden">
       <div class="bg-white shadow rounded border overflow-hidden">
-          <%= link_to 'Profile',  edit_user_registration_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
-          <%= link_to 'Password', password_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
-          <%= link_to 'Accounts', user_connected_accounts_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
-          <%= link_to 'Billing',  subscription_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
-          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 border-t text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Profile',  edit_user_registration_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
+          <%= link_to 'Password', password_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
+          <%= link_to 'Accounts', user_connected_accounts_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
+          <%= link_to 'Billing',  subscription_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
+          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 border-t text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
       </div>
     </div>
   </div>
@@ -176,11 +176,11 @@ If you want a dropdown to be opened on page load you can set the ```data-dropdow
     </div>
     <div id='activeTarget' data-dropdown-target="menu" class="absolute right-0 mt-2 hidden">
       <div class="bg-white shadow rounded border overflow-hidden">
-          <%= link_to 'Profile',  edit_user_registration_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
-          <%= link_to 'Password', password_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
-          <%= link_to 'Accounts', user_connected_accounts_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
-          <%= link_to 'Billing',  subscription_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
-          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 border-t text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap' %>
+          <%= link_to 'Profile',  edit_user_registration_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
+          <%= link_to 'Password', password_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
+          <%= link_to 'Accounts', user_connected_accounts_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
+          <%= link_to 'Billing',  subscription_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
+          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-8 py-3 border-t text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
       </div>
     </div>
   </div>

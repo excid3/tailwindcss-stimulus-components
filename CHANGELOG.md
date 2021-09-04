@@ -1,5 +1,9 @@
 # Unreleased
 
+# 2.2.2
+
+* [NEW] Add `dismissAfter` option for Alerts to auto-dismiss - @excid3
+
 # 2.2.0
 
 * [NEW] Added a color picker preview - @nickjj
