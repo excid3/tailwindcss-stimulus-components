@@ -30,6 +30,10 @@ export default class extends Controller {
   static targets = ['menu', 'button']
   static values = { open: Boolean }
 
+    initialize() {
+      this.keyboardListener = this.keyboardListener.bind(this);
+    }
+
   connect() {
     this.toggleClass = this.data.get('class') || 'hidden'
     this.visibleClass = this.data.get('visibleClass') || null
@@ -43,14 +47,23 @@ export default class extends Controller {
     }
 
     this.element.setAttribute("aria-haspopup", "true")
+    document.addEventListener('keydown', this.keyboardListener)
   }
 
   disconnect() {
     if (this.hasButtonTarget) {
       this.buttonTarget.removeEventListener("keydown", this._onMenuButtonKeydown)
     }
+
+    document.removeEventListener('keydown', this.keyboardListener);
   }
 
+
+  keyboardListener(e) {
+      if(e.key === 'Escape' && this.openValue) {
+          this.openValue = false;
+      }
+  }
 
   toggle() {
     this.openValue = !this.openValue
@@ -123,7 +136,7 @@ export default class extends Controller {
         this.toggle()
     }
   }
-  
+
   show(){
      this.openValue = true;
   }
