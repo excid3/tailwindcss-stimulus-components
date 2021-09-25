@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { Application, Controller } from "@hotwired/stimulus"
 import Slideover from 'slideover'
 
