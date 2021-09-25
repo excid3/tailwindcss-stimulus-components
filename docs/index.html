@@ -199,6 +199,19 @@
         </div>
       </div>
 
+      <!-- Toggle -->
+      <div class="my-12">
+        <h2 class="text-2xl text-gray-800 font-semibold mb-4">Toggle</h2>
+        <div data-controller='toggle' class="m-2 p-6 border">
+          <button data-action='click->toggle#toggle touch->toggle#toggle' class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded">
+            Toggle button
+          </button>
+          <div data-toggle-target='toggleable' class="m-4 hidden">
+            <p>This is the hidden text...</p>
+          </div>
+        </div>
+      </div>
+
       <!-- Color Picker and Preview -->
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Color Picker and Preview</h2>
@@ -291,6 +304,7 @@
         application.register('popover', TailwindcssStimulusComponents.Popover);
         application.register('alert', TailwindcssStimulusComponents.Alert);
         application.register('slideover', TailwindcssStimulusComponents.Slideover);
+        application.register('toggle', TailwindcssStimulusComponents.Toggle);
         application.register('color-preview', TailwindcssStimulusComponents.ColorPreview);
       })()
     </script>
