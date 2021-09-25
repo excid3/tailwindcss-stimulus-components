@@ -1,4 +1,4 @@
-import { Application, Controller } from "stimulus"
+import { Application, Controller } from "@hotwired/stimulus"
 import Dropdown from 'dropdown'
 
 describe("DropdownController", () => {

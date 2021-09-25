@@ -1,4 +1,4 @@
-import { Application, Controller } from "stimulus";
+import { Application, Controller } from "@hotwired/stimulus";
 import Tabs from "tabs";
 
 const fs = require('fs');
