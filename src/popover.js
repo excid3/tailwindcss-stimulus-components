@@ -15,7 +15,7 @@
 //  which shows you local search results before normal organic results.
 //</p>
 
-import { Controller } from 'stimulus'
+import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static targets = ['content']

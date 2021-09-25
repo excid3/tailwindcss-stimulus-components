@@ -3,13 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <title>Tailwind Stimulus Components</title>
-    <link href="https://unpkg.com/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/@tailwindcss/forms@0.3.2/dist/forms.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/stimulus/dist/stimulus.umd.js"></script>
-    <script src="https://unpkg.com/tailwindcss-stimulus-components/dist/tailwindcss-stimulus-components.umd.js"></script>
-    <!-- To use a local copy for testing, uncomment this
-    <script src="../dist/tailwindcss-stimulus-components.umd.js"></script>
-    -->
+    <link href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/@tailwindcss/forms/dist/forms.min.css" rel="stylesheet">
   <body>
     <div class="container mx-auto p-8"
          data-controller="slideover"
@@ -276,9 +271,20 @@
       </div>
     </div>
 
-    <script>
+    <script type="importmap">
+      {
+        "imports": {
+          "@hotwired/stimulus": "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import { Application } from "@hotwired/stimulus"
+      import TailwindcssStimulusComponents from "../dist/tailwindcss-stimulus-components.modern.js"
+
       (() => {
-        const application = Stimulus.Application.start();
+        const application = Application.start();
         application.register('dropdown', TailwindcssStimulusComponents.Dropdown);
         application.register('modal', TailwindcssStimulusComponents.Modal);
         application.register('tabs', TailwindcssStimulusComponents.Tabs);

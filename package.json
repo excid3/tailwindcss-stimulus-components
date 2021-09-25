@@ -25,9 +25,6 @@
   "np": {
     "tests": false
   },
-  "peerDependencies": {
-    "stimulus": ">=2.0.0"
-  },
   "scripts": {
     "build": "microbundle --globals stimulus=Stimulus",
     "prepublish": "yarn build",
@@ -52,6 +49,9 @@
     "mutationobserver-shim": "^0.3.7"
   },
   "dependencies": {
-    "stimulus": "^2.0.0"
+    "@hotwired/stimulus": "^3.0.0"
+  },
+  "peerDependencies": {
+    "@hotwired/stimulus": ">=3.0.0"
   }
 }
