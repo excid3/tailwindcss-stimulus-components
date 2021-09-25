@@ -24,7 +24,7 @@
 //  </div>
 // </div>
 
-import { Controller } from 'stimulus'
+import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static targets = ['menu', 'button']
@@ -123,7 +123,7 @@ export default class extends Controller {
         this.toggle()
     }
   }
-  
+
   show(){
      this.openValue = true;
   }
