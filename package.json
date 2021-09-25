@@ -41,8 +41,11 @@
     ]
   },
   "devDependencies": {
-    "jest": "^27.2.1",
-    "microbundle": "^0.13.3",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "babel-jest": "^27.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "jest": "^27.0.0",
+    "microbundle": "^0.13.0",
     "mutationobserver-shim": "^0.3.7"
   },
   "dependencies": {
