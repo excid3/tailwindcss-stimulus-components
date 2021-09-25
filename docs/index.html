@@ -5,6 +5,7 @@
     <title>Tailwind Stimulus Components</title>
     <link href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://unpkg.com/@tailwindcss/forms/dist/forms.min.css" rel="stylesheet">
+  </head>
   <body>
     <div class="container mx-auto p-8"
          data-controller="slideover"
@@ -301,14 +302,14 @@
 
       (() => {
         const application = Application.start();
+        application.register('alert', TailwindcssStimulusComponents.Alert);
+        application.register('color-preview', TailwindcssStimulusComponents.ColorPreview);
         application.register('dropdown', TailwindcssStimulusComponents.Dropdown);
         application.register('modal', TailwindcssStimulusComponents.Modal);
-        application.register('tabs', TailwindcssStimulusComponents.Tabs);
         application.register('popover', TailwindcssStimulusComponents.Popover);
-        application.register('alert', TailwindcssStimulusComponents.Alert);
         application.register('slideover', TailwindcssStimulusComponents.Slideover);
+        application.register('tabs', TailwindcssStimulusComponents.Tabs);
         application.register('toggle', TailwindcssStimulusComponents.Toggle);
-        application.register('color-preview', TailwindcssStimulusComponents.ColorPreview);
       })()
     </script>
   </body>
