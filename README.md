@@ -25,28 +25,15 @@ or
 npm install tailwindcss-stimulus-components
 ```
 
-or use directly from unpkg:
-
-```html
-<script src="https://unpkg.com/stimulus/dist/stimulus.umd.js"></script>
-<script src="https://unpkg.com/tailwindcss-stimulus-components/dist/tailwindcss-stimulus-components.umd.js"></script>
-```
-
 ## Basic Usage
 
 First, you'll want to initialize StimulusJS and then you can import all the TailwindCSS components.
 
 ```javascript
-// webpacker 5: app/javascript/controllers/index.js
-// webpacker 6: app/packs/controllers/index.js
-
 // Start StimulusJS
 import { Application } from "stimulus"
-import { definitionsFromContext } from "stimulus/webpack-helpers"
 
 const application = Application.start();
-const context = require.context("controllers", true, /.js$/);
-application.load(definitionsFromContext(context));
 
 // Import and register all TailwindCSS Components
 import { Alert, Autosave, Dropdown, Modal, Tabs, Popover, Toggle, Slideover } from "tailwindcss-stimulus-components"
@@ -580,8 +567,8 @@ Bug reports and pull requests are welcome on GitHub at <https://github.com/excid
 To run tests:
 
 ```bash
-yarn
-yarn test
+npm install
+npm run test
 ```
 
 ## License
