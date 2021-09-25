@@ -287,14 +287,17 @@
     <script type="importmap">
       {
         "imports": {
-          "@hotwired/stimulus": "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
+          "@hotwired/stimulus": "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js",
+          "tailwindcss-stimulus-components": "https://unpkg.com/tailwindcss-stimulus-components/dist/tailwindcss-stimulus-components.modern.js"
+          // Uncomment to use local package with "npx serve"
+          //"tailwindcss-stimulus-components": "../dist/tailwindcss-stimulus-components.modern.js"
         }
       }
     </script>
 
     <script type="module">
       import { Application } from "@hotwired/stimulus"
-      import TailwindcssStimulusComponents from "../dist/tailwindcss-stimulus-components.modern.js"
+      import TailwindcssStimulusComponents from "tailwindcss-stimulus-components"
 
       (() => {
         const application = Application.start();
