@@ -298,18 +298,18 @@
 
     <script type="module">
       import { Application } from "@hotwired/stimulus"
-      import TailwindcssStimulusComponents from "tailwindcss-stimulus-components"
+      import { Alert, ColorPreview, Dropdown, Modal, Popover, Slideover, Tabs, Toggle } from "tailwindcss-stimulus-components"
 
       (() => {
         const application = Application.start();
-        application.register('alert', TailwindcssStimulusComponents.Alert);
-        application.register('color-preview', TailwindcssStimulusComponents.ColorPreview);
-        application.register('dropdown', TailwindcssStimulusComponents.Dropdown);
-        application.register('modal', TailwindcssStimulusComponents.Modal);
-        application.register('popover', TailwindcssStimulusComponents.Popover);
-        application.register('slideover', TailwindcssStimulusComponents.Slideover);
-        application.register('tabs', TailwindcssStimulusComponents.Tabs);
-        application.register('toggle', TailwindcssStimulusComponents.Toggle);
+        application.register('alert', Alert);
+        application.register('color-preview', ColorPreview);
+        application.register('dropdown', Dropdown);
+        application.register('modal', Modal);
+        application.register('popover', Popover);
+        application.register('slideover', Slideover);
+        application.register('tabs', Tabs);
+        application.register('toggle', Toggle);
       })()
     </script>
   </body>

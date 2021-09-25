@@ -70,11 +70,11 @@
 
     <script type="module">
       import { Application } from "@hotwired/stimulus"
-      import TailwindcssStimulusComponents from "tailwindcss-stimulus-components"
+      import { Alert } from "tailwindcss-stimulus-components"
 
       (() => {
         const application = Application.start();
-        application.register('alert', TailwindcssStimulusComponents.Alert);
+        application.register('alert', Alert);
       })()
     </script>
 
