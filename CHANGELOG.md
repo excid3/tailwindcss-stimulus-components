@@ -1,5 +1,9 @@
 # Unreleased
 
+# 2.3.0
+
+* Change Stimulus dependency to `@hotwired/stimulus` - @excid3
+
 # 2.2.2
 
 * [NEW] Add `dismissAfter` option for Alerts to auto-dismiss - @excid3
