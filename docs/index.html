@@ -297,8 +297,11 @@
     </script>
 
     <script type="module">
-      import { Application } from "@hotwired/stimulus"
-      import { Alert, ColorPreview, Dropdown, Modal, Popover, Slideover, Tabs, Toggle } from "tailwindcss-stimulus-components"
+      import { Application } from 'https://cdn.skypack.dev/@hotwired/stimulus';
+      import { Alert, ColorPreview, Dropdown, Modal, Popover, Slideover, Tabs, Toggle } from "https://cdn.skypack.dev/tailwindcss-stimulus-components"
+
+      // Uncomment to use local package with "npx serve"
+      //import { Alert, ColorPreview, Dropdown, Modal, Popover, Slideover, Tabs, Toggle } from "tailwindcss-stimulus-components"
 
       (() => {
         const application = Application.start();
