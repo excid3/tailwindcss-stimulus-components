@@ -5,7 +5,11 @@
     <title>Tailwind Stimulus Components</title>
     <link href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://unpkg.com/@tailwindcss/forms/dist/forms.min.css" rel="stylesheet">
-  </head>
+    <script>
+      window.esmsInitOptions = { enable: ['css-modules', 'json-modules'] }
+    </script>
+    <script async src="https://unpkg.com/es-module-shims/dist/es-module-shims.js"></script>
+</head>
   <body>
     <div class="container mx-auto p-8"
          data-controller="slideover"
@@ -290,11 +294,13 @@
         "imports": {
           "@hotwired/stimulus": "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js",
           "tailwindcss-stimulus-components": "https://unpkg.com/tailwindcss-stimulus-components/dist/tailwindcss-stimulus-components.modern.js"
-          // Uncomment to use local package with "npx serve"
-          //"tailwindcss-stimulus-components": "../dist/tailwindcss-stimulus-components.modern.js"
         }
       }
     </script>
+    <!--
+      Use the following importmap for local package with "npx serve"
+      "tailwindcss-stimulus-components": "../dist/tailwindcss-stimulus-components.modern.js"
+    -->
 
     <script type="module">
       import { Application } from "@hotwired/stimulus"
