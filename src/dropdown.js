@@ -57,9 +57,9 @@ export default class extends Controller {
       this.buttonTarget.removeEventListener("keydown", this._onMenuButtonKeydown)
     }
 
-      document.removeEventListener('keydown', this.keyboardListener);
-      this.activeIndex = 0;
-      this.capturedFocus = false;
+    document.removeEventListener('keydown', this.keyboardListener);
+    this.activeIndex = 0;
+    this.capturedFocus = false;
   }
 
   keyboardListener(e) {
