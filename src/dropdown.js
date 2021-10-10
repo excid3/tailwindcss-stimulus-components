@@ -32,6 +32,8 @@ export default class extends Controller {
 
   initialize() {
       this.keyboardListener = this.keyboardListener.bind(this);
+      this.activeIndex = 0;
+      this.capturedFocus = false;
   }
 
   connect() {
@@ -55,7 +57,9 @@ export default class extends Controller {
       this.buttonTarget.removeEventListener("keydown", this._onMenuButtonKeydown)
     }
 
-    document.removeEventListener('keydown', this.keyboardListener);
+      document.removeEventListener('keydown', this.keyboardListener);
+      this.activeIndex = 0;
+      this.capturedFocus = false;
   }
 
   keyboardListener(e) {
