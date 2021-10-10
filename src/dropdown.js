@@ -30,9 +30,9 @@ export default class extends Controller {
   static targets = ['menu', 'button']
   static values = { open: Boolean }
 
-    initialize() {
+  initialize() {
       this.keyboardListener = this.keyboardListener.bind(this);
-    }
+  }
 
   connect() {
     this.toggleClass = this.data.get('class') || 'hidden'
@@ -191,5 +191,12 @@ export default class extends Controller {
   get leaveTimeout() {
     let timeout = this.data.get('leaveTimeout') || '0,0'
     return timeout.split(',').map(t => parseInt(t))
+  }
+
+  get keyboardFocusableElements() {
+    return [...this.menuTarget.querySelectorAll(
+        'a[href], button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'
+    )]
+        .filter(el => !el.hasAttribute('disabled') && !el.getAttribute("aria-hidden"))
   }
 }
