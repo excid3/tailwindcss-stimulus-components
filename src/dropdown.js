@@ -67,6 +67,10 @@ export default class extends Controller {
         return
     }
 
+    if(this.keyboardFocusableElements.length === 0) {
+        return
+    }
+
     switch (e.key) {
         case 'Tab':
             if(!this.capturedFocus) { // used for first time, to capture focus, then we let the browser do it's thing
