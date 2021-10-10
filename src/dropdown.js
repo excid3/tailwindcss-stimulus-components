@@ -58,11 +58,29 @@ export default class extends Controller {
     document.removeEventListener('keydown', this.keyboardListener);
   }
 
-
   keyboardListener(e) {
-      if(e.key === 'Escape' && this.openValue) {
-          this.openValue = false;
-      }
+    if (!this.openValue) {
+        return
+    }
+
+    switch (e.key) {
+        case 'Tab':
+            if(!this.capturedFocus) { // used for first time, to capture focus, then we let the browser do it's thing
+                this._focusFirstElement();
+                e.preventDefault();
+            }
+            break
+        case 'Escape':
+            this.openValue = false;
+            break
+        case "ArrowUp":
+            this._handleArrowUpKeyPress();
+            e.preventDefault();
+            break;
+        case "ArrowDown":
+            this._handleArrowDownKeyPress();
+            e.preventDefault();
+    }
   }
 
   toggle() {
@@ -144,6 +162,42 @@ export default class extends Controller {
   hide(event) {
     if (this.element.contains(event.target) === false && this.openValue) {
       this.openValue = false
+    }
+  }
+
+  _focusFirstElement() {
+    this.keyboardFocusableElements[0].focus();
+    this.capturedFocus = true;
+  }
+
+  _focusLastElement() {
+    const lastItemIndex = this.keyboardFocusableElements.length - 1;
+    this.keyboardFocusableElements[lastItemIndex].focus();
+
+    this.activeIndex = lastItemIndex;
+  }
+
+  _handleArrowUpKeyPress() {
+    if (this.activeIndex === 0) {
+        this.focusLastElement();
+        return;
+    }
+
+    if (this.capturedFocus && this.activeIndex >= 1) {
+        this.keyboardFocusableElements[this.activeIndex - 1].focus();
+        this.activeIndex -= 1;
+    }
+  }
+
+  _handleArrowDownKeyPress() {
+    if (!this.capturedFocus) {
+        this.focusFirstElement();
+    } else if (this.activeIndex === this.keyboardFocusableElements.length - 1) {
+        this.activeIndex = 0;
+        this.focusFirstElement();
+    } else {
+        this.keyboardFocusableElements[this.activeIndex + 1].focus();
+        this.activeIndex += 1;
     }
   }
 
