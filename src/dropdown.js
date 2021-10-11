@@ -187,7 +187,7 @@ export default class extends Controller {
 
   _handleArrowUpKeyPress() {
     if (this.activeIndex === 0) {
-        this.focusLastElement();
+        this._focusLastElement();
         return;
     }
 
@@ -199,10 +199,10 @@ export default class extends Controller {
 
   _handleArrowDownKeyPress() {
     if (!this.capturedFocus) {
-        this.focusFirstElement();
+        this._focusFirstElement();
     } else if (this.activeIndex === this.keyboardFocusableElements.length - 1) {
         this.activeIndex = 0;
-        this.focusFirstElement();
+        this._focusFirstElement();
     } else {
         this.keyboardFocusableElements[this.activeIndex + 1].focus();
         this.activeIndex += 1;
