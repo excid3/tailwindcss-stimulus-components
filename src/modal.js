@@ -144,6 +144,8 @@ export default class extends Controller {
   }
 
   restoreScrollPosition() {
+    if (this.scrollPosition === undefined) return;
+
     document.documentElement.scrollTop = this.scrollPosition;
   }
 }
