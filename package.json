@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-stimulus-components",
-  "version": "3.0.1",
+  "version": "3.0.0",
   "description": "A set of Stimulus components (tabs, dropdowns, modals, toggles, autosave, etc) for TailwindCSS users",
   "source": "src/index.js",
   "exports": "./dist/tailwindcss-stimulus-components.modern.js",
