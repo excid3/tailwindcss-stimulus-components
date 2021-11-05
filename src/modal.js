@@ -9,7 +9,7 @@
 //   </a>
 //
 //   <!-- Modal Container -->
-//   <div data-target="modal.container" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" class="hidden animated fadeIn fixed inset-0 overflow-y-auto flex items-center justify-center" style="z-index: 9999;">
+//   <div data-modal-target="container" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" class="hidden animated fadeIn fixed inset-0 overflow-y-auto flex items-center justify-center" style="z-index: 9999;">
 //     <!-- Modal Inner Container -->
 //     <div class="max-h-screen w-full max-w-lg relative">
 //       <!-- Modal Card -->
