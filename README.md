@@ -25,28 +25,15 @@ or
 npm install tailwindcss-stimulus-components
 ```
 
-or use directly from unpkg:
-
-```html
-<script src="https://unpkg.com/stimulus/dist/stimulus.umd.js"></script>
-<script src="https://unpkg.com/tailwindcss-stimulus-components/dist/tailwindcss-stimulus-components.umd.js"></script>
-```
-
 ## Basic Usage
 
 First, you'll want to initialize StimulusJS and then you can import all the TailwindCSS components.
 
 ```javascript
-// webpacker 5: app/javascript/controllers/index.js
-// webpacker 6: app/packs/controllers/index.js
-
 // Start StimulusJS
 import { Application } from "stimulus"
-import { definitionsFromContext } from "stimulus/webpack-helpers"
 
 const application = Application.start();
-const context = require.context("controllers", true, /.js$/);
-application.load(definitionsFromContext(context));
 
 // Import and register all TailwindCSS Components
 import { Alert, Autosave, Dropdown, Modal, Tabs, Popover, Toggle, Slideover } from "tailwindcss-stimulus-components"
@@ -249,7 +236,7 @@ application.register('slideover', Slideover)
       </div>
       <div id="slideover-target" data-slideover-target="menu" class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800 transition ease-in-out duration-300 transform -translate-x-full hidden">
         <div class="absolute top-0 right-0 -mr-14 p-1">
-          <button data-action="slideover#_hide" class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600" aria-label="Close sidebar">
+          <button data-action="slideover#hide" class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600" aria-label="Close sidebar">
             <svg class="h-6 w-6 text-white" stroke="currentColor" fill="none" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -580,8 +567,8 @@ Bug reports and pull requests are welcome on GitHub at <https://github.com/excid
 To run tests:
 
 ```bash
-yarn
-yarn test
+npm install
+npm run test
 ```
 
 ## License

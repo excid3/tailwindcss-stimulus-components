@@ -1,4 +1,8 @@
-import { Application, Controller } from "stimulus"
+/**
+ * @jest-environment jsdom
+ */
+
+import { Application, Controller } from "@hotwired/stimulus"
 import Slideover from 'slideover'
 
 const fs = require('fs');

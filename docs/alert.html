@@ -5,11 +5,10 @@
     <title>Tailwind Stimulus Components</title>
     <link href="https://unpkg.com/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://unpkg.com/@tailwindcss/forms@0.3.2/dist/forms.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/stimulus/dist/stimulus.umd.js"></script>
-    <script src="https://unpkg.com/tailwindcss-stimulus-components/dist/tailwindcss-stimulus-components.umd.js"></script>
-    <!-- To use a local copy for testing, uncomment this
-    <script src="../dist/tailwindcss-stimulus-components.umd.js"></script>
-    -->
+    <script>
+      window.esmsInitOptions = { enable: ['css-modules', 'json-modules'] }
+    </script>
+    <script async src="https://unpkg.com/es-module-shims/dist/es-module-shims.js"></script>
   <body>
     <div class="container mx-auto p-8">
       <h1 class="text-3xl font-semibold mb-2">Tailwind Stimulus Components Alert Examples</h1>
@@ -61,12 +60,30 @@
       </div>
     </div>
 
-    <script>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "@hotwired/stimulus": "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js",
+          "tailwindcss-stimulus-components": "https://unpkg.com/tailwindcss-stimulus-components/dist/tailwindcss-stimulus-components.modern.js"
+        }
+      }
+    </script>
+    <!--
+      Use the following importmap for local package with "npx serve"
+      "tailwindcss-stimulus-components": "../dist/tailwindcss-stimulus-components.modern.js"
+    -->
+
+    <script type="module">
+      import { Application } from "@hotwired/stimulus"
+      import { Alert } from "tailwindcss-stimulus-components"
+
       (() => {
-        const application = Stimulus.Application.start();
-        application.register('alert', TailwindcssStimulusComponents.Alert);
+        const application = Application.start();
+        application.register('alert', Alert);
       })()
     </script>
+
   </body>
 </html>
 

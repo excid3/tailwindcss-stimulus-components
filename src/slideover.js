@@ -13,11 +13,11 @@
 //      data-slideover-leave-timeout="300,300"
 //      data-slideover-active-target="#slideover-target">
 //      <div id="sidebar">
-//        <div data-target="slideover.overlay" class="fixed inset-0 flex z-40 transition-opacity ease-linear duration-300 opacity-0 hidden">
+//        <div data-slideover-target="overlay" class="fixed inset-0 flex z-40 transition-opacity ease-linear duration-300 opacity-0 hidden">
 //          <div class="fixed inset-0">
 //            <div class="absolute inset-0 bg-gray-600 opacity-75"></div>
 //          </div>
-//          <div id="slideover-target" data-target="slideover.menu" class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800 transition ease-in-out duration-300 transform -translate-x-full hidden">
+//          <div id="slideover-target" data-slideover-target="menu" class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800 transition ease-in-out duration-300 transform -translate-x-full hidden">
 //            <div class="absolute top-0 right-0 -mr-14 p-1">
 //              <button data-action="slideover#_hide" class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600" aria-label="Close sidebar">
 //                <svg class="h-6 w-6 text-white" stroke="currentColor" fill="none" viewBox="0 0 24 24">

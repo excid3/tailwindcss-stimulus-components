@@ -17,14 +17,14 @@
 //  <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" data-dropdown-target="button" tabindex="0" class="inline-block select-none">
 //    Open Dropdown
 //  </div>
-//  <div data-target="dropdown.menu" class="absolute pin-r mt-2 transform transition hidden opacity-0 scale-95">
+//  <div data-dropdown-target="menu" class="absolute pin-r mt-2 transform transition hidden opacity-0 scale-95">
 //    <div class="bg-white shadow rounded border overflow-hidden">
 //      Content
 //    </div>
 //  </div>
 // </div>
 
-import { Controller } from 'stimulus'
+import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static targets = ['menu', 'button']

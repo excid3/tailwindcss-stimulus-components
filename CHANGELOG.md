@@ -1,5 +1,17 @@
 # Unreleased
 
+# 3.0.1
+
+* Fix undefined scroll position - @PhilippMeissner
+
+# 3.0.0
+
+* Change package exports - @excid3
+
+# 2.3.0
+
+* Change Stimulus dependency to `@hotwired/stimulus` - @excid3
+
 # 2.2.2
 
 * [NEW] Add `dismissAfter` option for Alerts to auto-dismiss - @excid3

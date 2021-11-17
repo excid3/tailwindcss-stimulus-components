@@ -1,11 +1,16 @@
-import { Application, Controller } from "stimulus"
+/**
+ * @jest-environment jsdom
+ */
+
+import { Application, Controller } from "@hotwired/stimulus"
 import Dropdown from 'dropdown'
 
 describe("DropdownController", () => {
 
   describe("with active target specified", () => {
     beforeEach(() => {
-      jest.useFakeTimers()
+      jest.useFakeTimers('legacy');
+
       document.body.innerHTML = `
  <div class="relative"
       data-dropdown-active-target='#active_target' data-controller="dropdown"
@@ -31,6 +36,10 @@ describe("DropdownController", () => {
       `
       const application = Application.start();
       application.register("dropdown", Dropdown);
+    });
+
+    afterEach(() => {
+      jest.useRealTimers();
     });
 
     it('applies visible class to target ', async () => {
