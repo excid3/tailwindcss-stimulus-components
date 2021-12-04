@@ -30,7 +30,10 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-  static targets = ['container'];
+  static targets = ['container']
+  static values = {
+    backdropColor: { type: String, default: 'rgba(0, 0, 0, 0.8)' }
+  }
 
   connect() {
     // The class we should toggle on the container
@@ -106,7 +109,7 @@ export default class extends Controller {
   }
 
   _backgroundHTML() {
-    return `<div id="${this.backgroundId}" class="fixed top-0 left-0 w-full h-full" style="background-color: rgba(0, 0, 0, 0.8); z-index: 9998;"></div>`;
+    return `<div id="${this.backgroundId}" class="fixed top-0 left-0 w-full h-full" style="background-color: ${this.backdropColorValue}; z-index: 9998;"></div>`;
   }
 
   lockScroll() {
