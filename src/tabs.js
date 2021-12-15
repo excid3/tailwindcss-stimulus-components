@@ -37,6 +37,7 @@ export default class extends Controller {
         panel.classList.remove('hidden')
         tab.classList.remove(...this.inactiveTabClasses)
         tab.classList.add(...this.activeTabClasses)
+        tab.ariaSelected = 'true';
 
         // Update URL with the tab ID if it has one
         // This will be automatically selected on page load
@@ -47,8 +48,11 @@ export default class extends Controller {
         panel.classList.add('hidden')
         tab.classList.remove(...this.activeTabClasses)
         tab.classList.add(...this.inactiveTabClasses)
+        tab.ariaSelected = null;
       }
     })
+
+    this.scrollActiveTabIntoView()
   }
 
   get index() {
@@ -62,5 +66,15 @@ export default class extends Controller {
 
   get anchor() {
     return (document.URL.split('#').length > 1) ? document.URL.split('#')[1] : null;
+  }
+
+  // If tabs have horizontal scrolling, the active tab may be out of sight.
+  // Make sure the active tab is visible by scrolling it into the view.
+  scrollActiveTabIntoView() {
+    const activeTab = this.element.querySelector('[aria-selected]');
+    if (activeTab)
+      activeTab.scrollIntoView({
+        inline: 'center',
+      });
   }
 }

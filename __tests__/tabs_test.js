@@ -30,6 +30,17 @@ describe("TabsController", () => {
       // click first tab
     });
 
+    it("applies aria-selected when tab is clicked", () => {
+      const tabs = document.querySelectorAll("[data-tabs-target='tab']")
+
+      expect(tabs[0].ariaSelected).toEqual("true")
+      expect(tabs[2].ariaSelected).toEqual(null)
+
+      tabs[2].click()
+      expect(tabs[2].ariaSelected).toEqual("true")
+      expect(tabs[0].ariaSelected).toEqual(null)
+    });
+
     it("appends to location href when use-anchor is true", () => {
       const anchorTabCtrlr = document.querySelector("[data-tabs-use-anchor='true']")
       const tab = anchorTabCtrlr.querySelector('#first')
