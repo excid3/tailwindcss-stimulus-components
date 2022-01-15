@@ -564,6 +564,8 @@ If you override the `connect`, `disconnect` or any other methods from the parent
 
 ## Contributing
 
+To develop locally, run `npx serve` and open your browser to the URL it runs on. Visit `http://localhost:3000/docs` to see the examples page.
+
 Bug reports and pull requests are welcome on GitHub at <https://github.com/excid3/tailwindcss-stimulus-components>.  This project is intended to be a safe, welcoming space for  collaboration, and contributors are expected to adhere to the  Contributor Covenant code of conduct.
 
 To run tests:
