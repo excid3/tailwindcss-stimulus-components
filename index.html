@@ -14,7 +14,7 @@
       {
         "imports": {
           "@hotwired/stimulus": "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js",
-      "tailwindcss-stimulus-components": "../dist/tailwindcss-stimulus-components.modern.js"
+          "tailwindcss-stimulus-components": "./dist/tailwindcss-stimulus-components.modern.js"
         }
       }
     </script>
@@ -292,7 +292,7 @@
     </div>
 
     <!-- Alert -->
-    <div class="fixed top-0 inset-x-0 m-4">
+    <div class="fixed top-0 inset-x-0 m-4 z-30">
       <div class="flex flex-col items-end space-y-4">
         <div data-controller="alert" data-alert-show-class="translate-x-0 opacity-100" data-alert-hide-class="translate-x-full opacity-0" class="ease-in-out duration-500 opacity-0 max-w-sm w-full shadow-lg rounded px-4 py-3 rounded relative bg-gray-800 text-white pointer-events-auto">
           <div class="p-2">
@@ -336,7 +336,7 @@
     </div>
 
     <!-- Alert on bottom of screen
-    <div class="fixed inset-x-0 bottom-0 m-4">
+    <div class="fixed inset-x-0 bottom-0 m-4 z-30">
       <div class="flex flex-col space-y-4 ">
         <div data-controller="alert" data-alert-show-class="translate-x-0 opacity-100" data-alert-hide-class="-translate-x-full opacity-0" class="ease-in-out duration-500 opacity-0 max-w-sm w-full shadow-lg rounded px-3 py-2 rounded relative bg-white text-gray-800 border border-gray-100 shadow-lg pointer-events-auto">
           <div class="p-2">
