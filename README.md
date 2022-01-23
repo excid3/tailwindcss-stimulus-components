@@ -31,7 +31,7 @@ First, you'll want to initialize StimulusJS and then you can import all the Tail
 
 ```javascript
 // Start StimulusJS
-import { Application } from "stimulus"
+import { Application } from "@hotwired/stimulus"
 
 const application = Application.start();
 
