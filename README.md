@@ -311,6 +311,9 @@ that opens the modal and set to `false` to allow it. Default: `true`.
 default action from running when clicking the element (e.g. a link from opening)
 that closes the modal and set to `false` to allow it. Default: `true`.
 
+`data-modal-restore-scroll-value` may be set to `false` to disable
+restoring scroll position.
+
 `data-modal-backdrop-color-value` can be used to specify the color and transparency of the modal's backdrop by setting an rgba value. Default: `rgba(0, 0, 0, 0.8)`.
 
 ### Tabs

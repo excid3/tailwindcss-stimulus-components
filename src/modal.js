@@ -32,7 +32,8 @@ import { Controller } from '@hotwired/stimulus';
 export default class extends Controller {
   static targets = ['container']
   static values = {
-    backdropColor: { type: String, default: 'rgba(0, 0, 0, 0.8)' }
+    backdropColor: { type: String, default: 'rgba(0, 0, 0, 0.8)' },
+    restoreScroll: { type: Boolean, default: true }
   }
 
   connect() {
@@ -136,7 +137,9 @@ export default class extends Controller {
     document.body.classList.remove('fixed', 'inset-x-0', 'overflow-hidden');
 
     // Restore the scroll position of the body before it got locked
-    this.restoreScrollPosition();
+    if(this.restoreScrollValue) {
+      this.restoreScrollPosition();
+    }
 
     // Remove the negative top inline style from body
     document.body.style.top = null;
