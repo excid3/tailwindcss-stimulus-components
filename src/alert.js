@@ -43,7 +43,7 @@ export default class extends Controller {
   connect() {
     setTimeout(() => {
       this.show()
-    }, this.showAfter)
+    }, this.showDelayValue)
 
     // Auto dimiss if defined
     if (this.hasDismissAfterValue) {
@@ -58,7 +58,7 @@ export default class extends Controller {
 
     setTimeout(() => {
       this.element.remove()
-    }, this.removeAfter)
+    }, this.removeDelayValue)
   }
 
   show() {
@@ -69,13 +69,5 @@ export default class extends Controller {
   hide() {
     this.element.classList.add(...this.hideClasses)
     this.element.classList.remove(...this.showClasses)
-  }
-
-  get removeAfter() {
-    return this.removeDelayValue
-  }
-
-  get showAfter() {
-    return this.showDelayValue
   }
 }
