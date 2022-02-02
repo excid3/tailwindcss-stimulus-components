@@ -31,9 +31,8 @@ import { Controller } from '@hotwired/stimulus'
 export default class extends Controller {
   static values = {
     dismissAfter: Number,
-    showDelay: Number,
-    removeDelay: Number
-
+    showDelay: { type: Number, default: 200 },
+    removeDelay: { type: Number, default: 1100 }
   }
   static classes = ["show", "hide"]
 
@@ -73,18 +72,10 @@ export default class extends Controller {
   }
 
   get removeAfter() {
-    if (this.hasRemoveDelayValue) {
-      return this.removeDelayValue
-    } else {
-      return 1100
-    }
+    return this.removeDelayValue
   }
 
   get showAfter() {
-    if (this.hasShowDelayValue) {
-      return this.showDelayValue
-    } else {
-      return 200
-    }
+    return this.showDelayValue
   }
 }
