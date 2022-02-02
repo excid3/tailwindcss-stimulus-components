@@ -106,6 +106,12 @@ Alerts are set up to slide into view from the top-right side of the
 screen. Clicking on the "X" button will cause the alert to slide back
 out of view and be removed from the DOM.
 
+- `data-alert-dismiss-after-value` can be provided to make the alert dimiss after x miliseconds. Default is `undefined`.
+- `data-alert-show-delay-value` can be set to tell the alert to show itself after x miliseconds. Defaults to `300` miliseconds.
+- `data-alert-remove-delay-value` can be set to tell the alert to hide itself after x milisconds. Defaults to `1100` miliseconds.
+- `data-alert-show-class` is a set of all classes to apply on the alert when it's shown.
+- `data-alert-hide-class` is a set of all classes to apply on the alert when it's hidden.
+
 ### Dropdowns
 
 ![Dropdowns](https://d3vv6lp55qjaqc.cloudfront.net/items/3X1m1v1w2g1M3P0F2p2C/Screen%20Shot%202018-12-07%20at%201.23.52%20PM.png?X-CloudApp-Visitor-Id=bcd17e7039e393c836f30de901088b96&v=4c0ae15f)
