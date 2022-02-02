@@ -107,7 +107,7 @@ screen. Clicking on the "X" button will cause the alert to slide back
 out of view and be removed from the DOM.
 
 - `data-alert-dismiss-after-value` can be provided to make the alert dimiss after x miliseconds. Default is `undefined`.
-- `data-alert-show-delay-value` can be set to tell the alert to show itself after x miliseconds. Defaults to `300` miliseconds.
+- `data-alert-show-delay-value` can be set to tell the alert to show itself after x miliseconds. Defaults to `200` miliseconds.
 - `data-alert-remove-delay-value` can be set to tell the alert to hide itself after x milisconds. Defaults to `1100` miliseconds.
 - `data-alert-show-class` is a set of all classes to apply on the alert when it's shown.
 - `data-alert-hide-class` is a set of all classes to apply on the alert when it's hidden.
