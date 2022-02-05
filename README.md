@@ -151,6 +151,8 @@ It will also close if you click anywhere outside of the dropdown. This is
 done using a window click event to check if the user clicked outside the
 dropdown (`data-action="click@window->dropdown#hide"`).
 
+`data-dropdown-toggle-class` can be used to change the toggle class applied on the menu when it's shown/hidden. Defaults to `hidden`
+
 Users can also focus on the dropdown button if `tabindex="0"` is included. They can toggle the dropdown with Space or Enter if the attribute `data-dropdown-target="button"` is included on the button.
 
 The ```data-dropdown-active-class``` allows you add an active class to the dropdown menu. It will default to ```this.element```.  You can also specify a target to use for the active class with the ```data-active-target```.
@@ -301,26 +303,26 @@ application.register('modal', Modal)
 </div>
 ```
 
-`data-modal-allow-background-close` may be set to `false` to disable
+- `data-modal-allow-background-close-value` may be set to `false` to disable
 closing the modal when a user clicks on the background. Defaults to
 `true`
 
-`data-modal-disable-backdrop` may be set to `true` to disable adding the
+- `data-modal-disable-backdrop` may be set to `true` to disable adding the
 modal's dark transparent backdrop. This is useful if you want to make a
 fullscreen modal.
 
-`data-modal-prevent-default-action-opening` may be set to `true` to prevent the
+- `data-modal-prevent-default-action-opening-value` may be set to `true` to prevent the
 default action from running when clicking the element (e.g. a link from opening)
 that opens the modal and set to `false` to allow it. Default: `true`.
 
-`data-modal-prevent-default-action-closing` may be set to `true` to prevent the
+- `data-modal-prevent-default-action-closing-value` may be set to `true` to prevent the
 default action from running when clicking the element (e.g. a link from opening)
 that closes the modal and set to `false` to allow it. Default: `true`.
 
-`data-modal-restore-scroll-value` may be set to `false` to disable
+- `data-modal-restore-scroll-value` may be set to `false` to disable
 restoring scroll position.
 
-`data-modal-backdrop-color-value` can be used to specify the color and transparency of the modal's backdrop by setting an rgba value. Default: `rgba(0, 0, 0, 0.8)`.
+- `data-modal-backdrop-color-value` can be used to specify the color and transparency of the modal's backdrop by setting an rgba value. Default: `rgba(0, 0, 0, 0.8)`.
 
 ### Tabs
 
@@ -368,10 +370,10 @@ index of the tab is used to determine which panel to make visible.
 `data-tabs-target="panel"` defines which panel is visible based upon the
 currently selected tab.
 
-`data-tabs-active-tab` defines the list of classes that will be
+`data-tabs-active-tab-class` defines the list of classes that will be
 added/removed from the active tab when the active tab changes.
 
-`data-tabs-inactive-tab` defines the list of classes that will be
+`data-tabs-inactive-tab-class` defines the list of classes that will be
 added/removed from the inactive tab when the active tab changes.
 
 `data-tabs-index="1"` can be used to set the selected tab when the
@@ -409,11 +411,11 @@ application.register('popover', Popover)
 </p>
 ```
 
-`data-popover-target="content"` defines which element will contain the actual content in the popover.
+- `data-popover-target="content"` defines which element will contain the actual content in the popover.
 
-`data-popover-translate-x="0"` defines the css transform-translate X value used in positioning the popover.It can be anything from a percentage to rem units to pixels.
+- `data-popover-translate-x-value` defines the css transform-translate X value used in positioning the popover.It can be anything from a percentage to rem units to pixels. Default to `0px`.
 
-`data-popover-translate-y="-128%"` defines the css transform-translate Y value used in positioning the popover. It can be anything from a percentage to rem units to pixels.
+- `data-popover-translate-y-value="-128%"` defines the css transform-translate Y value used in positioning the popover. It can be anything from a percentage to rem units to pixels. Default to `0px`.
 
 ### Autosave (Rails-only)
 
