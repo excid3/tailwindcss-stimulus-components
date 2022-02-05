@@ -36,7 +36,7 @@ export default class extends Dropdown {
   static targets = ['menu', 'overlay']
 
   _show() {
-    this.overlayTarget.classList.remove(this.toggleClass)
+    this.overlayTarget.classList.remove(this._toggleClass)
 
     super._show(
       (() => {
@@ -64,7 +64,7 @@ export default class extends Dropdown {
             this._invisibleClassList[1].forEach(klass => this.overlayTarget.classList.add(klass))
             this._activeClassList[1].forEach(klass => this.overlayTarget.classList.remove(klass))
             this._leavingClassList[1].forEach(klass => this.overlayTarget.classList.remove(klass))
-            this.overlayTarget.classList.add(this.toggleClass)
+            this.overlayTarget.classList.add(this._toggleClass)
           }).bind(this),
           this.leaveTimeout[1],
         )

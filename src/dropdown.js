@@ -28,10 +28,13 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static targets = ['menu', 'button']
-  static values = { open: Boolean }
+  static values = { 
+    open: { type: Boolean, default: false },
+  }
+
+  static classes=['toggle']
 
   connect() {
-    this.toggleClass = this.data.get('class') || 'hidden'
     this.visibleClass = this.data.get('visibleClass') || null
     this.invisibleClass = this.data.get('invisibleClass') || null
     this.activeClass = this.data.get('activeClass') || null
@@ -67,7 +70,7 @@ export default class extends Controller {
   _show(cb) {
     setTimeout(
       (() => {
-        this.menuTarget.classList.remove(this.toggleClass)
+        this.menuTarget.classList.remove(this._toggleClass)
         this.element.setAttribute("aria-expanded", "true")
         this._enteringClassList[0].forEach(
           (klass => {
@@ -107,7 +110,7 @@ export default class extends Controller {
             this._leavingClassList[0].forEach(klass => this.menuTarget.classList.remove(klass))
             if (typeof cb == 'function') cb()
 
-            this.menuTarget.classList.add(this.toggleClass)
+            this.menuTarget.classList.add(this._toggleClass)
           }).bind(this),
           this.leaveTimeout[0],
         )
@@ -138,6 +141,10 @@ export default class extends Controller {
     return this.data.has('activeTarget')
       ? document.querySelector(this.data.get('activeTarget'))
       : this.element
+  }
+
+  get _toggleClass() {
+    return this.hasToggleClass ? this.toggleClass : "hidden"
   }
 
   get _activeClassList() {
