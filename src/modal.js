@@ -33,27 +33,35 @@ export default class extends Controller {
   static targets = ['container']
   static values = {
     backdropColor: { type: String, default: 'rgba(0, 0, 0, 0.8)' },
-    restoreScroll: { type: Boolean, default: true }
+    restoreScroll: { type: Boolean, default: true },
+    allowBackgroundClose: { type: Boolean, default: true },
+    preventDefaultActionOpening: { type: Boolean, default: true },
+    preventDefaultActionClosing: { type: Boolean, default: true }
   }
 
-  connect() {
-    // The class we should toggle on the container
-    this.toggleClass = this.data.get('class') || 'hidden';
+  static classes = ['toggle']
 
+  connect() {
     // The ID of the background to hide/remove
     this.backgroundId = this.data.get('backgroundId') || 'modal-background';
 
     // The HTML for the background element
     this.backgroundHtml = this.data.get('backgroundHtml') || this._backgroundHTML();
 
-    // Let the user close the modal by clicking on the background
-    this.allowBackgroundClose = (this.data.get('allowBackgroundClose') || 'true') === 'true';
+    if(this.data.get('allowBackgroundClose')) {
+      // Let the user close the modal by clicking on the background
+      this.allowBackgroundCloseValue = (this.data.get('allowBackgroundClose') || 'true') === 'true';
+    }
 
-    // Prevent the default action of the clicked element (following a link for example) when opening the modal
-    this.preventDefaultActionOpening = (this.data.get('preventDefaultActionOpening') || 'true') === 'true';
+    if(this.data.get('preventDefaultActionOpening')) {
+      // Prevent the default action of the clicked element (following a link for example) when opening the modal
+      this.preventDefaultActionOpeningValue = (this.data.get('preventDefaultActionOpening') || 'true') === 'true';
+    }
 
-    // Prevent the default action of the clicked element (following a link for example) when closing the modal
-    this.preventDefaultActionClosing = (this.data.get('preventDefaultActionClosing') || 'true') === 'true';
+    if(this.data.get('preventDefaultActionClosing')) {
+      // Prevent the default action of the clicked element (following a link for example) when opening the modal
+      this.preventDefaultActionClosingValue = (this.data.get('preventDefaultActionClosing') || 'true') === 'true';
+    }
   }
 
   disconnect() {
@@ -61,7 +69,7 @@ export default class extends Controller {
   }
 
   open(e) {
-    if (this.preventDefaultActionOpening) {
+    if (this.preventDefaultActionOpeningValue) {
       e.preventDefault();
     }
 
@@ -73,7 +81,7 @@ export default class extends Controller {
     this.lockScroll();
 
     // Unhide the modal
-    this.containerTarget.classList.remove(this.toggleClass);
+    this.containerTarget.classList.remove(this._toggleClass);
 
     // Insert the background
     if (!this.data.get("disable-backdrop")) {
@@ -83,7 +91,7 @@ export default class extends Controller {
   }
 
   close(e) {
-    if (e && this.preventDefaultActionClosing) {
+    if (e && this.preventDefaultActionClosingValue) {
       e.preventDefault();
     }
 
@@ -91,20 +99,20 @@ export default class extends Controller {
     this.unlockScroll();
 
     // Hide the modal
-    this.containerTarget.classList.add(this.toggleClass);
+    this.containerTarget.classList.add(this._toggleClass);
 
     // Remove the background
     if (this.background) { this.background.remove() }
   }
 
   closeBackground(e) {
-    if (this.allowBackgroundClose && e.target === this.containerTarget) {
+    if (this.allowBackgroundCloseValue && e.target === this.containerTarget) {
       this.close(e);
     }
   }
 
   closeWithKeyboard(e) {
-    if (e.keyCode === 27 && !this.containerTarget.classList.contains(this.toggleClass)) {
+    if (e.keyCode === 27 && !this.containerTarget.classList.contains(this._toggleClass)) {
       this.close(e);
     }
   }
@@ -153,5 +161,9 @@ export default class extends Controller {
     if (this.scrollPosition === undefined) return;
 
     document.documentElement.scrollTop = this.scrollPosition;
+  }
+
+  get _toggleClass() {
+    return this.hasToggleClass ? this.toggleClass : 'hidden'
   }
 }
