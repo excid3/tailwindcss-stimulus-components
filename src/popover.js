@@ -19,21 +19,39 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static targets = ['content']
+  static values = {
+    translateX: { type: String, default: "0" },
+    translateY: { type: String, default: "0"},
+  }
+
+  static classes = ['toggle']
 
   // Sets the popover offset using Stimulus data map objects.
   initialize() {
+    if(this.data.get('translateX')) {
+      this.translateXValue = this.data.get('translateX')
+    }
+
+    if(this.data.get('translateY')) {
+      this.translateYValue = this.data.get('translateY')
+    }
+
     this.contentTarget.setAttribute(
       'style',
-      `transform:translate(${this.data.get('translateX')}, ${this.data.get('translateY')});`,
+      `transform:translate(${this.translateXValue}, ${this.translateYValue});`,
     )
   }
 
   // Show the popover
   mouseOver() {
-    this.contentTarget.classList.remove('hidden')
+    this.contentTarget.classList.remove(this._toggleClass)
   }
   // Hide the popover
   mouseOut() {
-    this.contentTarget.classList.add('hidden')
+    this.contentTarget.classList.add(this._toggleClass)
+  }
+
+  get _toggleClass() {
+    return this.hasToggleClass ? this.toggleClass : 'hidden'
   }
 }
