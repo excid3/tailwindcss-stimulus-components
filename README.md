@@ -415,7 +415,7 @@ application.register('popover', Popover)
 
 - `data-popover-translate-x-value` defines the css transform-translate X value used in positioning the popover.It can be anything from a percentage to rem units to pixels. Default to `0px`.
 
-- `data-popover-translate-y-value="-128%"` defines the css transform-translate Y value used in positioning the popover. It can be anything from a percentage to rem units to pixels. Default to `0px`.
+- `data-popover-translate-y-value` defines the css transform-translate Y value used in positioning the popover. It can be anything from a percentage to rem units to pixels. Default to `0px`.
 
 ### Autosave (Rails-only)
 
