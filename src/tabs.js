@@ -2,10 +2,9 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static targets = ['tab', 'panel']
+  static classes = ['activeTab', 'inactiveTab']
 
   connect() {
-    this.activeTabClasses = (this.data.get('activeTab') || 'active').split(' ')
-    this.inactiveTabClasses = (this.data.get('inactiveTab') || 'inactive').split(' ')
     if (this.anchor) this.index = this.tabTargets.findIndex((tab) => tab.id === this.anchor)
     this.showTab()
   }
@@ -35,8 +34,8 @@ export default class extends Controller {
 
       if (index === this.index) {
         panel.classList.remove('hidden')
-        tab.classList.remove(...this.inactiveTabClasses)
-        tab.classList.add(...this.activeTabClasses)
+        tab.classList.remove(...this._inactiveTabClasses)
+        tab.classList.add(...this._activeTabClasses)
 
         // Update URL with the tab ID if it has one
         // This will be automatically selected on page load
@@ -45,8 +44,8 @@ export default class extends Controller {
         }
       } else {
         panel.classList.add('hidden')
-        tab.classList.remove(...this.activeTabClasses)
-        tab.classList.add(...this.inactiveTabClasses)
+        tab.classList.remove(...this._activeTabClasses)
+        tab.classList.add(...this._inactiveTabClasses)
       }
     })
   }
@@ -62,5 +61,21 @@ export default class extends Controller {
 
   get anchor() {
     return (document.URL.split('#').length > 1) ? document.URL.split('#')[1] : null;
+  }
+
+  get _activeTabClasses() {
+    if(this.hasActiveTabClass) {
+      return this.activeTabClasses
+    } else {
+      return (this.data.get('activeTab') || 'active').split(' ')
+    }
+  }
+
+  get _inactiveTabClasses() {
+    if(this.hasInactiveTabClass) {
+      return this.inactiveTabClasses
+    } else {
+      return (this.data.get('inactiveTab') || 'inactive').split(' ')
+    }
   }
 }
