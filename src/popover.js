@@ -14,6 +14,9 @@
 //    </div>
 //  which shows you local search results before normal organic results.
 //</p>
+//
+// You can also toggle the popover using the click action.
+// <div class="popover inline-block" data-controller="popover" data-action="click->popover#toggle" data-action="mouseover->popover#mouseOver mouseout->popover#mouseOut">
 
 import { Controller } from '@hotwired/stimulus'
 
@@ -35,5 +38,13 @@ export default class extends Controller {
   // Hide the popover
   mouseOut() {
     this.contentTarget.classList.add('hidden')
+  }
+  // Toggle the popover on demand
+  toggle() {
+    if (this.contentTarget.classList.contains('hidden')) {
+      this.contentTarget.classList.remove('hidden')
+    } else {
+      this.contentTarget.classList.add('hidden')
+    }    
   }
 }
