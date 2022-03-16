@@ -9,7 +9,9 @@ export default class extends Controller {
   }
 
   toggle(event) {
-    event.preventDefault()
+    if (event.target.getAttribute('type') != 'checkbox') {
+      event.preventDefault();
+    }
 
     this.openValue = !this.openValue
   }
