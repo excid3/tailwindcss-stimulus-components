@@ -3,11 +3,10 @@
   "version": "3.0.4",
   "description": "A set of Stimulus components (tabs, dropdowns, modals, toggles, autosave, etc) for TailwindCSS users",
   "source": "src/index.js",
-  "exports": "./dist/tailwindcss-stimulus-components.modern.js",
-  "main": "./dist/tailwindcss-stimulus-components.cjs",
-  "module": "./dist/tailwindcss-stimulus-components.module.js",
+  "main": "./dist/tailwindcss-stimulus-components.umd.js",
+  "module": "./dist/tailwindcss-stimulus-components.modern.js",
   "unpkg": "./dist/tailwindcss-stimulus-components.umd.js",
-  "typings": "./index.d.ts",
+  "types": "./index.d.ts",
   "repository": {
     "url": "https://github.com/excid3/tailwindcss-stimulus-components",
     "type": "git"
