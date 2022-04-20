@@ -53,6 +53,7 @@ export class Tabs extends Controller {
   get index(): number;
   set index(value: number);
   get anchor(): string | null;
+  get tabElements(): array;
 }
 
 export class Toggle extends Controller {

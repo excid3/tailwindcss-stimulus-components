@@ -188,6 +188,32 @@
       </div>
     </div>
   </div>
+
+  <!-- Tabs with select useful for mobile -->
+  <div class="my-12">
+    <h2 class="text-2xl text-gray-800 font-semibold mb-4">Tabs with select (for mobile)</h2>
+    <div data-controller="tabs" data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t" id="tabSelectExample">
+      <div>
+        <select name="tabs" data-action="change->tabs#change" data-tabs-target="select">
+          <option value="1">Tab 1</option>
+          <option value="2">Tab 2</option>
+          <option value="3">Tab 3</option>
+        </select>
+      </div>
+
+      <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
+        Tab panel 1
+      </div>
+
+      <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
+        Tab panel 2
+      </div>
+
+      <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/0aTRN9CSCY0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Alert -->

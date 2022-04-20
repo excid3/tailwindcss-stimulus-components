@@ -46,6 +46,19 @@ describe("TabsController", () => {
       expect(tab.className.includes(activeClass)).toEqual(true)
     });
 
+    it("applies active class to panel when select option is changed", () => {
+      const select = document.querySelector("[data-tabs-target='select']")
+      const panels = document.querySelectorAll("#tabSelectExample > [data-tabs-target='panel']")
+      const activeClass = document.querySelector('[data-tabs-active-tab]').dataset.tabsActiveTab
+
+      select.value = '3'
+      select.dispatchEvent(new Event('change'));
+
+      expect(panels[0].className.includes('hidden')).toEqual(true)
+      expect(panels[1].className.includes('hidden')).toEqual(true)
+      expect(panels[2].className.includes('hidden')).toEqual(false)
+    });
+
   });
 });
 

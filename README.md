@@ -387,6 +387,43 @@ If you'd like to change the tab from a button or link outside of the tabs, you c
 <a data-action="click->tabs#change" data-id="second">Change tab by data-id</a>
 ```
 
+##### Changes tabs from a select dropdown
+
+If you'd like to change a tab from a select element changing its value, you can utilize the
+`data-tabs-target="select"` attribute on the `<select>` element. This can be useful for
+  fallback UI on mobile.
+
+For example:
+
+```html
+<div data-controller="tabs" data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t">
+  <div class="border-b">
+    <select name="tabs" data-action="change->tabs#change" data-tabs-target="select" class="bg-white border-l border-r border-t py-2 px-4 -mb-px" id="tabSelectExample">
+      <option value="1">Tab 1</option>
+      <option value="2">Tab 2</option>
+      <option value="3">Tab 3</option>
+    </select>
+  </div>
+
+  <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
+    Tab panel 1
+  </div>
+
+  <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
+    Tab panel 2
+  </div>
+
+  <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/0aTRN9CSCY0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+</div>
+```
+
+Note: The `data-tabs-target="tab"` is not necessary to specify on individual `<option>` elements
+  as the `<select>` dropdown controls the value.
+
+Note: `<option>` elements must specify a value attribute.
+
 ### Popovers
 
 ![Popovers](https://user-images.githubusercontent.com/11435593/51342548-24ffd380-1a8c-11e9-95a9-1b8a0181b2a1.png)

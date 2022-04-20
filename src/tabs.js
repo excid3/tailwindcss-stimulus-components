@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static targets = ['tab', 'panel']
+  static targets = ['tab', 'panel', 'select']
 
   connect() {
     this.activeTabClasses = (this.data.get('activeTab') || 'active').split(' ')
@@ -21,6 +21,12 @@ export default class extends Controller {
     } else if (event.currentTarget.dataset.id) {
       this.index = this.tabTargets.findIndex((tab) => tab.id == event.currentTarget.dataset.id)
 
+    // If select target is set and matches current emitted event
+    } else if (this.hasSelectTarget && event.currentTarget === this.selectTarget) {
+      this.index = Array.from(this.selectTarget.children).findIndex(
+        (child) => (child.value === this.selectTarget.value),
+      );
+
     // Otherwise, use the index of the current target
     } else {
       this.index = this.tabTargets.indexOf(event.currentTarget)
@@ -30,7 +36,7 @@ export default class extends Controller {
   }
 
   showTab() {
-    this.tabTargets.forEach((tab, index) => {
+    this.tabElements.forEach((tab, index) => {
       const panel = this.panelTargets[index]
 
       if (index === this.index) {
@@ -62,5 +68,15 @@ export default class extends Controller {
 
   get anchor() {
     return (document.URL.split('#').length > 1) ? document.URL.split('#')[1] : null;
+  }
+
+  /**
+   * Return iterable tab elements for either selectTarget or tabTarget cases
+   **/
+  get tabElements() {
+    if (this.hasTabTargets === undefined && this.hasSelectTarget) {
+      return Array.from(this.selectTarget.children);
+    }
+    return this.tabTargets;
   }
 }
