@@ -320,6 +320,8 @@ that closes the modal and set to `false` to allow it. Default: `true`.
 `data-modal-restore-scroll-value` may be set to `false` to disable
 restoring scroll position.
 
+`data-modal-auto-open-value` may be set to `true` to auto open the modal when the element first appear in the dom (on connect event).
+
 `data-modal-backdrop-color-value` can be used to specify the color and transparency of the modal's backdrop by setting an rgba value. Default: `rgba(0, 0, 0, 0.8)`.
 
 ### Tabs

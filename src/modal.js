@@ -33,7 +33,8 @@ export default class extends Controller {
   static targets = ['container']
   static values = {
     backdropColor: { type: String, default: 'rgba(0, 0, 0, 0.8)' },
-    restoreScroll: { type: Boolean, default: true }
+    restoreScroll: { type: Boolean, default: true },
+    autoOpen: { type: Boolean, default: false }
   }
 
   connect() {
@@ -54,19 +55,25 @@ export default class extends Controller {
 
     // Prevent the default action of the clicked element (following a link for example) when closing the modal
     this.preventDefaultActionClosing = (this.data.get('preventDefaultActionClosing') || 'true') === 'true';
+
+    if (this.autoOpenValue) {
+      this.open()
+    }
   }
 
   disconnect() {
     this.close();
   }
 
-  open(e) {
-    if (this.preventDefaultActionOpening) {
-      e.preventDefault();
-    }
+  open(e = null) {
+    if (e) {
+      if (this.preventDefaultActionOpening) {
+        e.preventDefault();
+      }
 
-    if (e.target.blur) {
-      e.target.blur();
+      if (e.target.blur) {
+        e.target.blur();
+      }
     }
 
     // Lock the scroll and save current scroll position
