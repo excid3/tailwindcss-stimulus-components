@@ -119,14 +119,16 @@ export default class extends Controller {
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.paddingRight = `${scrollbarWidth}px`;
 
-    // Save the scroll position
-    this.saveScrollPosition();
-
     // Add classes to body to fix its position
     document.body.classList.add('fixed', 'inset-x-0', 'overflow-hidden');
 
-    // Add negative top position in order for body to stay in place
-    document.body.style.top = `-${this.scrollPosition}px`;
+    if(this.restoreScrollValue) {
+      // Save the scroll position
+      this.saveScrollPosition();
+      
+      // Add negative top position in order for body to stay in place
+      document.body.style.top = `-${this.scrollPosition}px`;
+    }
   }
 
   unlockScroll() {
@@ -139,10 +141,10 @@ export default class extends Controller {
     // Restore the scroll position of the body before it got locked
     if(this.restoreScrollValue) {
       this.restoreScrollPosition();
+      
+      // Remove the negative top inline style from body
+      document.body.style.top = null;
     }
-
-    // Remove the negative top inline style from body
-    document.body.style.top = null;
   }
 
   saveScrollPosition() {
