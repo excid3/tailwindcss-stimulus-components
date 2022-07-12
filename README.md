@@ -322,6 +322,8 @@ restoring scroll position.
 
 `data-modal-backdrop-color-value` can be used to specify the color and transparency of the modal's backdrop by setting an rgba value. Default: `rgba(0, 0, 0, 0.8)`.
 
+`data-modal-body-classes-value` can be used to specify the list of classes to be added to the body in case of modal opening. Default: `['fixed', 'inset-x-0', 'overflow-hidden', 'relative']`.
+
 ### Tabs
 
 ![Tabs](https://d3vv6lp55qjaqc.cloudfront.net/items/440B1H1P2Y1r3C3r1h0R/Screen%20Shot%202018-12-07%20at%201.24.31%20PM.png?X-CloudApp-Visitor-Id=bcd17e7039e393c836f30de901088b96&v=84e44dbd)

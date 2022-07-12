@@ -33,7 +33,8 @@ export default class extends Controller {
   static targets = ['container']
   static values = {
     backdropColor: { type: String, default: 'rgba(0, 0, 0, 0.8)' },
-    restoreScroll: { type: Boolean, default: true }
+    restoreScroll: { type: Boolean, default: true },
+    bodyClasses: { type: Array, default: ['fixed', 'inset-x-0', 'overflow-hidden', 'relative'] }
   }
 
   connect() {
@@ -120,12 +121,12 @@ export default class extends Controller {
     document.body.style.paddingRight = `${scrollbarWidth}px`;
 
     // Add classes to body to fix its position
-    document.body.classList.add('fixed', 'inset-x-0', 'overflow-hidden');
+    document.body.classList.add(...this.bodyClassesValue);
 
     if(this.restoreScrollValue) {
       // Save the scroll position
       this.saveScrollPosition();
-      
+
       // Add negative top position in order for body to stay in place
       document.body.style.top = `-${this.scrollPosition}px`;
     }
@@ -136,12 +137,12 @@ export default class extends Controller {
     document.body.style.paddingRight = null;
 
     // Remove classes from body to unfix position
-    document.body.classList.remove('fixed', 'inset-x-0', 'overflow-hidden');
+    document.body.classList.remove(...this.bodyClassesValue);
 
     // Restore the scroll position of the body before it got locked
     if(this.restoreScrollValue) {
       this.restoreScrollPosition();
-      
+
       // Remove the negative top inline style from body
       document.body.style.top = null;
     }
