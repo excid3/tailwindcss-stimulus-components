@@ -250,6 +250,45 @@
         </div>
       </div>
 
+      <div class="my-12">
+        <h2 class="text-2xl text-gray-800 font-semibold mb-4">Radios as Tabs</h2>
+
+        <div data-controller="tabs" data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t">
+          <ul class="list-reset flex border-b">
+            <li class="-mb-px mr-1" id="radio_default" data-tabs-target="tab" data-action="click->tabs#change">
+              <label class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline cursor-pointer">
+                <input type="radio" value="1" checked="checked" name="radio[option]" id="radio_option_1">
+                Active
+              </label>
+            </li>
+            <li class="mr-1" id="second_radio" data-tabs-target="tab" data-action="click->tabs#change">
+              <label class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline cursor-pointer">
+                <input type="radio" value="2" name="radio[option]" id="radio_option_2">
+                Second
+              </label>
+            </li>
+            <li class="mr-1" id="third_radio" data-tabs-target="tab">
+              <label class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline cursor-pointer">
+                <input type="radio" value="3" name="radio[option]" id="radio_option_3" data-action="click->tabs#change" data-id="third_radio">
+                Third
+              </label>
+            </li>
+          </ul>
+
+          <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
+            Tab panel 1
+          </div>
+
+          <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
+            Tab panel 2
+          </div>
+
+          <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
+            Tab panel 3
+          </div>
+        </div>
+      </div>
+
       <!-- Toggle -->
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Toggle</h2>
