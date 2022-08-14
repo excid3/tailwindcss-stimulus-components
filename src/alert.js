@@ -26,15 +26,16 @@
 //    </div>
 //  </div>
 
-import { Controller } from '@hotwired/stimulus'
+import {Controller} from '@hotwired/stimulus'
 
 export default class extends Controller {
   static values = {
-    dismissAfter: Number,
-    showDelay: { type: Number, default: 200 },
-    removeDelay: { type: Number, default: 1100 }
+    // zero value means leave open until explicitly closed
+    dismissAfter: {type: Number, default: 0},
+    showDelay: {type: Number, default: 200},
+    removeDelay: {type: Number, default: 1100},
   }
-  static classes = ["show", "hide"]
+  static classes = ['show', 'hide']
 
   initialize() {
     this.hide()
@@ -45,8 +46,8 @@ export default class extends Controller {
       this.show()
     }, this.showDelayValue)
 
-    // Auto dimiss if defined
-    if (this.hasDismissAfterValue) {
+    // Auto dismiss if defined (zero value means leave open)
+    if (this.dismissAfterValue > 0) {
       setTimeout(() => {
         this.close()
       }, this.dismissAfterValue)
@@ -62,12 +63,22 @@ export default class extends Controller {
   }
 
   show() {
-    this.element.classList.add(...this.showClasses)
-    this.element.classList.remove(...this.hideClasses)
+    if (this.hasShowClass) {
+      this.element.classList.add(...this.showClasses)
+    }
+
+    if (this.hasHideClass) {
+      this.element.classList.remove(...this.hideClasses)
+    }
   }
 
   hide() {
-    this.element.classList.add(...this.hideClasses)
-    this.element.classList.remove(...this.showClasses)
+    if (this.hasHideClass) {
+      this.element.classList.add(...this.hideClasses)
+    }
+
+    if (this.hasShowClass) {
+      this.element.classList.remove(...this.showClasses)
+    }
   }
 }
