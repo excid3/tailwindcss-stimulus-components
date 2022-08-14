@@ -24,14 +24,14 @@
 //  </div>
 // </div>
 
-import { Controller } from '@hotwired/stimulus'
+import {Controller} from '@hotwired/stimulus'
 
 export default class extends Controller {
   static targets = ['menu', 'button']
   static values = {
     open: Boolean,
-    enterTimeout: { type: Number, default: 300 },
-    leaveTimeout: { type: Number, default: 300 }
+    enterTimeout: {type: Number, default: 300},
+    leaveTimeout: {type: Number, default: 300}
   }
 
   static classes = ['toggle', 'visible', 'invisible', 'active', 'entering', 'leaving']
@@ -41,7 +41,12 @@ export default class extends Controller {
       this.buttonTarget.addEventListener("keydown", this._onMenuButtonKeydown)
     }
 
-    this.element.setAttribute("aria-haspopup", "true")
+    if (this.hasButtonTarget) {
+      this.buttonTarget.setAttribute('aria-haspopup', 'true')
+    } else {
+      // this is probably wrong, but for backward compatibility
+      this.element.setAttribute('aria-haspopup', 'true')
+    }
   }
 
   disconnect() {
@@ -66,7 +71,12 @@ export default class extends Controller {
     setTimeout(
       (() => {
         this.menuTarget.classList.remove(this._toggleClasses)
-        this.element.setAttribute("aria-expanded", "true")
+
+        if (this.hasButtonTarget) {
+          this.buttonTarget.setAttribute('aria-expanded', 'true')
+        } else {
+          this.element.setAttribute("aria-expanded", "true")
+        }
 
         if (this.hasActiveClass) {
           this.element.classList.add(...this.activeClasses)
@@ -101,6 +111,12 @@ export default class extends Controller {
   _hide(cb) {
     setTimeout(
       (() => {
+        if (this.hasButtonTarget) {
+          this.buttonTarget.setAttribute('aria-expanded', 'false')
+        } else {
+          this.buttonTarget.setAttribute('aria-expanded', 'false')
+        }
+
         if (this.hasActiveClass) {
           this.element.classList.remove(...this.activeClasses)
         }
@@ -130,16 +146,18 @@ export default class extends Controller {
   }
 
   _onMenuButtonKeydown = event => {
+    console.log("event key: ", event.key)
+    console.log("event keyCode: ", event.keyCode)
     switch (event.code) {
       case 'Enter':
-      case 'Space':
+      case 'Space': // space
         event.preventDefault()
         this.toggle()
     }
   }
 
-  show(){
-     this.openValue = true;
+  show() {
+    this.openValue = true;
   }
 
   hide(event) {
