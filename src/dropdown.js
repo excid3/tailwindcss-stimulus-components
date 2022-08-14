@@ -78,15 +78,21 @@ export default class extends Controller {
     // we attach here because we don't need it unless the dropdown is open
     document.addEventListener('keydown', this._keyboardListener)
 
+    // we do this so the dropdown exists and we can apply transitions to it
+    // hidden elements don't allow transitions to be applied
+    this.menuTarget.classList.add('invisible')
+    this.menuTarget.classList.remove('hidden')
+
     setTimeout(
       (() => {
-        this.menuTarget.classList.remove(this._toggleClasses)
-
         if (this.hasButtonTarget) {
           this.buttonTarget.setAttribute('aria-expanded', 'true')
         } else {
           this.element.setAttribute("aria-expanded", "true")
         }
+
+        this.menuTarget.classList.remove(...this.toggleClasses)
+        this.menuTarget.classList.remove('invisible')
 
         if (this.hasActiveClass) {
           this.element.classList.add(...this.activeClasses)
