@@ -3,9 +3,11 @@ import { Controller } from '@hotwired/stimulus'
 export default class extends Controller {
   static targets = ['toggleable']
   static values = { open: Boolean }
+  static classes = ['toggle']
 
   connect() {
-    this.toggleClass = this.data.get('class') || 'hidden'
+    // so we can have a default value if one is not supplied
+    this._toggleClass = this.hasToggleClass ? this.toggleClass : 'hidden'
   }
 
   toggle(event) {
@@ -32,7 +34,7 @@ export default class extends Controller {
     if (!this.toggleClass) { return }
 
     this.toggleableTargets.forEach(target => {
-      target.classList.toggle(this.toggleClass)
+      target.classList.toggle(this._toggleClass)
     })
   }
 }
