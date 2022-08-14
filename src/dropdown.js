@@ -47,12 +47,19 @@ export default class extends Controller {
       // this is probably wrong, but for backward compatibility
       this.element.setAttribute('aria-haspopup', 'true')
     }
+
+    // this listens for keyboard events so we can handle things once the menu is open
+    this._keyboardListener = this._keyboardListener.bind(this)
+    this.focusCaptured = false
+    this.activeIndex = 0
   }
 
   disconnect() {
     if (this.hasButtonTarget) {
       this.buttonTarget.removeEventListener("keydown", this._onMenuButtonKeydown)
     }
+
+    document?.removeEventListener('keydown', this._keyboardListener)
   }
 
   toggle() {
@@ -68,6 +75,9 @@ export default class extends Controller {
   }
 
   _show(cb) {
+    // we attach here because we don't need it unless the dropdown is open
+    document.addEventListener('keydown', this._keyboardListener)
+
     setTimeout(
       (() => {
         this.menuTarget.classList.remove(this._toggleClasses)
@@ -109,6 +119,8 @@ export default class extends Controller {
   }
 
   _hide(cb) {
+    document.removeEventListener('keydown', this._keyboardListener)
+
     setTimeout(
       (() => {
         if (this.hasButtonTarget) {
@@ -145,17 +157,6 @@ export default class extends Controller {
     )
   }
 
-  _onMenuButtonKeydown = event => {
-    console.log("event key: ", event.key)
-    console.log("event keyCode: ", event.keyCode)
-    switch (event.code) {
-      case 'Enter':
-      case 'Space': // space
-        event.preventDefault()
-        this.toggle()
-    }
-  }
-
   show() {
     this.openValue = true;
   }
@@ -168,5 +169,92 @@ export default class extends Controller {
 
   get _toggleClasses() {
     return this.hasToggleClass ? this.toggleClasses : ['hidden']
+  }
+
+  _onMenuButtonKeydown = event => {
+    console.log("event key: ", event.key)
+    console.log("event keyCode: ", event.keyCode)
+    switch (event.code) {
+      case 'Enter':
+      case 'Space': // space
+        event.preventDefault()
+        this.toggle()
+    }
+  }
+
+  // private: handle keyboard events regarding closing the menu and moving around the dropdown
+  _keyboardListener(event) {
+    if (this._menuItems.length === 0) {
+      return
+    }
+
+    switch (event.key) {
+      case 'Tab':
+        event.preventDefault()
+        if (!this.focusCaptured) {
+          this._focusFirstElement()
+        } else {
+          this._arrowDown()
+        }
+        break
+      case 'Escape':
+        this.openValue = false
+        break
+      case 'ArrowUp':
+        this._arrowUp()
+        event.preventDefault()
+        break
+      case "ArrowDown":
+        this._arrowDown()
+        event.preventDefault()
+        break
+    }
+  }
+
+  // private: get the menu items that aren't disabled
+  get _menuItems() {
+    return [...this.menuTarget.querySelectorAll(
+      'a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])')]
+      .filter(el => !el.hasAttribute('disabled') && !el.hasAttribute('aria-hidden'))
+  }
+
+// private: focus the first element in the menu
+  _focusFirstElement() {
+    this._menuItems[0].focus()
+    this.focusCaptured = true
+  }
+
+// private: focus the last element in the menu
+  _focusLastElement() {
+    const lastItemIndex = this._menuItems.length - 1
+    this._menuItems[lastItemIndex].focus()
+
+    this.activeIndex = lastItemIndex
+  }
+
+// private: move one element down in the menu and wrap if necessary
+  _arrowDown() {
+    if (!this.focusCaptured) {
+      this._focusFirstElement();
+    } else if (this.activeIndex === this._menuItems.length - 1) {
+      this.activeIndex = 0;
+      this._focusFirstElement();
+    } else {
+      this._menuItems[this.activeIndex + 1].focus();
+      this.activeIndex += 1;
+    }
+  }
+
+// private: move one element up in the menu and wrap if necessary
+  _arrowUp() {
+    if (this.activeIndex === 0) {
+      this._focusLastElement();
+      return;
+    }
+
+    if (this.focusCaptured && this.activeIndex >= 1) {
+      this._menuItems[this.activeIndex - 1].focus();
+      this.activeIndex -= 1;
+    }
   }
 }
