@@ -28,16 +28,15 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static targets = ['menu', 'button']
-  static values = { open: Boolean }
+  static values = {
+    open: Boolean,
+    enterTimeout: { type: Number, default: 300 },
+    leaveTimeout: { type: Number, default: 300 }
+  }
+
+  static classes = ['toggle', 'visible', 'invisible', 'active', 'entering', 'leaving']
 
   connect() {
-    this.toggleClass = this.data.get('class') || 'hidden'
-    this.visibleClass = this.data.get('visibleClass') || null
-    this.invisibleClass = this.data.get('invisibleClass') || null
-    this.activeClass = this.data.get('activeClass') || null
-    this.enteringClass = this.data.get('enteringClass') || null
-    this.leavingClass = this.data.get('leavingClass') || null
-
     if (this.hasButtonTarget) {
       this.buttonTarget.addEventListener("keydown", this._onMenuButtonKeydown)
     }
@@ -50,7 +49,6 @@ export default class extends Controller {
       this.buttonTarget.removeEventListener("keydown", this._onMenuButtonKeydown)
     }
   }
-
 
   toggle() {
     this.openValue = !this.openValue
@@ -67,26 +65,32 @@ export default class extends Controller {
   _show(cb) {
     setTimeout(
       (() => {
-        this.menuTarget.classList.remove(this.toggleClass)
+        this.menuTarget.classList.remove(this._toggleClasses)
         this.element.setAttribute("aria-expanded", "true")
-        this._enteringClassList[0].forEach(
-          (klass => {
-            this.menuTarget.classList.add(klass)
-          }).bind(this),
-        )
 
-        this._activeClassList[0].forEach(klass => {
-          this.activeTarget.classList.add(klass)
-        })
-        this._invisibleClassList[0].forEach(klass => this.menuTarget.classList.remove(klass))
-        this._visibleClassList[0].forEach(klass => {
-          this.menuTarget.classList.add(klass)
-        })
+        if (this.hasActiveClass) {
+          this.element.classList.add(...this.activeClasses)
+        }
+
+        if (this.hasEnteringClass) {
+          this.menuTarget.classList.add(...this.enteringClasses)
+        }
+
+        if (this.hasInvisibleClass) {
+          this.menuTarget.classList.remove(...this.invisibleClasses)
+        }
+
+        if (this.hasVisibileClass) {
+          this.menuTarget.classList.add(...this.visibleClasses)
+        }
+
         setTimeout(
           (() => {
-            this._enteringClassList[0].forEach(klass => this.menuTarget.classList.remove(klass))
+            if (this.hasEnteringClass) {
+              this.menuTarget.classList.remove(...this.enteringClasses)
+            }
           }).bind(this),
-          this.enterTimeout[0],
+          this.enterTimeoutValue,
         )
 
         if (typeof cb == 'function') cb()
@@ -97,28 +101,38 @@ export default class extends Controller {
   _hide(cb) {
     setTimeout(
       (() => {
-        this.element.setAttribute("aria-expanded", "false")
-        this._invisibleClassList[0].forEach(klass => this.menuTarget.classList.add(klass))
-        this._visibleClassList[0].forEach(klass => this.menuTarget.classList.remove(klass))
-        this._activeClassList[0].forEach(klass => this.activeTarget.classList.remove(klass))
-        this._leavingClassList[0].forEach(klass => this.menuTarget.classList.add(klass))
+        if (this.hasActiveClass) {
+          this.element.classList.remove(...this.activeClasses)
+        }
+
+        if (this.hasInvisibleClass) {
+          this.menuTarget.classList.add(...this.invisibleClasses)
+        }
+        if (this.hasVisibleClass) {
+          this.menuTarget.classList.remove(...this.visibleClasses)
+        }
+        if (this.hasLeavingClass) {
+          this.menuTarget.classList.add(...this.leavingClasses)
+        }
+
         setTimeout(
           (() => {
-            this._leavingClassList[0].forEach(klass => this.menuTarget.classList.remove(klass))
+            if (this.hasLeavingClass) {
+              this.menuTarget.classList.remove(...this.leavingClasses)
+            }
+
             if (typeof cb == 'function') cb()
 
-            this.menuTarget.classList.add(this.toggleClass)
-          }).bind(this),
-          this.leaveTimeout[0],
-        )
+            this.menuTarget.classList.add(...this._toggleClasses)
+          }).bind(this), this.leaveTimeoutValue)
       }).bind(this),
     )
   }
 
   _onMenuButtonKeydown = event => {
-    switch (event.keyCode) {
-      case 13: // enter
-      case 32: // space
+    switch (event.code) {
+      case 'Enter':
+      case 'Space':
         event.preventDefault()
         this.toggle()
     }
@@ -134,49 +148,7 @@ export default class extends Controller {
     }
   }
 
-  get activeTarget() {
-    return this.data.has('activeTarget')
-      ? document.querySelector(this.data.get('activeTarget'))
-      : this.element
-  }
-
-  get _activeClassList() {
-    return !this.activeClass
-      ? [[], []]
-      : this.activeClass.split(',').map(classList => classList.split(' '))
-  }
-
-  get _visibleClassList() {
-    return !this.visibleClass
-      ? [[], []]
-      : this.visibleClass.split(',').map(classList => classList.split(' '))
-  }
-
-  get _invisibleClassList() {
-    return !this.invisibleClass
-      ? [[], []]
-      : this.invisibleClass.split(',').map(classList => classList.split(' '))
-  }
-
-  get _enteringClassList() {
-    return !this.enteringClass
-      ? [[], []]
-      : this.enteringClass.split(',').map(classList => classList.split(' '))
-  }
-
-  get _leavingClassList() {
-    return !this.leavingClass
-      ? [[], []]
-      : this.leavingClass.split(',').map(classList => classList.split(' '))
-  }
-
-  get enterTimeout() {
-    let timeout = this.data.get('enterTimeout') || '0,0'
-    return timeout.split(',').map(t => parseInt(t))
-  }
-
-  get leaveTimeout() {
-    let timeout = this.data.get('leaveTimeout') || '0,0'
-    return timeout.split(',').map(t => parseInt(t))
+  get _toggleClasses() {
+    return this.hasToggleClass ? this.toggleClasses : ['hidden']
   }
 }
