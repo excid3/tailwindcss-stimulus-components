@@ -178,8 +178,6 @@ export default class extends Controller {
   }
 
   _onMenuButtonKeydown = event => {
-    console.log("event key: ", event.key)
-    console.log("event keyCode: ", event.keyCode)
     switch (event.code) {
       case 'Enter':
       case 'Space': // space
