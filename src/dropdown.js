@@ -6,7 +6,6 @@
 // <div class="relative"
 //      data-controller="dropdown"
 //      data-action="click->dropdown#toggle click@window->dropdown#hide"
-//      data-dropdown-active-target="#dropdown-button"
 //      data-dropdown-active-class="bg-teal-600"
 //      data-dropdown-invisible-class="opacity-0 scale-95"
 //      data-dropdown-visible-class="opacity-100 scale-100"
@@ -26,19 +25,41 @@
 
 import {Controller} from '@hotwired/stimulus'
 
+// @menuTarget: is the element that contains the dropdown menu content
+// @buttonTarget: is the element that is annotated with aria-* attributes showing the dropdown state
+// @windowActionTarget: is the element(s) that have a data-action for this controller.  If present, will
+//                use to trigger automatic add / remove of a click@window->dropdown#hide handler.
+//                Add this if you won't want to clutter the JS console window with a bunch of events
+//                that are not necessary when the dropdown is closed.
+//
+// @openValue: tracks the open / close state of the dropdown. It's managed automatically by the dropdown controller.
+// @enterTimeOut: is the duration of the enter animation in milliseconds. Default is 300ms.
+// @leaveTimeOut: is the duration of the leave animation in milliseconds. Default is 300ms.
+// @removeWindowAction: if true, will remove the click@window->dropdown#hide handler when the dropdown is closed.
+//
+// All of the classes below are optional:
+// @activeClass: is the class to add to the this.element when the dropdown is open.
+// @invisibleClass: is the class to add to the this.element when the dropdown is closed.
+// @visibleClass: is the class to add to the this.element when the dropdown is open.
+// @enteringClass: is the class to add to the this.element when the dropdown is entering.
+// @leavingClass: is the class to add to the this.element when the dropdown is leaving.
+
 export default class extends Controller {
-  static targets = ['menu', 'button']
+  static targets = ['menu', 'button', 'windowAction']
+
   static values = {
     open: Boolean,
     enterTimeout: {type: Number, default: 300},
-    leaveTimeout: {type: Number, default: 300}
+    leaveTimeout: {type: Number, default: 300},
+    removeWindowAction: {type: Boolean, default: false},
   }
 
   static classes = ['toggle', 'visible', 'invisible', 'active', 'entering', 'leaving']
 
   connect() {
+    // listens for dropdown open / close events
     if (this.hasButtonTarget) {
-      this.buttonTarget.addEventListener("keydown", this._onMenuButtonKeydown)
+      this.element.addEventListener('keydown', this._onMenuButtonKeydown)
     }
 
     if (this.hasButtonTarget) {
@@ -52,20 +73,45 @@ export default class extends Controller {
     this._keyboardListener = this._keyboardListener.bind(this)
     this.focusCaptured = false
     this.activeIndex = 0
+
+    // if we have removeWindowAction || windowActionTargets, proactively remove the click@window handler
+    // remove the global window click handler if it's present
+    // this allows more intentional code: you can have the click@window->dropdown#hide handler in the HTML
+    // and we'll still do the right thing
+    if (this.hasWindowActionTarget) {
+      this.removeWindowActionValue = true
+
+      if (!this.openValue) {
+        this._removeDropdownWindowAction()
+      }
+    }
   }
 
   disconnect() {
     if (this.hasButtonTarget) {
-      this.buttonTarget.removeEventListener("keydown", this._onMenuButtonKeydown)
+      this.element.removeEventListener('keydown', this._onMenuButtonKeydown)
     }
-
     document?.removeEventListener('keydown', this._keyboardListener)
   }
 
+// Public: toggle the open / close state of the dropdown
   toggle() {
     this.openValue = !this.openValue
   }
 
+// Public: show the dropdown
+  show() {
+    this.openValue = true
+  }
+
+// Public: hide the dropdown
+  hide(event) {
+    if (this.element.contains(event.target) === false && this.openValue) {
+      this.openValue = false
+    }
+  }
+
+// private: trigger the open / close code that does the work
   openValueChanged() {
     if (this.openValue) {
       this._show()
@@ -74,9 +120,15 @@ export default class extends Controller {
     }
   }
 
+// private: show the dropdown
   _show(cb) {
     // we attach here because we don't need it unless the dropdown is open
     document.addEventListener('keydown', this._keyboardListener)
+
+    // put the global window click handler back
+    if (this.removeWindowActionValue) {
+      this._addDropdownWindowAction()
+    }
 
     // we do this so the dropdown exists and we can apply transitions to it
     // hidden elements don't allow transitions to be applied
@@ -87,8 +139,6 @@ export default class extends Controller {
       (() => {
         if (this.hasButtonTarget) {
           this.buttonTarget.setAttribute('aria-expanded', 'true')
-        } else {
-          this.element.setAttribute("aria-expanded", "true")
         }
 
         this.menuTarget.classList.remove(...this.toggleClasses)
@@ -124,14 +174,18 @@ export default class extends Controller {
     )
   }
 
+// private: hide the dropdwon
   _hide(cb) {
     document.removeEventListener('keydown', this._keyboardListener)
+
+    // remove the global window click handler
+    if (this.removeWindowActionValue) {
+      this._removeDropdownWindowAction()
+    }
 
     setTimeout(
       (() => {
         if (this.hasButtonTarget) {
-          this.buttonTarget.setAttribute('aria-expanded', 'false')
-        } else {
           this.buttonTarget.setAttribute('aria-expanded', 'false')
         }
 
@@ -158,35 +212,24 @@ export default class extends Controller {
             if (typeof cb == 'function') cb()
 
             this.menuTarget.classList.add(...this._toggleClasses)
-          }).bind(this), this.leaveTimeoutValue)
+          }).bind(this), this.leaveTimeoutValue
+        )
       }).bind(this),
     )
   }
 
-  show() {
-    this.openValue = true;
-  }
-
-  hide(event) {
-    if (this.element.contains(event.target) === false && this.openValue) {
-      this.openValue = false
-    }
-  }
-
-  get _toggleClasses() {
-    return this.hasToggleClass ? this.toggleClasses : ['hidden']
-  }
-
+// private: handle keyboard events regarding opening the dropdown
   _onMenuButtonKeydown = event => {
     switch (event.code) {
       case 'Enter':
       case 'Space': // space
         event.preventDefault()
         this.toggle()
+        break
     }
   }
 
-  // private: handle keyboard events regarding closing the menu and moving around the dropdown
+// private: handle keyboard events regarding closing the menu and moving around the dropdown
   _keyboardListener(event) {
     if (this._menuItems.length === 0) {
       return
@@ -215,7 +258,12 @@ export default class extends Controller {
     }
   }
 
-  // private: get the menu items that aren't disabled
+// private: a little chicanery to support a default for our toggle class
+  get _toggleClasses() {
+    return this.hasToggleClass ? this.toggleClasses : ['hidden']
+  }
+
+// private: get the menu items that aren't disabled
   get _menuItems() {
     return [...this.menuTarget.querySelectorAll(
       'a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])')]
@@ -260,5 +308,43 @@ export default class extends Controller {
       this._menuItems[this.activeIndex - 1].focus();
       this.activeIndex -= 1;
     }
+  }
+
+// private: adds a window based click listener so we can close dropdowns
+  _addDropdownWindowAction() {
+    if (this.removeWindowActionValue) {
+      this._doDropdownAddWindowAction(this.buttonTargets)
+    }
+
+    if (this.hasWindowActionTarget) {
+      this._doDropdownAddWindowAction(this.windowActionTargets)
+    }
+  }
+
+  _doDropdownAddWindowAction(ary) {
+    ary.forEach(target => {
+      let actions = target.getAttribute('data-action')
+      let moreActions = actions + ' click@window->dropdown#hide'
+      target.setAttribute('data-action', moreActions)
+    })
+  }
+
+// private: removes window based click listeners so we don't process tons of evens when the dropdown is closed
+  _removeDropdownWindowAction() {
+    if (this.removeWindowActionValue) {
+      this._doDropdownRemoveWindowAction(this.buttonTargets)
+    }
+
+    if (this.hasWindowActionTarget) {
+      this._doDropdownRemoveWindowAction(this.windowActionTargets)
+    }
+  }
+
+  _doDropdownRemoveWindowAction(ary) {
+    ary.forEach(target => {
+      let actions = target.getAttribute('data-action')
+      let lessActions = actions.split(' ').filter(action => action !== 'click@window->dropdown#hide').join(' ')
+      target.setAttribute('data-action', lessActions)
+    })
   }
 }
