@@ -23,7 +23,7 @@
 //  </div>
 // </div>
 
-import {Controller} from '@hotwired/stimulus'
+import { Controller } from '@hotwired/stimulus'
 
 // @menuTarget: is the element that contains the dropdown menu content
 // @buttonTarget: is the element that is annotated with aria-* attributes showing the dropdown state
@@ -49,9 +49,9 @@ export default class extends Controller {
 
   static values = {
     open: Boolean,
-    enterTimeout: {type: Number, default: 300},
-    leaveTimeout: {type: Number, default: 300},
-    removeWindowAction: {type: Boolean, default: false},
+    enterTimeout: { type: Number, default: 300 },
+    leaveTimeout: { type: Number, default: 300 },
+    removeWindowAction: { type: Boolean, default: false },
   }
 
   static classes = ['toggle', 'visible', 'invisible', 'active', 'entering', 'leaving']
@@ -80,10 +80,10 @@ export default class extends Controller {
     // and we'll still do the right thing
     if (this.hasWindowActionTarget) {
       this.removeWindowActionValue = true
+    }
 
-      if (!this.openValue) {
-        this._removeDropdownWindowAction()
-      }
+    if (!this.openValue && this.removeWindowActionValue) {
+      this._removeDropdownWindowAction()
     }
   }
 
@@ -212,7 +212,7 @@ export default class extends Controller {
             if (typeof cb == 'function') cb()
 
             this.menuTarget.classList.add(...this._toggleClasses)
-          }).bind(this), this.leaveTimeoutValue
+          }).bind(this), this.leaveTimeoutValue,
         )
       }).bind(this),
     )
@@ -251,7 +251,7 @@ export default class extends Controller {
         this._arrowUp()
         event.preventDefault()
         break
-      case "ArrowDown":
+      case 'ArrowDown':
         this._arrowDown()
         event.preventDefault()
         break
@@ -287,26 +287,26 @@ export default class extends Controller {
 // private: move one element down in the menu and wrap if necessary
   _arrowDown() {
     if (!this.focusCaptured) {
-      this._focusFirstElement();
+      this._focusFirstElement()
     } else if (this.activeIndex === this._menuItems.length - 1) {
-      this.activeIndex = 0;
-      this._focusFirstElement();
+      this.activeIndex = 0
+      this._focusFirstElement()
     } else {
-      this._menuItems[this.activeIndex + 1].focus();
-      this.activeIndex += 1;
+      this._menuItems[this.activeIndex + 1].focus()
+      this.activeIndex += 1
     }
   }
 
 // private: move one element up in the menu and wrap if necessary
   _arrowUp() {
     if (this.activeIndex === 0) {
-      this._focusLastElement();
-      return;
+      this._focusLastElement()
+      return
     }
 
     if (this.focusCaptured && this.activeIndex >= 1) {
-      this._menuItems[this.activeIndex - 1].focus();
-      this.activeIndex -= 1;
+      this._menuItems[this.activeIndex - 1].focus()
+      this.activeIndex -= 1
     }
   }
 
