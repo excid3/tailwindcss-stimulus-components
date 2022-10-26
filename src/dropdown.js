@@ -40,14 +40,14 @@ export default class extends Controller {
 
     if (this.hasButtonTarget) {
       this.buttonTarget.addEventListener("keydown", this._onMenuButtonKeydown)
+      this.buttonTarget.setAttribute("aria-haspopup", "true")
     }
-
-    this.element.setAttribute("aria-haspopup", "true")
   }
 
   disconnect() {
     if (this.hasButtonTarget) {
       this.buttonTarget.removeEventListener("keydown", this._onMenuButtonKeydown)
+      this.buttonTarget.removeAttribute("aria-haspopup")
     }
   }
 
@@ -68,7 +68,9 @@ export default class extends Controller {
     setTimeout(
       (() => {
         this.menuTarget.classList.remove(this.toggleClass)
-        this.element.setAttribute("aria-expanded", "true")
+        if (this.hasButtonTarget) {
+          this.buttonTarget.setAttribute("aria-expanded", "true")
+        }
         this._enteringClassList[0].forEach(
           (klass => {
             this.menuTarget.classList.add(klass)
@@ -97,7 +99,9 @@ export default class extends Controller {
   _hide(cb) {
     setTimeout(
       (() => {
-        this.element.setAttribute("aria-expanded", "false")
+        if (this.hasButtonTarget) {
+          this.buttonTarget.setAttribute("aria-expanded", "false")
+        }
         this._invisibleClassList[0].forEach(klass => this.menuTarget.classList.add(klass))
         this._visibleClassList[0].forEach(klass => this.menuTarget.classList.remove(klass))
         this._activeClassList[0].forEach(klass => this.activeTarget.classList.remove(klass))
