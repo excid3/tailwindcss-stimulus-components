@@ -13,7 +13,9 @@ export default class extends Controller {
 
     this.timeout = setTimeout(() => {
       this.statusTarget.textContent = 'Saving...'
-      Rails.fire(this.formTarget, 'submit')
+      this.formTarget.dispatchEvent(
+        new Event('submit', { bubbles: true, cancelable: true })
+      )
     }, this.duration)
   }
 
