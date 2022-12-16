@@ -17,7 +17,9 @@ export default class extends Controller {
   }
 
   hide(event) {
-    event.preventDefault();
+    if (event.currentTarget != window) {
+      event.preventDefault(); 
+    }
 
     this.openValue = false;
   }
