@@ -21,6 +21,9 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
+  static values = {
+    dismissAfter: Number
+  }
   static targets = ['content']
 
   // Sets the popover offset using Stimulus data map objects.
@@ -43,8 +46,14 @@ export default class extends Controller {
   toggle() {
     if (this.contentTarget.classList.contains('hidden')) {
       this.contentTarget.classList.remove('hidden')
+
+      if (this.dismissAfterValue) {
+        setTimeout(() => {
+          this.contentTarget.classList.add('hidden')
+        }, this.dismissAfterValue)
+      }
     } else {
       this.contentTarget.classList.add('hidden')
-    }    
+    }
   }
 }
