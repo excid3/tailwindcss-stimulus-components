@@ -47,7 +47,7 @@ export default class extends Controller {
     if (this.contentTarget.classList.contains('hidden')) {
       this.contentTarget.classList.remove('hidden')
 
-      if (this.dismissAfterValue) {
+      if (this.hasDismissAfterValue) {
         setTimeout(() => {
           this.contentTarget.classList.add('hidden')
         }, this.dismissAfterValue)

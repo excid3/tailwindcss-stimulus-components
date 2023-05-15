@@ -415,6 +415,8 @@ application.register('popover', Popover)
 
 `data-popover-translate-y="-128%"` defines the css transform-translate Y value used in positioning the popover. It can be anything from a percentage to rem units to pixels.
 
+`data-alert-dismiss-after-value` can be provided to make the popover dimiss after x miliseconds. Default is `undefined`.
+
 ### Autosave (Rails-only)
 
 Autosaving forms are really helpful for saving drafts of records. This
