@@ -42,10 +42,33 @@ describe("TabsController", () => {
       const btn = anchorTabCtrlr.querySelector("[data-id='second']")
       const tab = anchorTabCtrlr.querySelector('#second')
       const activeClass = anchorTabCtrlr.dataset.tabsActiveTab
+      expect(tab.className.includes(activeClass)).toEqual(false)
       btn.click()
       expect(tab.className.includes(activeClass)).toEqual(true)
     });
 
+    it("does not preventDefault to be nice with radios", () => {
+      const firstTab = document.getElementById('radio_default_tab')
+      const secondTab = document.getElementById('second_radio_tab')
+
+      const firstRadio = document.getElementById('radio_option_1')
+      const secondRadio = document.getElementById('radio_option_2')
+
+      const activeClass = document.getElementById('tabs_with_radios').dataset.tabsActiveTab
+
+      expect(firstRadio.checked).toEqual(true)
+      expect(secondRadio.checked).toEqual(false)
+      expect(secondTab.className.includes(activeClass)).toEqual(false)
+
+      secondRadio.click()
+
+      expect(firstRadio.checked).toEqual(false)
+      expect(secondRadio.checked).toEqual(true)
+
+      // still applies the tab classes
+      expect(secondTab.className.includes(activeClass)).toEqual(true)
+
+    })
   });
 });
 

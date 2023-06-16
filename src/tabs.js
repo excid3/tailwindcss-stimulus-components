@@ -11,8 +11,6 @@ export default class extends Controller {
   }
 
   change(event) {
-    event.preventDefault()
-
     // If target specifies an index, use that
     if (event.currentTarget.dataset.index) {
       this.index = event.currentTarget.dataset.index
