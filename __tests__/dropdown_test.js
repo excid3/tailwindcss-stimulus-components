@@ -9,7 +9,7 @@ describe("DropdownController", () => {
 
   describe("with active target specified", () => {
     beforeEach(() => {
-      jest.useFakeTimers('legacy');
+      jest.useFakeTimers({legacyFakeTimers: true});
 
       document.body.innerHTML = `
  <div class="relative"
