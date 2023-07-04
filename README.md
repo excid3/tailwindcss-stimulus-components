@@ -1,4 +1,4 @@
-[![npm](https://img.shields.io/npm/v/tailwindcss-stimulus-components.svg)](https://www.npmjs.com/package/tailwindcss-stimulus-components) ![CI](https://github.com/excid3/tailwindcss-stimulus-components/workflows/CI/badge.svg)
+[![npm](https://img.shields.io/npm/v/tailwindcss-stimulus-components.svg)](https://www.npmjs.com/package/tailwindcss-stimulus-components) [![Tests](https://github.com/excid3/tailwindcss-stimulus-components/actions/workflows/ci.yml/badge.svg)](https://github.com/excid3/tailwindcss-stimulus-components/actions/workflows/ci.yml)
 
 # TailwindCSS Stimulus Components
 
