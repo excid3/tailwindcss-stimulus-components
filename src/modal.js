@@ -33,6 +33,7 @@ import { enter, leave } from "./transition"
 export default class extends Controller {
   static targets = ['container', 'background']
   static values = {
+    open: { type: Boolean, default: false },
     restoreScroll: { type: Boolean, default: true }
   }
 
@@ -41,20 +42,28 @@ export default class extends Controller {
   }
 
   open() {
-    this.containerTarget.focus()
-    this.lockScroll()
-    enter(this.backgroundTarget)
-    enter(this.containerTarget)
+    this.openValue = true
   }
 
   close() {
-    this.unlockScroll()
-    leave(this.containerTarget)
-    leave(this.backgroundTarget)
+    this.openValue = false
   }
 
   closeBackground(event) {
     if (event.target === this.containerTarget) this.close()
+  }
+
+  openValueChanged() {
+    if (this.openValue) {
+      this.containerTarget.focus()
+      this.lockScroll()
+      enter(this.backgroundTarget)
+      enter(this.containerTarget)
+    } else {
+      this.unlockScroll()
+      leave(this.containerTarget)
+      leave(this.backgroundTarget)
+    }
   }
 
   lockScroll() {
