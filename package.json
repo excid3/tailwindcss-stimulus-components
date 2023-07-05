@@ -31,8 +31,8 @@
   },
   "scripts": {
     "build": "npm run build-esm && npm run build-cjs",
-    "build-cjs": "esbuild src/index.js --format=cjs --target=es2020 --minify --bundle --sourcemap=external --outfile=dist/tailwindcss-stimulus-components.cjs",
-    "build-esm": "esbuild src/index.js --format=esm --target=es2020 --minify --bundle --sourcemap=external --outfile=dist/tailwindcss-stimulus-components.module.js",
+    "build-cjs": "esbuild src/index.js --format=cjs --target=es2020 --minify --bundle --sourcemap=external --external:@hotwired/stimulus --outfile=dist/tailwindcss-stimulus-components.cjs",
+    "build-esm": "esbuild src/index.js --format=esm --target=es2020 --minify --bundle --sourcemap=external --external:@hotwired/stimulus --outfile=dist/tailwindcss-stimulus-components.module.js",
     "prepublish": "npm run build",
     "test": "NODE_ENV=test jest"
   },
