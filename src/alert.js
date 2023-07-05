@@ -1,7 +1,5 @@
 // A Growl-style alert that slides into view at the top of the screen when rendered,
 // and slides back out of view when the "X" button is clicked/pressed.
-// Visit The Stimulus Handbook for more details
-// https://stimulusjs.org/handbook/introduction
 //
 // This example controller works with specially annotated HTML like:
 //
@@ -27,22 +25,18 @@
 //  </div>
 
 import { Controller } from '@hotwired/stimulus'
+import { enter, leave } from "./transition"
 
 export default class extends Controller {
   static values = {
     dismissAfter: Number,
-    showDelay: { type: Number, default: 200 },
     removeDelay: { type: Number, default: 1100 }
   }
   static classes = ["show", "hide"]
 
-  initialize() {
-    this.hide()
-  }
-
   connect() {
     setTimeout(() => {
-      this.show()
+      enter(this.element)
     }, this.showDelayValue)
 
     // Auto dimiss if defined
@@ -53,21 +47,10 @@ export default class extends Controller {
     }
   }
 
+  // Runs hide animation and then removes element from the page
   close() {
-    this.hide()
-
-    setTimeout(() => {
+    leave(this.element).then(() => {
       this.element.remove()
-    }, this.removeDelayValue)
-  }
-
-  show() {
-    this.element.classList.add(...this.showClasses)
-    this.element.classList.remove(...this.hideClasses)
-  }
-
-  hide() {
-    this.element.classList.add(...this.hideClasses)
-    this.element.classList.remove(...this.showClasses)
+    })
   }
 }

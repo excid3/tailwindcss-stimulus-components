@@ -2,29 +2,33 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static targets = ['form', 'status']
+  static values = {
+    submitDuration: {type: Number, default: 1000},
+    statusDuration: {type: Number, default: 2000},
+    submittingText: {type: String, default: "Saving..."},
+    successText: {type: String, default: "Saved!"},
+    errorText: {type: String, default: "Unable to save."}
+  }
 
   connect() {
     this.timeout = null
-    this.duration = this.data.get('duration') || 1000
   }
 
   save() {
     clearTimeout(this.timeout)
 
     this.timeout = setTimeout(() => {
-      this.statusTarget.textContent = 'Saving...'
-      this.formTarget.dispatchEvent(
-        new Event('submit', { bubbles: true, cancelable: true })
-      )
-    }, this.duration)
+      this.statusTarget.textContent = this.submittingTextValue
+      this.formTarget.requestSubmit()
+    }, this.submitDurationValue)
   }
 
   success() {
-    this.setStatus('Saved!')
+    this.setStatus(this.successTextValue)
   }
 
   error() {
-    this.setStatus('Unable to save!')
+    this.setStatus(this.errorTextValue)
   }
 
   setStatus(message) {
@@ -32,6 +36,6 @@ export default class extends Controller {
 
     this.timeout = setTimeout(() => {
       this.statusTarget.textContent = ''
-    }, 2000)
+    }, this.statusDurationValue)
   }
 }

@@ -1,38 +1,27 @@
 import { Controller } from '@hotwired/stimulus'
+import { toggleWithState } from "./transition"
 
 export default class extends Controller {
   static targets = ['toggleable']
-  static values = { open: Boolean }
-
-  connect() {
-    this.toggleClass = this.data.get('class') || 'hidden'
+  static values = {
+    open: { type: Boolean, default: false }
   }
 
   toggle(event) {
-    if (event.target.getAttribute('type') != 'checkbox') {
-      event.preventDefault();
-    }
-
     this.openValue = !this.openValue
   }
 
-  hide(event) {
-    event.preventDefault();
-
-    this.openValue = false;
+  hide() {
+    this.openValue = false
   }
 
-  show(event) {
-    event.preventDefault();
-
-    this.openValue = true;
+  show() {
+    this.openValue = true
   }
 
   openValueChanged() {
-    if (!this.toggleClass) { return }
-
     this.toggleableTargets.forEach(target => {
-      target.classList.toggle(this.toggleClass)
+      toggleWithState(target, this.openValue)
     })
   }
 }

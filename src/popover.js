@@ -16,44 +16,58 @@
 //</p>
 //
 // You can also toggle the popover using the click action.
-// <div class="popover inline-block" data-controller="popover" data-action="click->popover#toggle" data-action="mouseover->popover#mouseOver mouseout->popover#mouseOut">
+// <div class="popover inline-block" data-controller="popover" data-action="click->popover#toggle" data-action="mouseenter->popover#show mouseleave->popover#hide">
 
 import { Controller } from '@hotwired/stimulus'
+import { toggleWithState } from "./transition"
 
 export default class extends Controller {
-  static values = {
-    dismissAfter: Number
-  }
   static targets = ['content']
-
-  // Sets the popover offset using Stimulus data map objects.
-  initialize() {
-    this.contentTarget.setAttribute(
-      'style',
-      `transform:translate(${this.data.get('translateX')}, ${this.data.get('translateY')});`,
-    )
+  static values = {
+    dismissAfter: Number,
+    open: { type: Boolean, default: false }
   }
 
-  // Show the popover
-  mouseOver() {
-    this.contentTarget.classList.remove('hidden')
+  openValueChanged() {
+    toggleWithState(this.contentTarget, this.openValue)
+    if (this.shouldAutoDismiss) this.scheduleDismissal()
   }
-  // Hide the popover
-  mouseOut() {
-    this.contentTarget.classList.add('hidden')
+
+  // If already true, extend the dismissal another X seconds since this will not trigger openValueChanged
+  show(event) {
+    if (this.shouldAutoDismiss) this.scheduleDismissal()
+    this.openValue = true
   }
-  // Toggle the popover on demand
+
+  hide() {
+    this.openValue = false
+  }
+
   toggle() {
-    if (this.contentTarget.classList.contains('hidden')) {
-      this.contentTarget.classList.remove('hidden')
+    this.openValue = !this.openValue
+  }
 
-      if (this.hasDismissAfterValue) {
-        setTimeout(() => {
-          this.contentTarget.classList.add('hidden')
-        }, this.dismissAfterValue)
-      }
-    } else {
-      this.contentTarget.classList.add('hidden')
+  get shouldAutoDismiss() {
+    return (this.openValue && this.hasDismissAfterValue)
+  }
+
+  scheduleDismissal() {
+    if (!this.hasDismissAfterValue) return
+
+    // Cancel any existing dismissals
+    this.cancelDismissal()
+
+    // Schedule the next dismissal
+    this.timeoutId = setTimeout(() => {
+      this.hide()
+      this.timeoutId = undefined
+    }, this.dismissAfterValue)
+  }
+
+  cancelDismissal() {
+    if (typeof this.timeoutId === "number") {
+      clearTimeout(this.timeoutId)
+      this.timeoutId = undefined
     }
   }
 }

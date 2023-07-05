@@ -33,31 +33,26 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static targets = ['preview', 'color'];
-
-  connect() {
-    this.styleProperty = this.data.get('style') || 'backgroundColor';
+  static values = {
+    style: {type: String, default: "backgroundColor"}
   }
 
   update() {
-    this.preview = this.color;
+    this.preview = this.colorTarget.value
   }
 
   set preview(color) {
-    this.previewTarget.style[this.styleProperty] = color;
+    this.previewTarget.style[this.styleValue] = color
 
     // Ensure the foreground text is always readable by setting either the
     // backgroundColor or color to black or white.
-    const yiqColor = this._getContrastYIQ(color);
+    const yiqColor = this._getContrastYIQ(color)
 
-    if (this.styleProperty === 'color') {
-        this.previewTarget.style.backgroundColor = yiqColor;
+    if (this.styleValue === 'color') {
+      this.previewTarget.style.backgroundColor = yiqColor
     } else {
-        this.previewTarget.style.color = yiqColor;
+      this.previewTarget.style.color = yiqColor
     }
-  }
-
-  get color() {
-    return this.colorTarget.value;
   }
 
   _getContrastYIQ(hexColor) {

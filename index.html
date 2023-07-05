@@ -2,9 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Tailwind Stimulus Components</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/@tailwindcss/forms/dist/forms.min.css" rel="stylesheet">
+    <title>TailwindCSS Stimulus Components</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
     <script>
       window.esmsInitOptions = { enable: ['css-modules', 'json-modules'] }
     </script>
@@ -14,14 +13,10 @@
       {
         "imports": {
           "@hotwired/stimulus": "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js",
-          "tailwindcss-stimulus-components": "./dist/tailwindcss-stimulus-components.modern.js"
+          "tailwindcss-stimulus-components": "./dist/tailwindcss-stimulus-components.module.js"
         }
       }
     </script>
-    <!--
-      Use the following importmap for local package with "npx serve"
-      "tailwindcss-stimulus-components": "../dist/tailwindcss-stimulus-components.modern.js"
-    -->
 
     <script type="module">
       import { Application } from "@hotwired/stimulus";
@@ -41,23 +36,30 @@
     </script>
 </head>
   <body>
-    <div class="container mx-auto p-8"
-         data-controller="slideover"
-         data-slideover-open-value="false"
-         data-slideover-invisible-class="-translate-x-full,opacity-0"
-         data-slideover-visible-class="translate-x-0,opacity-100"
-         data-slideover-entering-class=""
-         data-slideover-enter-timeout="300,300"
-         data-slideover-leaving-class=""
-         data-slideover-leave-timeout="300,0"
-         data-slideover-active-target="#slideover-target">
+    <div class="container mx-auto p-8" data-controller="slideover" data-action="keydown.esc->modal#close" tabindex="-1">
       <!-- begin sidebar/slideover -->
       <div id="sidebar-mobile">
-        <div data-slideover-target="overlay" class="fixed inset-0 flex z-40 transition-opacity ease-linear duration-300 opacity-0 hidden">
+        <div data-slideover-target="overlay"
+             class="hidden fixed inset-0 flex z-40"
+             data-transition-enter="transition ease-out duration-200"
+             data-transition-enter-start="opacity-0"
+             data-transition-enter-end="opacity-100"
+             data-transition-leave="transition ease-in duration-150"
+             data-transition-leave-start="opacity-100"
+             data-transition-leave-end="opacity-0"
+          >
           <div class="fixed inset-0">
             <div class="absolute inset-0 bg-gray-600 opacity-75"></div>
           </div>
-          <div id="slideover-target" data-slideover-target="menu" class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800 transition ease-in-out duration-300 transform -translate-x-full hidden">
+          <div data-slideover-target="menu"
+               class="hidden relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800"
+               data-transition-enter="transition ease-out duration-200"
+               data-transition-enter-start="opacity-0 -translate-x-full"
+               data-transition-enter-end="opacity-100 translate-x-0"
+               data-transition-leave="transition ease-in duration-150"
+               data-transition-leave-start="opacity-100 translate-x-0"
+               data-transition-leave-end="opacity-0 -translate-x-full"
+            >
             <div class="absolute top-0 right-0 -mr-14 p-1">
               <button data-action="slideover#toggle" class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600" aria-label="Close sidebar">
                 <svg class="h-6 w-6 text-white" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -83,46 +85,35 @@
 
       <h1 class="text-3xl font-semibold mb-2">Tailwind Stimulus Components Examples</h1>
       <img src="https://img.shields.io/npm/v/tailwindcss-stimulus-components.svg" class="inline-block mr-2" />
-      <a href="https://github.com/excid3/tailwindcss-stimulus-components" class="text-blue-500">View on Github</a>
-      <p class="my-4">To view examples locally, run <code class="bg-gray-300 text-sm px-2 py-1 rounded">yarn build</code> and then open <code class="bg-gray-300 text-sm px-2 py-1 rounded">docs/index.html</code> in your browser.</p>
+      <a href="https://github.com/excid3/tailwindcss-stimulus-components" target="_blank" class="text-blue-500">View on Github</a>
+      <p class="my-4">To view examples locally, run <code class="bg-gray-300 text-sm px-2 py-1 rounded">npm install && npm run build && npx serve</code> and then open <code class="bg-gray-300 text-sm px-2 py-1 rounded">localhost:3000</code> in your browser.</p>
 
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Dropdowns</h2>
 
-        <nav id='nav_bar' class="flex items-center justify-between flex-wrap bg-indigo-500 p-6">
-          <div class="flex items-center flex-no-shrink text-white mr-6">
-            <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
-            <span class="font-semibold text-xl tracking-tight">Dropdown Example</span>
-          </div>
-
-          <div data-controller="dropdown"
-               data-action="click->dropdown#toggle click@window->dropdown#hide"
-               data-dropdown-open-value="false"
-               data-dropdown-active-target="#dropdown-button"
-               data-dropdown-active-class="bg-indigo-600"
-               data-dropdown-invisible-class="opacity-0 scale-95"
-               data-dropdown-visible-class="opacity-100 scale-100"
-               data-dropdown-entering-class="ease-out duration-300"
-               data-dropdown-enter-timeout="300"
-               data-dropdown-leaving-class="ease-in duration-300"
-               data-dropdown-leave-timeout="300">
-            <div id="dropdown-button" class="relative inline-block text-sm text-white px-4 py-2 leading-none rounded no-underline hover:bg-indigo-600 mt-0">
-              <div role="button" tabindex="0" data-dropdown-target="button" class="inline-block select-none">
-                <span class="appearance-none flex items-center inline-block">
-                  <span>Dropdown Example</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="text-white fill-current h-4 w-4"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
-                </span>
-              </div>
-              <div data-dropdown-target="menu" class="absolute right-0 mt-2 transform transition hidden opacity-0 scale-95">
-                <div class="bg-white shadow rounded border overflow-hidden w-32">
-                  <a href="#" class='no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap'>Account</a>
-                  <a href="#" class='no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap'>Billing</a>
-                  <a href="#" class='no-underline block pl-8 py-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-no-wrap border-t'>Sign Out</a>
-                </div>
+        <div data-controller="dropdown" data-action="click->dropdown#toggle click@window->dropdown#hide">
+          <div id="dropdown-button" class="relative inline-block">
+            <div role="button" tabindex="0" data-dropdown-target="button" class="inline-block select-none">
+              <span class="appearance-none flex items-center inline-block">
+                <span>Dropdown Example</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="fill-current h-4 w-4"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+              </span>
+            </div>
+            <div data-dropdown-target="menu"
+                 data-transition-enter="transition ease-out duration-200"
+                 data-transition-enter-start="opacity-0 translate-y-1"
+                 data-transition-enter-end="opacity-100 translate-y-0"
+                 data-transition-leave="transition ease-in duration-150"
+                 data-transition-leave-start="opacity-100 translate-y-0"
+                 data-transition-leave-end="opacity-0 translate-y-1"
+                 class="hidden absolute top-4 right-0 z-10 mt-5 flex w-screen max-w-max">
+              <div class="text-sm bg-white shadow-lg rounded border overflow-hidden w-32">
+                <a href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-no-wrap'>Account</a>
+                <a href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-no-wrap'>Billing</a>
+                <a href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-no-wrap border-t'>Sign Out</a>
               </div>
             </div>
           </div>
-        </nav>
       </div>
 
       <div class="my-12">
@@ -135,51 +126,78 @@
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Modals</h2>
 
-        <div data-controller="modal" data-modal-allow-background-close="true">
-          <a href="#" data-action="click->modal#open" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded">
-            <span>Open Modal</span>
-          </a>
+        <div data-controller="modal" data-action="keydown.esc->modal#close" tabindex="-1" class="relative z-10">
+          <a href="#" data-action="click->modal#open" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded">Open Modal</a>
 
-          <!-- Modal Container -->
-          <div data-modal-target="container" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" class="hidden animated fadeIn fixed inset-0 overflow-y-auto flex items-center justify-center" style="z-index: 9999;">
-            <!-- Modal Inner Container -->
-            <div class="max-h-screen w-full max-w-lg relative">
-              <!-- Modal Card -->
-              <div class="m-1 bg-white rounded shadow">
-                <div class="p-8">
-                  <h2 class="text-xl mb-4">Large Modal Content</h2>
-                  <p class="mb-4">This is an example modal dialog box.</p>
+          <!-- Modal Background -->
+          <div class="hidden fixed inset-0 bg-black overflow-y-auto flex items-center justify-center"
+               data-modal-target="background"
+               data-action="click->modal#closeBackground"
+               data-transition-enter="transition-all ease-in-out duration-300"
+               data-transition-enter-start="bg-opacity-0"
+               data-transition-enter-end="bg-opacity-80"
+               data-transition-leave="transition-all ease-in-out duration-300"
+               data-transition-leave-start="bg-opacity-80"
+               data-transition-leave-end="bg-opacity-0">
 
-                  <div class="flex justify-end items-center flex-wrap mt-6">
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" data-action="click->modal#close">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+               <!-- Modal Container -->
+               <div data-modal-target="container" class="max-h-screen w-full max-w-lg relative">
+                 <!-- Modal Card -->
+                 <div class="m-1 bg-white rounded shadow">
+                   <div class="p-8">
+                     <h2 class="text-xl mb-4">Large Modal Content</h2>
+                     <p class="mb-4">This is an example modal dialog box.</p>
+
+                     <div class="flex justify-end items-center flex-wrap mt-6">
+                       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" data-action="click->modal#close:prevent">Close</button>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+
           </div>
         </div>
       </div>
 
       <!-- Popover example -->
       <div class='my-12'>
-        <h2 class="text-2xl text-gray-800 font-semibold mb-4">Popover</h2>
+        <h2 class="text-2xl text-gray-800 font-semibold mb-4">Popovers</h2>
 
-        <div>
-          <span>Beginning in 2015, Google introduced what is called the</span>
-          <div class="popover inline-block cursor-pointer" data-controller="popover" data-popover-translate-x="0" data-popover-translate-y="-128%" data-action="mouseover->popover#mouseOver mouseout->popover#mouseOut">
-            <span class="underline">'local snack pack',</span>
-            <div class="content hidden absolute max-w-xs border rounded p-2" data-popover-target="content">
-              Terrible name - we know. But the biggest name in SEO came up with it.
-            </div>
+        <div class="inline-block relative cursor-pointer" data-controller="popover" data-action="mouseenter->popover#show mouseleave->popover#hide">
+          <span class="underline">Hover me</span>
+          <div class="hidden absolute left-0 bottom-7 w-max bg-white border border-gray-200 shadow rounded p-2"
+               data-popover-target="content"
+               data-transition-enter="transition-opacity ease-in-out duration-200"
+               data-transition-enter-start="opacity-0"
+               data-transition-enter-end="opacity-100"
+               data-transition-leave="transition-opacity ease-in-out duration-200"
+               data-transition-leave-start="opacity-100"
+               data-transition-leave-end="opacity-0"
+            >
+            This popover shows on hover
           </div>
-          <span>which shows you local search results before normal organic results.</span>
+        </div>
+
+        <div class="inline-block relative cursor-pointer" data-controller="popover" data-action="click->popover#show" data-popover-dismiss-after-value="3000">
+          <span class="underline">Click me</span>
+          <div class="hidden absolute left-0 bottom-7 w-max bg-white border border-gray-200 shadow rounded p-2"
+               data-popover-target="content"
+               data-transition-enter="transition-opacity ease-in-out duration-300"
+               data-transition-enter-start="opacity-0"
+               data-transition-enter-end="opacity-100"
+               data-transition-leave="transition-opacity ease-in-out duration-300"
+               data-transition-leave-start="opacity-100"
+               data-transition-leave-end="opacity-0"
+            >
+            This popover shows on click and auto-hides after 3 seconds.
+          </div>
         </div>
       </div>
 
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Tabs</h2>
 
-        <div data-controller="tabs" data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t">
+        <div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t">
           <ul class="list-reset flex border-b">
             <li class="-mb-px mr-1" data-tabs-target="tab" data-action="click->tabs#change:prevent">
               <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#">Active</a>
@@ -216,15 +234,15 @@
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Tabs with Anchors</h2>
 
-        <div data-controller="tabs" data-tabs-use-anchor="true" data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t">
+        <div data-controller="tabs" data-tabs-use-anchor="true" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t">
           <ul class="list-reset flex border-b">
-            <li class="-mb-px mr-1" id="first" data-tabs-target="tab" data-action="click->tabs#change">
+            <li class="-mb-px mr-1" id="first" data-tabs-target="tab" data-action="click->tabs#change:prevent">
               <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#">Active</a>
             </li>
-            <li class="mr-1" id="second" data-tabs-target="tab" data-action="click->tabs#change">
+            <li class="mr-1" id="second" data-tabs-target="tab" data-action="click->tabs#change:prevent">
               <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#">Tab</a>
             </li>
-            <li class="mr-1" id="third" data-tabs-target="tab" data-action="click->tabs#change">
+            <li class="mr-1" id="third" data-tabs-target="tab" data-action="click->tabs#change:prevent">
               <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#">Tab</a>
             </li>
             <li class="mr-1" id="fourth">
@@ -245,7 +263,7 @@
           </div>
 
           <div class="mt-4">
-            <a data-action="click->tabs#change" data-id="second" class="text-blue-500 underline" href="#">Change tab by data-id</a>
+            <a data-action="click->tabs#change:prevent" data-id="second" class="text-blue-500 underline" href="#">Change tab by data-id</a>
           </div>
         </div>
       </div>
@@ -253,7 +271,7 @@
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Radios as Tabs</h2>
 
-        <div data-controller="tabs" data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t">
+        <div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t">
           <ul class="list-reset flex border-b">
             <li class="-mb-px mr-1" id="radio_default" data-tabs-target="tab" data-action="click->tabs#change">
               <label class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline cursor-pointer">
@@ -292,12 +310,20 @@
       <!-- Toggle -->
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Toggle</h2>
-        <div data-controller='toggle' class="m-2 p-6 border">
-          <button data-action='click->toggle#toggle touch->toggle#toggle' class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded">
+        <div data-controller='toggle' class="m-2 p-6 border flex items-center gap-4">
+          <button data-action='click->toggle#toggle:prevent touch->toggle#toggle:prevent' class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded">
             Toggle button
           </button>
-          <div data-toggle-target='toggleable' class="m-4 hidden">
-            <p>This is the hidden text...</p>
+          <div class="hidden"
+               data-toggle-target='toggleable'
+               data-transition-enter="transition-all ease-linear duration-300"
+               data-transition-enter-start="opacity-0 h-0"
+               data-transition-enter-end="opacity-100"
+               data-transition-leave="transition-all ease-linear duration-300"
+               data-transition-leave-start="opacity-100"
+               data-transition-leave-end="opacity-0"
+               >
+            <p>This is hidden text...</p>
           </div>
         </div>
       </div>
@@ -320,8 +346,12 @@
                 <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500">
                   #
                 </span>
-                <input data-action="input->color-preview#update" data-color-preview-target="color"
-                       id="hex_color_bg" name="hex_color_bg" type="color" value="#ba1e03"
+                <input data-action="input->color-preview#update"
+                       data-color-preview-target="color"
+                       id="hex_color_bg"
+                       name="hex_color_bg"
+                       type="color"
+                       value="#ba1e03"
                        class="focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 flex-1 rounded-r-md mt-0 w-24 h-8 px-1 py-1 border" />
               </div>
             </span>
@@ -333,7 +363,15 @@
     <!-- Alert -->
     <div class="fixed top-0 inset-x-0 m-4 z-30">
       <div class="flex flex-col items-end space-y-4">
-        <div data-controller="alert" data-alert-show-class="translate-x-0 opacity-100" data-alert-hide-class="translate-x-full opacity-0" class="ease-in-out duration-500 opacity-0 max-w-sm w-full shadow-lg rounded px-4 py-3 rounded relative bg-gray-800 text-white pointer-events-auto">
+        <div data-controller="alert"
+             data-transition-enter="ease-in-out duration-500"
+             data-transition-enter-start="translate-x-full opacity-0"
+             data-transition-enter-end="translate-x-0 opacity-100"
+             data-transition-leave="ease-in-out duration-500"
+             data-transition-leave-start="translate-x-0 opacity-100"
+             data-transition-leave-end="translate-x-full opacity-0"
+             class="hidden max-w-sm w-full shadow-lg rounded px-4 py-3 rounded relative bg-gray-800 text-white pointer-events-auto"
+             >
           <div class="p-2">
             <div class="flex items-start">
               <div class="ml-3 w-0 flex-1 pt-0.5">
@@ -352,8 +390,22 @@
           </div>
         </div>
 
+      </div>
+    </div>
+
+    <div class="fixed inset-x-0 bottom-0 m-4 z-30">
+      <div class="flex flex-col items-end space-y-4">
         <!-- Alert that auto-dismisses-->
-        <div data-controller="alert" data-alert-dismiss-after-value="3000" data-alert-show-class="translate-x-0 opacity-100" data-alert-hide-class="translate-x-full opacity-0" class="ease-in-out duration-500 opacity-0 max-w-sm w-full shadow-lg rounded px-4 py-3 rounded relative bg-gray-800 text-white pointer-events-auto">
+        <div data-controller="alert"
+             data-alert-dismiss-after-value="3000"
+             data-transition-enter="ease-in-out duration-500"
+             data-transition-enter-start="translate-x-full opacity-0"
+             data-transition-enter-end="translate-x-0 opacity-100"
+             data-transition-leave="ease-in-out duration-500"
+             data-transition-leave-start="translate-x-0 opacity-100"
+             data-transition-leave-end="translate-x-full opacity-0"
+             class="hidden max-w-sm w-full shadow-lg rounded px-4 py-3 rounded relative bg-gray-800 text-white pointer-events-auto"
+             >
           <div class="p-2">
             <div class="flex items-start">
               <div class="ml-3 w-0 flex-1 pt-0.5">
@@ -373,50 +425,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Alert on bottom of screen
-    <div class="fixed inset-x-0 bottom-0 m-4 z-30">
-      <div class="flex flex-col space-y-4 ">
-        <div data-controller="alert" data-alert-show-class="translate-x-0 opacity-100" data-alert-hide-class="-translate-x-full opacity-0" class="ease-in-out duration-500 opacity-0 max-w-sm w-full shadow-lg rounded px-3 py-2 rounded relative bg-white text-gray-800 border border-gray-100 shadow-lg pointer-events-auto">
-          <div class="p-2">
-            <div class="flex items-start">
-              <div class="ml-3 w-0 flex-1 pt-0.5">
-                <p class="text-sm leading-5 font-medium">
-                Draft saved successfully
-                </p>
-              </div>
-              <div class="ml-4 flex-shrink-0 flex">
-                <button data-action="alert#close" class="inline-flex text-gray-400 focus:outline-none focus:text-gray-300 transition ease-in-out duration-150">
-                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div data-controller="alert" data-alert-show-class="translate-x-0 opacity-100" data-alert-hide-class="-translate-x-full opacity-0" class="ease-in-out duration-500 opacity-0 max-w-sm w-full shadow-lg rounded px-3 py-2 rounded relative bg-white text-gray-800 border border-gray-100 shadow-lg pointer-events-auto">
-          <div class="p-2">
-            <div class="flex items-start">
-              <div class="ml-3 w-0 flex-1 pt-0.5">
-                <p class="text-sm leading-5 font-medium">
-                Second alert
-                </p>
-              </div>
-              <div class="ml-4 flex-shrink-0 flex">
-                <button data-action="alert#close" class="inline-flex text-gray-400 focus:outline-none focus:text-gray-300 transition ease-in-out duration-150">
-                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    -->
 
   </body>
 </html>
