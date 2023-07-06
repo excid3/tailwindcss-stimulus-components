@@ -33,8 +33,8 @@ async function transition(direction, element, animation) {
   const animationClass = animation ? `${animation}-${direction}` : direction
   let transition = `transition${direction.charAt(0).toUpperCase() + direction.slice(1)}`
   const genesis = dataset[transition] ? dataset[transition].split(" ") : [animationClass]
-  const start = dataset[`${transition}Start`] ? dataset[`${transition}Start`].split(" ") : [`${animationClass}-start`]
-  const end = dataset[`${transition}End`] ? dataset[`${transition}End`].split(" ") : [`${animationClass}-end`]
+  const start = dataset[`${transition}From`] ? dataset[`${transition}From`].split(" ") : [`${animationClass}-from`]
+  const end = dataset[`${transition}To`] ? dataset[`${transition}To`].split(" ") : [`${animationClass}-to`]
 
   // if there's any overlap between the current set of classes and genesis/start/end,
   // we should remove them before we start and add them back at the end
