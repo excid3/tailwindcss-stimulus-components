@@ -30,30 +30,20 @@
   "scripts": {
     "build": "microbundle --globals @hotwired/stimulus=Stimulus",
     "prepublish": "npm run build",
-    "test": "NODE_ENV=test jest"
-  },
-  "jest": {
-    "testRegex": ".*_test.js",
-    "roots": [
-      "__tests__"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "src"
-    ]
+    "test": "web-test-runner",
+    "test:watch": "test --watch"
   },
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.15.0",
-    "jest": "^29.0.0",
-    "jest-environment-jsdom": "^29.5.0",
+    "@open-wc/testing": "^3.2.0",
+    "@web/test-runner": "^0.17.0",
     "microbundle": "^0.15.0",
     "mutationobserver-shim": "^0.3.7",
     "np": "^8.0.0"
   },
   "dependencies": {
-    "@hotwired/stimulus": ">=3.0.0"
+    "@hotwired/stimulus": ">= 3.0.0"
   },
   "peerDependencies": {
-    "@hotwired/stimulus": ">=3.0.0"
+    "@hotwired/stimulus": ">= 3.0.0"
   }
 }
