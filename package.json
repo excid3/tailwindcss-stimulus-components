@@ -31,7 +31,7 @@
     "build": "microbundle --globals @hotwired/stimulus=Stimulus",
     "prepublish": "npm run build",
     "test": "web-test-runner",
-    "test:watch": "test --watch"
+    "test:watch": "web-test-runner --watch"
   },
   "devDependencies": {
     "@open-wc/testing": "^3.2.0",
