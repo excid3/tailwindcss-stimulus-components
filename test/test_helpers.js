@@ -1,5 +1,3 @@
-import { nextFrame } from '@open-wc/testing'
-
 export function fixtureFile(fileName) {
   return `/test/fixtures/${fileName}`
 }
