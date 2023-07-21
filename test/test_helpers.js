@@ -8,7 +8,3 @@ export async function fetchFixture(fileName) {
 
   return await response.text()
 }
-
-export async function afterTransition(element) {
-  return Promise.all(element.getAnimations().map(animation => animation.finished))
-}

@@ -1,5 +1,4 @@
 import { html, fixture, expect, nextFrame } from '@open-wc/testing'
-import { afterTransition } from './test_helpers'
 
 import { Application } from '@hotwired/stimulus'
 import Toggle from '../src/toggle'

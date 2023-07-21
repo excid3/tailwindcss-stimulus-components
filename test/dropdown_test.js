@@ -48,7 +48,6 @@ describe('DropdownController', () => {
       const action = document.querySelector('[data-action]')
       action.click()
       await nextFrame()
-
       expect(target.className.includes('hidden')).to.equal(false)
     })
   })
