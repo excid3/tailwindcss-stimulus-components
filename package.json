@@ -34,23 +34,16 @@
     "build-cjs": "esbuild src/index.js --format=cjs --target=es2020 --minify --bundle --sourcemap=external --external:@hotwired/stimulus --outfile=dist/tailwindcss-stimulus-components.cjs",
     "build-esm": "esbuild src/index.js --format=esm --target=es2020 --minify --bundle --sourcemap=external --external:@hotwired/stimulus --outfile=dist/tailwindcss-stimulus-components.module.js",
     "prepublish": "npm run build",
-    "test": "NODE_ENV=test jest"
-  },
-  "jest": {
-    "testRegex": ".*_test.js",
-    "roots": [
-      "__tests__"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "src"
-    ]
+    "test": "web-test-runner",
+    "test:watch": "web-test-runner --watch"
   },
   "devDependencies": {
-    "np": "^8.0.0",
-    "esbuild": "^0.18.11"
+    "@open-wc/testing": "^3.2.0",
+    "@web/test-runner": "^0.17.0",
+    "esbuild": "^0.18.11",
+    "np": "^8.0.0"
   },
   "peerDependencies": {
-    "@hotwired/stimulus": ">=3.0.0"
+    "@hotwired/stimulus": ">= 3.0.0"
   }
 }
