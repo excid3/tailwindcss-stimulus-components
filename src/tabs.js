@@ -13,6 +13,7 @@ export default class extends Controller {
     this.showTab()
   }
 
+  // Changes to the clicked tab
   change(event) {
     // If target specifies an index, use that
     if (event.currentTarget.dataset.index) {
@@ -28,6 +29,32 @@ export default class extends Controller {
     }
 
     window.dispatchEvent(new CustomEvent('tsc:tab-change'))
+  }
+
+  nextTab() {
+    this.indexValue = Math.min(this.indexValue + 1, this.tabsCount)
+  }
+
+  previousTab() {
+    this.indexValue = Math.max(this.indexValue - 1, 0)
+  }
+
+  firstTab() {
+    this.indexValue = 0
+  }
+
+  lastTab() {
+    this.indexValue = this.tabsCount - 1
+  }
+
+  indexValueChanged() {
+    this.showTab()
+
+    // Update URL with the tab ID if it has one
+    // This will be automatically selected on page load
+    if (this.updateUrlAnchorValue) {
+      location.hash = this.tabTargets[this.indexValue].id
+    }
   }
 
   showTab() {
@@ -46,14 +73,8 @@ export default class extends Controller {
     })
   }
 
-  indexValueChanged() {
-    this.showTab()
-
-    // Update URL with the tab ID if it has one
-    // This will be automatically selected on page load
-    if (this.updateUrlAnchorValue) {
-      location.hash = this.tabTargets[this.indexValue].id
-    }
+  get tabsCount() {
+    return this.tabTargets.length
   }
 
   get anchor() {
