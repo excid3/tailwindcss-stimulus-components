@@ -17,7 +17,6 @@
 //
 // You can also toggle the popover using the click action.
 // <div class="popover inline-block" data-controller="popover" data-action="click->popover#toggle" data-action="mouseenter->popover#show mouseleave->popover#hide">
-
 import { Controller } from '@hotwired/stimulus'
 import { toggleWithState } from "./transition"
 
@@ -29,12 +28,11 @@ export default class extends Controller {
   }
 
   openValueChanged() {
-    toggleWithState(this.contentTarget, this.openValue)
+    this.debounceToggleWithState()
     if (this.shouldAutoDismiss) this.scheduleDismissal()
   }
 
-  // If already true, extend the dismissal another X seconds since this will not trigger openValueChanged
-  show(event) {
+  show() {
     if (this.shouldAutoDismiss) this.scheduleDismissal()
     this.openValue = true
   }
@@ -53,11 +51,7 @@ export default class extends Controller {
 
   scheduleDismissal() {
     if (!this.hasDismissAfterValue) return
-
-    // Cancel any existing dismissals
     this.cancelDismissal()
-
-    // Schedule the next dismissal
     this.timeoutId = setTimeout(() => {
       this.hide()
       this.timeoutId = undefined
@@ -69,5 +63,12 @@ export default class extends Controller {
       clearTimeout(this.timeoutId)
       this.timeoutId = undefined
     }
+  }
+
+  debounceToggleWithState() {
+    clearTimeout(this.toggleWithStateTimeoutId)
+    this.toggleWithStateTimeoutId = setTimeout(() => {
+      toggleWithState(this.contentTarget, this.openValue)
+    }, 200)  // adjust delay as needed
   }
 }
