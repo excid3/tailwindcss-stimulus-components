@@ -16,8 +16,11 @@ export async function enter(element, transitionName = null) {
 }
 
 export async function leave(element, transitionName = null) {
-  await transition('leave', element, transitionName)
-  element.classList.add('hidden')
+  try {
+    await transition('leave', element, transitionName)
+  } finally {
+    element.classList.add('hidden')
+  }
 }
 
 export async function toggle(element, transitionName = null) {
