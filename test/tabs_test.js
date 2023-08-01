@@ -1,4 +1,4 @@
-import { fixture, expect } from '@open-wc/testing'
+import { fixture, expect, nextFrame } from '@open-wc/testing'
 import { fetchFixture } from './test_helpers'
 
 import { Application } from '@hotwired/stimulus'
@@ -9,17 +9,17 @@ describe('TabsController', () => {
     beforeEach(async () => {
       const html = await fetchFixture('index.html')
       await fixture(html)
-
       const application = Application.start()
       application.register('tabs', Tabs)
     })
 
-    it('applies active class to panel when tab is clicked', () => {
+    it('applies active class to panel when tab is clicked', async () => {
       const tabs = document.querySelectorAll("[data-tabs-target='tab']")
       const panels = document.querySelectorAll("[data-tabs-target='panel']")
       const activeClass = document.querySelector('[data-tabs-active-tab]').dataset.tabsActiveTab
 
       tabs[2].click()
+      await nextFrame()
 
       expect(tabs[2].className.includes(activeClass)).to.equal(true)
       expect(panels[2].className.includes('hidden')).to.equal(false)
