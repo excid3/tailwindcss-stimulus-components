@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = ['tab', 'panel']
   static values = {
     index: 0,
-    updateUrlAnchor: Boolean
+    updateAnchor: Boolean
   }
 
   connect() {
@@ -52,7 +52,7 @@ export default class extends Controller {
 
     // Update URL with the tab ID if it has one
     // This will be automatically selected on page load
-    if (this.updateUrlAnchorValue) {
+    if (this.updateAnchorValue) {
       location.hash = this.tabTargets[this.indexValue].id
     }
   }
