@@ -7,7 +7,7 @@ import Slideover from '../src/slideover'
 describe('SlideoverController', () => {
   describe('#default', () => {
     beforeEach(async () => {
-      const html = await fetchFixture('index.html')
+      const html = await fetchFixture('slideover.html')
       await fixture(html)
 
       const application = Application.start()

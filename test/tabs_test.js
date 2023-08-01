@@ -7,7 +7,7 @@ import Tabs from '../src/tabs'
 describe('TabsController', () => {
   describe('#default', () => {
     beforeEach(async () => {
-      const html = await fetchFixture('index.html')
+      const html = await fetchFixture('tabs.html')
       await fixture(html)
       const application = Application.start()
       application.register('tabs', Tabs)
@@ -26,11 +26,12 @@ describe('TabsController', () => {
       expect(panels[2].className.includes('hidden')).to.equal(false)
     })
 
-    it('appends to location href when use-anchor is true', () => {
+    it('appends to location href when use-anchor is true', async () => {
       const anchorTabCtrlr = document.querySelector("[data-tabs-update-anchor-value='true']")
       const tab = anchorTabCtrlr.querySelector('#first')
 
       tab.click()
+      await nextFrame()
 
       expect(window.location.href.includes('#first')).to.equal(true)
     })

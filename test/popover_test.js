@@ -7,19 +7,18 @@ describe('PopoverController', () => {
   describe('#popover', () => {
     beforeEach(async () => {
       await fixture(html`
-        <div
-          class="popover inline-block"
-          data-controller="popover"
-          data-popover-translate-x="0"
-          data-popover-translate-y="-128%"
-          data-action="mouseover->popover#show mouseout->popover#hide"
-        >
-          <span class="underline">'local snack pack',</span>
-          <div
-            class="content hidden absolute max-w-xs bg-grey-light rounded p-2"
-            data-popover-target="content"
-          >
-            Terrible name - we know. But the biggest name in SEO came up with it.
+        <div class="inline-block relative cursor-pointer" data-controller="popover" data-action="mouseenter->popover#show mouseleave->popover#hide">
+          <span class="underline">Hover me</span>
+          <div class="hidden absolute left-0 bottom-7 w-max bg-white border border-gray-200 shadow rounded p-2"
+               data-popover-target="content"
+               data-transition-enter="transition-opacity ease-in-out duration-100"
+               data-transition-enter-from="opacity-0"
+               data-transition-enter-to="opacity-100"
+               data-transition-leave="transition-opacity ease-in-out duration-100"
+               data-transition-leave-from="opacity-100"
+               data-transition-leave-to="opacity-0"
+            >
+            This popover shows on hover
           </div>
         </div>
       `)
@@ -30,7 +29,7 @@ describe('PopoverController', () => {
 
     it('mouseOver removes hidden class', async () => {
       const target = document.querySelector('[data-popover-target="content"]')
-      const mouseover = new MouseEvent('mouseover', {
+      const mouseover = new MouseEvent('mouseenter', {
         view: window,
         bubbles: true,
         cancelable: true,
@@ -40,17 +39,22 @@ describe('PopoverController', () => {
       expect(target.className.includes('hidden')).to.equal(false)
     })
 
-    it('mouseOut adds hidden class', async () => {
+    it('mouseOut adds hidden class', (done) => {
       const target = document.querySelector('[data-popover-target="content"]')
       target.className.replace('hidden', '')
-      const mouseout = new MouseEvent('mouseout', {
+      const event = new MouseEvent('mouseleave', {
         view: window,
         bubbles: true,
         cancelable: true,
       })
-      target.dispatchEvent(mouseout)
-      await nextFrame()
-      expect(target.className.includes('hidden')).to.equal(true)
+      target.dispatchEvent(event)
+      setTimeout(() => {
+        expect(target.className.includes('transition-opacity')).to.equal(true)
+      }, 10)
+      setTimeout(() => {
+        expect(target.className.includes('hidden')).to.equal(true)
+        done()
+      }, 101)
     })
   })
 })
