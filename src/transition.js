@@ -13,8 +13,12 @@ export async function toggleWithState(element, state, transitionName = null) {
 }
 
 export async function enter(element, transitionName = null) {
+  try {
   element.classList.remove('hidden')
   await transition('enter', element, transitionName)
+  } finally {
+    cleanupInterruptedTransition(element, transitionName)
+  }
 }
 
 export async function leave(element, transitionName = null) {
@@ -22,6 +26,7 @@ export async function leave(element, transitionName = null) {
     await transition('leave', element, transitionName)
   } finally {
     element.classList.add('hidden')
+    cleanupInterruptedTransition(element, transitionName)
   }
 }
 
@@ -39,29 +44,14 @@ export async function toggle(element, transitionName = null) {
 //
 // When transitioning, adds itself to `transitions` with direction
 // If starting a new transition, looks at transitions and removes
-async function transition(direction, element, animation) {
-  const classes = transitionClasses(direction, element, animation)
+async function transition(direction, element, transitionName) {
+  cleanupInterruptedTransition(element, transitionName)
 
-  // Cleanup interrupted transition
-  if (transitioning.has(element)) {
-    const previousDirection = transitioning.get(element)
-    const previousClasses = transitionClasses(previousDirection, element, animation)
-    console.log("INTERRUPTED by", direction, "Removing", previousClasses)
-    removeClasses(element, previousClasses.transition + previousClasses.start + previousClasses.end)
-  }
-
-  // if there's any overlap between the current set of classes and initial/start/end,
-  // we should remove them before we start and add them back at the end
-  const stash = []
-  const current = new Set(element.classList.values())
-  classes.transition.forEach(cls => current.has(cls) && stash.push(cls))
-  classes.start.forEach(cls => current.has(cls) && stash.push(cls))
-  classes.end.forEach(cls => current.has(cls) && stash.push(cls))
+  const classes = transitionClasses(direction, element, transitionName)
 
   transitioning.set(element, direction)
 
   // Prepare transition
-  removeClasses(element, stash)
   addClasses(element, classes.transition)
   addClasses(element, classes.start)
 
@@ -76,22 +66,28 @@ async function transition(direction, element, animation) {
   // Cleanup transition
   removeClasses(element, classes.end)
   removeClasses(element, classes.transition)
-  addClasses(element, stash)
+
+  // Ensure original classes are there
+  if ("originalClass" in element.dataset && element.dataset.originalClass !== "") {
+    addClasses(element, element.dataset.originalClass.split(" "))
+  }
 
   // Remove transitioning state
   transitioning.delete(element)
 }
 
-function transitionClasses(direction, element, animation) {
+function transitionClasses(direction, element, transitionName) {
   const dataset = element.dataset
-  const animationClass = animation ? `${animation}-${direction}` : direction // 'dropdown-enter' or 'enter'
+  const transitionNameClass = transitionName ? `${transitionName}-${direction}` : direction // 'dropdown-enter' or 'enter'
   let transition = `transition${direction.charAt(0).toUpperCase() + direction.slice(1)}` // 'transitionEnter'
 
-  return {
-    transition: dataset[transition] ? dataset[transition].split(" ") : [animationClass], // Lookup dataset.transitionEnter classes or use ['dropdown-enter'] or ['enter']
-    start: dataset[`${transition}From`] ? dataset[`${transition}From`].split(" ") : [`${animationClass}-from`], // Lookup dataset.transitionEnterFrom classes
-    end: dataset[`${transition}To`] ? dataset[`${transition}To`].split(" ") : [`${animationClass}-to`] // Lookup dataset.transitionEnterTo classes
+  const classes = {
+    transition: dataset[transition] ? dataset[transition].split(" ") : [transitionNameClass], // Lookup dataset.transitionEnter classes or use ['dropdown-enter'] or ['enter']
+    start: dataset[`${transition}From`] ? dataset[`${transition}From`].split(" ") : [`${transitionNameClass}-from`], // Lookup dataset.transitionEnterFrom classes
+    end: dataset[`${transition}To`] ? dataset[`${transition}To`].split(" ") : [`${transitionNameClass}-to`] // Lookup dataset.transitionEnterTo classes
   }
+
+  return classes
 }
 
 function addClasses(element, classes) {
@@ -112,4 +108,26 @@ function nextFrame() {
 
 function afterTransition(element) {
   return Promise.all(element.getAnimations().map(animation => animation.finished))
+}
+
+async function cleanupInterruptedTransition(element, transitionName = null) {
+  // Save original classes for restoration
+  if (!("originalClass" in element.dataset)) {
+    element.dataset.originalClass = [...element.classList].filter(c => c !== "hidden").join(" ")
+  }
+
+
+  // Cleanup interrupted transition
+  if (transitioning.has(element)) {
+    const previousDirection = transitioning.get(element)
+    const previousClasses = transitionClasses(previousDirection, element, transitionName)
+    removeClasses(element, previousClasses.transition + previousClasses.start + previousClasses.end)
+
+    // Add back any duplicates
+    if ("originalClass" in element.dataset && element.dataset.originalClass !== "") {
+      addClasses(element, element.dataset.originalClass.split(" "))
+    }
+
+    transitioning.delete(element)
+  }
 }
