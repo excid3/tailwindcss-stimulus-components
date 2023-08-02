@@ -30,9 +30,9 @@ import { enter, leave } from "./transition"
 export default class extends Controller {
   static values = {
     dismissAfter: Number,
+    showDelay: { type: Number, default: 0 },
     removeDelay: { type: Number, default: 1100 }
   }
-  static classes = ["show", "hide"]
 
   connect() {
     setTimeout(() => {

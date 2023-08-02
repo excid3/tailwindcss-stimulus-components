@@ -1,3 +1,14 @@
+// Form autosave
+//
+// <%= form_with(model: post, data: { controller: "autosave", autosave_target: "form", action: "turbo:submit-end->autosave#success turbo:fetch-request-error->autosave#error" }) do |form| %>
+//   <div class="form-group">
+//     <%= form.label :title %>
+//     <%= form.text_field :title, class: 'form-control', data: { action: "keyup->autosave#save" } %>
+//   </div>
+//
+//   <div data-autosave-target="status"></div>
+// <% end %>
+
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {

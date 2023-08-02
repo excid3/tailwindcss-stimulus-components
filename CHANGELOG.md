@@ -1,5 +1,40 @@
 # Unreleased
 
+# 4.0.0
+
+* [Breaking] Complete refactor to take advantage of new Stimulus features, completely rewrite transitions, and more! 🎉
+* [Breaking] The main export is now cjs format and the module export is esm. We've dropped other formats as part of the move to esbuild.
+* [Breaking] Use `data-action"controller#method:prevent` to call `preventDefault` where needed. Components will no longer prevent default automatically.
+* Transitions now follow the TailwindCSS enter/leave pattern. This is based on the el-transition library.
+    ```html
+    <div class="hidden whatever default styles"
+         data-transition-enter="transition duration-300"
+         data-transition-enter-from="opacity-0"
+         data-transition-enter-to="opacity-100"
+         data-transition-leave="transition duration-300"
+         data-transition-leave-from="opacity-100"
+         data-transition-leave-to="opacity-0"
+         >
+      Content fades opacity over 300ms
+    </div>
+    ```
+    These should be applied to the element that will transition. For example, apply these attributes to the menu element of a Dropdown.
+* Alert transition classes have been moved to the transition API.
+* Autosave now uses `requestSubmit` for submitting the form.
+* Autosave now has configurable submitDuration, statusDuration, submittingText, successText, and errorText.
+* ColorPreview now uses styleValue instead of `data-style` to define which CSS style it applies to (color, backgroundColor, etc).
+* Dropdown transition classes have been moved to the transition API.
+* Modal transition classes have been moved to the transition API.
+* Modals now use a backgroundTarget to customize the background. `backdropColorValue` has been removed since this should be specified on your backdrop instead.
+* Modals now use the `open` value to trigger the opening and closing of the modal.
+* Popover transition classes have been moved to the transition API.
+* Popovers now use `show` and `hide` instead of `mouseOver` and `mouseOut`.
+* Slideovers transition classes have been moved to the transition API.
+* Tabs now use activeTab and inactiveTab Stimulus classes
+* Tabs also store the selected index in the indexValue
+* Tabs can be set to update the URL anchor when a tab is selected using `updateAnchorValue`
+* Toggles now support the transition API.
+
 # 3.0.1
 
 * Fix undefined scroll position - @PhilippMeissner
