@@ -117,17 +117,11 @@
       </div>
 
       <div class="my-12">
-        <h2 class="text-2xl text-gray-800 font-semibold mb-4">Slideovers</h2>
-        <button data-action="click->slideover#toggle click@window->slideover#hide" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded">
-          <span>Open Slideover</span>
-        </button>
-      </div>
-
-      <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Modals</h2>
 
-        <div data-controller="modal" data-action="keydown.esc->modal#close" tabindex="-1" class="relative z-10">
-          <a href="#" data-action="click->modal#open" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded">Open Modal</a>
+        <div data-controller="modal" data-action="keydown.esc->modal#close" tabindex="-1" class="relative">
+          <p class="mb-4 text-gray-700">This modal can be closed with the "esc" key or by clicking the backdrop.</p>
+          <a href="#" data-action="click->modal#open:prevent" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded">Open Modal</a>
 
           <!-- Modal Background -->
           <div class="hidden fixed inset-0 bg-black bg-opacity-80 overflow-y-auto flex items-center justify-center"
@@ -196,74 +190,43 @@
 
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Tabs</h2>
+        <p class="mb-4 text-gray-700">These tabs can be navigated with the keyboard using Left, Right, Home, and End.</p>
 
         <div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t">
           <ul class="list-reset flex border-b">
-            <li class="-mb-px mr-1" data-tabs-target="tab" data-action="click->tabs#change:prevent">
-              <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#">Active</a>
+            <li class="-mb-px mr-1" id="first" data-tabs-target="tab" data-action="click->tabs#change:prevent">
+              <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#" data-action="keydown.left->tabs#previousTab keydown.right->tabs#nextTab keydown.home->tabs#firstTab:prevent keydown.end->tabs#lastTab:prevent">First</a>
             </li>
-            <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change:prevent">
-              <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#">Tab</a>
+            <li class="mr-1" id="second" data-tabs-target="tab" data-action="click->tabs#change:prevent">
+              <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#" data-action="keydown.left->tabs#previousTab keydown.right->tabs#nextTab keydown.home->tabs#firstTab:prevent keydown.end->tabs#lastTab:prevent">Second</a>
             </li>
-            <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change:prevent">
-              <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#">Tab</a>
-            </li>
-            <li class="mr-1">
-              <a class="bg-white inline-block py-2 px-4 text-gray-500 font-semibold no-underline" href="#">Tab</a>
+            <li class="mr-1" id="third" data-tabs-target="tab" data-action="click->tabs#change:prevent">
+              <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#" data-action="keydown.left->tabs#previousTab keydown.right->tabs#nextTab keydown.home->tabs#firstTab:prevent keydown.end->tabs#lastTab:prevent">Third</a>
             </li>
           </ul>
 
           <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
             Tab panel 1
           </div>
-
           <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
             Tab panel 2
           </div>
-
           <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/0aTRN9CSCY0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            Tab panel 3
           </div>
 
           <div class="mt-4">
             <a data-action="click->tabs#change:prevent" data-index="1" class="text-blue-500 underline" href="#">Change tab by data-index</a>
-          </div>
-        </div>
-      </div>
+            <a data-action="click->tabs#change:prevent" data-id="third" class="text-blue-500 underline" href="#">Change tab by data-id</a>
 
-      <div class="my-12">
-        <h2 class="text-2xl text-gray-800 font-semibold mb-4">Tabs with Anchors</h2>
-
-        <div data-controller="tabs" data-tabs-update-anchor-value="false" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t">
-          <ul class="list-reset flex border-b">
-            <li class="-mb-px mr-1" id="first" data-tabs-target="tab" data-action="click->tabs#change:prevent">
-              <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#">Active</a>
-            </li>
-            <li class="mr-1" id="second" data-tabs-target="tab" data-action="click->tabs#change:prevent">
-              <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#">Tab</a>
-            </li>
-            <li class="mr-1" id="third" data-tabs-target="tab" data-action="click->tabs#change:prevent">
-              <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#">Tab</a>
-            </li>
-            <li class="mr-1" id="fourth">
-              <a class="bg-white inline-block py-2 px-4 text-gray-500 font-semibold no-underline" href="#">Tab</a>
-            </li>
-          </ul>
-
-          <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
-            Tab panel 1
-          </div>
-
-          <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
-            Tab panel 2
-          </div>
-
-          <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/0aTRN9CSCY0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          </div>
-
-          <div class="mt-4">
-            <a data-action="click->tabs#change:prevent" data-id="second" class="text-blue-500 underline" href="#">Change tab by data-id</a>
+            <span>or change by select</span>
+            <select data-action="tabs#change" data-tabs-target="select">
+              <option>First</option>
+              <option>Second</option>
+              <optgroup label="Works with optgroups">
+                <option>Third</option>
+              </optgroup>
+            </select>
           </div>
         </div>
       </div>

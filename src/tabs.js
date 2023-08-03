@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static classes = [ "activeTab", "inactiveTab" ]
-  static targets = ['tab', 'panel']
+  static targets = ['tab', 'panel', 'select']
   static values = {
     index: 0,
     updateAnchor: Boolean
@@ -15,8 +15,11 @@ export default class extends Controller {
 
   // Changes to the clicked tab
   change(event) {
+    if (event.currentTarget.tagName === "SELECT") {
+      this.indexValue = event.currentTarget.selectedIndex
+
     // If target specifies an index, use that
-    if (event.currentTarget.dataset.index) {
+    } else if (event.currentTarget.dataset.index) {
       this.indexValue = event.currentTarget.dataset.index
 
     // If target specifies an id, use that
@@ -71,6 +74,10 @@ export default class extends Controller {
         if (this.hasInactiveTabClass) tab.classList.add(...this.inactiveTabClasses)
       }
     })
+
+    if (this.hasSelectTarget) {
+      this.selectTarget.selectedIndex = this.indexValue
+    }
   }
 
   get tabsCount() {
