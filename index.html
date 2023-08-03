@@ -113,9 +113,10 @@
                  data-transition-leave-to="opacity-0 translate-y-1"
                  class="hidden absolute top-4 right-0 z-10 mt-5 flex w-screen max-w-max">
               <div class="text-sm bg-white shadow-lg rounded border overflow-hidden w-32">
-                <a href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-no-wrap'>Account</a>
-                <a href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-no-wrap'>Billing</a>
-                <a href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-no-wrap border-t'>Sign Out</a>
+                <a data-dropdown-target="menuItem" data-action="keydown.up->dropdown#previousItem:prevent keydown.down->dropdown#nextItem:prevent" href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-no-wrap focus:bg-gray-100'>Account</a>
+                <a data-dropdown-target="menuItem" data-action="keydown.up->dropdown#previousItem:prevent keydown.down->dropdown#nextItem:prevent" href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-no-wrap focus:bg-gray-100'>Billing</a>
+                <hr class="border-t" />
+                <a data-dropdown-target="menuItem" data-action="keydown.up->dropdown#previousItem:prevent keydown.down->dropdown#nextItem:prevent" href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-no-wrap focus:bg-gray-100'>Sign Out</a>
               </div>
             </div>
           </div>
