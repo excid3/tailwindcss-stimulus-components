@@ -21,7 +21,7 @@ export default class extends Controller {
   }
 
   closeBackground(event) {
-    if (event.target === this.containerTarget) this.close()
+    if (event.target === this.backgroundTarget) this.close()
   }
 
   openValueChanged() {
