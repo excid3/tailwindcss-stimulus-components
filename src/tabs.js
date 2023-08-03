@@ -32,7 +32,7 @@ export default class extends Controller {
   }
 
   nextTab() {
-    this.indexValue = Math.min(this.indexValue + 1, this.tabsCount)
+    this.indexValue = Math.min(this.indexValue + 1, this.tabsCount - 1)
   }
 
   previousTab() {
