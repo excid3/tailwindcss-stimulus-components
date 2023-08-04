@@ -3,6 +3,7 @@
 # 4.0.1
 
 * Tabs index now selects panels and no longer requires tabs
+* Add closeTarget to Slideover
 
 # 4.0.0
 
