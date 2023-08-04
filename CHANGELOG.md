@@ -1,5 +1,9 @@
 # Unreleased
 
+# 4.0.1
+
+* Tabs index now selects panels and no longer requires tabs
+
 # 4.0.0
 
 * [Breaking] Complete refactor to take advantage of new Stimulus features, completely rewrite transitions, and more! 🎉
