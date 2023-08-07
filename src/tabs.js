@@ -63,7 +63,6 @@ export default class extends Controller {
   showTab() {
     this.panelTargets.forEach((panel, index) => {
       const tab = this.tabTargets[index]
-      console.log(tab)
 
       if (index === this.indexValue) {
         panel.classList.remove('hidden')
