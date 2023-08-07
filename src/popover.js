@@ -19,7 +19,7 @@
 // <div class="popover inline-block" data-controller="popover" data-action="click->popover#toggle" data-action="mouseenter->popover#show mouseleave->popover#hide">
 
 import { Controller } from '@hotwired/stimulus'
-import { toggleWithState } from "./transition"
+import { transition } from "./transition"
 
 export default class extends Controller {
   static targets = ['content']
@@ -29,7 +29,7 @@ export default class extends Controller {
   }
 
   openValueChanged() {
-    toggleWithState(this.contentTarget, this.openValue)
+    transition(this.contentTarget, this.openValue)
     if (this.shouldAutoDismiss) this.scheduleDismissal()
   }
 

@@ -1,102 +1,69 @@
-// A fork of el-transition
-// https://github.com/mmccall10/el-transition
-
-let transitioning = new Map()
-
-// Accepts the intended state of the element
-export async function toggleWithState(element, state, transitionName = null) {
-  if (state) {
-    await enter(element, transitionName)
-  } else {
-    await leave(element, transitionName)
-  }
-}
-
-export async function enter(element, transitionName = null) {
-  try {
-  element.classList.remove('hidden')
-  await transition('enter', element, transitionName)
-  } finally {
-    cleanupInterruptedTransition(element, transitionName)
-  }
-}
-
-export async function leave(element, transitionName = null) {
-  try {
-    await transition('leave', element, transitionName)
-  } finally {
-    element.classList.add('hidden')
-    cleanupInterruptedTransition(element, transitionName)
-  }
-}
-
-export async function toggle(element, transitionName = null) {
-  if (element.classList.contains('hidden')) {
-    await enter(element, transitionName)
-  } else {
-    await leave(element, transitionName)
-  }
-}
-
-// transition('enter', element, null)
-// transition('leave', element, null)
-// transition('enter', element, 'dropdown')
+// Enter transition:
 //
-// When transitioning, adds itself to `transitions` with direction
-// If starting a new transition, looks at transitions and removes
-async function transition(direction, element, transitionName) {
-  cleanupInterruptedTransition(element, transitionName)
+//   transition(this.element, true)
+//
+// Leave transition:
+//
+//    transition(this.element, false)
+export async function transition(element, state) {
+  if (!!state) {
+    enter(element)
+  } else {
+    leave(element)
+  }
+}
 
-  const classes = transitionClasses(direction, element, transitionName)
-
-  transitioning.set(element, direction)
+// class="fixed inset-0 bg-black overflow-y-auto flex items-center justify-center bg-opacity-80 hidden"
+// data-transition-enter="transition-all ease-in-out duration-300"
+// data-transition-enter-from="bg-opacity-0"
+// data-transition-enter-to="bg-opacity-80"
+// data-transition-leave="transition-all ease-in-out duration-300"
+// data-transition-leave-from="bg-opacity-80"
+// data-transition-leave-to="bg-opacity-0"
+export async function enter(element) {
+  const transitionClasses = element.dataset.transitionEnter || "enter"
+  const fromClasses = element.dataset.transitionEnterFrom || "enter-from"
+  const toClasses = element.dataset.transitionEnterTo || "enter-to"
 
   // Prepare transition
-  addClasses(element, classes.transition)
-  addClasses(element, classes.start)
-  removeClasses(element, classes.end)
+  element.classList.add(...transitionClasses.split(" "))
+  element.classList.add(...fromClasses.split(" "))
+  element.classList.remove(...toClasses.split(" "))
+  element.classList.remove("hidden")
 
   await nextFrame()
 
-  // Start transition
-  removeClasses(element, classes.start)
-  addClasses(element, classes.end)
+  element.classList.remove(...fromClasses.split(" "))
+  element.classList.add(...toClasses.split(" "))
 
-  await afterTransition(element)
-
-  // Cleanup transition
-  removeClasses(element, classes.end)
-  removeClasses(element, classes.transition)
-
-  // Ensure original classes are there
-  if ("originalClass" in element.dataset && element.dataset.originalClass !== "") {
-    addClasses(element, element.dataset.originalClass.split(" "))
+  try {
+    await afterTransition(element)
+  } finally {
+    element.classList.remove(...transitionClasses.split(" "))
   }
-
-  // Remove transitioning state
-  transitioning.delete(element)
 }
 
-function transitionClasses(direction, element, transitionName) {
-  const dataset = element.dataset
-  const transitionNameClass = transitionName ? `${transitionName}-${direction}` : direction // 'dropdown-enter' or 'enter'
-  let transition = `transition${direction.charAt(0).toUpperCase() + direction.slice(1)}` // 'transitionEnter'
+export async function leave(element) {
+  const transitionClasses = element.dataset.transitionLeave || "leave"
+  const fromClasses = element.dataset.transitionLeaveFrom || "leave-from"
+  const toClasses = element.dataset.transitionLeaveTo || "leave-to"
 
-  const classes = {
-    transition: dataset[transition] ? dataset[transition].split(" ") : [transitionNameClass], // Lookup dataset.transitionEnter classes or use ['dropdown-enter'] or ['enter']
-    start: dataset[`${transition}From`] ? dataset[`${transition}From`].split(" ") : [`${transitionNameClass}-from`], // Lookup dataset.transitionEnterFrom classes
-    end: dataset[`${transition}To`] ? dataset[`${transition}To`].split(" ") : [`${transitionNameClass}-to`] // Lookup dataset.transitionEnterTo classes
+  // Prepare transition
+  element.classList.add(...transitionClasses.split(" "))
+  element.classList.add(...fromClasses.split(" "))
+  element.classList.remove(...toClasses.split(" "))
+
+  await nextFrame()
+
+  element.classList.remove(...fromClasses.split(" "))
+  element.classList.add(...toClasses.split(" "))
+
+  try {
+    await afterTransition(element)
+  } finally {
+    element.classList.remove(...transitionClasses.split(" "))
+    element.classList.add("hidden")
   }
-
-  return classes
-}
-
-function addClasses(element, classes) {
-  element.classList.add(...classes)
-}
-
-function removeClasses(element, classes) {
-  element.classList.remove(...classes)
 }
 
 function nextFrame() {
@@ -109,26 +76,4 @@ function nextFrame() {
 
 function afterTransition(element) {
   return Promise.all(element.getAnimations().map(animation => animation.finished))
-}
-
-async function cleanupInterruptedTransition(element, transitionName = null) {
-  // Save original classes for restoration
-  if (!("originalClass" in element.dataset)) {
-    element.dataset.originalClass = [...element.classList].filter(c => c !== "hidden").join(" ")
-  }
-
-
-  // Cleanup interrupted transition
-  if (transitioning.has(element)) {
-    const previousDirection = transitioning.get(element)
-    const previousClasses = transitionClasses(previousDirection, element, transitionName)
-    removeClasses(element, previousClasses.transition + previousClasses.start + previousClasses.end)
-
-    // Add back any duplicates
-    if ("originalClass" in element.dataset && element.dataset.originalClass !== "") {
-      addClasses(element, element.dataset.originalClass.split(" "))
-    }
-
-    transitioning.delete(element)
-  }
 }
