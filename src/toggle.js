@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus'
-import { toggleWithState } from "./transition"
+import { transition } from "./transition"
 
 export default class extends Controller {
   static targets = ['toggleable']
@@ -24,7 +24,7 @@ export default class extends Controller {
 
   animate() {
     this.toggleableTargets.forEach(target => {
-      toggleWithState(target, this.openValue)
+      transition(target, this.openValue)
     })
   }
 }

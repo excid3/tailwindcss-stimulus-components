@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus'
-import { toggleWithState } from "./transition"
+import { transition } from "./transition"
 
 export default class extends Controller {
   static targets = ['menu', 'button', 'menuItem']
@@ -20,7 +20,7 @@ export default class extends Controller {
   }
 
   openValueChanged() {
-    toggleWithState(this.menuTarget, this.openValue)
+    transition(this.menuTarget, this.openValue)
 
     if (this.openValue === true && this.hasMenuItemTarget) {
       this.menuItemTargets[0].focus()

@@ -1,12 +1,12 @@
 import Dropdown from './dropdown.js'
-import { toggleWithState } from './transition'
+import { transition } from './transition'
 
 export default class extends Dropdown {
   static targets = ['menu', 'overlay', 'close']
 
   openValueChanged() {
-    toggleWithState(this.overlayTarget, this.openValue)
-    toggleWithState(this.menuTarget, this.openValue)
-    if (this.hasCloseTarget) toggleWithState(this.closeTarget, this.openValue)
+    transition(this.overlayTarget, this.openValue)
+    transition(this.menuTarget, this.openValue)
+    if (this.hasCloseTarget) transition(this.closeTarget, this.openValue)
   }
 }
