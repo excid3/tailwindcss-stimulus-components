@@ -1,5 +1,9 @@
 # Unreleased
 
+# 4.0.3
+
+* Fix modal scroll position when opening
+
 # 4.0.2
 
 * Only animate toggle when an action happens (not on connect)

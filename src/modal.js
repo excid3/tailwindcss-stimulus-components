@@ -38,6 +38,13 @@ export default class extends Controller {
   }
 
   lockScroll() {
+    // Save the scroll position before we hide the scrollbar
+    if (this.restoreScrollValue) {
+      this.saveScrollPosition()
+      // Add negative top position in order for body to stay in place
+      document.body.style.top = `-${this.scrollPosition}px`
+    }
+
     // Add right padding to the body so the page doesn't shift
     // when we disable scrolling
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
@@ -45,14 +52,6 @@ export default class extends Controller {
 
     // Add classes to body to fix its position
     document.body.classList.add('fixed', 'inset-x-0', 'overflow-hidden')
-
-    if (this.restoreScrollValue) {
-      // Save the scroll position
-      this.saveScrollPosition()
-
-      // Add negative top position in order for body to stay in place
-      document.body.style.top = `-${this.scrollPosition}px`
-    }
   }
 
   unlockScroll() {
