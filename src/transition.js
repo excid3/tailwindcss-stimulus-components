@@ -54,6 +54,7 @@ async function transition(direction, element, transitionName) {
   // Prepare transition
   addClasses(element, classes.transition)
   addClasses(element, classes.start)
+  removeClasses(element, classes.end)
 
   await nextFrame()
 

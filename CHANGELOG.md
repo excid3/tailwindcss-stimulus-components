@@ -1,5 +1,13 @@
 # Unreleased
 
+# 4.0.4
+
+* Fix transitions by removing any end classes before beginning.
+  For example, let's say you have a modal backdrop of `bg-opacity-80` initially and your transition starts with `bg-opacity-0` and ends with `bg-opacity-80`.
+  Previously, this would start the transition with `bg-opacity-80 bg-opacity-0` and not remove the initial class. This would seem to not transition because of CSS ordering where `bg-opacity-80` might always take precedence.
+  By removing the end classes at the beginning of the transition, we can ensure that conflicting classes do not cause problems with the transition.
+* Unlock browser scroll after modal transitions instead of before. This fixes an issue where the modal gets bumped left during the leave transition.
+
 # 4.0.3
 
 * Fix modal scroll position when opening

@@ -24,16 +24,16 @@ export default class extends Controller {
     if (event.target === this.backgroundTarget) this.close()
   }
 
-  openValueChanged() {
+  async openValueChanged() {
     if (this.openValue) {
       this.containerTarget.focus()
       this.lockScroll()
       enter(this.backgroundTarget)
       enter(this.containerTarget)
     } else {
-      this.unlockScroll()
       leave(this.containerTarget)
-      leave(this.backgroundTarget)
+      await leave(this.backgroundTarget)
+      this.unlockScroll()
     }
   }
 
