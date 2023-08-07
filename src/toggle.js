@@ -9,17 +9,20 @@ export default class extends Controller {
 
   toggle(event) {
     this.openValue = !this.openValue
+    this.animate()
   }
 
   hide() {
     this.openValue = false
+    this.animate()
   }
 
   show() {
     this.openValue = true
+    this.animate()
   }
 
-  openValueChanged() {
+  animate() {
     this.toggleableTargets.forEach(target => {
       toggleWithState(target, this.openValue)
     })

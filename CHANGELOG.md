@@ -1,5 +1,9 @@
 # Unreleased
 
+# 4.0.2
+
+* Only animate toggle when an action happens (not on connect)
+
 # 4.0.1
 
 * Tabs index now selects panels and no longer requires tabs
