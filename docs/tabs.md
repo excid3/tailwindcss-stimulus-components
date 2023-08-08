@@ -10,7 +10,7 @@ application.register('tabs', Tabs)
 ```
 
 ```html
-<div data-controller="tabs" data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t">
+<div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t">
   <ul class="list-reset flex border-b">
     <li class="-mb-px mr-1" data-tabs-target="tab" data-action="click->tabs#change">
       <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-700 font-semibold no-underline" href="#">Active</a>
