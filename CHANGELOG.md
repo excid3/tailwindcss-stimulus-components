@@ -1,5 +1,7 @@
 # Unreleased
 
+* Add `toggleInput` to toggle to sync with input checkbox or radio state
+
 # 4.0.4
 
 * Fix transitions by removing any end classes before beginning.

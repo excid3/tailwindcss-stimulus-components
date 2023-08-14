@@ -12,6 +12,12 @@ export default class extends Controller {
     this.animate()
   }
 
+  // Sets open to value of checkbox or radio
+  toggleInput(event) {
+    this.openValue = event.target.checked
+    this.animate()
+  }
+
   hide() {
     this.openValue = false
     this.animate()
