@@ -44,3 +44,5 @@ application.register('modal', Modal)
 
 `data-modal-restore-scroll-value` may be set to `false` to disable
 restoring scroll position.
+
+`data-modal-open-value` may be set to `true` to open modal on page load.
