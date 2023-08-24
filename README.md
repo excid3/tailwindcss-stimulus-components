@@ -54,7 +54,7 @@ This will start StimulusJS and load any controllers that you have locally and th
 
 * [Alert](/docs/alert.md)
 * [Autosave](/docs/autosave.md)
-* [Color Preview](/docs/color_preview.md)
+* [Color Preview](/docs/color-preview.md)
 * [Dropdown](/docs/dropdown.md)
 * [Modal](/docs/modal.md)
 * [Popover](/docs/popover.md)
