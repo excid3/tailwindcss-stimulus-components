@@ -24,13 +24,13 @@ export async function enter(element) {
   const transitionClasses = element.dataset.transitionEnter || "enter"
   const fromClasses = element.dataset.transitionEnterFrom || "enter-from"
   const toClasses = element.dataset.transitionEnterTo || "enter-to"
-  const toggleClasses = element.dataset.toggleClasses || "hidden"
+  const toggleClass = element.dataset.toggleClass || "hidden"
 
   // Prepare transition
   element.classList.add(...transitionClasses.split(" "))
   element.classList.add(...fromClasses.split(" "))
   element.classList.remove(...toClasses.split(" "))
-  element.classList.remove(...toggleClasses.split(" "))
+  element.classList.remove(...toggleClass.split(" "))
 
   await nextFrame()
 
@@ -48,7 +48,7 @@ export async function leave(element) {
   const transitionClasses = element.dataset.transitionLeave || "leave"
   const fromClasses = element.dataset.transitionLeaveFrom || "leave-from"
   const toClasses = element.dataset.transitionLeaveTo || "leave-to"
-  const toggleClasses = element.dataset.toggleClasses || "hidden"
+  const toggleClass = element.dataset.toggleClass || "hidden"
 
   // Prepare transition
   element.classList.add(...transitionClasses.split(" "))
@@ -64,7 +64,7 @@ export async function leave(element) {
     await afterTransition(element)
   } finally {
     element.classList.remove(...transitionClasses.split(" "))
-    element.classList.add(...toggleClasses.split(" "))
+    element.classList.add(...toggleClass.split(" "))
   }
 }
 

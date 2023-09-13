@@ -55,7 +55,7 @@ describe('ToggleController', () => {
           <div
              id="toggleTarget"
              data-toggle-target="toggleable"
-             data-toggle-classes="class1 class2"
+             data-toggle-class="class1 class2"
              class="class1 class2 m-4"
              data-transition-enter-to="opacity-100"
              >
