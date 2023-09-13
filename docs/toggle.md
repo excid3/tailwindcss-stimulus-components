@@ -23,11 +23,11 @@ application.register('toggle', Toggle)
 In this example, clicking the question will toggle the hidden class. The hidden class is the default. If you wish to use a different class, you can use the `data-toggle-class="custom-class"` attribute.
 
 ```html
-<div data-controller='toggle' data-toggle-class='bg-red-900' class="m-2">
+<div data-controller='toggle' class="m-2">
   <div data-action='click->toggle#toggle touch->toggle#toggle' class="bg-gray-900 text-white p-6">
     What is the question?
   </div>
-  <div data-toggle-target='toggleable' class="m-4 bg-red-900">
+  <div data-toggle-target='toggleable' data-toggle-class='bg-red-900' class="m-4 bg-red-900">
     <p>This is the answer</p>
   </div>
 </div>
