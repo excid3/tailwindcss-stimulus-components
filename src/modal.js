@@ -9,7 +9,9 @@ export default class extends Controller {
   }
 
   disconnect() {
-    this.close()
+    // Value Change Callbacks are not executed when a value is changed from a
+    // disconnect function, thus we must call the logic directly.
+    this.closeModal()
   }
 
   open() {
@@ -24,16 +26,24 @@ export default class extends Controller {
     if (event.target === this.backgroundTarget) this.close()
   }
 
+  async closeModal() {
+    leave(this.containerTarget)
+    await leave(this.backgroundTarget)
+    this.unlockScroll()
+  }
+
+  openModal() {
+    this.containerTarget.focus()
+    this.lockScroll()
+    enter(this.backgroundTarget)
+    enter(this.containerTarget)
+  }
+
   async openValueChanged() {
     if (this.openValue) {
-      this.containerTarget.focus()
-      this.lockScroll()
-      enter(this.backgroundTarget)
-      enter(this.containerTarget)
+      this.openModal()
     } else {
-      leave(this.containerTarget)
-      await leave(this.backgroundTarget)
-      this.unlockScroll()
+      this.closeModal()
     }
   }
 
