@@ -3,7 +3,7 @@ import { transition } from './transition'
 
 export default class extends Controller {
   static targets = ['menu', 'button', 'menuItem']
-  static values = { open: Boolean, default: false }
+  static values = { open: { type: Boolean, default: false } }
 
   // lifecycle
   connect() {
