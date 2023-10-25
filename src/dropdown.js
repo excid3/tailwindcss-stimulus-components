@@ -6,7 +6,7 @@ export default class extends Controller {
   static values = {
     open: { type: Boolean, default: false },
     closeOnEscape: { type: Boolean, default: true },
-    closeOnClickOutside: { type: Boolean, default: false },
+    closeOnClickOutside: { type: Boolean, default: true },
   }
 
   static classes = ['enter', 'enterFrom', 'enterTo', 'leave', 'leaveFrom', 'leaveTo', 'toggle']
