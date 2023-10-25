@@ -30,6 +30,7 @@
     "tests": false
   },
   "scripts": {
+    "dev": "esbuild src/index.js --format=esm  --bundle --outfile=dist/tailwindcss-stimulus-components.module.js --watch",
     "build": "npm run build-esm && npm run build-cjs",
     "build-cjs": "esbuild src/index.js --format=cjs --target=es2020 --minify --bundle --sourcemap=external --external:@hotwired/stimulus --outfile=dist/tailwindcss-stimulus-components.cjs",
     "build-esm": "esbuild src/index.js --format=esm --target=es2020 --minify --bundle --sourcemap=external --external:@hotwired/stimulus --outfile=dist/tailwindcss-stimulus-components.module.js",
