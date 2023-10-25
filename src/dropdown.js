@@ -6,6 +6,7 @@ export default class extends Controller {
   static values = {
     open: { type: Boolean, default: false },
     closeOnEscape: { type: Boolean, default: true },
+    closeOnClickOutside: { type: Boolean, default: false },
   }
 
   // lifecycle
@@ -34,7 +35,12 @@ export default class extends Controller {
 
   hide(event) {
     // if the event is a click and the target is not inside the dropdown, then close it
-    if (event.target.nodeType && this.element.contains(event.target) === false && this.openValue) {
+    if (
+      this.closeOnClickOutsideValue &&
+      event.target.nodeType &&
+      this.element.contains(event.target) === false &&
+      this.openValue
+    ) {
       this.openValue = false
     }
 
