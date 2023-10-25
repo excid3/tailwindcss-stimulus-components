@@ -3,7 +3,10 @@ import { transition } from './transition'
 
 export default class extends Controller {
   static targets = ['menu', 'button', 'menuItem']
-  static values = { open: { type: Boolean, default: false } }
+  static values = {
+    open: { type: Boolean, default: false },
+    closeOnEscape: { type: Boolean, default: true },
+  }
 
   // lifecycle
   connect() {
@@ -30,7 +33,13 @@ export default class extends Controller {
   }
 
   hide(event) {
+    // if the event is a click and the target is not inside the dropdown, then close it
     if (event.target.nodeType && this.element.contains(event.target) === false && this.openValue) {
+      this.openValue = false
+    }
+
+    // if the event is a keydown and the key is escape, then close it
+    if (this.closeOnEscapeValue && event.key === 'Escape' && this.openValue) {
       this.openValue = false
     }
   }
@@ -76,6 +85,7 @@ export default class extends Controller {
     actions.push('click@window->dropdown#hide')
     actions.push('keydown.up->dropdown#previousItem')
     actions.push('keydown.down->dropdown#nextItem')
+    actions.push('keydown.esc->dropdown#hide')
     this.element.dataset.action = [...new Set(actions)].join(' ')
   }
 }
