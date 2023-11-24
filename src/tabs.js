@@ -8,8 +8,11 @@ export default class extends Controller {
     updateAnchor: Boolean
   }
 
-  connect() {
+  initialize() {
     if (this.anchor) this.indexValue = this.tabTargets.findIndex((tab) => tab.id === this.anchor)
+  }
+
+  connect() {
     this.showTab()
   }
 
