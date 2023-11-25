@@ -11,7 +11,7 @@ application.register('modal', Modal)
 
 ```html
 <div data-controller="modal" data-action="keydown.esc->modal#close" tabindex="-1" class="relative z-10">
-  <button data-action="click->modal#open" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Open Modal</button>
+  <button type="button" data-action="click->modal#open" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Open Modal</button>
 
   <!-- Modal Background -->
   <div class="hidden fixed inset-0 bg-black bg-opacity-80 overflow-y-auto flex items-center justify-center"
