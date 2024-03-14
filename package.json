@@ -39,10 +39,10 @@
     "test:watch": "web-test-runner --watch"
   },
   "devDependencies": {
-    "@open-wc/testing": "^3.2.0",
-    "@web/test-runner": "^0.17.0",
-    "esbuild": "^0.18.11",
-    "np": "^8.0.0"
+    "@open-wc/testing": "^4.0.0",
+    "@web/test-runner": "^0.18.0",
+    "esbuild": "^0.20.0",
+    "np": "^10.0.0"
   },
   "peerDependencies": {
     "@hotwired/stimulus": ">= 3.0.0"
