@@ -279,7 +279,7 @@
 
       <!-- Toggle -->
       <div class="my-12">
-        <h2 class="text-2xl text-gray-800 font-semibold mb-4">Toggle</h2>
+        <h2 class="text-2xl text-gray-800 font-semibold">Toggle</h2>
         <div data-controller='toggle' class="m-2 p-6 border flex items-center gap-4">
           <button data-action='click->toggle#toggle:prevent touch->toggle#toggle:prevent' class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded">
             Toggle button
@@ -296,25 +296,37 @@
             <p>This is hidden text...</p>
           </div>
         </div>
-      </div>
-
         <div data-controller='toggle' class="m-2 p-6 border flex items-center gap-4">
           <label class="flex gap-2 items-center">
             <input type="checkbox" data-action="toggle#toggleInput">
             Trigger by checkbox or radio inputs
           </label>
           <div class="hidden bg-yellow-500/20"
-               data-toggle-target='toggleable'
-               data-transition-enter="transition-all ease-linear duration-300"
-               data-transition-enter-from="opacity-0 h-0"
-               data-transition-enter-to="opacity-100"
-               data-transition-leave="transition-all ease-linear duration-300"
-               data-transition-leave-from="opacity-100"
-               data-transition-leave-to="opacity-0"
-               >
+                data-toggle-target='toggleable'
+                data-transition-enter="transition-all ease-linear duration-300"
+                data-transition-enter-from="opacity-0 h-0"
+                data-transition-enter-to="opacity-100"
+                data-transition-leave="transition-all ease-linear duration-300"
+                data-transition-leave-from="opacity-100"
+                data-transition-leave-to="opacity-0"
+                >
             <p>This is hidden text...</p>
           </div>
         </div>
+
+        <div data-controller='toggle' class="m-2 p-6 border flex items-center gap-4">
+          <button data-action='click->toggle#toggle:prevent touch->toggle#toggle:prevent' class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded">
+            Toggle button with custom classes
+          </button>
+          <div class="opacity-50 bg-yellow-500/20"
+                data-toggle-target='toggleable'
+                data-toggle-class="opacity-50"
+                >
+            <p>This is toggleable text...</p>
+          </div>
+        </div>
+      </div>
+
 
       <!-- Color Picker and Preview -->
       <div class="my-12">

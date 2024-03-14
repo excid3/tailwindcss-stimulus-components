@@ -11,7 +11,7 @@ application.register('modal', Modal)
 
 ```html
 <div data-controller="modal" data-action="keydown.esc->modal#close" tabindex="-1" class="relative z-10">
-  <a href="#" data-action="click->modal#open" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded">Open Modal</a>
+  <button type="button" data-action="click->modal#open" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Open Modal</button>
 
   <!-- Modal Background -->
   <div class="hidden fixed inset-0 bg-black bg-opacity-80 overflow-y-auto flex items-center justify-center"
@@ -44,3 +44,5 @@ application.register('modal', Modal)
 
 `data-modal-restore-scroll-value` may be set to `false` to disable
 restoring scroll position.
+
+`data-modal-open-value` may be set to `true` to open modal on page load.
