@@ -6,6 +6,8 @@ export default class extends Controller {
   static values = { open: Boolean, default: false }
 
   connect() {
+    document.addEventListener("turbo:before-cache", this.beforeCache.bind(this))
+
     if (this.hasButtonTarget) {
       this.buttonTarget.addEventListener("keydown", this._onMenuButtonKeydown)
       this.buttonTarget.setAttribute("aria-haspopup", "true")
@@ -13,6 +15,8 @@ export default class extends Controller {
   }
 
   disconnect() {
+    document.removeEventListener("turbo:before-cache", this.beforeCache.bind(this))
+
     if (this.hasButtonTarget) {
       this.buttonTarget.removeEventListener("keydown", this._onMenuButtonKeydown)
       this.buttonTarget.removeAttribute("aria-haspopup")
@@ -28,7 +32,11 @@ export default class extends Controller {
   }
 
   show() {
-     this.openValue = true;
+     this.openValue = true
+  }
+
+  close() {
+    this.openValue = false
   }
 
   hide(event) {
@@ -53,5 +61,11 @@ export default class extends Controller {
 
   get currentItemIndex() {
     return this.menuItemTargets.indexOf(document.activeElement)
+  }
+
+  // Ensures the menu is hidden before Turbo caches the page
+  beforeCache() {
+    this.openValue = false
+    this.menuTarget.classList.add("hidden")
   }
 }
