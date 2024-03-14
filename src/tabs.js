@@ -5,11 +5,15 @@ export default class extends Controller {
   static targets = ['tab', 'panel', 'select']
   static values = {
     index: 0,
-    updateAnchor: Boolean
+    updateAnchor: Boolean,
+    scrollToAnchor: Boolean,
+  }
+
+  initialize() {
+    if (this.anchor) this.indexValue = this.tabTargets.findIndex((tab) => tab.id === this.anchor)
   }
 
   connect() {
-    if (this.anchor) this.indexValue = this.tabTargets.findIndex((tab) => tab.id === this.anchor)
     this.showTab()
   }
 
@@ -56,7 +60,14 @@ export default class extends Controller {
     // Update URL with the tab ID if it has one
     // This will be automatically selected on page load
     if (this.updateAnchorValue) {
-      location.hash = this.tabTargets[this.indexValue].id
+      const new_tab_id = this.tabTargets[this.indexValue].id // Grab the id from the newly activated tab
+      if (this.scrollToAnchorValue){
+        location.hash = new_tab_id // Use location.hash to change the URL with scrolling
+      } else {
+        const currentUrl = window.location.href // Get the current URL
+        const newUrl = currentUrl.split('#')[0] + '#' + new_tab_id // Create a new URL with the updated ID
+        history.replaceState({}, document.title, newUrl) // Use history.replaceState to change the URL without scrolling
+      }
     }
   }
 

@@ -13,12 +13,17 @@ export default class extends Controller {
 
   // lifecycle
   connect() {
+    document.addEventListener("turbo:before-cache", this.beforeCache.bind(this))
     this.#initializeDropdownActions()
   }
 
   disconnect() {
-    // lets make sure we don't cache with Turbo any open dropdowns
-    this.openValue = false
+    document.removeEventListener("turbo:before-cache", this.beforeCache.bind(this))
+
+    if (this.hasButtonTarget) {
+      this.buttonTarget.removeEventListener("keydown", this._onMenuButtonKeydown)
+      this.buttonTarget.removeAttribute("aria-haspopup")
+    }
   }
 
   // callbacks
@@ -33,6 +38,10 @@ export default class extends Controller {
   // actions
   show() {
     this.openValue = true
+  }
+
+  close() {
+    this.openValue = false
   }
 
   hide(event) {
@@ -108,5 +117,11 @@ export default class extends Controller {
     actions.push('keydown.down->dropdown#nextItem')
     actions.push('keydown.esc->dropdown#hide')
     this.element.dataset.action = [...new Set(actions)].join(' ')
+  }
+
+  // Ensures the menu is hidden before Turbo caches the page
+  beforeCache() {
+    this.openValue = false
+    this.menuTarget.classList.add("hidden")
   }
 }

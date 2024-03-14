@@ -8,8 +8,12 @@ export default class extends Controller {
     restoreScroll: { type: Boolean, default: true }
   }
 
+  connect() {
+    document.addEventListener("turbo:before-cache", this.beforeCache.bind(this))
+  }
+
   disconnect() {
-    this.close()
+    document.removeEventListener("turbo:before-cache", this.beforeCache.bind(this))
   }
 
   open() {
@@ -77,5 +81,11 @@ export default class extends Controller {
   restoreScrollPosition() {
     if (this.scrollPosition === undefined) return
     document.documentElement.scrollTop = this.scrollPosition
+  }
+
+  beforeCache() {
+    this.close()
+    this.backgroundTarget.classList.add("hidden")
+    this.containerTarget.classList.add("hidden")
   }
 }
