@@ -9,8 +9,11 @@ export default class extends Controller {
     scrollToAnchor: Boolean,
   }
 
-  connect() {
+  initialize() {
     if (this.anchor) this.indexValue = this.tabTargets.findIndex((tab) => tab.id === this.anchor)
+  }
+
+  connect() {
     this.showTab()
   }
 
