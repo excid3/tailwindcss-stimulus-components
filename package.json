@@ -41,8 +41,7 @@
   "devDependencies": {
     "@open-wc/testing": "^4.0.0",
     "@web/test-runner": "^0.18.0",
-    "esbuild": "^0.20.0",
-    "np": "^10.0.0"
+    "esbuild": "^0.20.0"
   },
   "peerDependencies": {
     "@hotwired/stimulus": ">= 3.0.0"
