@@ -77,10 +77,12 @@ export default class extends Controller {
 
       if (index === this.indexValue) {
         panel.classList.remove('hidden')
+        tab.ariaSelected = 'true'
         if (this.hasInactiveTabClass) tab?.classList?.remove(...this.inactiveTabClasses)
         if (this.hasActiveTabClass) tab?.classList?.add(...this.activeTabClasses)
       } else {
         panel.classList.add('hidden')
+        tab.ariaSelected = null
         if (this.hasActiveTabClass) tab?.classList?.remove(...this.activeTabClasses)
         if (this.hasInactiveTabClass) tab?.classList?.add(...this.inactiveTabClasses)
       }
@@ -89,6 +91,18 @@ export default class extends Controller {
     if (this.hasSelectTarget) {
       this.selectTarget.selectedIndex = this.indexValue
     }
+
+    this.scrollActiveTabIntoView()
+  }
+
+  // If tabs have horizontal scrolling, the active tab may be out of sight.
+  // Make sure the active tab is visible by scrolling it into the view.
+  scrollActiveTabIntoView() {
+    const activeTab = this.element.querySelector('[aria-selected]');
+    if (activeTab)
+      activeTab.scrollIntoView({
+        inline: 'center',
+      });
   }
 
   get tabsCount() {
