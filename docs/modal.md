@@ -15,7 +15,8 @@ application.register('modal', Modal)
     <p>This modal dialog has a groovy backdrop!</p>
     <button autofocus data-action="modal#close" class="px-2.5 py-1 bg-blue-500 text-white text-sm rounded">Close</button>
   </dialog>
-  <button data-action="modal#showModal" class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-1 px-2.5 rounded">Open modal</button>
+
+  <button data-action="modal#open" class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-1 px-2.5 rounded">Open modal</button>
 </div>
 ```
 

@@ -8,18 +8,19 @@ export default class extends Controller {
   }
 
   connect() {
-    if (this.openValue) this.showModal()
+    if (this.openValue) this.open()
   }
 
-  showModal() {
-    this.dialogTarget.showModal()
-  }
-
-  show() {
-    this.dialogTarget.show()
+  open() {
+    this.showModal()
   }
 
   close() {
     this.dialogTarget.close()
+  }
+
+  // For showing non-modally
+  show() {
+    this.dialogTarget.show()
   }
 }
