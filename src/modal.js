@@ -12,7 +12,7 @@ export default class extends Controller {
   }
 
   open() {
-    this.showModal()
+    this.dialogTarget.showModal()
   }
 
   close() {
