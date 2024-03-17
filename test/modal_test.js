@@ -1,4 +1,4 @@
-import { fixture, expect, nextFrame } from '@open-wc/testing'
+import { fixture, expect } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands';
 import { fetchFixture } from './test_helpers'
 
@@ -14,31 +14,27 @@ describe('ModalController', () => {
       application.register('modal', Modal)
     })
 
-    it('adds open attribute when open button is clicked', async () => {
+    const openModalButton = document.querySelector("[data-action='modal#open']")
+
+    it('clicks to open and close the modal', async () => {
       const dialog = document.querySelector("dialog")
       const openModalButton = document.querySelector("[data-action='modal#open']")
       openModalButton.click()
-
       expect(dialog.hasAttribute("open")).to.equal(true)
-    })
 
-    it('removes open attribute when open button is clicked', async () => {
-      const dialog = document.querySelector("dialog")
-      dialog.setAttribute("open", true)
       const closeModalButton = document.querySelector("[data-action='modal#close']")
       closeModalButton.click()
-
       expect(dialog.hasAttribute("open")).to.equal(false)
     })
 
-    it('removes open attribute when hitting escape', async () => {
+    it('uses the keyboard to open and close the modal', async () => {
       const dialog = document.querySelector("dialog")
       const openModalButton = document.querySelector("[data-action='modal#open']")
-      openModalButton.click()
-
+      openModalButton.focus()
+      await sendKeys({ press: 'Space' });
       expect(dialog.hasAttribute("open")).to.equal(true)
-      await sendKeys({ press: 'Escape' });
 
+      await sendKeys({ press: 'Escape' });
       expect(dialog.hasAttribute("open")).to.equal(false)
     })
   })
