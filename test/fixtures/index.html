@@ -88,23 +88,6 @@
   </div>
 
   <div class="my-12">
-    <h2 class="text-2xl text-gray-800 font-semibold mb-4">Modals</h2>
-    <p>Modals use the <code>&lt;dialog&gt;</code> html element and can be closed with <kbd>Esc</kbd> or a button. See the
-      <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#accessibility_concerns" target="_blank"
-        class="underline text-blue-500">dialog element MDN docs</a>.</p>
-
-    <div data-controller="modal">
-      <dialog data-modal-target="dialog" class="p-8 rounded-lg backdrop:bg-black/80">
-        <p>This modal dialog has a groovy backdrop!</p>
-        <button autofocus data-action="modal#close"
-          class="px-2.5 py-1 bg-blue-500 text-white text-sm rounded">Close</button>
-      </dialog>
-      <button data-action="modal#open"
-        class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-1 px-2.5 rounded">Open modal</button>
-    </div>
-  </div>
-
-  <div class="my-12">
     <h2 class="text-2xl text-gray-800 font-semibold mb-4">Tabs</h2>
 
     <div id="tabs" data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t">
