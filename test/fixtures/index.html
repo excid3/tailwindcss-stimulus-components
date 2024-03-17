@@ -89,29 +89,18 @@
 
   <div class="my-12">
     <h2 class="text-2xl text-gray-800 font-semibold mb-4">Modals</h2>
+    <p>Modals use the <code>&lt;dialog&gt;</code> html element and can be closed with <kbd>Esc</kbd> or a button. See the
+      <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#accessibility_concerns" target="_blank"
+        class="underline text-blue-500">dialog element MDN docs</a>.</p>
 
-    <div data-controller="modal" data-modal-allow-background-close="true">
-      <a href="#" data-action="click->modal#open" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded">
-        <span>Open Modal</span>
-      </a>
-
-      <!-- Modal Container -->
-      <div data-modal-target="container" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" class="hidden animated fadeIn fixed inset-0 overflow-y-auto flex items-center justify-center" style="z-index: 9999;">
-        <!-- Modal Inner Container -->
-        <div class="max-h-screen w-full max-w-lg relative">
-          <!-- Modal Card -->
-          <div class="m-1 bg-white rounded shadow">
-            <div class="p-8">
-              <h2 class="text-xl mb-4">Large Modal Content</h2>
-              <p class="mb-4">This is an example modal dialog box.</p>
-
-              <div class="flex justify-end items-center flex-wrap mt-6">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" data-action="click->modal#close">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div data-controller="modal">
+      <dialog data-modal-target="dialog" class="p-8 rounded-lg backdrop:bg-black/80">
+        <p>This modal dialog has a groovy backdrop!</p>
+        <button autofocus data-action="modal#close"
+          class="px-2.5 py-1 bg-blue-500 text-white text-sm rounded">Close</button>
+      </dialog>
+      <button data-action="modal#open"
+        class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-1 px-2.5 rounded">Open modal</button>
     </div>
   </div>
 
