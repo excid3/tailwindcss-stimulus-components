@@ -12,6 +12,7 @@ const filterBrowserLogs = (log) => {
 }
 
 export default {
+  concurrency: 1,
   files: "test/**/*_test.js",
   nodeResolve: true,
   filterBrowserLogs,
