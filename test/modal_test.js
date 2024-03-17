@@ -20,5 +20,14 @@ describe('ModalController', () => {
 
       expect(dialog.hasAttribute("open")).to.equal(true)
     })
+
+    it('removes open attribute when open button is clicked', async () => {
+      const dialog = document.querySelector("dialog")
+      dialog.setAttribute("open", true)
+      const closeModalButton = document.querySelector("[data-action='modal#close']")
+      closeModalButton.click()
+
+      expect(dialog.hasAttribute("open")).to.equal(false)
+    })
   })
 })
