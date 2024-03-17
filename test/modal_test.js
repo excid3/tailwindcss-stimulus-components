@@ -1,4 +1,5 @@
 import { fixture, expect, nextFrame } from '@open-wc/testing'
+import { sendKeys } from '@web/test-runner-commands';
 import { fetchFixture } from './test_helpers'
 
 import { Application } from '@hotwired/stimulus'
@@ -26,6 +27,17 @@ describe('ModalController', () => {
       dialog.setAttribute("open", true)
       const closeModalButton = document.querySelector("[data-action='modal#close']")
       closeModalButton.click()
+
+      expect(dialog.hasAttribute("open")).to.equal(false)
+    })
+
+    it('removes open attribute when hitting escape', async () => {
+      const dialog = document.querySelector("dialog")
+      const openModalButton = document.querySelector("[data-action='modal#open']")
+      openModalButton.click()
+
+      expect(dialog.hasAttribute("open")).to.equal(true)
+      await sendKeys({ press: 'Escape' });
 
       expect(dialog.hasAttribute("open")).to.equal(false)
     })
