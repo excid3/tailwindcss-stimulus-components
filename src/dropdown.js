@@ -110,13 +110,14 @@ export default class extends Controller {
     // data-action="click->dropdown#toggle click@window->dropdown#hide keydown.up->dropdown#previousItem keydown.down->dropdown#nextItem"
     // Note: If existing actions are already specified by the user, they will be preserved and augmented without any redundancy.
 
-    const actions = this.element.dataset.action ? this.element.dataset.action.split(' ') : []
+    const buttonElement = this.hasButtonTarget ? this.buttonTarget : this.element
+    const actions = buttonElement.dataset.action ? buttonElement.dataset.action.split(' ') : []
     actions.push('click->dropdown#toggle')
     actions.push('click@window->dropdown#hide')
     actions.push('keydown.up->dropdown#previousItem')
     actions.push('keydown.down->dropdown#nextItem')
     actions.push('keydown.esc->dropdown#hide')
-    this.element.dataset.action = [...new Set(actions)].join(' ')
+    buttonElement.dataset.action = [...new Set(actions)].join(' ')
   }
 
   // Ensures the menu is hidden before Turbo caches the page

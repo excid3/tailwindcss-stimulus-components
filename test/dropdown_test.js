@@ -1,4 +1,4 @@
-import { html, fixture, expect, nextFrame } from '@open-wc/testing'
+import { html, fixture, expect, nextFrame, aTimeout } from '@open-wc/testing'
 
 import { Application } from '@hotwired/stimulus'
 import Dropdown from '../src/dropdown'
@@ -11,7 +11,6 @@ describe('DropdownController', () => {
           class="relative"
           data-dropdown-active-target="#active_target"
           data-controller="dropdown"
-          data-action="click->dropdown#toggle click@window->dropdown#hide"
           data-dropdown-active-target="#dropdown-button"
           data-dropdown-open-value="false"
           data-dropdown-active-class="bg-teal-600"
@@ -23,6 +22,7 @@ describe('DropdownController', () => {
           data-dropdown-leave-timeout="75"
         >
           <div
+            data-dropdown-target="button"
             data-action="click->dropdown#toggle click@window->dropdown#hide"
             role="button"
             class="inline-block select-none"
@@ -48,6 +48,8 @@ describe('DropdownController', () => {
       const action = document.querySelector('[data-action]')
       action.click()
       await nextFrame()
+      expect(target.className.includes('hidden')).to.equal(false)
+      await aTimeout(10)
       expect(target.className.includes('hidden')).to.equal(false)
     })
   })
