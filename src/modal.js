@@ -8,6 +8,11 @@ export default class extends Controller {
 
   connect() {
     if (this.openValue) this.open()
+    document.addEventListener("turbo:before-cache", this.beforeCache.bind(this))
+  }
+
+  disconnect() {
+    document.removeEventListener("turbo:before-cache", this.beforeCache.bind(this))
   }
 
   open() {
@@ -21,5 +26,9 @@ export default class extends Controller {
   // For showing non-modally
   show() {
     this.dialogTarget.show()
+  }
+
+  beforeCache() {
+    this.close()
   }
 }

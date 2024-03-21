@@ -20,4 +20,6 @@ application.register('modal', Modal)
 </div>
 ```
 
+### Options
+
 `data-modal-open-value` may be set to `true` to open modal on connect.
