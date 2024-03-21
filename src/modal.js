@@ -23,6 +23,10 @@ export default class extends Controller {
     this.dialogTarget.close()
   }
 
+  backdropClose(event) {
+    if (event.target.nodeName == "DIALOG") this.dialogTarget.close()
+  }
+
   // For showing non-modally
   show() {
     this.dialogTarget.show()
