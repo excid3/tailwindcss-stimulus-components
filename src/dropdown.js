@@ -6,27 +6,18 @@ export default class extends Controller {
   static values = {
     open: { type: Boolean, default: false },
     closeOnEscape: { type: Boolean, default: true },
-    closeOnClickOutside: { type: Boolean, default: true },
+    closeOnClickOutside: { type: Boolean, default: true }
   }
-
   static classes = ['enter', 'enterFrom', 'enterTo', 'leave', 'leaveFrom', 'leaveTo', 'toggle']
 
-  // lifecycle
   connect() {
     document.addEventListener("turbo:before-cache", this.beforeCache.bind(this))
-    this.#initializeDropdownActions()
   }
 
   disconnect() {
     document.removeEventListener("turbo:before-cache", this.beforeCache.bind(this))
-
-    if (this.hasButtonTarget) {
-      this.buttonTarget.removeEventListener("keydown", this._onMenuButtonKeydown)
-      this.buttonTarget.removeAttribute("aria-haspopup")
-    }
   }
 
-  // callbacks
   openValueChanged() {
     transition(this.menuTarget, this.openValue, this.transitionOptions)
 
@@ -35,7 +26,6 @@ export default class extends Controller {
     }
   }
 
-  // actions
   show() {
     this.openValue = true
   }
@@ -44,6 +34,7 @@ export default class extends Controller {
     this.openValue = false
   }
 
+  // Closes dropdown from outside click or keyboard
   hide(event) {
     // if the event is a click and the target is not inside the dropdown, then close it
     if (
@@ -101,22 +92,6 @@ export default class extends Controller {
       leaveTo: this.hasLeaveToClass ? this.leaveToClass : 'transform opacity-0 scale-95',
       toggleClass: this.hasToggleClass ? this.toggleClass : 'hidden',
     }
-  }
-
-  // private
-
-  #initializeDropdownActions() {
-    // this will set the necessary actions on the dropdown element for it to work
-    // data-action="click->dropdown#toggle click@window->dropdown#hide keydown.up->dropdown#previousItem keydown.down->dropdown#nextItem"
-    // Note: If existing actions are already specified by the user, they will be preserved and augmented without any redundancy.
-
-    const actions = this.element.dataset.action ? this.element.dataset.action.split(' ') : []
-    actions.push('click->dropdown#toggle')
-    actions.push('click@window->dropdown#hide')
-    actions.push('keydown.up->dropdown#previousItem')
-    actions.push('keydown.down->dropdown#nextItem')
-    actions.push('keydown.esc->dropdown#hide')
-    this.element.dataset.action = [...new Set(actions)].join(' ')
   }
 
   // Ensures the menu is hidden before Turbo caches the page

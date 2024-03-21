@@ -1,15 +1,3 @@
-# Dropdown Component
-
-![dropdown](dropdown.gif)
-
-## Usage
-
-```javascript
-import { Dropdown } from "tailwindcss-stimulus-components"
-application.register('dropdown', Dropdown)
-```
-
-```html
 <div
     data-controller="dropdown"
     data-action="click@window->dropdown#hide touchstart@window->dropdown#hide keydown.up->dropdown#previousItem keydown.down->dropdown#nextItem keydown.esc->dropdown#hide"
@@ -27,21 +15,3 @@ application.register('dropdown', Dropdown)
       </div>
     </div>
 </div>
-```
-
-Dropdowns are set up to toggle if you click on the dropdown button or any of the
-options with in the dropdown menu (via `data-action="click->dropdown#toggle`).
-It will also close if you click anywhere outside of the dropdown. This is
-done using a window click event to check if the user clicked outside the
-dropdown (`data-action="click@window->dropdown#hide"`).
-
-Users can also focus on the dropdown button if `tabindex="0"` is included. They can toggle the dropdown with Space or Enter if the attribute `data-dropdown-target="button"` is included on the button.
-
-If you want a dropdown to be opened on page load you can set the ```data-dropdown-open-value="true"``` as a data attribute.
-
-The code above will toggle the dropdown component, if you needed to only perform a single action, such as `show` or `hide`. the dropdown component exposes such method.
-
-```html
-data-action="click->dropdown#show"
-data-action="click->dropdown#hide"
-```

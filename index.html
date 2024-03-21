@@ -153,27 +153,25 @@
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Dropdowns</h2>
         <p class="mb-4 text-gray-700">When open, you can navigate menu items with Up and Down keys.</p>
-        <div class="flex">
 
-          <div data-controller="dropdown">
-            <div id="dropdown-button" class="relative inline-block">
-              <div role="button" tabindex="0" data-dropdown-target="button" class="inline-block select-none">
-                <span class="appearance-none flex items-center inline-block">
-                  <span>Dropdown Example</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="fill-current h-4 w-4"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
-                </span>
-              </div>
-              <div data-dropdown-target="menu" class="hidden absolute top-4 right-0 z-10 mt-5 flex w-screen max-w-max">
-                <div class="text-sm bg-white shadow-lg rounded border overflow-hidden w-32">
-                  <a data-dropdown-target="menuItem" href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-no-wrap focus:bg-gray-100'>Account</a>
-                  <a data-dropdown-target="menuItem" href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-no-wrap focus:bg-gray-100'>Billing</a>
-                  <hr class="border-t" />
-                  <a data-dropdown-target="menuItem" href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-no-wrap focus:bg-gray-100'>Sign Out</a>
-                </div>
+        <div
+            data-controller="dropdown"
+            data-action="click@window->dropdown#hide touchstart@window->dropdown#hide keydown.up->dropdown#previousItem keydown.down->dropdown#nextItem keydown.esc->dropdown#hide"
+            class="inline-block relative">
+            <button data-action="dropdown#toggle:stop" class="px-2.5 py-1 bg-blue-500 text-white text-sm rounded">
+              Dropdown
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="inline-block fill-current h-4 w-4"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+            </button>
+            <div data-dropdown-target="menu" class="hidden absolute top-4 right-0 z-10 mt-5 flex w-screen max-w-max">
+              <div class="text-sm bg-white shadow-lg rounded border overflow-hidden w-32">
+                <a data-dropdown-target="menuItem" href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-nowrap focus:bg-gray-100'>Account</a>
+                <a data-dropdown-target="menuItem" href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-nowrap focus:bg-gray-100'>Billing</a>
+                <hr class="border-t" />
+                <a data-dropdown-target="menuItem" href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-nowrap focus:bg-gray-100'>Sign Out</a>
               </div>
             </div>
-          </div>
         </div>
+      </div>
 
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Modals</h2>
