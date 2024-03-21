@@ -1,5 +1,4 @@
 import { Controller } from "@hotwired/stimulus"
-import { enter, leave } from "./transition"
 
 export default class extends Controller {
   static targets = ["dialog"]
