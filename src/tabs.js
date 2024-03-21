@@ -7,6 +7,7 @@ export default class extends Controller {
     index: 0,
     updateAnchor: Boolean,
     scrollToAnchor: Boolean,
+    scrollActiveTabIntoView: Boolean
   }
 
   initialize() {
@@ -92,17 +93,14 @@ export default class extends Controller {
       this.selectTarget.selectedIndex = this.indexValue
     }
 
-    this.scrollActiveTabIntoView()
+    if (this.scrollActiveTabIntoViewValue) this.scrollToActiveTab()
   }
 
   // If tabs have horizontal scrolling, the active tab may be out of sight.
   // Make sure the active tab is visible by scrolling it into the view.
-  scrollActiveTabIntoView() {
-    const activeTab = this.element.querySelector('[aria-selected]');
-    if (activeTab)
-      activeTab.scrollIntoView({
-        inline: 'center',
-      });
+  scrollToActiveTab() {
+    const activeTab = this.element.querySelector('[aria-selected]')
+    if (activeTab) activeTab.scrollIntoView({ inline: 'center', })
   }
 
   get tabsCount() {
