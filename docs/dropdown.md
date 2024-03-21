@@ -10,7 +10,7 @@ application.register('dropdown', Dropdown)
 ```
 
 ```html
-<div data-controller="dropdown" data-action="click->dropdown#toggle click@window->dropdown#hide">
+<div data-controller="dropdown">
   <div id="dropdown-button" class="relative inline-block">
     <div role="button" tabindex="0" data-dropdown-target="button" class="inline-block select-none">
       <span class="appearance-none flex items-center inline-block">
