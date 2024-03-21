@@ -50,7 +50,7 @@ export async function leave(element, transitionOptions = {}) {
   const fromClasses =
     element.dataset.transitionLeaveFrom || transitionOptions.leaveFrom || 'leave-from'
   const toClasses = element.dataset.transitionLeaveTo || transitionOptions.leaveTo || 'leave-to'
-  const toggleClass = element.dataset.toggleClass || transitionOptions.toogle || 'hidden'
+  const toggleClass = element.dataset.toggleClass || transitionOptions.toggle || 'hidden'
 
   // Prepare transition
   element.classList.add(...transitionClasses.split(' '))
