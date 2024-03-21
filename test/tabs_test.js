@@ -1,4 +1,4 @@
-import { fixture, expect, nextFrame } from '@open-wc/testing'
+import { fixture, expect, nextFrame, oneEvent } from '@open-wc/testing'
 import { fetchFixture } from './test_helpers'
 
 import { Application } from '@hotwired/stimulus'
@@ -24,6 +24,27 @@ describe('TabsController', () => {
 
       expect(tabs[2].className.includes(activeClass)).to.equal(true)
       expect(panels[2].className.includes('hidden')).to.equal(false)
+    })
+
+    it('applies the active attribute to the active tab', async() => {
+      const element = document.querySelector("#tabs")
+      const tabs = element.querySelectorAll("[data-tabs-target='tab']")
+      expect(tabs[2].hasAttribute("active")).to.equal(false)
+
+      tabs[2].click()
+      await nextFrame()
+
+      expect(tabs[2].hasAttribute("active")).to.equal(true)
+    })
+
+    it('sends an event on tab change', async() => {
+      const element = document.querySelector("#tabs")
+      const tabs = element.querySelectorAll("[data-tabs-target='tab']")
+      const listener = oneEvent(tabs[2], 'tabs:tab-change')
+      tabs[2].click()
+
+      const { detail } = await listener
+      expect(detail.activeIndex).to.equal(2)
     })
 
     it('appends to location href when use-anchor is true', async () => {

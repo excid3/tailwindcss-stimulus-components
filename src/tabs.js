@@ -36,7 +36,6 @@ export default class extends Controller {
       this.indexValue = this.tabTargets.indexOf(event.currentTarget)
     }
 
-    window.dispatchEvent(new CustomEvent('tsc:tab-change'))
   }
 
   nextTab() {
@@ -57,7 +56,12 @@ export default class extends Controller {
 
   indexValueChanged() {
     this.showTab()
-
+    this.dispatch("tab-change", {
+      target: this.tabTargets[this.indexValue],
+      detail: {
+        activeIndex: this.indexValue
+      }
+    })
     // Update URL with the tab ID if it has one
     // This will be automatically selected on page load
     if (this.updateAnchorValue) {
@@ -79,11 +83,13 @@ export default class extends Controller {
       if (index === this.indexValue) {
         panel.classList.remove('hidden')
         tab.ariaSelected = 'true'
+        tab.setAttribute("active", true)
         if (this.hasInactiveTabClass) tab?.classList?.remove(...this.inactiveTabClasses)
         if (this.hasActiveTabClass) tab?.classList?.add(...this.activeTabClasses)
       } else {
         panel.classList.add('hidden')
         tab.ariaSelected = null
+        tab.removeAttribute("active")
         if (this.hasActiveTabClass) tab?.classList?.remove(...this.activeTabClasses)
         if (this.hasInactiveTabClass) tab?.classList?.add(...this.inactiveTabClasses)
       }
