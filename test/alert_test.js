@@ -27,7 +27,6 @@ describe('AlertController', () => {
     })
   })
 
-
   describe('with show delay value', () => {
     it('shows after 1000ms', async () => {
       await loadFixture('alerts/alert_show_delay.html')
@@ -35,6 +34,16 @@ describe('AlertController', () => {
 
       await aTimeout(1000)
       expect(fetchElement().className.includes("hidden")).to.equal(false)
+    })
+  })
+
+  describe('with dismiss after value', () => {
+    it('dismisses after 500ms', async () => {
+      await loadFixture('alerts/alert_dismiss_after.html')
+      expect(fetchElement().className.includes("hidden")).to.equal(false)
+
+      await aTimeout(600)
+      expect(fetchElement()).to.equal(null)
     })
   })
 })
