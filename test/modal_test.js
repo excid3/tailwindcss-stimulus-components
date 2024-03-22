@@ -24,6 +24,11 @@ describe('ModalController', () => {
 
       const closeModalButton = document.querySelector("[data-action='modal#close']")
       closeModalButton.click()
+      expect(dialog.hasAttribute("closing")).to.equal(true)
+
+      await Promise.all(dialog.getAnimations().map((animation) => animation.finished))
+
+      expect(dialog.hasAttribute("closing")).to.equal(false)
       expect(dialog.hasAttribute("open")).to.equal(false)
     })
 
