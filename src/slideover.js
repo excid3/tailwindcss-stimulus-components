@@ -21,11 +21,18 @@ export default class extends Controller {
   }
 
   close() {
-    this.dialogTarget.close()
+    this.dialogTarget.setAttribute("closing", "")
+
+    Promise.all(
+      this.dialogTarget.getAnimations().map((animation) => animation.finished),
+    ).then(() => {
+      this.dialogTarget.removeAttribute("closing")
+      this.dialogTarget.close()
+    })
   }
 
   backdropClose(event) {
-    if (event.target.nodeName == "DIALOG") this.dialogTarget.close()
+    if (event.target.nodeName == "DIALOG") this.close()
   }
 
   beforeCache() {

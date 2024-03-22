@@ -35,6 +35,35 @@
         application.register('toggle', Toggle);
       })()
     </script>
+
+    <style>
+    /* Prevent scrolling while dialog is open */
+    body:has(dialog[open]) {
+      overflow: hidden;
+    }
+
+    dialog {
+      box-shadow: 0 0 0 100vw rgb(0 0 0 / 0.5);
+    }
+
+    @keyframes fade-in {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fade-out {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+    </style>
 </head>
   <body>
     <div class="container mx-auto p-8">
@@ -102,8 +131,17 @@
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Modals</h2>
         <p>Modals use the <code>&lt;dialog&gt;</code> html element and can be closed with <kbd>Esc</kbd> or a button. See the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#accessibility_concerns" target="_blank" class="underline text-blue-500">dialog element MDN docs</a>.</p>
 
+        <style>
+          dialog.modal[open] {
+            animation: fade-in 200ms forwards;
+          }
+
+          dialog.modal[closing] {
+            animation: fade-out 200ms forwards;
+          }
+        </style>
         <div data-controller="modal">
-          <dialog data-modal-target="dialog" data-action="click->modal#backdropClose" class="rounded-lg backdrop:bg-black/80">
+          <dialog data-modal-target="dialog" data-action="click->modal#backdropClose" class="modal rounded-lg">
             <div class="p-8">
               <p>This modal dialog has a groovy backdrop!</p>
               <button autofocus data-action="modal#close" class="px-2.5 py-1 bg-blue-500 text-white text-sm rounded">Close</button>
@@ -120,7 +158,12 @@
         <div data-controller="slideover">
           <style>
             dialog.slideover[open] {
-              animation: slide-in-from-left 200ms forwards ease;
+              animation: slide-in-from-left 200ms forwards ease-in-out;
+            }
+
+            dialog.slideover[closing] {
+              pointer-events: none;
+              animation: slide-out-to-left 200ms forwards ease-in-out;
             }
 
             @keyframes slide-in-from-left{
@@ -128,8 +171,14 @@
                 transform: translateX(-100%);
               }
             }
+
+            @keyframes slide-out-to-left{
+              to {
+                transform: translateX(-100%);
+              }
+            }
           </style>
-          <dialog data-slideover-target="dialog" data-action="click->slideover#backdropClose" class="slideover h-full max-h-full m-0 backdrop:bg-black/80">
+          <dialog data-slideover-target="dialog" data-action="click->slideover#backdropClose" class="slideover h-full max-h-full m-0">
             <div class="h-full w-96 p-8">
               <p>This slideover dialog has a groovy backdrop!</p>
               <button autofocus data-action="slideover#close" class="px-2.5 py-1 bg-blue-500 text-white text-sm rounded">Close</button>
