@@ -40,6 +40,10 @@ export default class extends Controller {
     this.dialogTarget.show()
   }
 
+  hide() {
+    this.close()
+  }
+
   beforeCache() {
     this.close()
   }

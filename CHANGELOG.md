@@ -1,5 +1,10 @@
 # Unreleased
 
+# 5.1.1
+
+* Add `show` and `hide` to slideover controller for backwards compatibility
+* Add `hide` to modal controller as an alias for `close`
+
 # 5.1.0
 
 * [Breaking] Slideover's now use `<dialog>` element and no longer inherit from the Dropdown controller

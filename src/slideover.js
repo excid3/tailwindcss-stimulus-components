@@ -35,6 +35,14 @@ export default class extends Controller {
     if (event.target.nodeName == "DIALOG") this.close()
   }
 
+  show() {
+    this.open()
+  }
+
+  hide() {
+    this.close()
+  }
+
   beforeCache() {
     this.close()
   }
