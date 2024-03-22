@@ -1,5 +1,21 @@
 # Unreleased
 
+# 5.1.0
+
+* [Breaking] Slideover's now use `<dialog>` element and no longer inherit from the Dropdown controller
+  Slideovers and modals examples now use CSS Animations to work better with the `<dialog>` element since it changes from `display: none` to `display: block` and that property is currently not transition-able (but will hopefully be in the future).
+* [Breaking] Revert automatic addition of data-attributes on `dropdown` controller.
+  While it did simplify the HTML, it made it too hard to customize.
+* Scroll active tab into view is now off by default to prevent messing with page load
+
+# 5.0.0
+
+* Use `<dialog>` element for modals.
+  This greatly simplifies the HTML and JavaScript required and is much easier to use now that browser support is strong.
+* Set `aria-selected="true"` on tabs
+
+# 4.1.0
+
 * Add `toggleInput` to toggle to sync with input checkbox or radio state
 
 # 4.0.4
