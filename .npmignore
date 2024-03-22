@@ -6,3 +6,5 @@
 .prettierrc.json
 /.git
 /.vscode
+/test
+/docs
