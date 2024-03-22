@@ -1,30 +1,40 @@
-import { aTimeout,waitUntil, fixture, expect, nextFrame } from '@open-wc/testing'
-import { sendKeys } from '@web/test-runner-commands';
+import { aTimeout, fixture, expect } from '@open-wc/testing'
 import { fetchFixture } from './test_helpers'
 
 import { Application } from '@hotwired/stimulus'
 import Alert from '../src/alert'
 
 describe('AlertController', () => {
-  describe('#default', () => {
-    beforeEach(async () => {
-      const html = await fetchFixture('alert.html')
-      await fixture(html)
-      const application = Application.start()
-      application.register('alert', Alert)
-    })
+  const loadFixture = async (fixturePath) => {
+    const html = await fetchFixture(fixturePath)
+    await fixture(html)
+    const application = Application.start()
+    application.register('alert', Alert)
+  }
 
+  const fetchElement = () => document.querySelector("[data-controller='alert'")
 
-    it('closes the alert when it appears by default', async () => {
-      const element = document.querySelector("[data-controller='alert'")
-      expect(element.className.includes("hidden")).to.equal(false)
+  describe('with default values', () => {
+    it('shows the element immediately and closes it without delay ', async () => {
+      await loadFixture('alerts/alert_default.html')
 
+      expect(fetchElement().className.includes("hidden")).to.equal(false)
       const closeButton = document.querySelector("[data-action='alert#close']")
       closeButton.click()
 
-      setTimeout(() => {
-        expect(element).to.equal(undefined)
-      }, 1000);
+      await aTimeout(1000)
+      expect(fetchElement()).to.equal(null)
+    })
+  })
+
+
+  describe('with show delay value', () => {
+    it('shows after 1000ms', async () => {
+      await loadFixture('alerts/alert_show_delay.html')
+      expect(fetchElement().className.includes("hidden")).to.equal(true)
+
+      await aTimeout(1000)
+      expect(fetchElement().className.includes("hidden")).to.equal(false)
     })
   })
 })
