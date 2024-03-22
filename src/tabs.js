@@ -83,13 +83,13 @@ export default class extends Controller {
       if (index === this.indexValue) {
         panel.classList.remove('hidden')
         tab.ariaSelected = 'true'
-        tab.setAttribute("active", true)
+        tab.dataset.active =  true
         if (this.hasInactiveTabClass) tab?.classList?.remove(...this.inactiveTabClasses)
         if (this.hasActiveTabClass) tab?.classList?.add(...this.activeTabClasses)
       } else {
         panel.classList.add('hidden')
         tab.ariaSelected = null
-        tab.removeAttribute("active")
+        delete tab.dataset.active
         if (this.hasActiveTabClass) tab?.classList?.remove(...this.activeTabClasses)
         if (this.hasInactiveTabClass) tab?.classList?.add(...this.inactiveTabClasses)
       }

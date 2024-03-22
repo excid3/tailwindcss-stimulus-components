@@ -26,15 +26,15 @@ describe('TabsController', () => {
       expect(panels[2].className.includes('hidden')).to.equal(false)
     })
 
-    it('applies the active attribute to the active tab', async() => {
+    it('applies the active data-attribute to the active tab', async() => {
       const element = document.querySelector("#tabs")
       const tabs = element.querySelectorAll("[data-tabs-target='tab']")
-      expect(tabs[2].hasAttribute("active")).to.equal(false)
+      expect(tabs[2].dataset.active).to.equal(undefined)
 
       tabs[2].click()
       await nextFrame()
 
-      expect(tabs[2].hasAttribute("active")).to.equal(true)
+      expect(tabs[2].dataset.active).to.equal('true')
     })
 
     it('sends an event on tab change', async() => {
