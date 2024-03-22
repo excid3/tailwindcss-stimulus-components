@@ -5,7 +5,6 @@ export default class extends Controller {
   static values = {
     dismissAfter: Number,
     showDelay: { type: Number, default: 0 },
-    removeDelay: { type: Number, default: 1100 }
   }
 
   connect() {
