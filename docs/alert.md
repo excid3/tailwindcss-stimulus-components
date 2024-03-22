@@ -55,4 +55,3 @@ Alerts are set up to slide into view from the top-right side of the screen. Clic
 
 - `data-alert-dismiss-after-value` can be provided to make the alert dimiss after x miliseconds. Default is `undefined`.
 - `data-alert-show-delay-value` can be set to tell the alert to show itself after x miliseconds. Defaults to `0` miliseconds.
-- `data-alert-remove-delay-value` can be set to tell the alert to hide itself after x milisconds. Defaults to `1100` miliseconds.

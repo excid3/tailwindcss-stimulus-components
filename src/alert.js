@@ -5,7 +5,6 @@ export default class extends Controller {
   static values = {
     dismissAfter: Number,
     showDelay: { type: Number, default: 0 },
-    removeDelay: { type: Number, default: 0 }
   }
 
   connect() {
@@ -24,9 +23,7 @@ export default class extends Controller {
   // Runs hide animation and then removes element from the page
   close() {
     leave(this.element).then(() => {
-      setTimeout(() => {
-        this.element.remove()
-      }, this.removeDelayValue)
+      this.element.remove()
     })
   }
 }

@@ -46,20 +46,4 @@ describe('AlertController', () => {
       expect(fetchElement()).to.equal(null)
     })
   })
-
-  describe('with remove delay value', () => {
-    it('removes after 1000ms', async () => {
-      await loadFixture('alerts/alert_remove_delay.html')
-      expect(fetchElement().className.includes("hidden")).to.equal(false)
-
-      const closeButton = document.querySelector("[data-action='alert#close']")
-      closeButton.click()
-
-      await aTimeout(100)
-      expect(fetchElement().className.includes("hidden")).to.equal(true)
-
-      await aTimeout(1100)
-      expect(fetchElement()).to.equal(null)
-    })
-  })
 })
