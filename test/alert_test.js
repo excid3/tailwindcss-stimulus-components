@@ -1,4 +1,4 @@
-import { aTimeout, fixture, expect } from '@open-wc/testing'
+import { aTimeout, fixture, expect, nextFrame } from '@open-wc/testing'
 import { fetchFixture } from './test_helpers'
 
 import { Application } from '@hotwired/stimulus'
@@ -17,8 +17,8 @@ describe('AlertController', () => {
   describe('with default values', () => {
     it('shows the element immediately and closes it without delay ', async () => {
       await loadFixture('alerts/alert_default.html')
-
       expect(fetchElement().className.includes("hidden")).to.equal(false)
+
       const closeButton = document.querySelector("[data-action='alert#close']")
       closeButton.click()
 
@@ -54,6 +54,9 @@ describe('AlertController', () => {
 
       const closeButton = document.querySelector("[data-action='alert#close']")
       closeButton.click()
+
+      await aTimeout(100)
+      expect(fetchElement().className.includes("hidden")).to.equal(true)
 
       await aTimeout(1100)
       expect(fetchElement()).to.equal(null)
