@@ -9,11 +9,12 @@ export default class extends Controller {
 
   connect() {
     if (this.openValue) this.open()
-    document.addEventListener("turbo:before-cache", this.beforeCache.bind(this))
+    this.boundBeforeCache = this.beforeCache
+    document.addEventListener("turbo:before-cache", this.boundBeforeCache)
   }
 
   disconnect() {
-    document.removeEventListener("turbo:before-cache", this.beforeCache.bind(this))
+    document.removeEventListener("turbo:before-cache", this.boundBeforeCache)
   }
 
   open() {
