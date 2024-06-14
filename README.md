@@ -25,6 +25,12 @@ or
 npm install tailwindcss-stimulus-components
 ```
 
+or
+
+```bash
+bin/importmap pin tailwindcss-stimulus-components
+```
+
 ## Basic Usage
 
 First, you'll want to initialize StimulusJS and then you can import all the TailwindCSS components.
