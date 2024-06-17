@@ -25,7 +25,7 @@ or
 npm install tailwindcss-stimulus-components
 ```
 
-or
+or use with Rails importmaps:
 
 ```bash
 bin/importmap pin tailwindcss-stimulus-components
