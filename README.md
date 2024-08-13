@@ -42,7 +42,7 @@ import { Application } from "@hotwired/stimulus"
 const application = Application.start();
 
 // Import and register all TailwindCSS Components or just the ones you need
-import { Alert, Autosave, ColorPreview, Dropdown, Modal, Tabs, Popover, Toggle, Slideover } from "tailwindcss-stimulus-components"
+import { Alert, Autosave, ColorPreview, Dropdown, Modal, Tabs, Popover, Toggle, Slideover, InputFloatingLabel } from "tailwindcss-stimulus-components"
 application.register('alert', Alert)
 application.register('autosave', Autosave)
 application.register('color-preview', ColorPreview)
@@ -52,6 +52,7 @@ application.register('popover', Popover)
 application.register('slideover', Slideover)
 application.register('tabs', Tabs)
 application.register('toggle', Toggle)
+application.register('input-floating-label', InputFloatingLabel)
 ```
 
 This will start StimulusJS and load any controllers that you have locally and then register the TailwindCSS components.
