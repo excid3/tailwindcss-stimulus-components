@@ -68,6 +68,10 @@ This will start StimulusJS and load any controllers that you have locally and th
 * [Tabs](/docs/tabs.md)
 * [Toggle](/docs/toggle.md)
 
+## Utilities
+
+* [transition](/docs/transition.md)
+
 ## Styling
 
 All of the styles for the Stimulus components are configurable. Our
