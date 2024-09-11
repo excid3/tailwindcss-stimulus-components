@@ -11,11 +11,12 @@ export default class extends Controller {
   static classes = ['enter', 'enterFrom', 'enterTo', 'leave', 'leaveFrom', 'leaveTo', 'toggle']
 
   connect() {
-    document.addEventListener("turbo:before-cache", this.beforeCache.bind(this))
+    this.boundBeforeCache = this.beforeCache.bind(this)
+    document.addEventListener('turbo:before-cache', this.boundBeforeCache)
   }
 
   disconnect() {
-    document.removeEventListener("turbo:before-cache", this.beforeCache.bind(this))
+    document.removeEventListener('turbo:before-cache', this.boundBeforeCache)
   }
 
   openValueChanged() {

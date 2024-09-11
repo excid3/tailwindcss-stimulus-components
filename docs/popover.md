@@ -28,4 +28,4 @@ application.register('popover', Popover)
 
 `data-popover-target="content"` defines which element will contain the actual content in the popover.
 
-`data-alert-dismiss-after-value` can be provided to make the popover dimiss after x miliseconds. Default is `undefined`.
+`data-popover-dismiss-after-value` can be provided to make the popover dimiss after x miliseconds. Default is `undefined`.

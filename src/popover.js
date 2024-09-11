@@ -16,7 +16,7 @@
 //</p>
 //
 // You can also toggle the popover using the click action.
-// <div class="popover inline-block" data-controller="popover" data-action="click->popover#toggle" data-action="mouseenter->popover#show mouseleave->popover#hide">
+// <div class="popover inline-block" data-controller="popover" data-action="click->popover#toggle">
 
 import { Controller } from '@hotwired/stimulus'
 import { transition } from "./transition"

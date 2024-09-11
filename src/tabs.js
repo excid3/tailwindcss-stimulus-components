@@ -11,7 +11,7 @@ export default class extends Controller {
   }
 
   initialize() {
-    if (this.anchor) this.indexValue = this.tabTargets.findIndex((tab) => tab.id === this.anchor)
+    if (this.updateAnchorValue && this.anchor) this.indexValue = this.tabTargets.findIndex((tab) => tab.id === this.anchor)
   }
 
   connect() {
