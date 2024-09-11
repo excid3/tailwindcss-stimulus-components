@@ -7,3 +7,4 @@ export { default as Popover } from './popover'
 export { default as Slideover } from './slideover'
 export { default as Tabs } from './tabs'
 export { default as Toggle } from './toggle'
+export { transition } from "./transition"
