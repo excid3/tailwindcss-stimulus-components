@@ -1,11 +1,10 @@
 {
   "name": "tailwindcss-stimulus-components",
-  "version": "5.1.1",
+  "version": "6.0.0",
   "description": "A set of Stimulus components (tabs, dropdowns, modals, toggles, autosave, etc) for TailwindCSS users",
   "source": "./src/index.js",
   "main": "./src/index.js",
   "exports": "./src/index.js",
-  "typings": "./index.d.ts",
   "repository": {
     "url": "https://github.com/excid3/tailwindcss-stimulus-components",
     "type": "git"
@@ -26,9 +25,6 @@
     "defaults",
     "not IE 11"
   ],
-  "np": {
-    "tests": false
-  },
   "scripts": {
     "test": "web-test-runner",
     "test:watch": "web-test-runner --watch"
