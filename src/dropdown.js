@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus'
-import { transition } from './transition'
+import { transition } from './transition.js'
 
 export default class extends Controller {
   static targets = ['menu', 'button', 'menuItem']

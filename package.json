@@ -3,8 +3,8 @@
   "version": "5.1.1",
   "description": "A set of Stimulus components (tabs, dropdowns, modals, toggles, autosave, etc) for TailwindCSS users",
   "source": "src/index.js",
-  "main": "./dist/tailwindcss-stimulus-components.cjs",
-  "module": "./dist/tailwindcss-stimulus-components.module.js",
+  "main": "src/index.js",
+  "exports": "src/index.js",
   "typings": "./index.d.ts",
   "repository": {
     "url": "https://github.com/excid3/tailwindcss-stimulus-components",
@@ -30,19 +30,13 @@
     "tests": false
   },
   "scripts": {
-    "dev": "esbuild src/index.js --format=esm  --bundle --outfile=dist/tailwindcss-stimulus-components.module.js --watch",
-    "build": "npm run build-esm && npm run build-cjs",
-    "build-cjs": "esbuild src/index.js --format=cjs --target=es2020 --minify --bundle --sourcemap=external --external:@hotwired/stimulus --outfile=dist/tailwindcss-stimulus-components.cjs",
-    "build-esm": "esbuild src/index.js --format=esm --target=es2020 --minify --bundle --sourcemap=external --external:@hotwired/stimulus --outfile=dist/tailwindcss-stimulus-components.module.js",
-    "prepublish": "npm run build",
     "test": "web-test-runner",
     "test:watch": "web-test-runner --watch"
   },
   "devDependencies": {
     "@open-wc/testing": "^4.0.0",
     "@web/test-runner": "^0.18.0",
-    "@web/test-runner-commands": "^0.9.0",
-    "esbuild": "^0.20.0"
+    "@web/test-runner-commands": "^0.9.0"
   },
   "peerDependencies": {
     "@hotwired/stimulus": ">= 3.0.0"

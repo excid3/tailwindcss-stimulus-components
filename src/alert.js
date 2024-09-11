@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus'
-import { enter, leave } from "./transition"
+import { enter, leave } from "./transition.js"
 
 export default class extends Controller {
   static values = {
