@@ -11,7 +11,7 @@ export default class extends Controller {
   }
 
   initialize() {
-    if (this.anchor) this.indexValue = this.tabTargets.findIndex((tab) => tab.id === this.anchor)
+    if (this.updateAnchorValue && this.anchor) this.indexValue = this.tabTargets.findIndex((tab) => tab.id === this.anchor)
   }
 
   connect() {
@@ -71,7 +71,11 @@ export default class extends Controller {
       } else {
         const currentUrl = window.location.href // Get the current URL
         const newUrl = currentUrl.split('#')[0] + '#' + new_tab_id // Create a new URL with the updated ID
-        history.replaceState({}, document.title, newUrl) // Use history.replaceState to change the URL without scrolling
+        if(typeof Turbo !== 'undefined') {
+          Turbo.navigator.history.replace(new URL(newUrl))
+        } else {
+          history.replaceState({}, document.title, newUrl) // Use history.replaceState to change the URL without scrolling
+        }
       }
     }
   }
