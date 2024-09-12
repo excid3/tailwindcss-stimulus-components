@@ -1,9 +1,0 @@
-export { default as Alert } from "./alert";
-export { default as Autosave } from "./autosave";
-export { default as Dropdown } from "./dropdown";
-export { default as Modal } from "./modal";
-export { default as Tabs } from "./tabs";
-export { default as Toggle } from "./toggle";
-export { default as Popover } from "./popover";
-export { default as Slideover } from "./slideover";
-export { default as ColorPreview } from "./color_preview";

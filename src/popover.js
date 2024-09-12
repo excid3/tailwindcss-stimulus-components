@@ -19,7 +19,7 @@
 // <div class="popover inline-block" data-controller="popover" data-action="click->popover#toggle">
 
 import { Controller } from '@hotwired/stimulus'
-import { transition } from "./transition"
+import { transition } from "./transition.js"
 
 export default class extends Controller {
   static targets = ['content']
