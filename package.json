@@ -6,7 +6,7 @@
   "main": "./src/index.js",
   "exports": "./src/index.js",
   "repository": {
-    "url": "https://github.com/excid3/tailwindcss-stimulus-components",
+    "url": "git+https://github.com/excid3/tailwindcss-stimulus-components.git",
     "type": "git"
   },
   "author": "Chris Oliver <excid3@gmail.com>",
