@@ -28,21 +28,33 @@ export async function enter(element, transitionOptions = {}) {
   const toggleClass = element.dataset.toggleClass || transitionOptions.toggleClass || 'hidden'
 
   // Prepare transition
-  element.classList.add(...transitionClasses.split(' '))
-  element.classList.add(...fromClasses.split(' '))
-  element.classList.remove(...toClasses.split(' '))
-  element.classList.remove(...toggleClass.split(' '))
+  return new Promise((resolve) => {
+    requestAnimationFrame(() => {
+      element.classList.add(...transitionClasses.split(' '))
+      element.classList.add(...fromClasses.split(' '))
+      element.classList.remove(...toClasses.split(' '))
+      element.classList.remove(...toggleClass.split(' '))
 
-  await nextFrame()
+      requestAnimationFrame(() => {
+        element.classList.remove(...fromClasses.split(' '))
+        element.classList.add(...toClasses.split(' '))
 
-  element.classList.remove(...fromClasses.split(' '))
-  element.classList.add(...toClasses.split(' '))
+        setTimeout(() => {
+          element.classList.remove(...transitionClasses.split(' '))
+          resolve()
+        }, getAnimationDuration(element))
+      })
+    })
+  })
+}
 
-  try {
-    await afterTransition(element)
-  } finally {
-    element.classList.remove(...transitionClasses.split(' '))
-  }
+function getAnimationDuration(element) {
+  let duration = Number(getComputedStyle(element).transitionDuration.replace(/,.*/, '').replace('s', '')) * 1000
+  let delay = Number(getComputedStyle(element).transitionDelay.replace(/,.*/, '').replace('s', '')) * 1000
+
+  if (duration === 0) duration = Number(getComputedStyle(element).animationDuration.replace('s', '')) * 1000
+
+  return duration + delay
 }
 
 export async function leave(element, transitionOptions = {}) {
@@ -53,31 +65,22 @@ export async function leave(element, transitionOptions = {}) {
   const toggleClass = element.dataset.toggleClass || transitionOptions.toggle || 'hidden'
 
   // Prepare transition
-  element.classList.add(...transitionClasses.split(' '))
-  element.classList.add(...fromClasses.split(' '))
-  element.classList.remove(...toClasses.split(' '))
-
-  await nextFrame()
-
-  element.classList.remove(...fromClasses.split(' '))
-  element.classList.add(...toClasses.split(' '))
-
-  try {
-    await afterTransition(element)
-  } finally {
-    element.classList.remove(...transitionClasses.split(' '))
-    element.classList.add(...toggleClass.split(' '))
-  }
-}
-
-function nextFrame() {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     requestAnimationFrame(() => {
-      requestAnimationFrame(resolve)
+      element.classList.add(...fromClasses.split(' '))
+      element.classList.remove(...toClasses.split(' '))
+      element.classList.add(...transitionClasses.split(' '))
+
+      requestAnimationFrame(() => {
+        element.classList.remove(...fromClasses.split(' '))
+        element.classList.add(...toClasses.split(' '))
+
+        setTimeout(() => {
+          element.classList.remove(...transitionClasses.split(' '))
+          element.classList.add(...toggleClass.split(' '))
+          resolve()
+        }, getAnimationDuration(element))
+      })
     })
   })
-}
-
-function afterTransition(element) {
-  return Promise.all(element.getAnimations().map(animation => animation.finished))
 }
