@@ -7,11 +7,18 @@ export default class extends Controller {
     index: 0,
     updateAnchor: Boolean,
     scrollToAnchor: Boolean,
-    scrollActiveTabIntoView: Boolean
+    scrollActiveTabIntoView: Boolean,
+    sync: { type: Boolean, default: false },
+    syncGroup: { type: String, default: "default" }
   }
 
   initialize() {
     if (this.updateAnchorValue && this.anchor) this.indexValue = this.tabTargets.findIndex((tab) => tab.id === this.anchor)
+
+    if (this.syncValue) {
+      this.syncHandlerBound = this.syncHandler.bind(this);
+      document.addEventListener("tabs:sync", this.syncHandlerBound);
+    }
   }
 
   connect() {
@@ -36,6 +43,7 @@ export default class extends Controller {
       this.indexValue = this.tabTargets.indexOf(event.currentTarget)
     }
 
+    if(this.syncValue) this.dispatch(`sync`, { detail: { sync_group: this.syncGroupValue, tab_index: this.indexValue } });
   }
 
   nextTab() {
@@ -111,6 +119,25 @@ export default class extends Controller {
   scrollToActiveTab() {
     const activeTab = this.element.querySelector('[aria-selected]')
     if (activeTab) activeTab.scrollIntoView({ inline: 'center', })
+  }
+
+  syncHandler(event) {
+    if(!this.syncValue) return
+
+    const { sync_group, tab_index } = event.detail;
+    const correctTabGroup = sync_group === this.syncGroupValue;
+    const incorrectTab = tab_index !== this.indexValue;
+    const tabExists = tab_index < this.tabsCount
+
+    if(tabExists && correctTabGroup && incorrectTab) {
+      this.indexValue = tab_index;
+    }
+  }
+
+  disconnect() {
+    if (this.syncValue && this.syncHandlerBound) {
+      document.removeEventListener("tabs:sync", this.syncHandlerBound);
+    }
   }
 
   get tabsCount() {
