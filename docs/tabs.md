@@ -52,6 +52,10 @@ application.register('tabs', Tabs)
 
 `data-tabs-update-anchor-value="true"` can be used to update the URL anchor when the tab changes.
 
+`data-tabs-sync-value="true"` can be used to sync deferent instances of tabs.
+
+`data-tabs-sync-group-value="true"` can be used to sync tabs by groups.
+
 ##### Changing tabs from other places
 
 If you'd like to change the tab from a button or link outside of the tabs, you can call the same method and assign either `data-id` or `data-index` to select the tab.
