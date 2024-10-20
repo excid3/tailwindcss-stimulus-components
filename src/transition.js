@@ -37,7 +37,7 @@ export async function enter(element, transitionOptions = {}) {
         element.classList.remove(...fromClasses.split(' '))
         element.classList.add(...toClasses.split(' '))
     },
-    cleanup() {
+    ending() {
       element.classList.remove(...transitionClasses.split(' '))
     }
   })
@@ -59,7 +59,7 @@ export async function leave(element, transitionOptions = {}) {
         element.classList.remove(...fromClasses.split(' '))
         element.classList.add(...toClasses.split(' '))
     },
-    cleanup() {
+    ending() {
       element.classList.remove(...transitionClasses.split(' '))
       element.classList.add(...toggleClass.split(' '))
     }
@@ -91,12 +91,30 @@ function performTransitions(element, transitionStages) {
     console.log("Not cancelling")
   }
 
-  let interrupted = false
+  let interrupted, firstStageComplete, secondStageComplete
+
   setupTransition(element)
+  element._stimulus_transition.cleanup = () => {
+    if(! firstStageComplete) {
+      console.log("Completing first stage")
+      transitionStages.firstFrame()
+    }
+    if(! secondStageComplete) {
+      console.log("Completing first stage")
+      transitionStages.secondFrame()
+    }
+
+    transitionStages.ending()
+    element._stimulus_transition = null
+  }
+
   element._stimulus_transition.interrupt = () => {
     console.log("Interrupting")
+    element._stimulus_transition.cleanup()
     interrupted = true
   }
+
+
   return new Promise((resolve) => {
     if(interrupted) return
 
@@ -109,6 +127,7 @@ function performTransitions(element, transitionStages) {
       }
 
       transitionStages.firstFrame()
+      firstStageComplete = true
 
       requestAnimationFrame(() => {
         if(interrupted) {
@@ -119,6 +138,7 @@ function performTransitions(element, transitionStages) {
         }
 
         transitionStages.secondFrame()
+        secondStageComplete = true
 
         if(element._stimulus_transition) {
           element._stimulus_transition.timeout = setTimeout(() => {
@@ -129,8 +149,7 @@ function performTransitions(element, transitionStages) {
               console.log("Timeout")
             }
 
-            transitionStages.cleanup()
-            element._stimulus_transition = null
+            element._stimulus_transition.cleanup()
             console.log("End timeout")
             resolve()
           }, getAnimationDuration(element))
