@@ -21,55 +21,48 @@ export async function transition(element, state, transitionOptions = {}) {
 // data-transition-leave-from="bg-opacity-80"
 // data-transition-leave-to="bg-opacity-0"
 export async function enter(element, transitionOptions = {}) {
-  console.log("Starting enter")
-
-  let interrupted = false
-  if (element._stimulus_transition) {
-    cancelTransition(element)
-    element._stimulus_transition = null
-  } else {
-    console.log("not cancelling enter")
-  }
-
-  setupTransition(element)
-  element._stimulus_transition.interrupt = () => {
-    interrupted = true
-  }
-
   const transitionClasses = element.dataset.transitionEnter || transitionOptions.enter || 'enter'
   const fromClasses = element.dataset.transitionEnterFrom || transitionOptions.enterFrom || 'enter-from'
   const toClasses = element.dataset.transitionEnterTo || transitionOptions.enterTo || 'enter-to'
   const toggleClass = element.dataset.toggleClass || transitionOptions.toggleClass || 'hidden'
 
-  // Prepare transition
-  return new Promise((resolve) => {
-    if(interrupted) return
-
-    requestAnimationFrame(() => {
-      if(interrupted) return
-      console.log("First enter frame.")
+  return performTransitions(element, {
+    firstFrame() {
       element.classList.add(...transitionClasses.split(' '))
       element.classList.add(...fromClasses.split(' '))
       element.classList.remove(...toClasses.split(' '))
       element.classList.remove(...toggleClass.split(' '))
-
-      requestAnimationFrame(() => {
-        if(interrupted) return
-        console.log("Second enter frame.")
+    },
+    secondFrame() {
         element.classList.remove(...fromClasses.split(' '))
         element.classList.add(...toClasses.split(' '))
+    },
+    cleanup() {
+      element.classList.remove(...transitionClasses.split(' '))
+    }
+  })
+}
 
-        if(element._stimulus_transition) {
-          element._stimulus_transition.timeout = setTimeout(() => {
-            if(interrupted) return
-            element.classList.remove(...transitionClasses.split(' '))
-            element._stimulus_transition = null
-            console.log("Timeout enter")
-            resolve()
-          }, getAnimationDuration(element))
-        }
-      })
-    })
+export async function leave(element, transitionOptions = {}) {
+  const transitionClasses = element.dataset.transitionLeave || transitionOptions.leave || 'leave'
+  const fromClasses = element.dataset.transitionLeaveFrom || transitionOptions.leaveFrom || 'leave-from'
+  const toClasses = element.dataset.transitionLeaveTo || transitionOptions.leaveTo || 'leave-to'
+  const toggleClass = element.dataset.toggleClass || transitionOptions.toggle || 'hidden'
+
+  return performTransitions(element, {
+    firstFrame() {
+      element.classList.add(...fromClasses.split(' '))
+      element.classList.remove(...toClasses.split(' '))
+      element.classList.add(...transitionClasses.split(' '))
+    },
+    secondFrame() {
+        element.classList.remove(...fromClasses.split(' '))
+        element.classList.add(...toClasses.split(' '))
+    },
+    cleanup() {
+      element.classList.remove(...transitionClasses.split(' '))
+      element.classList.add(...toggleClass.split(' '))
+    }
   })
 }
 
@@ -79,14 +72,72 @@ function setupTransition(element) {
   element._stimulus_transition.interrupted = false
 }
 
-function cancelTransition(element) {
-  console.log(`Canceling....${element._stimulus_transition.timeout}`)
+export function cancelTransition(element) {
+  console.log("Canceling")
   element._stimulus_transition.interrupt()
 
   if(element._stimulus_transition.timeout) {
-    console.log("Canceling timeout....")
+    console.log("Canceling timeout")
     clearTimeout(element._stimulus_transition.timeout)
   }
+}
+
+function performTransitions(element, transitionStages) {
+  console.log("performTransition()")
+  if (element._stimulus_transition) {
+    cancelTransition(element)
+    element._stimulus_transition = null
+  } else {
+    console.log("Not cancelling")
+  }
+
+  let interrupted = false
+  setupTransition(element)
+  element._stimulus_transition.interrupt = () => {
+    console.log("Interrupting")
+    interrupted = true
+  }
+  return new Promise((resolve) => {
+    if(interrupted) return
+
+    requestAnimationFrame(() => {
+      if(interrupted) {
+        console.log("First frame interrupted")
+        return
+      } else {
+        console.log("First frame")
+      }
+
+      transitionStages.firstFrame()
+
+      requestAnimationFrame(() => {
+        if(interrupted) {
+          console.log("Second frame interrupted")
+          return
+        } else {
+          console.log("Second frame")
+        }
+
+        transitionStages.secondFrame()
+
+        if(element._stimulus_transition) {
+          element._stimulus_transition.timeout = setTimeout(() => {
+            if(interrupted) {
+              console.log("Timeout interrupted")
+              return
+            } else {
+              console.log("Timeout")
+            }
+
+            transitionStages.cleanup()
+            element._stimulus_transition = null
+            console.log("End timeout")
+            resolve()
+          }, getAnimationDuration(element))
+        }
+      })
+    })
+  })
 }
 
 function getAnimationDuration(element) {
@@ -96,56 +147,4 @@ function getAnimationDuration(element) {
   if (duration === 0) duration = Number(getComputedStyle(element).animationDuration.replace('s', '')) * 1000
 
   return duration + delay
-}
-
-export async function leave(element, transitionOptions = {}) {
-  console.log("Starting leave")
-
-  if (element._stimulus_transition) {
-    cancelTransition(element)
-    element._stimulus_transition = null
-  } else {
-    console.log("not cancelling leave")
-  }
-
-  let interrupted = false
-  setupTransition(element)
-  element._stimulus_transition.interrupt = () => {
-    interrupted = true
-  }
-
-  const transitionClasses = element.dataset.transitionLeave || transitionOptions.leave || 'leave'
-  const fromClasses = element.dataset.transitionLeaveFrom || transitionOptions.leaveFrom || 'leave-from'
-  const toClasses = element.dataset.transitionLeaveTo || transitionOptions.leaveTo || 'leave-to'
-  const toggleClass = element.dataset.toggleClass || transitionOptions.toggle || 'hidden'
-
-  // Prepare transition
-  return new Promise((resolve) => {
-    if(interrupted) return
-    requestAnimationFrame(() => {
-      if(interrupted) return
-      console.log("First leave frame.")
-      element.classList.add(...fromClasses.split(' '))
-      element.classList.remove(...toClasses.split(' '))
-      element.classList.add(...transitionClasses.split(' '))
-
-      requestAnimationFrame(() => {
-        if(interrupted) return
-        console.log("Second leave frame.")
-        element.classList.remove(...fromClasses.split(' '))
-        element.classList.add(...toClasses.split(' '))
-
-        if(element._stimulus_transition) {
-          element._stimulus_transition.timeout = setTimeout(() => {
-            if(interrupted) return
-            console.log("leave timeout")
-            element.classList.remove(...transitionClasses.split(' '))
-            element.classList.add(...toggleClass.split(' '))
-            element._stimulus_transition = null
-            resolve()
-          }, getAnimationDuration(element))
-        }
-      })
-    })
-  })
 }
