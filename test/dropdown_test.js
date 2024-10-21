@@ -1,4 +1,4 @@
-import { html, fixture, expect, nextFrame } from '@open-wc/testing'
+import { fixture, expect, nextFrame, aTimeout } from '@open-wc/testing'
 import { fetchFixture } from './test_helpers'
 
 import { Application } from '@hotwired/stimulus'
@@ -18,6 +18,7 @@ describe('DropdownController', () => {
       const menu = document.querySelector('[data-dropdown-target="menu"]')
       const button = document.querySelector('[data-action="dropdown#toggle:stop"]')
       button.click()
+      await nextFrame()
       await nextFrame()
       expect(menu.className.includes('hidden')).to.equal(false)
     })

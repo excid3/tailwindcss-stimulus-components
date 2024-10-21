@@ -19,6 +19,8 @@ describe('AlertController', () => {
       await loadFixture('alerts/alert_default.html')
       expect(fetchElement().className.includes("hidden")).to.equal(false)
 
+      // Timeout so click() doesn't happen before setTimeout runs in controller.
+      await aTimeout(0)
       const closeButton = document.querySelector("[data-action='alert#close']")
       closeButton.click()
 
