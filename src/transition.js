@@ -26,7 +26,7 @@ export async function enter(element, transitionOptions = {}) {
   const toClasses = element.dataset.transitionEnterTo || transitionOptions.enterTo || 'enter-to'
   const toggleClass = element.dataset.toggleClass || transitionOptions.toggleClass || 'hidden'
 
-  return performTransitions(element, {
+  return performTransitions("enter", element, {
     firstFrame() {
       element.classList.add(...transitionClasses.split(' '))
       element.classList.add(...fromClasses.split(' '))
@@ -49,7 +49,7 @@ export async function leave(element, transitionOptions = {}) {
   const toClasses = element.dataset.transitionLeaveTo || transitionOptions.leaveTo || 'leave-to'
   const toggleClass = element.dataset.toggleClass || transitionOptions.toggle || 'hidden'
 
-  return performTransitions(element, {
+  return performTransitions("leave", element, {
     firstFrame() {
       element.classList.add(...fromClasses.split(' '))
       element.classList.remove(...toClasses.split(' '))
@@ -73,34 +73,34 @@ function setupTransition(element) {
 }
 
 export function cancelTransition(element) {
-  console.log("Canceling")
+  console.log(`Canceling ${element._stimulus_transition.enterOrLeave}`)
   element._stimulus_transition.interrupt()
-
-  if(element._stimulus_transition.timeout) {
-    console.log("Canceling timeout")
-    clearTimeout(element._stimulus_transition.timeout)
-  }
+  console.log(`Done interrupting`)
 }
 
-function performTransitions(element, transitionStages) {
-  console.log("performTransition()")
+function performTransitions(type, element, transitionStages) {
+  console.log(`performTransition() ${type}`)
   if (element._stimulus_transition) {
     cancelTransition(element)
     element._stimulus_transition = null
   } else {
-    console.log("Not cancelling")
+    console.log(`Not cancelling ${type}`)
   }
 
   let interrupted, firstStageComplete, secondStageComplete
 
   setupTransition(element)
+
+  // Note: Remove this later
+  element._stimulus_transition.enterOrLeave = type
+
   element._stimulus_transition.cleanup = () => {
     if(! firstStageComplete) {
-      console.log("Completing first stage")
+      console.log(`Completing first stage ${type}`)
       transitionStages.firstFrame()
     }
     if(! secondStageComplete) {
-      console.log("Completing first stage")
+      console.log(`Completing second stage ${type}`)
       transitionStages.secondFrame()
     }
 
@@ -109,9 +109,13 @@ function performTransitions(element, transitionStages) {
   }
 
   element._stimulus_transition.interrupt = () => {
-    console.log("Interrupting")
-    element._stimulus_transition.cleanup()
+    console.log(`Interrupting ${element._stimulus_transition.enterOrLeave}`)
     interrupted = true
+    if(element._stimulus_transition.timeout) {
+      console.log(`Canceling timeout ${element._stimulus_transition.enterOrLeave}`)
+      clearTimeout(element._stimulus_transition.timeout)
+    }
+    element._stimulus_transition.cleanup()
   }
 
 
@@ -120,10 +124,10 @@ function performTransitions(element, transitionStages) {
 
     requestAnimationFrame(() => {
       if(interrupted) {
-        console.log("First frame interrupted")
+        console.log(`First frame interrupted`)
         return
       } else {
-        console.log("First frame")
+        console.log(`First frame ${element._stimulus_transition.enterOrLeave}`)
       }
 
       transitionStages.firstFrame()
@@ -131,10 +135,10 @@ function performTransitions(element, transitionStages) {
 
       requestAnimationFrame(() => {
         if(interrupted) {
-          console.log("Second frame interrupted")
+          console.log(`Second frame interrupted`)
           return
         } else {
-          console.log("Second frame")
+          console.log(`Second frame ${element._stimulus_transition.enterOrLeave}`)
         }
 
         transitionStages.secondFrame()
@@ -143,14 +147,14 @@ function performTransitions(element, transitionStages) {
         if(element._stimulus_transition) {
           element._stimulus_transition.timeout = setTimeout(() => {
             if(interrupted) {
-              console.log("Timeout interrupted")
+              console.log(`Timeout interrupted ${element._stimulus_transition.enterOrLeave}`)
               return
             } else {
-              console.log("Timeout")
+              console.log(`Timeout ${element._stimulus_transition.enterOrLeave}`)
             }
 
             element._stimulus_transition.cleanup()
-            console.log("End timeout")
+            console.log(`End timeout`)
             resolve()
           }, getAnimationDuration(element))
         }
