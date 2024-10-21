@@ -67,25 +67,24 @@ export async function leave(element, transitionOptions = {}) {
 }
 
 function setupTransition(element) {
-  element._stimulus_transition = {}
-  element._stimulus_transition.timeout = null
-  element._stimulus_transition.interrupted = false
+  element._stimulus_transition = {
+    timeout: null,
+    interrupted: false
+  }
 }
 
 export function cancelTransition(element) {
-  console.log(`Canceling ${element._stimulus_transition.enterOrLeave}`)
-  element._stimulus_transition.interrupt()
+  if(element._stimulus_transition && element._stimulus_transition.interrupt) {
+    console.log(`Canceling ${element._stimulus_transition.enterOrLeave}`)
+    element._stimulus_transition.interrupt()
+  }
   console.log(`Done interrupting`)
 }
 
 function performTransitions(type, element, transitionStages) {
   console.log(`performTransition() ${type}`)
-  if (element._stimulus_transition) {
-    cancelTransition(element)
-    element._stimulus_transition = null
-  } else {
-    console.log(`Not cancelling ${type}`)
-  }
+  if (element._stimulus_transition)  cancelTransition(element)
+  console.log(`Not cancelling ${type}`)
 
   let interrupted, firstStageComplete, secondStageComplete
 
@@ -150,7 +149,7 @@ function performTransitions(type, element, transitionStages) {
               console.log(`Timeout interrupted ${element._stimulus_transition.enterOrLeave}`)
               return
             } else {
-              console.log(`Timeout ${element._stimulus_transition.enterOrLeave}`)
+              // console.log(`Timeout ${element._stimulus_transition.enterOrLeave}`)
             }
 
             element._stimulus_transition.cleanup()
