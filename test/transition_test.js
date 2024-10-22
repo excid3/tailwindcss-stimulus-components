@@ -112,7 +112,7 @@ describe('Transition', () => {
       await nextFrame()
       expect(target.className.split(' ')).to.have.members(['foo', 'transition-opacity', 'ease-in-out', 'duration-100', 'opacity-0'])
 
-      await aTimeout(100)
+      await aTimeout(0)
       expect(target.className.split(' ')).to.have.members(['foo', 'opacity-0', 'hidden'])
     })
 
@@ -159,7 +159,7 @@ describe('Transition', () => {
       await nextFrame()
       expect(target.className.split(' ')).to.have.members(['foo', 'transition-opacity', 'ease-in-out', 'duration-100', 'opacity-100'])
 
-      await aTimeout(100)
+      await aTimeout(0)
       expect(target.className.split(' ')).to.have.members(['foo', 'opacity-100'])
     })
 
