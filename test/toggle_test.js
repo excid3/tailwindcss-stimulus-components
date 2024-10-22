@@ -86,6 +86,8 @@ describe('ToggleController', () => {
       await nextFrame()
       action.click()
       await nextFrame()
+      await nextFrame()
+      await nextFrame()
 
       expect(target.className.includes('class1')).to.equal(true)
       expect(target.className.includes('class2')).to.equal(true)

@@ -36,10 +36,11 @@ describe('PopoverController', () => {
       })
       target.dispatchEvent(mouseover)
       await nextFrame()
+      await nextFrame()
       expect(target.className.includes('hidden')).to.equal(false)
     })
 
-    it('mouseOut adds hidden class', (done) => {
+    it('mouseOut adds hidden class', async () => {
       const target = document.querySelector('[data-popover-target="content"]')
       target.className.replace('hidden', '')
       const event = new MouseEvent('mouseleave', {
@@ -47,14 +48,16 @@ describe('PopoverController', () => {
         bubbles: true,
         cancelable: true,
       })
+
       target.dispatchEvent(event)
-      setTimeout(() => {
-        expect(target.className.includes('transition-opacity')).to.equal(true)
-      }, 10)
-      setTimeout(() => {
-        expect(target.className.includes('hidden')).to.equal(true)
-        done()
-      }, 101)
+
+      await nextFrame()
+      await nextFrame()
+      expect(target.className.includes('transition-opacity')).to.equal(true)
+
+      await nextFrame()
+      expect(target.className.includes('hidden')).to.equal(true)
+      expect(target.className.includes('transition-opacity')).to.not.equal(true)
     })
   })
 })
