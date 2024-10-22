@@ -146,10 +146,8 @@ function performTransitions(type, element, transitionStages) {
         if(element._stimulus_transition) {
           element._stimulus_transition.timeout = setTimeout(() => {
             if(interrupted) {
-              console.log(`Timeout interrupted ${element._stimulus_transition.enterOrLeave}`)
+              resolve()
               return
-            } else {
-              // console.log(`Timeout ${element._stimulus_transition.enterOrLeave}`)
             }
 
             element._stimulus_transition.cleanup()

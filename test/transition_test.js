@@ -40,51 +40,6 @@ describe('Transition', () => {
     expect(target._stimulus_transition).to.be.null
   })
 
-  it('should cancel and clean up when canceled before the first stage', async () => {
-    const target = document.querySelector('[data-popover-target="content"]')
-
-    await leave(target)
-
-    enter(target, {})
-    expect(target.className.split(' ')).to.have.members(['foo', 'opacity-0', 'hidden'])
-
-    cancelTransition(target)
-
-    expect(target.className.split(' ')).to.have.members(['foo', 'opacity-100'])
-    expect(target._stimulus_transition).to.be.null
-  })
-
-  it('should cancel and clean up when canceled before second stage', async () => {
-    const target = document.querySelector('[data-popover-target="content"]')
-
-    await leave(target)
-    enter(target, {})
-    await nextFrame()
-
-    expect(target.className.split(' ')).to.have.members(['foo', 'opacity-0', 'transition-opacity', 'ease-in-out', 'duration-100'])
-
-    cancelTransition(target)
-
-    expect(target.className.split(' ')).to.have.members(['foo', 'opacity-100'])
-    expect(target._stimulus_transition).to.be.null
-  })
-
-  it('should cancel and clean up when canceled after second stage', async () => {
-    const target = document.querySelector('[data-popover-target="content"]')
-
-    await leave(target)
-    enter(target, {})
-    await nextFrame()
-    await nextFrame()
-
-    expect(target.className.split(' ')).to.have.members(['foo', 'opacity-100', 'transition-opacity', 'ease-in-out', 'duration-100'])
-
-    cancelTransition(target)
-
-    expect(target.className.split(' ')).to.have.members(['foo', 'opacity-100'])
-    expect(target._stimulus_transition).to.be.null
-  })
-
   it('cancels a transition that is already running', async () => {
     const target = document.querySelector('[data-popover-target="content"]')
 
@@ -94,6 +49,53 @@ describe('Transition', () => {
 
     await leave(target, {})
     expect(target.className.includes('hidden')).to.be.true
+  })
+
+  describe('has different stages', () => {
+    it('should cancel and clean up when canceled before the first stage', async () => {
+      const target = document.querySelector('[data-popover-target="content"]')
+
+      await leave(target)
+      enter(target, {})
+
+      expect(target.className.split(' ')).to.have.members(['foo', 'opacity-0', 'hidden'])
+
+      cancelTransition(target)
+
+      expect(target.className.split(' ')).to.have.members(['foo', 'opacity-100'])
+      expect(target._stimulus_transition).to.be.null
+    })
+
+    it('should cancel and clean up when canceled before second stage', async () => {
+      const target = document.querySelector('[data-popover-target="content"]')
+
+      await leave(target)
+      enter(target, {})
+      await nextFrame()
+
+      expect(target.className.split(' ')).to.have.members(['foo', 'opacity-0', 'transition-opacity', 'ease-in-out', 'duration-100'])
+
+      cancelTransition(target)
+
+      expect(target.className.split(' ')).to.have.members(['foo', 'opacity-100'])
+      expect(target._stimulus_transition).to.be.null
+    })
+
+    it('should cancel and clean up when canceled after second stage', async () => {
+      const target = document.querySelector('[data-popover-target="content"]')
+
+      await leave(target)
+      enter(target, {})
+      await nextFrame()
+      await nextFrame()
+
+      expect(target.className.split(' ')).to.have.members(['foo', 'opacity-100', 'transition-opacity', 'ease-in-out', 'duration-100'])
+
+      cancelTransition(target)
+
+      expect(target.className.split(' ')).to.have.members(['foo', 'opacity-100'])
+      expect(target._stimulus_transition).to.be.null
+    })
   })
 
   describe('leave()', () => {
