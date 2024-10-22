@@ -1,5 +1,13 @@
 # Unreleased
 
+# 6.1.0
+
+* Refactor transitions
+
+# 6.0.0
+
+* Fix bugs
+
 # 5.1.1
 
 * Add `show` and `hide` to slideover controller for backwards compatibility
