@@ -80,7 +80,7 @@ export function cancelTransition(element) {
 }
 
 function performTransitions(element, transitionStages) {
-  if (element._stimulus_transition)  cancelTransition(element)
+  if (element._stimulus_transition) cancelTransition(element)
 
   let interrupted, firstStageComplete, secondStageComplete
   setupTransition(element)
