@@ -7,9 +7,9 @@
 //    transition(this.element, false)
 export async function transition(element, state, transitionOptions = {}) {
   if (!!state) {
-    enter(element, transitionOptions)
+    await enter(element, transitionOptions)
   } else {
-    leave(element, transitionOptions)
+    await leave(element, transitionOptions)
   }
 }
 
