@@ -1,4 +1,4 @@
-import { fixture, expect, nextFrame, aTimeout } from '@open-wc/testing'
+import { fixture, expect, nextFrame } from '@open-wc/testing'
 import { fetchFixture } from './test_helpers'
 
 import { Application } from '@hotwired/stimulus'

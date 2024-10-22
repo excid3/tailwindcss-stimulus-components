@@ -1,4 +1,4 @@
-import { html, fixture, expect, nextFrame, aTimeout } from '@open-wc/testing'
+import { html, fixture, expect, nextFrame } from '@open-wc/testing'
 
 import { Application } from '@hotwired/stimulus'
 import Popover from '../src/popover'
