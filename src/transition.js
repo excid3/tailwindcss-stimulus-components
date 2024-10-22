@@ -21,10 +21,7 @@ export async function transition(element, state, transitionOptions = {}) {
 // data-transition-leave-from="bg-opacity-80"
 // data-transition-leave-to="bg-opacity-0"
 export async function enter(element, transitionOptions = {}) {
-  const transitionClasses = element.dataset.transitionEnter || transitionOptions.enter || 'enter'
-  const fromClasses = element.dataset.transitionEnterFrom || transitionOptions.enterFrom || 'enter-from'
-  const toClasses = element.dataset.transitionEnterTo || transitionOptions.enterTo || 'enter-to'
-  const toggleClass = element.dataset.toggleClass || transitionOptions.toggleClass || 'hidden'
+  const { transitionClasses, fromClasses, toClasses, toggleClass } = getTransitionOptions("Enter", element, transitionOptions)
 
   return performTransitions(element, {
     firstFrame() {
@@ -44,10 +41,7 @@ export async function enter(element, transitionOptions = {}) {
 }
 
 export async function leave(element, transitionOptions = {}) {
-  const transitionClasses = element.dataset.transitionLeave || transitionOptions.leave || 'leave'
-  const fromClasses = element.dataset.transitionLeaveFrom || transitionOptions.leaveFrom || 'leave-from'
-  const toClasses = element.dataset.transitionLeaveTo || transitionOptions.leaveTo || 'leave-to'
-  const toggleClass = element.dataset.toggleClass || transitionOptions.toggle || 'hidden'
+  const { transitionClasses, fromClasses, toClasses, toggleClass } = getTransitionOptions("Leave", element, transitionOptions)
 
   return performTransitions(element, {
     firstFrame() {
@@ -64,6 +58,15 @@ export async function leave(element, transitionOptions = {}) {
       element.classList.add(...toggleClass.split(' '))
     }
   })
+}
+
+function getTransitionOptions(type, element, transitionOptions) {
+  return {
+    transitionClasses: element.dataset[`transition${type}`] || transitionOptions[type.toLowerCase()] || type.toLowerCase(),
+    fromClasses: element.dataset[`transition${type}From`] || transitionOptions[`${type.toLowerCase()}From`] || `${type.toLowerCase()}-from`,
+    toClasses: element.dataset[`transition${type}To`] || transitionOptions[`${type.toLowerCase()}To`] || `${type.toLowerCase()}-to`,
+    toggleClass: element.dataset.toggleClass || transitionOptions.toggleClass || transitionOptions.toggle || 'hidden'
+  }
 }
 
 function setupTransition(element) {

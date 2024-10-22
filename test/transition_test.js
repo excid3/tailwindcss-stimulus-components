@@ -112,8 +112,36 @@ describe('Transition', () => {
       await nextFrame()
       expect(target.className.split(' ')).to.have.members(['foo', 'transition-opacity', 'ease-in-out', 'duration-100', 'opacity-0'])
 
-      await aTimeout(100)
+      await aTimeout(0)
       expect(target.className.split(' ')).to.have.members(['foo', 'opacity-0', 'hidden'])
+    })
+
+    it('parses transitionOptions properly', async () => {
+      await fixture(html`
+          <div id="my-div" class="opacity-100">
+            This popover shows on hover
+          </div>
+      `)
+
+      const target = document.getElementById('my-div')
+
+      leave(target, {
+        leave: 'transition-opacity ease-in-out duration-100',
+        leaveFrom: 'opacity-100',
+        leaveTo: 'opacity-0',
+        toggleClass: 'my-hidden'
+      })
+
+      expect(target.className.split(' ')).to.have.members(['opacity-100'])
+
+      await nextFrame()
+      expect(target.className.split(' ')).to.have.members(['transition-opacity', 'ease-in-out', 'duration-100', 'opacity-100'])
+
+      await nextFrame()
+      expect(target.className.split(' ')).to.have.members(['opacity-0', 'transition-opacity', 'ease-in-out', 'duration-100'])
+
+      await aTimeout(0)
+      expect(target.className.split(' ')).to.have.members(['my-hidden', 'opacity-0'])
     })
   })
 
@@ -131,8 +159,36 @@ describe('Transition', () => {
       await nextFrame()
       expect(target.className.split(' ')).to.have.members(['foo', 'transition-opacity', 'ease-in-out', 'duration-100', 'opacity-100'])
 
-      await aTimeout(100)
+      await aTimeout(0)
       expect(target.className.split(' ')).to.have.members(['foo', 'opacity-100'])
+    })
+
+    it('parses transitionOptions properly', async () => {
+      await fixture(html`
+          <div id="my-div" class="my-hidden">
+            This popover shows on hover
+          </div>
+      `)
+
+      const target = document.getElementById('my-div')
+
+      enter(target, {
+        enter: 'transition-opacity ease-in-out duration-100',
+        enterFrom: 'opacity-0',
+        enterTo: 'opacity-100',
+        toggle: 'my-hidden'
+      })
+
+      expect(target.className.split(' ')).to.have.members(['my-hidden'])
+
+      await nextFrame()
+      expect(target.className.split(' ')).to.have.members(['opacity-0', 'transition-opacity', 'ease-in-out', 'duration-100'])
+
+      await nextFrame()
+      expect(target.className.split(' ')).to.have.members(['transition-opacity', 'ease-in-out', 'duration-100', 'opacity-100'])
+
+      await aTimeout(0)
+      expect(target.className.split(' ')).to.have.members(['opacity-100'])
     })
   })
 
