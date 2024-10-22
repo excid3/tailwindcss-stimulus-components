@@ -12,7 +12,7 @@ export default class extends Controller {
       enter(this.element)
     }, this.showDelayValue)
 
-    // Auto dimiss if defined
+    // Auto dismiss if defined
     if (this.hasDismissAfterValue) {
       setTimeout(() => {
         this.close()
