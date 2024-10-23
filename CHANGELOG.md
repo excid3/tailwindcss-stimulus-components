@@ -1,5 +1,13 @@
 # Unreleased
 
+# 6.1.2
+
+* Fix transition bug
+
+# 6.1.1
+
+* Fix release
+
 # 6.1.0
 
 * Refactor transitions
