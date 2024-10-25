@@ -4,8 +4,6 @@ export default class extends Controller {
   static targets = ['options', 'selectedItems']
 
   connect() {
-    console.log('hi')
-
     document.addEventListener('click', this.handleOutsideClick.bind(this))
   }
 
