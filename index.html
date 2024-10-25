@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TailwindCSS Stimulus Components</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
     <script>
@@ -20,116 +20,188 @@
     </script>
 
     <script type="module">
-      import { Application } from "@hotwired/stimulus";
-      import { Alert, ColorPreview, Dropdown, Modal, Popover, Slideover, Tabs, Toggle } from "tailwindcss-stimulus-components";
-
-      (() => {
-        const application = Application.start();
-        application.register('alert', Alert);
-        application.register('color-preview', ColorPreview);
-        application.register('dropdown', Dropdown);
-        application.register('modal', Modal);
-        application.register('popover', Popover);
-        application.register('slideover', Slideover);
-        application.register('tabs', Tabs);
-        application.register('toggle', Toggle);
+      import { Application } from '@hotwired/stimulus'
+      import {
+        Alert,
+        ColorPreview,
+        Dropdown,
+        Modal,
+        Popover,
+        Slideover,
+        Tabs,
+        Toggle,
+        MultiSelect,
+      } from 'tailwindcss-stimulus-components'
+      ;(() => {
+        const application = Application.start()
+        application.register('alert', Alert)
+        application.register('color-preview', ColorPreview)
+        application.register('dropdown', Dropdown)
+        application.register('modal', Modal)
+        application.register('popover', Popover)
+        application.register('slideover', Slideover)
+        application.register('tabs', Tabs)
+        application.register('toggle', Toggle)
+        application.register('multi-select', MultiSelect)
       })()
     </script>
 
     <style>
-    /* Prevent scrolling while dialog is open */
-    body:has(dialog[open]) {
-      overflow: hidden;
-    }
+      /* Prevent scrolling while dialog is open */
+      body:has(dialog[open]) {
+        overflow: hidden;
+      }
 
-    dialog {
-      box-shadow: 0 0 0 100vw rgb(0 0 0 / 0.5);
-    }
+      dialog {
+        box-shadow: 0 0 0 100vw rgb(0 0 0 / 0.5);
+      }
 
-    @keyframes fade-in {
-      0% {
-        opacity: 0;
+      @keyframes fade-in {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
       }
-      100% {
-        opacity: 1;
-      }
-    }
 
-    @keyframes fade-out {
-      0% {
-        opacity: 1;
+      @keyframes fade-out {
+        0% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
       }
-      100% {
-        opacity: 0;
-      }
-    }
     </style>
-</head>
+  </head>
   <body>
     <div class="container mx-auto p-8">
       <h1 class="text-3xl font-semibold mb-2">Tailwind Stimulus Components Examples</h1>
-      <img src="https://img.shields.io/npm/v/tailwindcss-stimulus-components.svg" class="inline-block mr-2" />
-      <a href="https://github.com/excid3/tailwindcss-stimulus-components" target="_blank" class="text-blue-500">View on Github</a>
-      <p class="my-4">To view examples locally, run <code class="bg-gray-300 text-sm px-2 py-1 rounded">npm install && npm run build && npx serve</code> and then open <code class="bg-gray-300 text-sm px-2 py-1 rounded">localhost:3000</code> in your browser.</p>
+      <img
+        src="https://img.shields.io/npm/v/tailwindcss-stimulus-components.svg"
+        class="inline-block mr-2"
+      />
+      <a
+        href="https://github.com/excid3/tailwindcss-stimulus-components"
+        target="_blank"
+        class="text-blue-500"
+        >View on Github</a
+      >
+      <p class="my-4">
+        To view examples locally, run
+        <code class="bg-gray-300 text-sm px-2 py-1 rounded"
+          >npm install && npm run build && npx serve</code
+        >
+        and then open <code class="bg-gray-300 text-sm px-2 py-1 rounded">localhost:3000</code> in
+        your browser.
+      </p>
 
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Alerts</h2>
 
         <!-- Alert -->
-        <div data-controller="alert"
-             data-transition-enter="ease-in-out duration-500"
-             data-transition-enter-from="translate-x-full opacity-0"
-             data-transition-enter-to="translate-x-0 opacity-100"
-             data-transition-leave="ease-in-out duration-500"
-             data-transition-leave-from="translate-x-0 opacity-100"
-             data-transition-leave-to="translate-x-full opacity-0"
-             class="hidden max-w-sm w-full shadow-lg rounded px-4 py-3 rounded relative bg-gray-800 text-white pointer-events-auto"
-             >
-             <div class="p-2">
-               <div class="flex items-start">
-                 <div class="ml-3 w-0 flex-1 pt-0.5">
-                   <p class="text-sm leading-5 font-medium">
-                   We have alerts too!
-                   </p>
-                 </div>
-                 <div class="ml-4 flex-shrink-0 flex">
-                   <button data-action="alert#close" class="inline-flex text-white focus:outline-none focus:text-gray-300 transition ease-in-out duration-150">
-                     <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                       <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                     </svg>
-                   </button>
-                 </div>
-               </div>
-             </div>
+        <div
+          data-controller="alert"
+          data-transition-enter="ease-in-out duration-500"
+          data-transition-enter-from="translate-x-full opacity-0"
+          data-transition-enter-to="translate-x-0 opacity-100"
+          data-transition-leave="ease-in-out duration-500"
+          data-transition-leave-from="translate-x-0 opacity-100"
+          data-transition-leave-to="translate-x-full opacity-0"
+          class="hidden max-w-sm w-full shadow-lg rounded px-4 py-3 rounded relative bg-gray-800 text-white pointer-events-auto"
+        >
+          <div class="p-2">
+            <div class="flex items-start">
+              <div class="ml-3 w-0 flex-1 pt-0.5">
+                <p class="text-sm leading-5 font-medium">We have alerts too!</p>
+              </div>
+              <div class="ml-4 flex-shrink-0 flex">
+                <button
+                  data-action="alert#close"
+                  class="inline-flex text-white focus:outline-none focus:text-gray-300 transition ease-in-out duration-150"
+                >
+                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                      fill-rule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Dropdowns</h2>
-        <p class="mb-4 text-gray-700">When open, you can navigate menu items with Up and Down keys.</p>
+        <p class="mb-4 text-gray-700">
+          When open, you can navigate menu items with Up and Down keys.
+        </p>
 
         <div
-            data-controller="dropdown"
-            data-action="click@window->dropdown#hide touchstart@window->dropdown#hide keydown.up->dropdown#previousItem keydown.down->dropdown#nextItem keydown.esc->dropdown#hide"
-            class="inline-block relative">
-            <button data-action="dropdown#toggle:stop" class="px-2.5 py-1 bg-blue-500 text-white text-sm rounded">
-              Dropdown
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="inline-block fill-current h-4 w-4"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
-            </button>
-            <div data-dropdown-target="menu" class="hidden absolute top-4 right-0 z-10 mt-5 flex w-screen max-w-max">
-              <div class="text-sm bg-white shadow-lg rounded border overflow-hidden w-32">
-                <a data-dropdown-target="menuItem" href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-nowrap focus:bg-gray-100'>Account</a>
-                <a data-dropdown-target="menuItem" href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-nowrap focus:bg-gray-100'>Billing</a>
-                <hr class="border-t" />
-                <a data-dropdown-target="menuItem" href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-nowrap focus:bg-gray-100'>Sign Out</a>
-              </div>
+          data-controller="dropdown"
+          data-action="click@window->dropdown#hide touchstart@window->dropdown#hide keydown.up->dropdown#previousItem keydown.down->dropdown#nextItem keydown.esc->dropdown#hide"
+          class="inline-block relative"
+        >
+          <button
+            data-action="dropdown#toggle:stop"
+            class="px-2.5 py-1 bg-blue-500 text-white text-sm rounded"
+          >
+            Dropdown
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              class="inline-block fill-current h-4 w-4"
+            >
+              <path
+                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+              ></path>
+            </svg>
+          </button>
+          <div
+            data-dropdown-target="menu"
+            class="hidden absolute top-4 right-0 z-10 mt-5 flex w-screen max-w-max"
+          >
+            <div class="text-sm bg-white shadow-lg rounded border overflow-hidden w-32">
+              <a
+                data-dropdown-target="menuItem"
+                href="#"
+                class="no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-nowrap focus:bg-gray-100"
+                >Account</a
+              >
+              <a
+                data-dropdown-target="menuItem"
+                href="#"
+                class="no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-nowrap focus:bg-gray-100"
+                >Billing</a
+              >
+              <hr class="border-t" />
+              <a
+                data-dropdown-target="menuItem"
+                href="#"
+                class="no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-nowrap focus:bg-gray-100"
+                >Sign Out</a
+              >
             </div>
+          </div>
         </div>
       </div>
 
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Modals</h2>
-        <p>Modals use the <code>&lt;dialog&gt;</code> html element and can be closed with <kbd>Esc</kbd> or a button. See the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#accessibility_concerns" target="_blank" class="underline text-blue-500">dialog element MDN docs</a>.</p>
+        <p>
+          Modals use the <code>&lt;dialog&gt;</code> html element and can be closed with
+          <kbd>Esc</kbd> or a button. See the
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#accessibility_concerns"
+            target="_blank"
+            class="underline text-blue-500"
+            >dialog element MDN docs</a
+          >.
+        </p>
 
         <style>
           dialog.modal[open] {
@@ -141,19 +213,43 @@
           }
         </style>
         <div data-controller="modal">
-          <dialog data-modal-target="dialog" data-action="click->modal#backdropClose" class="modal rounded-lg">
+          <dialog
+            data-modal-target="dialog"
+            data-action="click->modal#backdropClose"
+            class="modal rounded-lg"
+          >
             <div class="p-8">
               <p>This modal dialog has a groovy backdrop!</p>
-              <button autofocus data-action="modal#close" class="px-2.5 py-1 bg-blue-500 text-white text-sm rounded">Close</button>
+              <button
+                autofocus
+                data-action="modal#close"
+                class="px-2.5 py-1 bg-blue-500 text-white text-sm rounded"
+              >
+                Close
+              </button>
             </div>
           </dialog>
-          <button data-action="modal#open" class="bg-blue-500 hover:bg-blue-700 text-white text-sm py-1 px-2.5 rounded">Open modal</button>
+          <button
+            data-action="modal#open"
+            class="bg-blue-500 hover:bg-blue-700 text-white text-sm py-1 px-2.5 rounded"
+          >
+            Open modal
+          </button>
         </div>
       </div>
 
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Slideovers</h2>
-        <p>Slideovers use the <code>&lt;dialog&gt;</code> html element and can be closed with <kbd>Esc</kbd> or a button. See the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#accessibility_concerns" target="_blank" class="underline text-blue-500">dialog element MDN docs</a>.</p>
+        <p>
+          Slideovers use the <code>&lt;dialog&gt;</code> html element and can be closed with
+          <kbd>Esc</kbd> or a button. See the
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog#accessibility_concerns"
+            target="_blank"
+            class="underline text-blue-500"
+            >dialog element MDN docs</a
+          >.
+        </p>
 
         <div data-controller="slideover">
           <style>
@@ -166,58 +262,84 @@
               animation: slide-out-to-left 200ms forwards ease-in-out;
             }
 
-            @keyframes slide-in-from-left{
+            @keyframes slide-in-from-left {
               from {
                 transform: translateX(-100%);
               }
             }
 
-            @keyframes slide-out-to-left{
+            @keyframes slide-out-to-left {
               to {
                 transform: translateX(-100%);
               }
             }
           </style>
-          <dialog data-slideover-target="dialog" data-action="click->slideover#backdropClose" class="slideover h-dvh max-h-dvh m-0">
+          <dialog
+            data-slideover-target="dialog"
+            data-action="click->slideover#backdropClose"
+            class="slideover h-dvh max-h-dvh m-0"
+          >
             <div class="h-full w-72 p-8">
               <p>This slideover dialog has a groovy backdrop!</p>
-              <button autofocus data-action="slideover#close" class="px-2.5 py-1 bg-blue-500 text-white text-sm rounded">Close</button>
+              <button
+                autofocus
+                data-action="slideover#close"
+                class="px-2.5 py-1 bg-blue-500 text-white text-sm rounded"
+              >
+                Close
+              </button>
             </div>
           </dialog>
-          <button data-action="slideover#open" class="bg-blue-500 hover:bg-blue-700 text-white text-sm py-1 px-2.5 rounded">Open slideover</button>
+          <button
+            data-action="slideover#open"
+            class="bg-blue-500 hover:bg-blue-700 text-white text-sm py-1 px-2.5 rounded"
+          >
+            Open slideover
+          </button>
         </div>
       </div>
 
       <!-- Popover example -->
-      <div class='my-12'>
+      <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Popovers</h2>
 
-        <div class="inline-block relative cursor-pointer" data-controller="popover" data-action="mouseenter->popover#show mouseleave->popover#hide">
+        <div
+          class="inline-block relative cursor-pointer"
+          data-controller="popover"
+          data-action="mouseenter->popover#show mouseleave->popover#hide"
+        >
           <span class="underline">Hover me</span>
-          <div class="hidden absolute left-0 bottom-7 w-max bg-white border border-gray-200 shadow rounded p-2"
-               data-popover-target="content"
-               data-transition-enter="transition-opacity ease-in-out duration-300"
-               data-transition-enter-from="opacity-0"
-               data-transition-enter-to="opacity-100"
-               data-transition-leave="transition-opacity ease-in-out duration-300"
-               data-transition-leave-from="opacity-100"
-               data-transition-leave-to="opacity-0"
-            >
+          <div
+            class="hidden absolute left-0 bottom-7 w-max bg-white border border-gray-200 shadow rounded p-2"
+            data-popover-target="content"
+            data-transition-enter="transition-opacity ease-in-out duration-300"
+            data-transition-enter-from="opacity-0"
+            data-transition-enter-to="opacity-100"
+            data-transition-leave="transition-opacity ease-in-out duration-300"
+            data-transition-leave-from="opacity-100"
+            data-transition-leave-to="opacity-0"
+          >
             This popover shows on hover
           </div>
         </div>
 
-        <div class="inline-block relative cursor-pointer" data-controller="popover" data-action="click->popover#show" data-popover-dismiss-after-value="3000">
+        <div
+          class="inline-block relative cursor-pointer"
+          data-controller="popover"
+          data-action="click->popover#show"
+          data-popover-dismiss-after-value="3000"
+        >
           <span class="underline">Click me</span>
-          <div class="hidden absolute left-0 bottom-7 w-max bg-white border border-gray-200 shadow rounded p-2"
-               data-popover-target="content"
-               data-transition-enter="transition-opacity ease-in-out duration-300"
-               data-transition-enter-from="opacity-0"
-               data-transition-enter-to="opacity-100"
-               data-transition-leave="transition-opacity ease-in-out duration-300"
-               data-transition-leave-from="opacity-100"
-               data-transition-leave-to="opacity-0"
-            >
+          <div
+            class="hidden absolute left-0 bottom-7 w-max bg-white border border-gray-200 shadow rounded p-2"
+            data-popover-target="content"
+            data-transition-enter="transition-opacity ease-in-out duration-300"
+            data-transition-enter-from="opacity-0"
+            data-transition-enter-to="opacity-100"
+            data-transition-leave="transition-opacity ease-in-out duration-300"
+            data-transition-leave-from="opacity-100"
+            data-transition-leave-to="opacity-0"
+          >
             This popover shows on click and auto-hides after 3 seconds.
           </div>
         </div>
@@ -225,18 +347,53 @@
 
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Tabs</h2>
-        <p class="mb-4 text-gray-700">These tabs can be navigated with the keyboard using Left, Right, Home, and End.</p>
+        <p class="mb-4 text-gray-700">
+          These tabs can be navigated with the keyboard using Left, Right, Home, and End.
+        </p>
 
-        <div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t">
+        <div
+          data-controller="tabs"
+          data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t"
+        >
           <ul class="list-reset flex border-b">
-            <li class="-mb-px mr-1" id="first" data-tabs-target="tab" data-action="click->tabs#change:prevent">
-              <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#" data-action="keydown.left->tabs#previousTab keydown.right->tabs#nextTab keydown.home->tabs#firstTab:prevent keydown.end->tabs#lastTab:prevent">First</a>
+            <li
+              class="-mb-px mr-1"
+              id="first"
+              data-tabs-target="tab"
+              data-action="click->tabs#change:prevent"
+            >
+              <a
+                class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline"
+                href="#"
+                data-action="keydown.left->tabs#previousTab keydown.right->tabs#nextTab keydown.home->tabs#firstTab:prevent keydown.end->tabs#lastTab:prevent"
+                >First</a
+              >
             </li>
-            <li class="mr-1" id="second" data-tabs-target="tab" data-action="click->tabs#change:prevent">
-              <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#" data-action="keydown.left->tabs#previousTab keydown.right->tabs#nextTab keydown.home->tabs#firstTab:prevent keydown.end->tabs#lastTab:prevent">Second</a>
+            <li
+              class="mr-1"
+              id="second"
+              data-tabs-target="tab"
+              data-action="click->tabs#change:prevent"
+            >
+              <a
+                class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline"
+                href="#"
+                data-action="keydown.left->tabs#previousTab keydown.right->tabs#nextTab keydown.home->tabs#firstTab:prevent keydown.end->tabs#lastTab:prevent"
+                >Second</a
+              >
             </li>
-            <li class="mr-1" id="third" data-tabs-target="tab" data-action="click->tabs#change:prevent">
-              <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#" data-action="keydown.left->tabs#previousTab keydown.right->tabs#nextTab keydown.home->tabs#firstTab:prevent keydown.end->tabs#lastTab:prevent">Third</a>
+            <li
+              class="mr-1"
+              id="third"
+              data-tabs-target="tab"
+              data-action="click->tabs#change:prevent"
+            >
+              <a
+                class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline"
+                href="#"
+                data-action="keydown.left->tabs#previousTab keydown.right->tabs#nextTab keydown.home->tabs#firstTab:prevent keydown.end->tabs#lastTab:prevent"
+                >Third</a
+              >
             </li>
           </ul>
 
@@ -251,8 +408,20 @@
           </div>
 
           <div class="mt-4">
-            <a data-action="click->tabs#change:prevent" data-index="1" class="text-blue-500 underline" href="#">Change tab by data-index</a>
-            <a data-action="click->tabs#change:prevent" data-id="third" class="text-blue-500 underline" href="#">Change tab by data-id</a>
+            <a
+              data-action="click->tabs#change:prevent"
+              data-index="1"
+              class="text-blue-500 underline"
+              href="#"
+              >Change tab by data-index</a
+            >
+            <a
+              data-action="click->tabs#change:prevent"
+              data-id="third"
+              class="text-blue-500 underline"
+              href="#"
+              >Change tab by data-id</a
+            >
 
             <span>or change by select</span>
             <select data-action="tabs#change" data-tabs-target="select">
@@ -269,23 +438,55 @@
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Radios as Tabs</h2>
 
-        <div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t">
+        <div
+          data-controller="tabs"
+          data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t"
+        >
           <ul class="list-reset flex border-b">
-            <li class="-mb-px mr-1" id="radio_default" data-tabs-target="tab" data-action="click->tabs#change">
-              <label class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline cursor-pointer">
-                <input type="radio" value="1" checked="checked" name="radio[option]" id="radio_option_1">
+            <li
+              class="-mb-px mr-1"
+              id="radio_default"
+              data-tabs-target="tab"
+              data-action="click->tabs#change"
+            >
+              <label
+                class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline cursor-pointer"
+              >
+                <input
+                  type="radio"
+                  value="1"
+                  checked="checked"
+                  name="radio[option]"
+                  id="radio_option_1"
+                />
                 Active
               </label>
             </li>
-            <li class="mr-1" id="second_radio" data-tabs-target="tab" data-action="click->tabs#change">
-              <label class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline cursor-pointer">
-                <input type="radio" value="2" name="radio[option]" id="radio_option_2">
+            <li
+              class="mr-1"
+              id="second_radio"
+              data-tabs-target="tab"
+              data-action="click->tabs#change"
+            >
+              <label
+                class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline cursor-pointer"
+              >
+                <input type="radio" value="2" name="radio[option]" id="radio_option_2" />
                 Second
               </label>
             </li>
             <li class="mr-1" id="third_radio" data-tabs-target="tab">
-              <label class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline cursor-pointer">
-                <input type="radio" value="3" name="radio[option]" id="radio_option_3" data-action="click->tabs#change" data-id="third_radio">
+              <label
+                class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline cursor-pointer"
+              >
+                <input
+                  type="radio"
+                  value="3"
+                  name="radio[option]"
+                  id="radio_option_3"
+                  data-action="click->tabs#change"
+                  data-id="third_radio"
+                />
                 Third
               </label>
             </li>
@@ -308,81 +509,148 @@
       <!-- Toggle -->
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold">Toggle</h2>
-        <div data-controller='toggle' class="m-2 p-6 border flex items-center gap-4">
-          <button data-action='click->toggle#toggle:prevent touch->toggle#toggle:prevent' class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-1 px-2.5 rounded">
+        <div data-controller="toggle" class="m-2 p-6 border flex items-center gap-4">
+          <button
+            data-action="click->toggle#toggle:prevent touch->toggle#toggle:prevent"
+            class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-1 px-2.5 rounded"
+          >
             Toggle button
           </button>
-          <div class="hidden bg-yellow-500/20"
-               data-toggle-target='toggleable'
-               data-transition-enter="transition-all ease-linear duration-300"
-               data-transition-enter-from="opacity-0 h-0"
-               data-transition-enter-to="opacity-100"
-               data-transition-leave="transition-all ease-linear duration-300"
-               data-transition-leave-from="opacity-100"
-               data-transition-leave-to="opacity-0"
-               >
+          <div
+            class="hidden bg-yellow-500/20"
+            data-toggle-target="toggleable"
+            data-transition-enter="transition-all ease-linear duration-300"
+            data-transition-enter-from="opacity-0 h-0"
+            data-transition-enter-to="opacity-100"
+            data-transition-leave="transition-all ease-linear duration-300"
+            data-transition-leave-from="opacity-100"
+            data-transition-leave-to="opacity-0"
+          >
             <p>This is hidden text...</p>
           </div>
         </div>
-        <div data-controller='toggle' class="m-2 p-6 border flex items-center gap-4">
+        <div data-controller="toggle" class="m-2 p-6 border flex items-center gap-4">
           <label class="flex gap-2 items-center">
-            <input type="checkbox" data-action="toggle#toggleInput">
+            <input type="checkbox" data-action="toggle#toggleInput" />
             Trigger by checkbox or radio inputs
           </label>
-          <div class="hidden bg-yellow-500/20"
-                data-toggle-target='toggleable'
-                data-transition-enter="transition-all ease-linear duration-300"
-                data-transition-enter-from="opacity-0 h-0"
-                data-transition-enter-to="opacity-100"
-                data-transition-leave="transition-all ease-linear duration-300"
-                data-transition-leave-from="opacity-100"
-                data-transition-leave-to="opacity-0"
-                >
+          <div
+            class="hidden bg-yellow-500/20"
+            data-toggle-target="toggleable"
+            data-transition-enter="transition-all ease-linear duration-300"
+            data-transition-enter-from="opacity-0 h-0"
+            data-transition-enter-to="opacity-100"
+            data-transition-leave="transition-all ease-linear duration-300"
+            data-transition-leave-from="opacity-100"
+            data-transition-leave-to="opacity-0"
+          >
             <p>This is hidden text...</p>
           </div>
         </div>
 
-        <div data-controller='toggle' class="m-2 p-6 border flex items-center gap-4">
-          <button data-action='click->toggle#toggle:prevent touch->toggle#toggle:prevent' class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-1 px-2.5 rounded">
+        <div data-controller="toggle" class="m-2 p-6 border flex items-center gap-4">
+          <button
+            data-action="click->toggle#toggle:prevent touch->toggle#toggle:prevent"
+            class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-1 px-2.5 rounded"
+          >
             Toggle button with custom classes
           </button>
-          <div class="opacity-50 bg-yellow-500/20"
-                data-toggle-target='toggleable'
-                data-toggle-class="opacity-50"
-                >
+          <div
+            class="opacity-50 bg-yellow-500/20"
+            data-toggle-target="toggleable"
+            data-toggle-class="opacity-50"
+          >
             <p>This is toggleable text...</p>
           </div>
         </div>
       </div>
 
-
       <!-- Color Picker and Preview -->
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Color Picker and Preview</h2>
         <div class="col-span-6 sm:col-span-3">
-          <label for="hex_color_bg" class="block text-sm font-medium text-gray-700 ">
-            Color
-          </label>
+          <label for="hex_color_bg" class="block text-sm font-medium text-gray-700"> Color </label>
           <div class="mt-3 flex items-center" data-controller="color-preview">
-            <p data-color-preview-target="preview"
-               class="h-10 w-10 mr-2 rounded-full text-2xl text-white text-center"
-               style="background-color: #ba1e03; color: #fff; padding-top: 1px;">
+            <p
+              data-color-preview-target="preview"
+              class="h-10 w-10 mr-2 rounded-full text-2xl text-white text-center"
+              style="background-color: #ba1e03; color: #fff; padding-top: 1px"
+            >
               A
             </p>
             <span class="ml-2">
               <div class="flex rounded-md shadow-sm">
-                <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500">
+                <span
+                  class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500"
+                >
                   #
                 </span>
-                <input data-action="input->color-preview#update"
-                       data-color-preview-target="color"
-                       id="hex_color_bg"
-                       name="hex_color_bg"
-                       type="color"
-                       value="#ba1e03"
-                       class="focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 flex-1 rounded-r-md mt-0 w-24 h-8 px-1 py-1 border" />
+                <input
+                  data-action="input->color-preview#update"
+                  data-color-preview-target="color"
+                  id="hex_color_bg"
+                  name="hex_color_bg"
+                  type="color"
+                  value="#ba1e03"
+                  class="focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 flex-1 rounded-r-md mt-0 w-24 h-8 px-1 py-1 border"
+                />
               </div>
             </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Multiselect dropdown and Preview -->
+      <div class="my-12">
+        <h2 class="text-2xl text-gray-800 font-semibold mb-4">Multiselect Dropdown and Preview</h2>
+        <div class="col-span-6 sm:col-span-3">
+          <label for="multiselect" class="block text-sm font-medium text-gray-700">
+            Multiselect dropwodnw
+          </label>
+
+          <div data-controller="multi-select" class="relative w-fit">
+            <div
+              data-action="click->multi-select#toggle"
+              class="border rounded-md p-3 bg-white shadow-md cursor-pointer w-auto"
+            >
+              <span data-multi-select-target="selectedItems" class="text-gray-600"
+                >Select options</span
+              >
+            </div>
+            <div
+              data-multi-select-target="options"
+              class="absolute left-0 right-0 mt-1 hidden bg-white border rounded-md shadow-lg z-10 w-32"
+            >
+              <div class="p-2">
+                <label class="flex items-center">
+                  <input
+                    type="checkbox"
+                    value="Option 1"
+                    data-action="change->multi-select#updateSelection"
+                    class="mr-2"
+                  />
+                  Option 1
+                </label>
+                <label class="flex items-center">
+                  <input
+                    type="checkbox"
+                    value="Option 2"
+                    data-action="change->multi-select#updateSelection"
+                    class="mr-2"
+                  />
+                  Option 2
+                </label>
+                <label class="flex items-center">
+                  <input
+                    type="checkbox"
+                    value="Option 3"
+                    data-action="change->multi-select#updateSelection"
+                    class="mr-2"
+                  />
+                  Option 3
+                </label>
+              </div>
+            </div>
           </div>
         </div>
       </div>
