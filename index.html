@@ -601,13 +601,13 @@
       </div>
 
       <!-- Multiselect dropdown and Preview -->
-      <div class="my-12">
+      <div class="my-12 pb-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Multiselect Dropdown and Preview</h2>
         <div class="col-span-6 sm:col-span-3">
           <label for="multiselect" class="block text-sm font-medium text-gray-700">
             Selected option(s) returned as comma separated string as shown in item selector.
           </label>
-          <div data-controller="multi-select" class="relative w-fit">
+          <div data-controller="multi-select" class="relative w-1/5">
             <div
               data-action="click->multi-select#toggle"
               class="border rounded-md p-3 bg-white shadow-md cursor-pointer w-auto"
@@ -616,8 +616,9 @@
                 readonly
                 name="selected_tag_names"
                 data-multi-select-target="selectedItems"
-                class="text-gray-600"
+                class="text-gray-600 w-full"
                 placeholder="Select options"
+                cursor="pointer"
               />
             </div>
             <div
