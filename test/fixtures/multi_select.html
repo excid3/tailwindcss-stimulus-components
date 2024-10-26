@@ -3,7 +3,13 @@
     data-action="click->multi-select#toggle"
     class="border rounded-md p-3 bg-white shadow-md cursor-pointer"
   >
-    <span data-multi-select-target="selectedItems" class="text-gray-600">Select options</span>
+    <input
+      readonly
+      name="selected_tag_names"
+      data-multi-select-target="selectedItems"
+      class="text-gray-600"
+      placeholder="Select options"
+    />
   </div>
   <div
     data-multi-select-target="options"

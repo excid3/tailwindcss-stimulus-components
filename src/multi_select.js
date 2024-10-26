@@ -5,6 +5,7 @@ export default class extends Controller {
 
   connect() {
     document.addEventListener('click', this.handleOutsideClick.bind(this))
+    this.updateSelection()
   }
 
   disconnect() {
@@ -21,7 +22,7 @@ export default class extends Controller {
       .filter(checkbox => checkbox.checked)
       .map(checkbox => checkbox.value)
 
-    this.selectedItemsTarget.textContent = selected.length ? selected.join(', ') : 'Select options'
+    this.selectedItemsTarget.value = selected.length ? selected.join(', ') : 'Select options'
   }
 
   handleOutsideClick(event) {

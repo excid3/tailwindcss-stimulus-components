@@ -605,17 +605,20 @@
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Multiselect Dropdown and Preview</h2>
         <div class="col-span-6 sm:col-span-3">
           <label for="multiselect" class="block text-sm font-medium text-gray-700">
-            Multiselect dropwodnw
+            Selected option(s) returned as comma separated string as shown in item selector.
           </label>
-
           <div data-controller="multi-select" class="relative w-fit">
             <div
               data-action="click->multi-select#toggle"
               class="border rounded-md p-3 bg-white shadow-md cursor-pointer w-auto"
             >
-              <span data-multi-select-target="selectedItems" class="text-gray-600"
-                >Select options</span
-              >
+              <input
+                readonly
+                name="selected_tag_names"
+                data-multi-select-target="selectedItems"
+                class="text-gray-600"
+                placeholder="Select options"
+              />
             </div>
             <div
               data-multi-select-target="options"

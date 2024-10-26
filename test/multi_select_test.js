@@ -32,40 +32,40 @@ describe('MultiSelectController', () => {
 
   it('should update selected items text when checkboxes are checked', async () => {
     const checkbox1 = document.querySelector('input[value="Option 1"]')
-    const selectedItems = document.querySelector('[data-multi-select-target="selectedItems"]')
+    const selectedTagNames = document.querySelector('[name="selected_tag_names"]')
 
     // check the first checkbox, confirm its checked
     checkbox1.click()
     await document.updateComplete // Wait for updates to apply
-    expect(selectedItems.textContent).to.equal('Option 1')
+    expect(selectedTagNames.value).to.equal('Option 1')
 
     // check the second checkbox, confirm again
     const checkbox2 = document.querySelector('input[value="Option 2"]')
     checkbox2.click()
     await document.updateComplete
-    expect(selectedItems.textContent).to.equal('Option 1, Option 2')
+    expect(selectedTagNames.value).to.equal('Option 1, Option 2')
 
     // uncheck the first checkbox, confirm first option not present
     checkbox1.click()
     await document.updateComplete
-    expect(selectedItems.textContent).to.equal('Option 2')
+    expect(selectedTagNames.value).to.equal('Option 2')
   })
 
   it('should reset text when no checkboxes are checked', async () => {
-    const selectedItems = document.querySelector('[data-multi-select-target="selectedItems"]')
+    const selectedTagNames = document.querySelector('[name="selected_tag_names"]')
     const checkboxes = document.querySelectorAll('input[type="checkbox"]')
 
     // check starting value
-    expect(selectedItems.textContent).to.equal('Select options')
+    expect(selectedTagNames.value).to.equal('Select options')
 
     // check all boxes and confirm all checked labels are showing
     checkboxes.forEach(checkbox => checkbox.click())
     await document.updateComplete
-    expect(selectedItems.textContent).to.equal('Option 1, Option 2, Option 3')
+    expect(selectedTagNames.value).to.equal('Option 1, Option 2, Option 3')
 
     // uncheck all boxes - confirm starting phrase visible
     checkboxes.forEach(checkbox => checkbox.click())
     await document.updateComplete
-    expect(selectedItems.textContent).to.equal('Select options')
+    expect(selectedTagNames.value).to.equal('Select options')
   })
 })
