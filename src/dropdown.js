@@ -85,13 +85,13 @@ export default class extends Controller {
   get transitionOptions() {
     // once the Class API default values are available, we can simplify this
     return {
-      enter: this.hasEnterClass ? this.enterClass : 'transition ease-out duration-100',
-      enterFrom: this.hasEnterFromClass ? this.enterFromClass : 'transform opacity-0 scale-95',
-      enterTo: this.hasEnterToClass ? this.enterToClass : 'transform opacity-100 scale-100',
-      leave: this.hasLeaveClass ? this.leaveClass : 'transition ease-in duration-75',
-      leaveFrom: this.hasLeaveFromClass ? this.leaveFromClass : 'transform opacity-100 scale-100',
-      leaveTo: this.hasLeaveToClass ? this.leaveToClass : 'transform opacity-0 scale-95',
-      toggleClass: this.hasToggleClass ? this.toggleClass : 'hidden',
+      enter: this.hasEnterClass ? ...this.enterClasses : 'transition ease-out duration-100',
+      enterFrom: this.hasEnterFromClass ? ...this.enterFromClasses : 'transform opacity-0 scale-95',
+      enterTo: this.hasEnterToClass ? ...this.enterToClasses : 'transform opacity-100 scale-100',
+      leave: this.hasLeaveClass ? ...this.leaveClasses : 'transition ease-in duration-75',
+      leaveFrom: this.hasLeaveFromClass ? ...this.leaveFromClasses : 'transform opacity-100 scale-100',
+      leaveTo: this.hasLeaveToClass ? ...this.leaveToClasses : 'transform opacity-0 scale-95',
+      toggleClass: this.hasToggleClass ? ...this.toggleClasses : 'hidden',
     }
   }
 
