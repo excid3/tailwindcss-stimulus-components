@@ -46,7 +46,7 @@ data-action="click->dropdown#show"
 data-action="click->dropdown#hide"
 ```
 
-### Transition
+### Transitions
 
 The Dropdown component allows you to natively personalize the css transitions as described in the [transition](/docs/transition.md) utility.
 
