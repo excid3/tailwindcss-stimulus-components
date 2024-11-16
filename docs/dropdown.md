@@ -45,3 +45,19 @@ The code above will toggle the dropdown component, if you needed to only perform
 data-action="click->dropdown#show"
 data-action="click->dropdown#hide"
 ```
+
+### Transition
+
+The Dropdown component allows you to natively personalize the css transitions as described in the [transition](/docs/transition.md) utility.
+
+In the table below are detailed the defaults tansitions options values, and the data classes attributes you can apply to your controller element to customize your transitions.
+
+| Options   | Default value                      | HTML data atribute               |
+|-----------|------------------------------------|----------------------------------|
+| enter     | `transition ease-out duration-100` | `data-dropdown-enter-class`      |
+| enterFrom | `transform opacity-0 scale-95`     | `data-dropdown-enter-from-class` |
+| enterTo   | `transform opacity-100 scale-100`  | `data-dropdown-enter-to-class`   |
+| leave     | `transition ease-in duration-75`   | `data-dropdown-leave-class`      |
+| leaveFrom | `transform opacity-100 scale-100`  | `data-dropdown-leave-from-class` |
+| leaveTo   | `transform opacity-0 scale-95`     | `data-dropdown-leave-to-class`   |
+| toggle    | `hidden`                           | `data-dropdown-toggle-class`     |
