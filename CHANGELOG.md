@@ -1,5 +1,9 @@
 # Unreleased
 
+# 6.1.3
+
+* Support multiple classes for dropdown transitions
+
 # 6.1.2
 
 * Fix transition bug
