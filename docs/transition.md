@@ -9,6 +9,7 @@ import { Controller } from "@hotwired/stimulus"
 
 class CustomController extends Controller {
     static targets = ['content']
+    static classes = ['enter', 'enterFrom', 'enterTo', 'leave', 'leaveFrom', 'leaveTo', 'toggle']
 
     showContent() {
       transition(this.contentTarget, true, this.defaultOptions())
@@ -20,13 +21,13 @@ class CustomController extends Controller {
 
     defaultOptions() {
       return {
-        enter: this.hasEnterClass ? this.enterClass : 'transition ease-out duration-100',
-        enterFrom: this.hasEnterFromClass ? this.enterFromClass : 'transform opacity-0 scale-95',
-        enterTo: this.hasEnterToClass ? this.enterToClass : 'transform opacity-100 scale-100',
-        leave: this.hasLeaveClass ? this.leaveClass : 'transition ease-in duration-75',
-        leaveFrom: this.hasLeaveFromClass ? this.leaveFromClass : 'transform opacity-100 scale-100',
-        leaveTo: this.hasLeaveToClass ? this.leaveToClass : 'transform opacity-0 scale-95',
-        toggleClass: this.hasToggleClass ? this.toggleClass : 'hidden',
+        enter: this.hasEnterClass ? this.enterClasses.join(' ') : 'transition ease-out duration-100',
+        enterFrom: this.hasEnterFromClass ? this.enterFromClasses.join(' ') : 'transform opacity-0 scale-95',
+        enterTo: this.hasEnterToClass ? this.enterToClasses.join(' ') : 'transform opacity-100 scale-100',
+        leave: this.hasLeaveClass ? this.leaveClasses.join(' ') : 'transition ease-in duration-75',
+        leaveFrom: this.hasLeaveFromClass ? this.leaveFromClasses.join(' ') : 'transform opacity-100 scale-100',
+        leaveTo: this.hasLeaveToClass ? this.leaveToClasses.join(' ') : 'transform opacity-0 scale-95',
+        toggleClass: this.hasToggleClass ? this.toggleClasses.join(' ') : 'hidden',
       }
     }
 }
@@ -45,12 +46,12 @@ on an element by element basis
   <div class="hidden absolute left-0 bottom-7 w-max bg-white border border-gray-200 shadow rounded p-2"
        data-custom-target="content"       
 
-       data-custom-enter="transition ease-out duration-100"
-       data-custom-enter-from="transform opacity-0 scale-95"
-       data-custom-enter-to="transform opacity-100 scale-100"
-       data-custom-leave="transition ease-in duration-75"
-       data-custom-leave-from="transform opacity-100 scale-100"
-       data-custom-leave-to="transform opacity-0 scale-95-0" 
+       data-custom-enter-class="transition ease-out duration-100"
+       data-custom-enter-from-class="transform opacity-0 scale-95"
+       data-custom-enter-to-class="transform opacity-100 scale-100"
+       data-custom-leave-class="transition ease-in duration-75"
+       data-custom-leave-from-class="transform opacity-100 scale-100"
+       data-custom-leave-to-class="transform opacity-0 scale-95-0" 
        data-toggle="hidden"        
     >
     Content

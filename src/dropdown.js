@@ -85,19 +85,19 @@ export default class extends Controller {
   get transitionOptions() {
     // once the Class API default values are available, we can simplify this
     return {
-      enter: this.hasEnterClass ? this.enterClass : 'transition ease-out duration-100',
-      enterFrom: this.hasEnterFromClass ? this.enterFromClass : 'transform opacity-0 scale-95',
-      enterTo: this.hasEnterToClass ? this.enterToClass : 'transform opacity-100 scale-100',
-      leave: this.hasLeaveClass ? this.leaveClass : 'transition ease-in duration-75',
-      leaveFrom: this.hasLeaveFromClass ? this.leaveFromClass : 'transform opacity-100 scale-100',
-      leaveTo: this.hasLeaveToClass ? this.leaveToClass : 'transform opacity-0 scale-95',
-      toggleClass: this.hasToggleClass ? this.toggleClass : 'hidden',
+      enter: this.hasEnterClass ? this.enterClasses.join(' ') : 'transition ease-out duration-100',
+      enterFrom: this.hasEnterFromClass ? this.enterFromClasses.join(' ') : 'transform opacity-0 scale-95',
+      enterTo: this.hasEnterToClass ? this.enterToClasses.join(' ') : 'transform opacity-100 scale-100',
+      leave: this.hasLeaveClass ? this.leaveClasses.join(' ') : 'transition ease-in duration-75',
+      leaveFrom: this.hasLeaveFromClass ? this.leaveFromClasses.join(' ') : 'transform opacity-100 scale-100',
+      leaveTo: this.hasLeaveToClass ? this.leaveToClasses.join(' ') : 'transform opacity-0 scale-95',
+      toggleClass: this.hasToggleClass ? this.toggleClasses.join(' ') : 'hidden',
     }
   }
 
   // Ensures the menu is hidden before Turbo caches the page
   beforeCache() {
     this.openValue = false
-    this.menuTarget.classList.add("hidden")
+    this.menuTarget.classList.add(this.transitionOptions.toggleClass)
   }
 }
