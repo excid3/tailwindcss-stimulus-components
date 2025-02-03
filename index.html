@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TailwindCSS Stimulus Components</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <script>
-      window.esmsInitOptions = { enable: ['css-modules', 'json-modules'] }
-    </script>
-    <script async src="https://unpkg.com/es-module-shims/dist/es-module-shims.js"></script>
 
     <script type="importmap">
       {
@@ -117,10 +113,10 @@
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="inline-block fill-current h-4 w-4"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
             </button>
             <div data-dropdown-target="menu" class="hidden absolute top-4 right-0 z-10 mt-5 flex w-screen max-w-max">
-              <div class="text-sm bg-white shadow-lg rounded border overflow-hidden w-32">
+              <div class="text-sm bg-white shadow-lg rounded border border-gray-200 overflow-hidden w-32">
                 <a data-dropdown-target="menuItem" href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-nowrap focus:bg-gray-100'>Account</a>
                 <a data-dropdown-target="menuItem" href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-nowrap focus:bg-gray-100'>Billing</a>
-                <hr class="border-t" />
+                <hr class="border-t border-gray-200" />
                 <a data-dropdown-target="menuItem" href="#" class='no-underline block pl-4 py-2 text-gray-900 bg-white hover:bg-gray-100 whitespace-nowrap focus:bg-gray-100'>Sign Out</a>
               </div>
             </div>
@@ -141,7 +137,7 @@
           }
         </style>
         <div data-controller="modal">
-          <dialog data-modal-target="dialog" data-action="click->modal#backdropClose" class="modal rounded-lg">
+          <dialog data-modal-target="dialog" data-action="click->modal#backdropClose" class="modal rounded-lg m-auto">
             <div class="p-8">
               <p>This modal dialog has a groovy backdrop!</p>
               <button autofocus data-action="modal#close" class="px-2.5 py-1 bg-blue-500 text-white text-sm rounded">Close</button>
@@ -227,8 +223,8 @@
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Tabs</h2>
         <p class="mb-4 text-gray-700">These tabs can be navigated with the keyboard using Left, Right, Home, and End.</p>
 
-        <div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t">
-          <ul class="list-reset flex border-b">
+        <div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r border-gray-200 rounded-t">
+          <ul class="list-reset flex border-b border-gray-200">
             <li class="-mb-px mr-1" id="first" data-tabs-target="tab" data-action="click->tabs#change:prevent">
               <a class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline" href="#" data-action="keydown.left->tabs#previousTab keydown.right->tabs#nextTab keydown.home->tabs#firstTab:prevent keydown.end->tabs#lastTab:prevent">First</a>
             </li>
@@ -240,13 +236,13 @@
             </li>
           </ul>
 
-          <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
+          <div class="hidden py-4 px-4 border-l border-b border-r border-gray-200" data-tabs-target="panel">
             Tab panel 1
           </div>
-          <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
+          <div class="hidden py-4 px-4 border-l border-b border-r border-gray-200" data-tabs-target="panel">
             Tab panel 2
           </div>
-          <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
+          <div class="hidden py-4 px-4 border-l border-b border-r border-gray-200" data-tabs-target="panel">
             Tab panel 3
           </div>
 
@@ -269,8 +265,8 @@
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Radios as Tabs</h2>
 
-        <div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t">
-          <ul class="list-reset flex border-b">
+        <div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r border-gray-200 rounded-t">
+          <ul class="list-reset flex border-b border-gray-200">
             <li class="-mb-px mr-1" id="radio_default" data-tabs-target="tab" data-action="click->tabs#change">
               <label class="bg-white inline-block py-2 px-4 text-blue-600 hover:text-blue-700 font-semibold no-underline cursor-pointer">
                 <input type="radio" value="1" checked="checked" name="radio[option]" id="radio_option_1">
@@ -291,15 +287,15 @@
             </li>
           </ul>
 
-          <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
+          <div class="hidden py-4 px-4 border-l border-b border-r border-gray-200" data-tabs-target="panel">
             Tab panel 1
           </div>
 
-          <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
+          <div class="hidden py-4 px-4 border-l border-b border-r border-gray-200" data-tabs-target="panel">
             Tab panel 2
           </div>
 
-          <div class="hidden py-4 px-4 border-l border-b border-r" data-tabs-target="panel">
+          <div class="hidden py-4 px-4 border-l border-b border-r border-gray-200" data-tabs-target="panel">
             Tab panel 3
           </div>
         </div>
@@ -308,7 +304,7 @@
       <!-- Toggle -->
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold">Toggle</h2>
-        <div data-controller='toggle' class="m-2 p-6 border flex items-center gap-4">
+        <div data-controller='toggle' class="m-2 p-6 border border-gray-200 flex items-center gap-4">
           <button data-action='click->toggle#toggle:prevent touch->toggle#toggle:prevent' class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-1 px-2.5 rounded">
             Toggle button
           </button>
@@ -324,7 +320,7 @@
             <p>This is hidden text...</p>
           </div>
         </div>
-        <div data-controller='toggle' class="m-2 p-6 border flex items-center gap-4">
+        <div data-controller='toggle' class="m-2 p-6 border border-gray-200 flex items-center gap-4">
           <label class="flex gap-2 items-center">
             <input type="checkbox" data-action="toggle#toggleInput">
             Trigger by checkbox or radio inputs
@@ -342,7 +338,7 @@
           </div>
         </div>
 
-        <div data-controller='toggle' class="m-2 p-6 border flex items-center gap-4">
+        <div data-controller='toggle' class="m-2 p-6 border border-gray-200 flex items-center gap-4">
           <button data-action='click->toggle#toggle:prevent touch->toggle#toggle:prevent' class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-1 px-2.5 rounded">
             Toggle button with custom classes
           </button>
