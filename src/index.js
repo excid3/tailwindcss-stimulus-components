@@ -1,3 +1,4 @@
+export { default as Accordion } from './accordion.js'
 export { default as Alert } from './alert.js'
 export { default as Autosave } from './autosave.js'
 export { default as ColorPreview } from './color_preview.js'
