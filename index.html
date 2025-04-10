@@ -17,10 +17,11 @@
 
     <script type="module">
       import { Application } from "@hotwired/stimulus";
-      import { Alert, ColorPreview, Dropdown, Modal, Popover, Slideover, Tabs, Toggle } from "tailwindcss-stimulus-components";
+      import { Accordion, Alert, ColorPreview, Dropdown, Modal, Popover, Slideover, Tabs, Toggle } from "tailwindcss-stimulus-components";
 
       (() => {
         const application = Application.start();
+        application.register('accordion', Accordion);
         application.register('alert', Alert);
         application.register('color-preview', ColorPreview);
         application.register('dropdown', Dropdown);
@@ -67,6 +68,63 @@
       <img src="https://img.shields.io/npm/v/tailwindcss-stimulus-components.svg" class="inline-block mr-2" />
       <a href="https://github.com/excid3/tailwindcss-stimulus-components" target="_blank" class="text-blue-500">View on Github</a>
       <p class="my-4">To view examples locally, run <code class="bg-gray-300 text-sm px-2 py-1 rounded">npm install && npm run build && npx serve</code> and then open <code class="bg-gray-300 text-sm px-2 py-1 rounded">localhost:3000</code> in your browser.</p>
+
+      <div class="my-12">
+        <h2 class="text-2xl text-gray-800 font-semibold mb-4">Accordion</h2>
+
+        <!-- Accordion -->
+        <div data-controller="accordion"
+             class='flex flex-col gap-0.5 max-w-75 border border-gray-400 rounded-lg'>
+          <div data-index='0' data-action='click->accordion#toggle' data-accordion-target='button'
+               class='flex justify-between items-center cursor-pointer w-full items-center gap-3 rounded-lg px-2 py-4 text-left text-base/6 font-medium text-zinc-950 sm:py-2 sm:text-sm/5'
+          >
+            <span>Button 1</span>
+            <span data-accordion-target='chevron' class='w-4 h-4 transition-transform'>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+              </svg>
+            </span>
+          </div>
+          <div data-accordion-target='panel' class='pl-4 overflow-hidden h-0'>
+            <div class="p-4">
+              This is the first accordion panel.
+            </div>
+          </div>
+
+          <div data-index='1' data-action='click->accordion#toggle' data-accordion-target='button'
+               class='flex justify-between items-center cursor-pointer w-full items-center gap-3 rounded-lg px-2 py-4 text-left text-base/6 font-medium text-zinc-950 sm:py-2 sm:text-sm/5'
+          >
+            <span>Button 2</span>
+            <span data-accordion-target='chevron' class='w-4 h-4 transition-transform'>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+              </svg>
+            </span>
+          </div>
+          <div data-accordion-target='panel' class='pl-4 overflow-hidden h-0'>
+            <div class="p-4">
+              This is the second accordion panel.
+            </div>
+          </div>
+
+          <div data-index='2' data-action='click->accordion#toggle' data-accordion-target='button'
+               class='flex justify-between items-center cursor-pointer w-full items-center gap-3 rounded-lg px-2 py-4 text-left text-base/6 font-medium text-zinc-950 sm:py-2 sm:text-sm/5'
+          >
+            <span>Button 3</span>
+            <span data-accordion-target='chevron' class='w-4 h-4 transition-transform'>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+              </svg>
+            </span>
+          </div>
+          <div data-accordion-target='panel' class='pl-4 overflow-hidden h-0'>
+            <div class="p-4">
+              This is the third accordion panel.
+            </div>
+          </div>
+
+        </div>
+      </div>
 
       <div class="my-12">
         <h2 class="text-2xl text-gray-800 font-semibold mb-4">Alerts</h2>

@@ -1,0 +1,31 @@
+<div id='accordion' data-controller="accordion" class='flex flex-col gap-0.5 max-w-75 border border-gray-400 rounded-lg'>
+  <div data-index='0' data-action='click->accordion#toggle' data-accordion-target='button' id='button1'
+       class='flex justify-between items-center cursor-pointer w-full items-center gap-3 rounded-lg px-2 py-4 text-left'>
+    <span>Button Text</span>
+    <span data-accordion-target='chevron' class='w-4 h-4 transition-transform'>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+      </svg>
+    </span>
+  </div>
+  <div data-accordion-target='panel' class='pl-4 overflow-hidden h-0' id='panel1'>
+    <div class="p-4">
+      This is the first accordion panel.
+    </div>
+  </div>
+
+  <div data-index='1' data-action='click->accordion#toggle' data-accordion-target='button' id='button2'
+       class='flex justify-between items-center cursor-pointer w-full items-center gap-3 rounded-lg px-2 py-4 text-left'>
+    <span>Button Text #2</span>
+    <span data-accordion-target='chevron' class='w-4 h-4 transition-transform'>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+      </svg>
+    </span>
+  </div>
+  <div data-accordion-target='panel' class='pl-4 overflow-hidden h-0' id='panel2'>
+    <div class="p-4">
+      And this is the second accordion panel.
+    </div>
+  </div>
+</div>

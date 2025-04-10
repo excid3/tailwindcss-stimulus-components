@@ -14,8 +14,6 @@ describe('ModalController', () => {
       application.register('modal', Modal)
     })
 
-    const openModalButton = document.querySelector("[data-action='modal#open']")
-
     it('clicks to open and close the modal', async () => {
       const dialog = document.querySelector("dialog")
       const openModalButton = document.querySelector("[data-action='modal#open']")
