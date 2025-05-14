@@ -34,4 +34,4 @@ application.register('slideover', Slideover)
 
 ### Options
 
-`data-modal-open-value` may be set to `true` to open modal on connect.
+`data-slideover-open-value` may be set to `true` to open slideover on connect.
