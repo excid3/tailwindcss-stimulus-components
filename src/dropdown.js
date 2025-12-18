@@ -98,6 +98,8 @@ export default class extends Controller {
   // Ensures the menu is hidden before Turbo caches the page
   beforeCache() {
     this.openValue = false
-    this.menuTarget.classList.add(this.transitionOptions.toggleClass)
+    if (this.hasMenuTarget) {
+      this.menuTarget.classList.add(this.transitionOptions.toggleClass)
+    }
   }
 }
