@@ -42,5 +42,18 @@ describe('ModalController', () => {
       await sendKeys({ press: 'Escape' });
       expect(dialog.hasAttribute("open")).to.equal(false)
     })
+
+    it('handles beforeCache callback when dialog target is removed', () => {
+      const dialog = document.querySelector("dialog")
+      const openModalButton = document.querySelector("[data-action='modal#open']")
+
+      openModalButton.click()
+      expect(dialog.hasAttribute("open")).to.equal(true)
+
+      dialog.remove()
+
+      const event = new CustomEvent('turbo:before-cache', { bubbles: true })
+      expect(() => document.dispatchEvent(event)).to.not.throw()
+    })
   })
 })

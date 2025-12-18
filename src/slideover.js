@@ -45,6 +45,8 @@ export default class extends Controller {
   }
 
   beforeCache() {
-    this.close()
+    if (this.hasDialogTarget) {
+      this.close()
+    }
   }
 }
