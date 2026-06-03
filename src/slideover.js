@@ -33,10 +33,10 @@ export default class extends Controller {
   }
 
   backdropClose(event) {
-    if (event.target.nodeName !== "DIALOG") return;
-    if (window.getSelection().toString().length > 0) return;
+    if (event.target.nodeName !== "DIALOG") return
+    if (window.getSelection().toString().length > 0) return
 
-    this.close();
+    this.close()
   }
 
   show() {
