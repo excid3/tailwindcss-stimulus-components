@@ -1,5 +1,8 @@
 # Unreleased
 
+* Fix premeture closing of modals and slideovers (#284, #289)
+* Update Tailwind v4 documentation
+
 # 6.1.3
 
 * Support multiple classes for dropdown transitions
