@@ -1,6 +1,8 @@
 import { Controller } from '@hotwired/stimulus'
 import { transition } from './transition.js'
 
+let nextDropdownId = 0
+
 export default class extends Controller {
   static targets = ['menu', 'button', 'menuItem']
   static values = {
@@ -13,18 +15,57 @@ export default class extends Controller {
   connect() {
     this.boundBeforeCache = this.beforeCache.bind(this)
     document.addEventListener('turbo:before-cache', this.boundBeforeCache)
+
+    this.setupAccessibility()
   }
 
   disconnect() {
     document.removeEventListener('turbo:before-cache', this.boundBeforeCache)
   }
 
+  // Labels the menu and its button so screen readers announce the dropdown
+  // and its state. Any attribute you set yourself is left alone.
+  setupAccessibility() {
+    if (!this.hasMenuTarget) return
+
+    if (!this.menuTarget.id) this.menuTarget.id = `dropdown-menu-${++nextDropdownId}`
+    if (!this.menuTarget.hasAttribute('role')) this.menuTarget.setAttribute('role', 'menu')
+
+    const button = this.buttonElement
+    if (!button) return
+
+    if (!button.id) button.id = `${this.menuTarget.id}-button`
+    if (!button.hasAttribute('aria-haspopup')) button.setAttribute('aria-haspopup', 'true')
+    if (!this.menuTarget.hasAttribute('aria-labelledby')) this.menuTarget.setAttribute('aria-labelledby', button.id)
+
+    button.setAttribute('aria-controls', this.menuTarget.id)
+    button.setAttribute('aria-expanded', this.openValue)
+  }
+
+  menuItemTargetConnected(item) {
+    if (!item.hasAttribute('role')) item.setAttribute('role', 'menuitem')
+    if (!item.hasAttribute('tabindex')) item.setAttribute('tabindex', '-1')
+  }
+
   openValueChanged() {
     transition(this.menuTarget, this.openValue, this.transitionOptions)
 
-    if (this.openValue === true && this.hasMenuItemTarget) {
-      this.menuItemTargets[0].focus()
+    this.buttonElement?.setAttribute('aria-expanded', this.openValue)
+
+    if (this.openValue === true) {
+      if (this.hasMenuItemTarget) this.menuItemTargets[0].focus()
+    } else {
+      this.returnFocus()
     }
+  }
+
+  // Focus would be lost to the body when the menu closes underneath it, so send
+  // it back to the button. Only when focus is still inside the menu, otherwise
+  // we'd steal it from whatever the user clicked to close the dropdown.
+  returnFocus() {
+    if (!this.hasMenuTarget || !this.menuTarget.contains(document.activeElement)) return
+
+    this.buttonElement?.focus()
   }
 
   show() {
@@ -70,6 +111,17 @@ export default class extends Controller {
   }
 
   // getters and setters
+
+  // The button target if it was declared, otherwise the control that toggles the menu
+  get buttonElement() {
+    if (this.hasButtonTarget) return this.buttonTarget
+
+    const selector = `button, [role="button"], [data-action*="${this.identifier}#toggle"], [data-action*="${this.identifier}#show"]`
+    return Array.from(this.element.querySelectorAll(selector)).find(
+      (element) => !this.hasMenuTarget || !this.menuTarget.contains(element)
+    )
+  }
+
   get currentItemIndex() {
     return this.menuItemTargets.indexOf(document.activeElement)
   }

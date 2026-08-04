@@ -46,6 +46,20 @@ data-action="click->dropdown#show"
 data-action="click->dropdown#hide"
 ```
 
+### Accessibility
+
+The controller wires up the ARIA attributes for you on connect:
+
+* The menu gets `role="menu"`, an `id` (generated if it doesn't have one) and `aria-labelledby` pointing at the button.
+* The button gets `aria-haspopup="true"`, `aria-controls` pointing at the menu, and `aria-expanded`, which is kept in sync as the dropdown opens and closes.
+* Each `menuItem` target gets `role="menuitem"` and `tabindex="-1"`, since the controller moves focus between them with the arrow keys.
+
+The button is the `data-dropdown-target="button"` element when you provide one. Otherwise the controller uses the first button (or element with a `dropdown#toggle`/`dropdown#show` action) outside of the menu.
+
+Focus is managed to match: opening the dropdown focuses the first `menuItem`, and closing it returns focus to the button so it isn't lost to the page when the menu disappears. If you close the dropdown by clicking elsewhere, focus stays wherever you clicked.
+
+Any of these attributes that you set yourself in your markup are left untouched, so you can override the roles if your dropdown isn't a menu — for example a dropdown that wraps a form.
+
 ### Transitions
 
 The Dropdown component allows you to natively personalize the css transitions as described in the [transition](/docs/transition.md) utility.
