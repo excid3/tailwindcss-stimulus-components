@@ -1,6 +1,7 @@
 <div data-controller="slideover">
-  <dialog data-slideover-target="dialog" class="slideover h-full max-h-full m-0 w-96 p-8 backdrop:bg-black/80">
+  <dialog data-slideover-target="dialog" data-action="click->slideover#backdropClose" class="slideover h-full max-h-full m-0 w-96 p-8 backdrop:bg-black/80">
     <p>This slideover dialog has a groovy backdrop!</p>
+    <input type="text" value="Select this text" class="border p-1" data-testid="slideover-input">
     <button autofocus data-action="slideover#close" class="px-2.5 py-1 bg-blue-500 text-white text-sm rounded">Close</button>
   </dialog>
   <button data-action="slideover#open" class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-1 px-2.5 rounded">Open slideover</button>
