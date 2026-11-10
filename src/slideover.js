@@ -9,7 +9,7 @@ export default class extends Controller {
 
   connect() {
     if (this.openValue) this.open()
-    this.boundBeforeCache = this.beforeCache
+    this.boundBeforeCache = this.beforeCache.bind(this)
     document.addEventListener("turbo:before-cache", this.boundBeforeCache)
   }
 
@@ -49,7 +49,8 @@ export default class extends Controller {
 
   beforeCache() {
     if (this.hasDialogTarget) {
-      this.close()
+      this.dialogTarget.removeAttribute("closing")
+      this.dialogTarget.close()
     }
   }
 }
