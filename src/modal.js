@@ -50,7 +50,8 @@ export default class extends Controller {
 
   beforeCache() {
     if (this.hasDialogTarget) {
-      this.close()
+      this.dialogTarget.removeAttribute("closing")
+      this.dialogTarget.close()
     }
   }
 }

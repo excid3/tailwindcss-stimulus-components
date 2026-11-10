@@ -21,6 +21,17 @@ describe('SlideoverController', () => {
       expect(dialog.hasAttribute('open')).to.equal(true)
     })
 
+    it('closes the dialog before Turbo caches the page', () => {
+      const dialog = document.querySelector("dialog")
+      document.querySelector("[data-action='slideover#open']").click()
+      expect(dialog.hasAttribute("open")).to.equal(true)
+
+      document.dispatchEvent(new CustomEvent('turbo:before-cache', { bubbles: true }))
+
+      expect(dialog.hasAttribute("open")).to.equal(false)
+      expect(dialog.hasAttribute("closing")).to.equal(false)
+    })
+
     it('closes the slideover when clicking on the backdrop', async () => {
       const dialog = document.querySelector('dialog')
       const openSlideoverButton = document.querySelector("[data-action='slideover#open']")

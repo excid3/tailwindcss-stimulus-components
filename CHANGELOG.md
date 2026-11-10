@@ -1,6 +1,7 @@
 # Unreleased
 
 * Fix premeture closing of modals and slideovers (#284, #289)
+* Close modals and slideovers before Turbo caches the page so they aren't restored open
 * Update Tailwind v4 documentation
 
 # 6.1.3

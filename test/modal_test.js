@@ -56,6 +56,17 @@ describe('ModalController', () => {
       expect(() => document.dispatchEvent(event)).to.not.throw()
     })
 
+    it('closes the dialog before Turbo caches the page', () => {
+      const dialog = document.querySelector("dialog")
+      document.querySelector("[data-action='modal#open']").click()
+      expect(dialog.hasAttribute("open")).to.equal(true)
+
+      document.dispatchEvent(new CustomEvent('turbo:before-cache', { bubbles: true }))
+
+      expect(dialog.hasAttribute("open")).to.equal(false)
+      expect(dialog.hasAttribute("closing")).to.equal(false)
+    })
+
     it('closes the modal when clicking on the backdrop', async () => {
       const dialog = document.querySelector("dialog")
       const openModalButton = document.querySelector("[data-action='modal#open']")
